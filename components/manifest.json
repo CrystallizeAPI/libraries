@@ -1,4 +1,9 @@
 {
-  "type": "oss-monorepository",
-  "many-repositories": {}
+    "type": "oss-monorepository",
+    "many-repositories": {
+        "js-api-client": {
+            "name": "(Java|Type)Script API Client",
+            "git": "git@github.com:CrystallizeAPI/js-api-client.git"
+        }
+    }
 }

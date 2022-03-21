@@ -15,6 +15,7 @@ All contributions will happen here:
 
 | Libraries                                                                      | Licence(s) |
 | ------------------------------------------------------------------------------ | ---------- |
+| [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)               |  ![mit]    |
 
 ## Contributions
 
