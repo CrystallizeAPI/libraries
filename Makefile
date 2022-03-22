@@ -14,6 +14,16 @@ list:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf " ${YELLOW}%-15s${RESTORE} > %s\n", $$1, $$2}'
 	@echo "${RED}==============================${RESTORE}"
 
+.PHONY: tests
+tests: ## Run the tests
+	@echo " ..:: Mono Repo Testing ::.."
+	@echo "Nothing yet".
+	@for COMPONENT in $(shell ls components); do \
+    	if [ -d "components/$${COMPONENT}" ]; then \
+    		echo " ..:: Testing $${COMPONENT} ::.."; \
+			cd components/$${COMPONENT} && yarn install && yarn build && yarn test; cd -; \
+		fi \
+	done
 
 .PHONY: add-component
 add-component: ## Create an empty structure for a new Component

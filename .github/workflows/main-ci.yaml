@@ -25,7 +25,7 @@ jobs:
                     for COMPONENT in `ls components`; do
                         if [ -d "components/${COMPONENT}" ]; then
                           echo ::group::..:: ${COMPONENT} ::..
-                          cd components/${COMPONENT} && yarn install && yarn build && yarn test;
+                          cd components/${COMPONENT} && yarn install && yarn build && yarn test; cd -;
                           echo ::endgroup::
                         fi  
                     done
