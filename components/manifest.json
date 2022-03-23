@@ -4,6 +4,10 @@
         "js-api-client": {
             "name": "(Java|Type)Script API Client",
             "git": "git@github.com:CrystallizeAPI/js-api-client.git"
+        },
+        "reactjs-hooks": {
+            "name": "React Hooks",
+            "git": "git@github.com:CrystallizeAPI/reactjs-hooks.git"
         }
     }
 }
