@@ -14,10 +14,14 @@ list:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf " ${YELLOW}%-15s${RESTORE} > %s\n", $$1, $$2}'
 	@echo "${RED}==============================${RESTORE}"
 
+.PHONY: codeclean
+codeclean: ## Code Clean
+	@yarn prettier --write .
+
 .PHONY: tests
 tests: ## Run the tests
 	@echo " ..:: Mono Repo Testing ::.."
-	@echo "Nothing yet".
+	@yarn prettier --check .
 	@for COMPONENT in $(shell ls components); do \
     	if [ -d "components/$${COMPONENT}" ]; then \
     		echo " ..:: Testing $${COMPONENT} ::.."; \
