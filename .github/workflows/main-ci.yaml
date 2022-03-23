@@ -3,30 +3,69 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+    lint:
+        name: 💄 Prettier
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 📥 Download deps
+              run: yarn install
+
+            - name: 🔬 Lint Check
+              run: yarn prettier --check .
+
     tests:
-        name: Tests
+        name: 🧪 Tests
         runs-on: ubuntu-latest
         strategy:
             matrix:
                 node: [12, 14, 16]
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node }}
                   cache: 'yarn'
                   cache-dependency-path: components/*/yarn.lock
 
-            - name: Run the tests
+            - name: 📥 Download deps
               run: |
-                  yarn install
                   echo ::group::..:: Mono Repo Tests ::..
-                  yarn prettier --check .
+                  yarn install
                   echo ::endgroup::
                   for COMPONENT in `ls components`; do
                       if [ -d "components/${COMPONENT}" ]; then
                         echo ::group::..:: ${COMPONENT} ::..
-                        cd components/${COMPONENT} && yarn install && yarn build && yarn test; cd -;
+                        cd components/${COMPONENT} && yarn install && cd -;
+                        echo ::endgroup::
+                      fi  
+                  done
+
+            - name: 🏄 Run the tests
+              run: |
+                  echo ::group::..:: Mono Repo Tests ::..
+                  echo "Nothing yet."
+                  echo ::endgroup::
+                  for COMPONENT in `ls components`; do
+                      if [ -d "components/${COMPONENT}" ]; then
+                        echo ::group::..:: ${COMPONENT} ::..
+                        cd components/${COMPONENT} && yarn build && yarn test && cd -;
                         echo ::endgroup::
                       fi  
                   done
