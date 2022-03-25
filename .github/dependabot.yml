@@ -1,0 +1,10 @@
+version: 2
+updates:
+    - package-ecosystem: 'npm'
+      directory: '/components/js-api-client'
+      schedule:
+          interval: 'weekly'
+    - package-ecosystem: 'npm'
+      directory: '/components/reacts-hooks'
+      schedule:
+          interval: 'weekly'
