@@ -1,0 +1,41 @@
+name: GitHub Pages
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        concurrency:
+            group: ${{ github.workflow }}-${{ github.ref }}
+        steps:
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 📥 Download deps
+              run: |
+                  for COMPONENT in `ls components`; do
+                      if [ -d "components/${COMPONENT}" ]; then
+                        echo ::group::..:: ${COMPONENT} ::..
+                        cd components/${COMPONENT} && yarn install && cd -;
+                        echo ::endgroup::
+                      fi  
+                  done
+
+            - name: 🥖 Build the React App
+              run: |
+                  cd docs/react-app && npm install && npm run build
+
+            - name: 🍿 Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              if: ${{ github.ref == 'refs/heads/main' }}
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./docs/react-app/build
