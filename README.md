@@ -20,7 +20,23 @@ All contributions will happen here:
 
 ## Contributions
 
+### Conventions
+
 -   Pull Requests and Issues should start with `[$COMPONENT_NAME]`
+
+### Demo app (Github Page)
+
+You can test on that live demo page here: https://crystallizeapi.github.io/libraries/
+
+This React App is built from this repository as well, to run it:
+
+```bash
+cd docs/react-app
+npm install
+npm start
+```
+
+> This app is then built in production mode and deployed on Github Pages via Github Actions.
 
 ## Adding a new Component (Library)
 

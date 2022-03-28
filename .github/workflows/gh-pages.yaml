@@ -31,7 +31,8 @@ jobs:
 
             - name: 🥖 Build the React App
               run: |
-                  cd docs/react-app && npm install && npm run build
+                  cd docs/react-app && npm install && npm run build && cd -
+                  cp docs/react-app/build/index.html docs/react-app/build/404.html
 
             - name: 🍿 Deploy
               uses: peaceiris/actions-gh-pages@v3
