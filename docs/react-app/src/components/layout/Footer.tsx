@@ -1,6 +1,7 @@
 import { FC, useRef } from 'react';
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { useCrystallize } from '@crystallize/reactjs-hooks';
+import logo from '../../images/crystallize.svg';
 
 export const Footer: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -44,7 +45,7 @@ export const Footer: FC = () => {
                 >
                     <span>
                         <img
-                            src="/images/crystallize.svg"
+                            src={logo}
                             alt="Crystallize Logo"
                             width={75 * 1.5}
                             height={25 * 1.5}

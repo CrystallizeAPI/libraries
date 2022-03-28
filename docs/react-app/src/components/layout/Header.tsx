@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/esm/Navbar';
 import Container from 'react-bootstrap/esm/Container';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import { Link } from 'react-router-dom';
+import icon from '../../images/favicon.png';
 
 export const Header: FC = () => {
     const { state } = useCrystallize();
@@ -15,7 +16,7 @@ export const Header: FC = () => {
                     <Navbar.Brand as={Link} to="/">
                         <img
                             alt="Crystallize Logo"
-                            src="/favicon.ico"
+                            src={icon}
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
