@@ -16,7 +16,6 @@ import Navbar from 'react-bootstrap/esm/Navbar';
 import Nav from 'react-bootstrap/esm/Nav';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import { useParams } from 'react-router-dom';
-import { watch } from 'fs';
 
 export const NavigationFetcher: FC = () => {
     const { what } = useParams();
