@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
 export const Home: FC = () => {
-    return <div>Hello home</div>;
+    return <div>Crytallize Libraries</div>;
 };

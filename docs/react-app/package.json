@@ -2,6 +2,7 @@
     "name": "react-app",
     "version": "0.1.0",
     "private": true,
+    "homepage": "libraries",
     "dependencies": {
         "@crystallize/js-api-client": "../../components/js-api-client",
         "@crystallize/reactjs-hooks": "../../components/reactjs-hooks",

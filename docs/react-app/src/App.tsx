@@ -25,6 +25,14 @@ const App: FC = () => {
                         />
                     </Route>
                 </Route>
+                <Route
+                    path="*"
+                    element={
+                        <p>
+                            404 - <a href="/libraries">Go there</a>
+                        </p>
+                    }
+                />
             </Routes>
         </CrystallizeProvider>
     );

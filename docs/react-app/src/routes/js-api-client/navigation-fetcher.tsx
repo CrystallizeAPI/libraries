@@ -44,7 +44,7 @@ export const NavigationFetcher: FC = () => {
             setResult(response);
         })();
         // eslint-disable-next-line
-    }, [state.configuration.tenantIdentifier, form]);
+    }, [state.configuration.tenantIdentifier, form, what]);
 
     const usageCode = `import { ${creator} } from '@crystallize/js-api-client';
 const apiClient = createClient({
@@ -53,14 +53,24 @@ const apiClient = createClient({
 const fetch = ${creator}(apiClient);
 const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
-    let tree =
-        result && result.tree && result.tree.children
-            ? result.tree.children
-            : [];
+    let tree = [];
+
+    if (what === 'folders') {
+        tree =
+            result && result.tree && result.tree.children
+                ? result.tree.children
+                : [];
+    }
+
     if (what === 'topics') {
         if (form.path === '/' && result && result.tree) {
             tree = result.tree;
         }
+    }
+
+    // we have the old tree of the components, we erase it
+    if (!Array.isArray(tree)) {
+        tree = [];
     }
 
     return (
@@ -120,6 +130,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                                                 return (
                                                     <NavDropdown.Item
                                                         href={child.path}
+                                                        key={child.path}
                                                     >
                                                         {child.name}
                                                     </NavDropdown.Item>
