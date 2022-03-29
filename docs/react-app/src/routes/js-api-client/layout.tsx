@@ -57,11 +57,11 @@ export const JSAPIClientLayout: FC = () => {
                         <li className="list-group-item">
                             <FaGithubSquare size={30} />{' '}
                             <a
-                                href="https://github.com/CrystallizeAPI/js-api-client"
+                                href="https://github.com/CrystallizeAPI/js-api-client#crystallize-api-client"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Distribution
+                                Documentation
                             </a>
                         </li>
                         <li className="list-group-item">

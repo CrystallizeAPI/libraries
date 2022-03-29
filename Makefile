@@ -49,3 +49,8 @@ add-component-compliance-files: ## Add the compliance files into all the compone
 			fi; \
 		fi; \
 	done
+
+.PHONY: start-demo-app
+start-demo-app: ## Start Demo App
+	@echo " ..:: Starting Demo App ::.."
+	@cd docs/react-app && npm start

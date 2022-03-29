@@ -16,6 +16,7 @@ import Navbar from 'react-bootstrap/esm/Navbar';
 import Nav from 'react-bootstrap/esm/Nav';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import { useParams } from 'react-router-dom';
+import Alert from 'react-bootstrap/esm/Alert';
 
 export const NavigationFetcher: FC = () => {
     const { what } = useParams();
@@ -53,6 +54,8 @@ const apiClient = createClient({
 const fetch = ${creator}(apiClient);
 const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
+    const advanceUsageCode = `function fetch(path:string, language:string, depth:number, extraQuery: any, (level:number) => any);`;
+
     let tree = [];
 
     if (what === 'folders') {
@@ -77,6 +80,21 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
         <div>
             <h1>Use the {what} nav fetcher</h1>
             <Code language="javascript">{usageCode}</Code>
+
+            <Alert variant="info">
+                <Alert.Heading>There is more!</Alert.Heading>
+                <p>
+                    You can customize 100% of the underlaying GraphQL query that
+                    is made for you by the helper.
+                </p>
+                <Code language="typescript">{advanceUsageCode}</Code>
+                <hr />
+                It's using <em>json-to-graphql-query</em> behind this scene to
+                convert the object to GraphQL query!{' '}
+                <Alert.Link href="https://github.com/CrystallizeAPI/js-api-client#Navigation-Tree-Fetcher">
+                    Check the documentation!
+                </Alert.Link>
+            </Alert>
             <Row>
                 <Col md={3}>
                     <h2>Query</h2>

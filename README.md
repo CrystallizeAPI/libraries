@@ -23,6 +23,26 @@ All contributions will happen here:
 ### Conventions
 
 -   Pull Requests and Issues should start with `[$COMPONENT_NAME]`
+-   CI will fail if Coding Standars are not OK
+-   CI will fail if Tests are not OK
+
+### Coding Standards
+
+To run them locally:
+
+```bash
+make codeclean
+```
+
+### Tests
+
+To run them locally:
+
+```bash
+make tests
+```
+
+> It will run the Mono Repo Tests and the tests in each `components`
 
 ### Demo app (Github Page)
 
@@ -31,10 +51,10 @@ You can test on that live demo page here: https://crystallizeapi.github.io/libra
 This React App is built from this repository as well, to run it:
 
 ```bash
-cd docs/react-app
-npm install
-npm start
+make start-demo-app
 ```
+
+Then you can access it: http://localhost:3000/libraries (it in a subfolder like on Github.io)
 
 > This app is then built in production mode and deployed on Github Pages via Github Actions.
 

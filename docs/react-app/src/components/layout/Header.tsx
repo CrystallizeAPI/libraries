@@ -13,14 +13,14 @@ export const Header: FC = () => {
         <header>
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
+                    <img
+                        alt="Crystallize Logo"
+                        src={icon}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                    />
                     <Navbar.Brand as={Link} to="/">
-                        <img
-                            alt="Crystallize Logo"
-                            src={icon}
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{' '}
                         <h1 className="fs-3 d-inline">Demo</h1>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
