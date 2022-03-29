@@ -56,14 +56,10 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
     const advanceUsageCode = `function fetch(path:string, language:string, depth:number, extraQuery: any, (level:number) => any);`;
 
-    let tree = [];
-
-    if (what === 'folders') {
-        tree =
-            result && result.tree && result.tree.children
-                ? result.tree.children
-                : [];
-    }
+    let tree =
+        result && result.tree && result.tree.children
+            ? result.tree.children
+            : [];
 
     if (what === 'topics') {
         if (form.path === '/' && result && result.tree) {
