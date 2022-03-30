@@ -20,15 +20,18 @@ jobs:
               with:
                   node-version: 16
 
+            # For this process we need the components to be in sync and reuse each other
+            # so we need to link some of them together
             - name: 📥 Download deps
               run: |
                   for COMPONENT in `ls components`; do
                       if [ -d "components/${COMPONENT}" ]; then
                         echo ::group::..:: ${COMPONENT} ::..
-                        cd components/${COMPONENT} && yarn install && yarn build && cd -;
+                        cd components/${COMPONENT} && yarn install && yarn build && yarn link && cd -;
                         echo ::endgroup::
                       fi  
-                  done
+                  done 
+                  cd components/reactjs-hooks && yarn link @crystallize/js-api-client && yarn build && cd -;
 
             - name: 🥖 Build the React App
               run: |
