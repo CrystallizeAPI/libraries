@@ -14,6 +14,19 @@ list:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf " ${YELLOW}%-15s${RESTORE} > %s\n", $$1, $$2}'
 	@echo "${RED}==============================${RESTORE}"
 
+
+.PHONY: clean
+clean: ## Clean non-essential files
+	@rm -rf node_modules
+	@for COMPONENT in $(shell ls components); do \
+		if [ -d "components/$${COMPONENT}" ]; then \
+			rm -rf components/$${COMPONENT}/node_modules; \
+			rm -rf components/$${COMPONENT}/dist; \
+			rm -rf components/$${COMPONENT}/build; \
+			rm components/$${COMPONENT}/yarn.lock; \
+		fi; \
+	done
+
 .PHONY: codeclean
 codeclean: ## Code Clean
 	@yarn prettier --write .
