@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Code } from '../../components/Code';
 
 export const CrystallizeHook: FC = () => {
-    const { state, apiClient } = useCrystallize();
+    const { state } = useCrystallize();
 
     const usageCode = `import { createClient } from '@crystallize/reactjshooks';
 
