@@ -9,11 +9,13 @@ import { CrystallizeProvider } from '@crystallize/reactjs-hooks';
 import { useLocalStorage } from '@rehooks/local-storage';
 import Container from 'react-bootstrap/esm/Container';
 import { Header } from './components/layout/Header';
+import { ReactJSHooksLayout } from './routes/reactjs-hooks/layout';
+import { CrystallizeHook } from './routes/reactjs-hooks/crystallize-hook';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
     return (
-        <CrystallizeProvider tenantIdentifier={tenant}>
+        <CrystallizeProvider language="en" tenantIdentifier={tenant}>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
@@ -22,6 +24,15 @@ const App: FC = () => {
                         <Route
                             path="navigation-fetcher/by/:what"
                             element={<NavigationFetcher />}
+                        />
+                    </Route>
+                    <Route
+                        path="reactjs-hooks"
+                        element={<ReactJSHooksLayout />}
+                    >
+                        <Route
+                            path="use-crystallize"
+                            element={<CrystallizeHook />}
                         />
                     </Route>
                 </Route>

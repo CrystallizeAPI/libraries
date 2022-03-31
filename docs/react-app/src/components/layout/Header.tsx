@@ -50,6 +50,14 @@ export const Header: FC = () => {
                                 Navigation By Topics
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <NavDropdown title="reactjs-hooks">
+                            <NavDropdown.Item
+                                as={Link}
+                                to={'/reactjs-hooks/use-crystallize'}
+                            >
+                                useCrystallize
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </Navbar.Collapse>
                     <Navbar.Text className="justify-content-end">
                         Tenant: {state.configuration.tenantIdentifier}

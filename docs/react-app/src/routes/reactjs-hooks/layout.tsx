@@ -5,15 +5,15 @@ import { FaGithubSquare, FaGithub, FaNpm, FaYarn } from 'react-icons/fa';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 
-export const JSAPIClientLayout: FC = () => {
-    const libname = 'js-api-client';
+export const ReactJSHooksLayout: FC = () => {
+    const libname = 'reactjs-hooks';
     return (
         <div>
             <Breadcrumb>
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/' }}>
                     Home
                 </Breadcrumb.Item>
-                <Breadcrumb.Item active>JS Api Client</Breadcrumb.Item>
+                <Breadcrumb.Item active>React JS Hooks</Breadcrumb.Item>
             </Breadcrumb>
 
             <Row className="align-items-center">
@@ -58,7 +58,7 @@ export const JSAPIClientLayout: FC = () => {
                         <li className="list-group-item">
                             <FaGithubSquare size={30} />{' '}
                             <a
-                                href={`https://github.com/CrystallizeAPI/${libname}#crystallize-api-client`}
+                                href={`https://github.com/CrystallizeAPI/${libname}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
