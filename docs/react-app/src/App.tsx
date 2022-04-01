@@ -11,6 +11,7 @@ import Container from 'react-bootstrap/esm/Container';
 import { Header } from './components/layout/Header';
 import { ReactJSHooksLayout } from './routes/reactjs-hooks/layout';
 import { CrystallizeHook } from './routes/reactjs-hooks/crystallize-hook';
+import { Hydrater } from './routes/js-api-client/hydrater';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -24,6 +25,10 @@ const App: FC = () => {
                         <Route
                             path="navigation-fetcher/by/:what"
                             element={<NavigationFetcher />}
+                        />
+                        <Route
+                            path="hydrater/by/:what"
+                            element={<Hydrater />}
                         />
                     </Route>
                     <Route

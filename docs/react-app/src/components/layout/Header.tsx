@@ -49,6 +49,19 @@ export const Header: FC = () => {
                             >
                                 Navigation By Topics
                             </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                                as={Link}
+                                to={'/js-api-client/hydrater/by/paths'}
+                            >
+                                Hydrater By Paths
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                as={Link}
+                                to={'/js-api-client/hydrater/by/skus'}
+                            >
+                                Hydrater By Skus
+                            </NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="reactjs-hooks">
                             <NavDropdown.Item

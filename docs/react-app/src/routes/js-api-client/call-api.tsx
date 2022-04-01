@@ -1,5 +1,5 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import FormControl from 'react-bootstrap/esm/FormControl';
 import InputGroup from 'react-bootstrap/esm/InputGroup';
@@ -9,15 +9,23 @@ import { Code } from '../../components/Code';
 export const CallAPI: FC = () => {
     const { state, apiClient } = useCrystallize();
     const [result, setResult] = useState('');
-
-    const queryPlaceholder = `query {
+    const [form, setForm] = useState(`query {
     catalogue(language: "en", path: "/") {
         name
             children {
             name
         }
     }
-}`;
+}`);
+
+    useEffect(() => {
+        (async () => {
+            const response = await apiClient.catalogueApi(form);
+            setResult(JSON.stringify(response, null, 2));
+        })();
+        // eslint-disable-next-line
+    }, [state.configuration.tenantIdentifier, form]);
+
     const usageCode = `import { createClient } from '@crystallize/js-api-client';
 
 const apiClient = createClient({
@@ -39,18 +47,10 @@ const response = await apiClient.catalogueApi(event.target.value);`;
                             aria-label="GraphQL"
                             rows={15}
                             className="border-2"
-                            onFocus={(event) => {
-                                if (event.target.value === '') {
-                                    event.target.value = queryPlaceholder;
-                                }
+                            defaultValue={form}
+                            onChange={(event) => {
+                                setForm(event.target.value);
                             }}
-                            onBlur={async (event) => {
-                                const response = await apiClient.catalogueApi(
-                                    event.target.value
-                                );
-                                setResult(JSON.stringify(response, null, 2));
-                            }}
-                            placeholder={queryPlaceholder}
                         />
                     </InputGroup>
                 </Col>
