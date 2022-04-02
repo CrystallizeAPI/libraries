@@ -52,7 +52,7 @@ const response = await hydrater([${form.items
         .map((e) => `'${e}'`)
         .join(',')}], 'en');`;
 
-    const advanceUsageCode = `function hydrater(items:string[], language:string, extraQuery: any, (item: string, index: number) => any);`;
+    const advanceUsageCode = `function hydrater(items:string[], language:string, extraQuery: any, perProduct: (item: string, index: number) => any, perVariant: (item: string, index: number) => any);`;
 
     return (
         <div>
