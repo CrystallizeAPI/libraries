@@ -20,12 +20,7 @@ export const Footer: FC = () => {
             <div className="changeTenant">
                 <div>
                     <label htmlFor="change-tenant">Tenant</label>
-                    <input
-                        id="change-tenant"
-                        type="text"
-                        ref={inputRef}
-                        defaultValue={tenant}
-                    />
+                    <input id="change-tenant" type="text" ref={inputRef} defaultValue={tenant} />
                 </div>
                 <button
                     onClick={() => {
@@ -38,18 +33,9 @@ export const Footer: FC = () => {
                 </button>
             </div>
             <div className="inner">
-                <a
-                    href="https://crystallize.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <a href="https://crystallize.com" target="_blank" rel="noopener noreferrer">
                     <span>
-                        <img
-                            src={logo}
-                            alt="Crystallize Logo"
-                            width={75 * 1.5}
-                            height={25 * 1.5}
-                        />
+                        <img src={logo} alt="Crystallize Logo" width={75 * 1.5} height={25 * 1.5} />
                     </span>
                 </a>
             </div>

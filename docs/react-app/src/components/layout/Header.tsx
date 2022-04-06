@@ -26,48 +26,26 @@ export const Header: FC = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse>
                         <NavDropdown title="js-api-client">
-                            <NavDropdown.Item
-                                as={Link}
-                                to={'/js-api-client/call-api'}
-                            >
+                            <NavDropdown.Item as={Link} to={'/js-api-client/call-api'}>
                                 Simple API Call
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item
-                                as={Link}
-                                to={
-                                    '/js-api-client/navigation-fetcher/by/folders'
-                                }
-                            >
+                            <NavDropdown.Item as={Link} to={'/js-api-client/navigation-fetcher/by/folders'}>
                                 Navigation By Folders
                             </NavDropdown.Item>
-                            <NavDropdown.Item
-                                as={Link}
-                                to={
-                                    '/js-api-client/navigation-fetcher/by/topics'
-                                }
-                            >
+                            <NavDropdown.Item as={Link} to={'/js-api-client/navigation-fetcher/by/topics'}>
                                 Navigation By Topics
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item
-                                as={Link}
-                                to={'/js-api-client/hydrater/by/paths'}
-                            >
+                            <NavDropdown.Item as={Link} to={'/js-api-client/hydrater/by/paths'}>
                                 Hydrater By Paths
                             </NavDropdown.Item>
-                            <NavDropdown.Item
-                                as={Link}
-                                to={'/js-api-client/hydrater/by/skus'}
-                            >
+                            <NavDropdown.Item as={Link} to={'/js-api-client/hydrater/by/skus'}>
                                 Hydrater By Skus
                             </NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="reactjs-hooks">
-                            <NavDropdown.Item
-                                as={Link}
-                                to={'/reactjs-hooks/use-crystallize'}
-                            >
+                            <NavDropdown.Item as={Link} to={'/reactjs-hooks/use-crystallize'}>
                                 useCrystallize
                             </NavDropdown.Item>
                         </NavDropdown>

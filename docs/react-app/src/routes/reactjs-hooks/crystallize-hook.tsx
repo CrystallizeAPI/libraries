@@ -22,17 +22,13 @@ helpers.createProductHydraterBySkus(['b-1628520141076','b-1628514494819']);
         <div>
             <h1>Using the Hook</h1>
             <p>
-                <em>useCrystallize()</em> hook provides a <em>Provider</em> that
-                is going to wrap your app. So you get a <em>state</em> and other
-                helpers from it.
+                <em>useCrystallize()</em> hook provides a <em>Provider</em> that is going to wrap your app. So you get a{' '}
+                <em>state</em> and other helpers from it.
             </p>
 
             <Code language="javascript">{usageCode}</Code>
 
-            <p>
-                Thanks to the provider Crystallize Hook maintains the
-                configuration and the language.
-            </p>
+            <p>Thanks to the provider Crystallize Hook maintains the configuration and the language.</p>
         </div>
     );
 };

@@ -56,10 +56,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
     const advanceUsageCode = `function fetch(path:string, language:string, depth:number, extraQuery: any, (level:number) => any);`;
 
-    let tree =
-        result && result.tree && result.tree.children
-            ? result.tree.children
-            : [];
+    let tree = result && result.tree && result.tree.children ? result.tree.children : [];
 
     if (what === 'topics') {
         if (form.path === '/' && result && result.tree) {
@@ -79,14 +76,10 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
             <Alert variant="info">
                 <Alert.Heading>There is more!</Alert.Heading>
-                <p>
-                    You can customize 100% of the underlaying GraphQL query that
-                    is made for you by the helper.
-                </p>
+                <p>You can customize 100% of the underlaying GraphQL query that is made for you by the helper.</p>
                 <Code language="typescript">{advanceUsageCode}</Code>
                 <hr />
-                It's using <em>json-to-graphql-query</em> behind this scene to
-                convert the object to GraphQL query!{' '}
+                It's using <em>json-to-graphql-query</em> behind this scene to convert the object to GraphQL query!{' '}
                 <Alert.Link href="https://github.com/CrystallizeAPI/js-api-client#Navigation-Tree-Fetcher">
                     Check the documentation!
                 </Alert.Link>
@@ -95,9 +88,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                 <Col md={3}>
                     <h2>Query</h2>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">
-                            Path
-                        </InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">Path</InputGroup.Text>
                         <FormControl
                             placeholder="Path"
                             aria-label="Path"
@@ -111,9 +102,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                         />
                     </InputGroup>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">
-                            Depth
-                        </InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">Depth</InputGroup.Text>
                         <FormControl
                             type="number"
                             placeholder="Depth"
@@ -136,16 +125,10 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                             {tree.map((item: any) => {
                                 if (item.children) {
                                     return (
-                                        <NavDropdown
-                                            title={item.name}
-                                            key={item.path}
-                                        >
+                                        <NavDropdown title={item.name} key={item.path}>
                                             {item.children.map((child: any) => {
                                                 return (
-                                                    <NavDropdown.Item
-                                                        href={child.path}
-                                                        key={child.path}
-                                                    >
+                                                    <NavDropdown.Item href={child.path} key={child.path}>
                                                         {child.name}
                                                     </NavDropdown.Item>
                                                 );

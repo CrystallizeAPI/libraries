@@ -1,9 +1,6 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 // eslint-disable-next-line
-import {
-    createProductHydraterByPaths,
-    createProductHydraterBySkus
-} from '@crystallize/js-api-client';
+import { createProductHydraterByPaths, createProductHydraterBySkus } from '@crystallize/js-api-client';
 import type { ProductHydrater } from '@crystallize/js-api-client';
 
 import { FC, useEffect, useState } from 'react';
@@ -48,9 +45,7 @@ const apiClient = createClient({
     tenantIdentifier: '${state.configuration.tenantIdentifier}'
 });
 const hydrater = ${creator}(apiClient);
-const response = await hydrater([${form.items
-        .map((e) => `'${e}'`)
-        .join(',')}], 'en');`;
+const response = await hydrater([${form.items.map((e) => `'${e}'`).join(',')}], 'en');`;
 
     const advanceUsageCode = `function hydrater(items:string[], language:string, extraQuery: any, perProduct: (item: string, index: number) => any, perVariant: (item: string, index: number) => any);`;
 
@@ -64,14 +59,10 @@ const response = await hydrater([${form.items
 
             <Alert variant="info">
                 <Alert.Heading>There is more!</Alert.Heading>
-                <p>
-                    You can customize 100% of the underlaying GraphQL query that
-                    is made for you by the helper.
-                </p>
+                <p>You can customize 100% of the underlaying GraphQL query that is made for you by the helper.</p>
                 <Code language="typescript">{advanceUsageCode}</Code>
                 <hr />
-                It's using <em>json-to-graphql-query</em> behind this scene to
-                convert the object to GraphQL query!{' '}
+                It's using <em>json-to-graphql-query</em> behind this scene to convert the object to GraphQL query!{' '}
                 <Alert.Link href="https://github.com/CrystallizeAPI/js-api-client#Hydrater">
                     Check the documentation!
                 </Alert.Link>
@@ -80,9 +71,7 @@ const response = await hydrater([${form.items
                 <Col md={3}>
                     <h2>Query</h2>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">
-                            {what}
-                        </InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">{what}</InputGroup.Text>
                         <FormControl
                             placeholder="Path"
                             aria-label="Path"

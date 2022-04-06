@@ -22,23 +22,11 @@ const App: FC = () => {
                     <Route index element={<Home />} />
                     <Route path="js-api-client" element={<JSAPIClientLayout />}>
                         <Route path="call-api" element={<CallAPI />} />
-                        <Route
-                            path="navigation-fetcher/by/:what"
-                            element={<NavigationFetcher />}
-                        />
-                        <Route
-                            path="hydrater/by/:what"
-                            element={<Hydrater />}
-                        />
+                        <Route path="navigation-fetcher/by/:what" element={<NavigationFetcher />} />
+                        <Route path="hydrater/by/:what" element={<Hydrater />} />
                     </Route>
-                    <Route
-                        path="reactjs-hooks"
-                        element={<ReactJSHooksLayout />}
-                    >
-                        <Route
-                            path="use-crystallize"
-                            element={<CrystallizeHook />}
-                        />
+                    <Route path="reactjs-hooks" element={<ReactJSHooksLayout />}>
+                        <Route path="use-crystallize" element={<CrystallizeHook />} />
                     </Route>
                 </Route>
                 <Route

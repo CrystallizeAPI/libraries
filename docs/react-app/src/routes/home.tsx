@@ -12,14 +12,12 @@ export const Home: FC = () => {
 
             <br />
             <p className="text-center">
-                This demo application has been created to show how to use the
-                different Crystallize libraries.
+                This demo application has been created to show how to use the different Crystallize libraries.
             </p>
 
             <p className="text-center">
-                At anytime you can change the <em>tenantIdentifier</em> in the
-                footer input (on the left). If your tenant catalogue is public,
-                that will work.
+                At anytime you can change the <em>tenantIdentifier</em> in the footer input (on the left). If your
+                tenant catalogue is public, that will work.
             </p>
         </div>
     );
