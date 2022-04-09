@@ -23,7 +23,7 @@ clean: ## Clean non-essential files
 			rm -rf components/$${COMPONENT}/node_modules; \
 			rm -rf components/$${COMPONENT}/dist; \
 			rm -rf components/$${COMPONENT}/build; \
-			rm components/$${COMPONENT}/yarn.lock; \
+			rm -f components/$${COMPONENT}/yarn.lock; \
 		fi; \
 	done
 

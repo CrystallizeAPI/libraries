@@ -2,7 +2,9 @@
     "private": true,
     "workspaces": [
         "components/js-api-client",
-        "components/reactjs-hooks"
+        "components/reactjs-hooks",
+        "components/node-service-api-router",
+        "components/node-service-api-request-handlers"
     ],
     "devDependencies": {
         "prettier": "2.6.0"

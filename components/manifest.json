@@ -5,6 +5,14 @@
             "name": "(Java|Type)Script API Client",
             "git": "git@github.com:CrystallizeAPI/js-api-client.git"
         },
+        "node-service-api-router": {
+            "name": "Node Service API Router",
+            "git": "git@github.com:CrystallizeAPI/node-service-api-router.git"
+        },
+        "node-service-api-request-handlers": {
+            "name": "Node Service API Request Handlers",
+            "git": "git@github.com:CrystallizeAPI/node-service-api-request-handlers.git"
+        },
         "reactjs-hooks": {
             "name": "React Hooks",
             "git": "git@github.com:CrystallizeAPI/reactjs-hooks.git"
