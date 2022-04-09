@@ -42,6 +42,16 @@ tests: ## Run the tests
 		fi \
 	done
 
+.PHONY: bump
+bump: ## Bump all components
+	@for COMPONENT in $(shell ls components); do \
+		if [ -d "components/$${COMPONENT}" ]; then \
+			cd components/$${COMPONENT};\
+			yarn bump $(VERSION);\
+			cd ..; \
+		fi; \
+	done
+
 .PHONY: add-component
 add-component: ## Create an empty structure for a new Component
 	@mkdir -p components/$(COMPONENT)

@@ -67,3 +67,34 @@ jobs:
                         echo ::endgroup::
                       fi  
                   done
+
+    builds:
+        name: 👀 Test Standalone Builds
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: [12, 14, 16]
+        steps:
+            - name: 🛑 Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.9.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node }}
+
+            - name: 📥 Download deps and builds folder by folder
+              run: |
+                  rm -f package.json
+                  rm -f yarn.lock
+                  rm -rf node_modules
+                  for COMPONENT in `ls components`; do
+                      if [ -d "components/${COMPONENT}" ]; then
+                        echo ::group::..:: ${COMPONENT} ::..
+                        cd components/${COMPONENT} && yarn install && yarn build && cd -;
+                        echo ::endgroup::
+                      fi  
+                  done
