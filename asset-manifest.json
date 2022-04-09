@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/libraries/static/css/main.479406d3.css",
-    "main.js": "/libraries/static/js/main.6a90057a.js",
+    "main.js": "/libraries/static/js/main.8ddad66b.js",
     "static/media/crystallize.svg": "/libraries/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
     "index.html": "/libraries/index.html",
     "main.479406d3.css.map": "/libraries/static/css/main.479406d3.css.map",
-    "main.6a90057a.js.map": "/libraries/static/js/main.6a90057a.js.map"
+    "main.8ddad66b.js.map": "/libraries/static/js/main.8ddad66b.js.map"
   },
   "entrypoints": [
     "static/css/main.479406d3.css",
-    "static/js/main.6a90057a.js"
+    "static/js/main.8ddad66b.js"
   ]
 }
