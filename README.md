@@ -13,10 +13,12 @@ All contributions will happen here:
 
 ## Managed Repositories
 
-| Libraries                                                         | Licence(s) |
-| ----------------------------------------------------------------- | ---------- |
-| [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)  | ![mit]     |
-| [React JS Hooks](https://github.com/CrystallizeAPI/reactjs-hooks) | ![mit]     |
+| Libraries                                                                                                | Licence(s) |
+| -------------------------------------------------------------------------------------------------------- | ---------- |
+| [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)                                         | ![mit]     |
+| [React JS Hooks](https://github.com/CrystallizeAPI/reactjs-hooks)                                        | ![mit]     |
+| [Node Service Api Router](https://github.com/CrystallizeAPI/node-service-api-router)                     | ![mit]     |
+| [Node Service Api Request Handlers](https://github.com/CrystallizeAPI/node-service-api-request-handlers) | ![mit]     |
 
 ## Contributions
 

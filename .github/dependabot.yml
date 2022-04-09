@@ -8,3 +8,11 @@ updates:
       directory: '/components/reacts-hooks'
       schedule:
           interval: 'weekly'
+    - package-ecosystem: 'npm'
+      directory: '/components/node-service-api-request-handlers'
+      schedule:
+          interval: 'weekly'
+    - package-ecosystem: 'npm'
+      directory: '/components/node-service-api-router'
+      schedule:
+          interval: 'weekly'
