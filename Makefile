@@ -20,6 +20,7 @@ clean: ## Clean non-essential files
 	@rm -rf node_modules
 	@for COMPONENT in $(shell ls components); do \
 		if [ -d "components/$${COMPONENT}" ]; then \
+			echo " ..:: Cleaning $${COMPONENT} ::.."; \
 			rm -rf components/$${COMPONENT}/node_modules; \
 			rm -rf components/$${COMPONENT}/dist; \
 			rm -rf components/$${COMPONENT}/build; \
@@ -46,9 +47,8 @@ tests: ## Run the tests
 bump: ## Bump all components
 	@for COMPONENT in $(shell ls components); do \
 		if [ -d "components/$${COMPONENT}" ]; then \
-			cd components/$${COMPONENT};\
-			yarn bump $(VERSION);\
-			cd ..; \
+			echo " ..:: Bumping $${COMPONENT} ::.."; \
+			cd components/$${COMPONENT} && yarn bump $(VERSION) && cd - ;\
 		fi; \
 	done
 
