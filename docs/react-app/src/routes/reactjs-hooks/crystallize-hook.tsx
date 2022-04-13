@@ -13,10 +13,10 @@ export const CrystallizeHook: FC = () => {
 ///...
 
 const { state, apiClient, helpers } = useCrystallize();
-helpers.createNavigationByFoldersFetcher('/shop', 2);
-helpers.createNavigationByTopicsFetcher('/specials', 3);
-helpers.createProductHydraterByPaths(['/p1','/p2']);
-helpers.createProductHydraterBySkus(['b-1628520141076','b-1628514494819']);
+helpers.navigationFetcher.byFolders('/shop', 2);
+helpers.navigationFetcher.byTopics('/specials', 3);
+helpers.productHydrater.byPaths(['/p1','/p2']);
+helpers.productHydrater.bySkus(['b-1628520141076','b-1628514494819']);
 `;
     return (
         <div>

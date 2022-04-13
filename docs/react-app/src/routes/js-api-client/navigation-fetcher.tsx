@@ -1,10 +1,6 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 // eslint-disable-next-line
-import {
-    createNavigationByFoldersFetcher,
-    createNavigationByTopicsFetcher,
-    TreeFetcher
-} from '@crystallize/js-api-client';
+import { createNavigationFetcher, TreeFetcher } from '@crystallize/js-api-client';
 import { FC, useEffect, useState } from 'react';
 import { ListedNav } from '../../components/ListedNav';
 import { Code } from '../../components/Code';
@@ -31,12 +27,12 @@ export const NavigationFetcher: FC = () => {
     let creator: string;
     switch (what) {
         case 'topics':
-            fetcher = createNavigationByTopicsFetcher(apiClient);
-            creator = 'createNavigationByTopicsFetcher';
+            fetcher = createNavigationFetcher(apiClient).byTopics;
+            creator = 'byTopics';
             break;
         default:
-            fetcher = createNavigationByFoldersFetcher(apiClient);
-            creator = 'createNavigationByFoldersFetcher';
+            fetcher = createNavigationFetcher(apiClient).byFolders;
+            creator = 'byFolders';
     }
 
     useEffect(() => {
@@ -47,11 +43,11 @@ export const NavigationFetcher: FC = () => {
         // eslint-disable-next-line
     }, [state.configuration.tenantIdentifier, form, what]);
 
-    const usageCode = `import { ${creator} } from '@crystallize/js-api-client';
+    const usageCode = `import { createNavigationFetcher } from '@crystallize/js-api-client';
 const apiClient = createClient({
     tenantIdentifier: '${state.configuration.tenantIdentifier}'
 });
-const fetch = ${creator}(apiClient);
+const fetch = createNavigationFetcher(apiClient).${creator};
 const response = await fetch('${form.path}', 'en', ${form.depth});`;
 
     const advanceUsageCode = `function fetch(path:string, language:string, depth:number, extraQuery: any, (level:number) => any);`;
