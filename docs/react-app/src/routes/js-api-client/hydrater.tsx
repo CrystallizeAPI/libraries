@@ -1,6 +1,6 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 // eslint-disable-next-line
-import { createProductHydraterByPaths, createProductHydraterBySkus } from '@crystallize/js-api-client';
+import { createProductHydrater } from '@crystallize/js-api-client';
 import type { ProductHydrater } from '@crystallize/js-api-client';
 
 import { FC, useEffect, useState } from 'react';
@@ -24,12 +24,12 @@ export const Hydrater: FC = () => {
     let creator: string;
     switch (what) {
         case 'skus':
-            hydrater = createProductHydraterBySkus(apiClient);
-            creator = 'createProductHydraterBySkus';
+            hydrater = createProductHydrater(apiClient).bySkus;
+            creator = 'bySkus';
             break;
         default:
-            hydrater = createProductHydraterByPaths(apiClient);
-            creator = 'createProductHydraterByPaths';
+            hydrater = createProductHydrater(apiClient).byPaths;
+            creator = 'byPaths';
     }
 
     useEffect(() => {
@@ -40,11 +40,11 @@ export const Hydrater: FC = () => {
         // eslint-disable-next-line
     }, [state.configuration.tenantIdentifier, form, what]);
 
-    const usageCode = `import { ${creator} } from '@crystallize/js-api-client';
+    const usageCode = `import { createProductHydrater } from '@crystallize/js-api-client';
 const apiClient = createClient({
     tenantIdentifier: '${state.configuration.tenantIdentifier}'
 });
-const hydrater = ${creator}(apiClient);
+const hydrater = createProductHydrater(apiClient).${creator};
 const response = await hydrater([${form.items.map((e) => `'${e}'`).join(',')}], 'en');`;
 
     const advanceUsageCode = `function hydrater(items:string[], language:string, extraQuery: any, perProduct: (item: string, index: number) => any, perVariant: (item: string, index: number) => any);`;
