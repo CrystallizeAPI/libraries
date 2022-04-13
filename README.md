@@ -13,12 +13,12 @@ All contributions will happen here:
 
 ## Managed Repositories
 
-| Libraries                                                                                                | Licence(s) |
-| -------------------------------------------------------------------------------------------------------- | ---------- |
-| [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)                                         | ![mit]     |
-| [React JS Hooks](https://github.com/CrystallizeAPI/reactjs-hooks)                                        | ![mit]     |
-| [Node Service Api Router](https://github.com/CrystallizeAPI/node-service-api-router)                     | ![mit]     |
-| [Node Service Api Request Handlers](https://github.com/CrystallizeAPI/node-service-api-request-handlers) | ![mit]     |
+| Libraries                                                                                                | Licence | Version                                      |
+| -------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------- |
+| [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)                                         | ![mit]  | ![js-api-client-version]                     |
+| [React JS Hooks](https://github.com/CrystallizeAPI/reactjs-hooks)                                        | ![mit]  | ![reactjs-hooks-version]                     |
+| [Node Service Api Router](https://github.com/CrystallizeAPI/node-service-api-router)                     | ![mit]  | ![node-service-api-router-version]           |
+| [Node Service Api Request Handlers](https://github.com/CrystallizeAPI/node-service-api-request-handlers) | ![mit]  | ![node-service-api-request-handlers-version] |
 
 ## Contributions
 
@@ -69,3 +69,7 @@ make add-component COMPONENT=my-new-component
 > If not already done, you still need create the Github sub-repository and add an entry in `components/manifest.json`
 
 [mit]: https://img.shields.io/badge/license-MIT-green?style=flat-square&labelColor=black
+[js-api-client-version]: https://img.shields.io/npm/v/@crystallize/js-api-client?label=version&style=flat-square
+[reactjs-hooks-version]: https://img.shields.io/npm/v/@crystallize/reactjs-hooks?label=version&style=flat-square
+[node-service-api-router-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-router?label=version&style=flat-square
+[node-service-api-request-handlers-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-request-handlers?label=version&style=flat-square
