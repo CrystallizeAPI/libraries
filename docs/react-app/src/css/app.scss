@@ -24,3 +24,7 @@ textarea.form-control {
 body {
     font-family: Roboto, sans-serif;
 }
+
+figure.img-fluid > picture > img {
+    max-width: 100%;
+}

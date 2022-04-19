@@ -12,6 +12,8 @@ import { Header } from './components/layout/Header';
 import { ReactJSHooksLayout } from './routes/reactjs-hooks/layout';
 import { CrystallizeHook } from './routes/reactjs-hooks/crystallize-hook';
 import { Hydrater } from './routes/js-api-client/hydrater';
+import { ReactJSComponentsLayout } from './routes/reactjs-components/layout';
+import { CrystallizeComponents } from './routes/reactjs-components/image';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -27,6 +29,9 @@ const App: FC = () => {
                     </Route>
                     <Route path="reactjs-hooks" element={<ReactJSHooksLayout />}>
                         <Route path="use-crystallize" element={<CrystallizeHook />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="image" element={<CrystallizeComponents />} />
                     </Route>
                 </Route>
                 <Route
