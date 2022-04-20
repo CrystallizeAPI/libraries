@@ -15,6 +15,7 @@ import { Hydrater } from './routes/js-api-client/hydrater';
 import { ReactJSComponentsLayout } from './routes/reactjs-components/layout';
 import { CrystallizeImage } from './routes/reactjs-components/image';
 import { CrystallizeGrid } from './routes/reactjs-components/grid';
+import { CrystallizeContentTransformer } from './routes/reactjs-components/content-transformer';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -36,6 +37,9 @@ const App: FC = () => {
                     </Route>
                     <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
                         <Route path="grid" element={<CrystallizeGrid />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="content-transformer" element={<CrystallizeContentTransformer />} />
                     </Route>
                 </Route>
                 <Route
