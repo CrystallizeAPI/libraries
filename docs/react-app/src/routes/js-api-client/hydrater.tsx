@@ -1,5 +1,4 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
-// eslint-disable-next-line
 import { createProductHydrater } from '@crystallize/js-api-client';
 import type { ProductHydrater } from '@crystallize/js-api-client';
 
