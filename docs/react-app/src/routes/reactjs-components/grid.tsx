@@ -3,12 +3,12 @@ import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { Image } from '@crystallize/reactjs-components/dist/image';
 import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
 import { FC, useEffect, useState } from 'react';
+import { Code } from '../../components/Code';
 
 export const CrystallizeGrid: FC = () => {
     const { state, helpers } = useCrystallize();
     const fetch = helpers.catalogueFetcher;
     const [grid, setGrid] = useState<any>(null);
-
     useEffect(() => {
         (async () => {
             const builder = catalogueFetcherGraphqlBuilder;
@@ -55,12 +55,22 @@ export const CrystallizeGrid: FC = () => {
         })();
     }, [state.configuration.tenantIdentifier]);
 
+    const usageCode = `import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
+    // fetch data and then
+    <h2>CSS Grid</h2>
+    {grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />}
+
+    <h2>Table Grid</h2>
+    {grid && <GridRenderer grid={grid} type={GridRenderingType.Table} cellComponent={Cell} />}
+`;
+
     return (
         <div>
             <h1>Grid Component</h1>
+            <Code language="javascript">{usageCode}</Code>
 
-            {/* <h2>CSS Grid</h2> */}
-            {/* {grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />} */}
+            <h2>CSS Grid</h2>
+            {grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />}
 
             <h2>Table Grid</h2>
             {grid && <GridRenderer grid={grid} type={GridRenderingType.Table} cellComponent={Cell} />}

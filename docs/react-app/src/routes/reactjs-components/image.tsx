@@ -4,6 +4,7 @@ import { Image } from '@crystallize/reactjs-components/dist/image';
 import { FC, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import CardGroup from 'react-bootstrap/esm/CardGroup';
+import { Code } from '../../components/Code';
 
 export const CrystallizeImage: FC = () => {
     const { state, helpers } = useCrystallize();
@@ -45,10 +46,15 @@ export const CrystallizeImage: FC = () => {
         })();
     }, [state.configuration.tenantIdentifier]);
 
+    const usageCode = `import { Image } from '@crystallize/reactjs-components/dist/image';
+    // fetch data and then
+<Image className="card-img-top img-fluid" {...product.defaultVariant.firstImage} sizes="100w, 700px" />
+`;
+
     return (
         <div>
             <h1>Image Component</h1>
-
+            <Code language="javascript">{usageCode}</Code>
             <CardGroup>
                 {products &&
                     products.slice(0, 5).map((product: any) => <Product product={product} key={'1' + product.path} />)}
