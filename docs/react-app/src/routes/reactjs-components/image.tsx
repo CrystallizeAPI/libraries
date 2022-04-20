@@ -1,11 +1,11 @@
 import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { useCrystallize } from '@crystallize/reactjs-hooks';
-import { Image } from '@crystallize/reactjs-components';
+import { Image } from '@crystallize/reactjs-components/dist/image';
 import { FC, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import CardGroup from 'react-bootstrap/esm/CardGroup';
 
-export const CrystallizeComponents: FC = () => {
+export const CrystallizeImage: FC = () => {
     const { state, helpers } = useCrystallize();
     const [products, setProducts] = useState<any[]>([]);
     const fetch = helpers.catalogueFetcher;
@@ -47,7 +47,7 @@ export const CrystallizeComponents: FC = () => {
 
     return (
         <div>
-            <h1>Using the Components</h1>
+            <h1>Image Component</h1>
 
             <CardGroup>
                 {products &&
@@ -71,11 +71,7 @@ const Product: FC<{ product: any }> = ({ product }) => {
     return (
         <Card key={product.path}>
             {/* <Card.Img variant="top" src={product.defaultVariant.firstImage.variants[2].url} /> */}
-            <Image
-                className="card-img-top img-fluid"
-                {...product.defaultVariant.firstImage}
-                sizes="(max-width: 700px) 90vw, 700px"
-            />
+            <Image className="card-img-top img-fluid" {...product.defaultVariant.firstImage} sizes="100w, 700px" />
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
