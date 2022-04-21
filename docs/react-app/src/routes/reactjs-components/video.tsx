@@ -1,6 +1,6 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 import { Video } from '@crystallize/reactjs-components/dist/video';
-import '@crystallize/reactjs-components/dist/video/styles.css';
+import '@crystallize/reactjs-components/assets/video/styles.css';
 import { FC, useEffect, useState } from 'react';
 import { Code } from '../../components/Code';
 
