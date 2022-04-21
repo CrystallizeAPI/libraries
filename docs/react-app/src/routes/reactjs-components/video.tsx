@@ -6,10 +6,10 @@ import { Code } from '../../components/Code';
 
 export const CrystallizeVideo: FC = () => {
     const { state, helpers } = useCrystallize();
-    const fetch = helpers.catalogueFetcher;
     const [videos, setVideos] = useState<any>([]);
     useEffect(() => {
         (async () => {
+            const fetch = helpers.catalogueFetcher;
             const query = {
                 catalogue: {
                     __args: {

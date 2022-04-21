@@ -7,10 +7,10 @@ import { Code } from '../../components/Code';
 
 export const CrystallizeGrid: FC = () => {
     const { state, helpers } = useCrystallize();
-    const fetch = helpers.catalogueFetcher;
     const [grid, setGrid] = useState<any>(null);
     useEffect(() => {
         (async () => {
+            const fetch = helpers.catalogueFetcher;
             const builder = catalogueFetcherGraphqlBuilder;
             const query = {
                 grid: {

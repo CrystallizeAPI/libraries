@@ -9,9 +9,9 @@ import { Code } from '../../components/Code';
 export const CrystallizeImage: FC = () => {
     const { state, helpers } = useCrystallize();
     const [products, setProducts] = useState<any[]>([]);
-    const fetch = helpers.catalogueFetcher;
     useEffect(() => {
         (async () => {
+            const fetch = helpers.catalogueFetcher;
             const builder = catalogueFetcherGraphqlBuilder;
             const query = {
                 catalogue: {

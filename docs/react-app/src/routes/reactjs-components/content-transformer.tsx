@@ -5,10 +5,10 @@ import { Code } from '../../components/Code';
 
 export const CrystallizeContentTransformer: FC = () => {
     const { state, helpers } = useCrystallize();
-    const fetch = helpers.catalogueFetcher;
     const [paragraphs, setParagraphs] = useState<any>([]);
     useEffect(() => {
         (async () => {
+            const fetch = helpers.catalogueFetcher;
             const query = {
                 catalogue: {
                     __args: {
