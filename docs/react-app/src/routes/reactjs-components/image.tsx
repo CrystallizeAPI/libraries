@@ -44,7 +44,7 @@ export const CrystallizeImage: FC = () => {
             const products = response.catalogue.children.filter((item: any) => item.__typename === 'Product');
             setProducts(products);
         })();
-    }, [state.configuration.tenantIdentifier]);
+    }, [state.configuration.tenantIdentifier]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const usageCode = `import { Image } from '@crystallize/reactjs-components/dist/image';
     // fetch data and then

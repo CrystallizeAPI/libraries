@@ -44,7 +44,7 @@ export const CrystallizeVideo: FC = () => {
             console.log(response);
             setVideos(response.catalogue.videos.content.videos);
         })();
-    }, [state.configuration.tenantIdentifier]);
+    }, [state.configuration.tenantIdentifier]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const usageCode = ``;
 

@@ -36,7 +36,7 @@ export const CrystallizeContentTransformer: FC = () => {
             const response = await fetch<any>(query);
             setParagraphs(response.catalogue.description.content.paragraphs);
         })();
-    }, [state.configuration.tenantIdentifier]);
+    }, [state.configuration.tenantIdentifier]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const usageCode = `import { ContentTransformer } from '@crystallize/reactjs-components/dist/content-transformer';
 {paragraphs.filter((paragraph: any) => paragraph?.body).map((paragraph: any, index: number) => (

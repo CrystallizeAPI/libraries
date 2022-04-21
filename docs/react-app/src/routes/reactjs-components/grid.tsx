@@ -53,7 +53,7 @@ export const CrystallizeGrid: FC = () => {
             const response = await fetch<any>(query);
             setGrid(response.grid);
         })();
-    }, [state.configuration.tenantIdentifier]);
+    }, [state.configuration.tenantIdentifier]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const usageCode = `import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
     // fetch data and then
