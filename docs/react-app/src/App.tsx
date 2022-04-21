@@ -12,6 +12,11 @@ import { Header } from './components/layout/Header';
 import { ReactJSHooksLayout } from './routes/reactjs-hooks/layout';
 import { CrystallizeHook } from './routes/reactjs-hooks/crystallize-hook';
 import { Hydrater } from './routes/js-api-client/hydrater';
+import { ReactJSComponentsLayout } from './routes/reactjs-components/layout';
+import { CrystallizeImage } from './routes/reactjs-components/image';
+import { CrystallizeGrid } from './routes/reactjs-components/grid';
+import { CrystallizeContentTransformer } from './routes/reactjs-components/content-transformer';
+import { CrystallizeVideo } from './routes/reactjs-components/video';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -27,6 +32,18 @@ const App: FC = () => {
                     </Route>
                     <Route path="reactjs-hooks" element={<ReactJSHooksLayout />}>
                         <Route path="use-crystallize" element={<CrystallizeHook />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="image" element={<CrystallizeImage />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="video" element={<CrystallizeVideo />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="grid" element={<CrystallizeGrid />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="content-transformer" element={<CrystallizeContentTransformer />} />
                     </Route>
                 </Route>
                 <Route

@@ -6,6 +6,7 @@
     "dependencies": {
         "@crystallize/js-api-client": "../../components/js-api-client",
         "@crystallize/reactjs-hooks": "../../components/reactjs-hooks",
+        "@crystallize/reactjs-components": "../../components/reactjs-components",
         "@rehooks/local-storage": "^2.4.4",
         "@types/node": "^16.11.26",
         "@types/react": "^17.0.43",

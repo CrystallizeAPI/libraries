@@ -49,6 +49,20 @@ export const Header: FC = () => {
                                 useCrystallize
                             </NavDropdown.Item>
                         </NavDropdown>
+                        <NavDropdown title="reactjs-components">
+                            <NavDropdown.Item as={Link} to={'/reactjs-components/image'}>
+                                Image
+                            </NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/reactjs-components/video'}>
+                                Video
+                            </NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/reactjs-components/grid'}>
+                                Grid
+                            </NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/reactjs-components/content-transformer'}>
+                                Content Transformer
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </Navbar.Collapse>
                     <Navbar.Text className="justify-content-end">
                         Tenant: {state.configuration.tenantIdentifier}
