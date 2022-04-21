@@ -5,9 +5,7 @@ import { CellComponent, model } from './utils';
 
 describe('GridRenderer', () => {
     it('renders a grid correctly', () => {
-        const wrapper = shallow(
-            <GridRenderer grid={model} cellComponent={CellComponent} type={GridRenderingType.Table} />
-        );
+        const wrapper = shallow(<GridRenderer grid={model} cellComponent={CellComponent} />);
         expect(wrapper).toMatchSnapshot();
     });
 
@@ -19,9 +17,7 @@ describe('GridRenderer', () => {
     });
 
     it('passes the `cellComponent` prop through correctly', () => {
-        const wrapper = shallow(
-            <GridRenderer grid={model} cellComponent={CellComponent} type={GridRenderingType.Table} />
-        );
+        const wrapper = shallow(<GridRenderer grid={model} cellComponent={CellComponent} />);
         expect(wrapper.find('CSSGrid').prop('cellComponent')).toEqual(CellComponent);
     });
 
@@ -29,7 +25,7 @@ describe('GridRenderer', () => {
         // The children should be a function as per the prop types
         const mock = jest.fn();
         const wrapper = shallow(
-            <GridRenderer grid={model} cellComponent={CellComponent} type={GridRenderingType.Table}>
+            <GridRenderer grid={model} cellComponent={CellComponent}>
                 {mock}
             </GridRenderer>
         );

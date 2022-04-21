@@ -24,7 +24,7 @@ export interface TableGridProps {
 export interface GridRendererProps {
     className?: string;
     cellComponent: React.FunctionComponent<{ cell: any; totalColSpan: number }>;
-    type: GridRenderingType;
+    type?: GridRenderingType;
     grid: {
         rows: any;
     };
