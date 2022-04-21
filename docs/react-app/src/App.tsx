@@ -16,6 +16,7 @@ import { ReactJSComponentsLayout } from './routes/reactjs-components/layout';
 import { CrystallizeImage } from './routes/reactjs-components/image';
 import { CrystallizeGrid } from './routes/reactjs-components/grid';
 import { CrystallizeContentTransformer } from './routes/reactjs-components/content-transformer';
+import { CrystallizeVideo } from './routes/reactjs-components/video';
 
 const App: FC = () => {
     const [tenant] = useLocalStorage<string>('tenant', 'furniture');
@@ -34,6 +35,9 @@ const App: FC = () => {
                     </Route>
                     <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
                         <Route path="image" element={<CrystallizeImage />} />
+                    </Route>
+                    <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
+                        <Route path="video" element={<CrystallizeVideo />} />
                     </Route>
                     <Route path="reactjs-components" element={<ReactJSComponentsLayout />}>
                         <Route path="grid" element={<CrystallizeGrid />} />

@@ -1,5 +1,4 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
-import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { FC, useEffect, useState } from 'react';
 import { ContentTransformer } from '@crystallize/reactjs-components/dist/content-transformer';
 import { Code } from '../../components/Code';
@@ -10,7 +9,6 @@ export const CrystallizeContentTransformer: FC = () => {
     const [paragraphs, setParagraphs] = useState<any>([]);
     useEffect(() => {
         (async () => {
-            const builder = catalogueFetcherGraphqlBuilder;
             const query = {
                 catalogue: {
                     __args: {

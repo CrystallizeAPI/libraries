@@ -53,6 +53,9 @@ export const Header: FC = () => {
                             <NavDropdown.Item as={Link} to={'/reactjs-components/image'}>
                                 Image
                             </NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/reactjs-components/video'}>
+                                Video
+                            </NavDropdown.Item>
                             <NavDropdown.Item as={Link} to={'/reactjs-components/grid'}>
                                 Grid
                             </NavDropdown.Item>
