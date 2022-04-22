@@ -17,6 +17,7 @@ All contributions will happen here:
 | -------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------- |
 | [JS Api Client](https://github.com/CrystallizeAPI/js-api-client)                                         | ![mit]  | ![js-api-client-version]                     |
 | [React JS Hooks](https://github.com/CrystallizeAPI/reactjs-hooks)                                        | ![mit]  | ![reactjs-hooks-version]                     |
+| [React JS Components](https://github.com/CrystallizeAPI/reactjs-components)                              | ![mit]  | ![reactjs-components-version]                |
 | [Node Service Api Router](https://github.com/CrystallizeAPI/node-service-api-router)                     | ![mit]  | ![node-service-api-router-version]           |
 | [Node Service Api Request Handlers](https://github.com/CrystallizeAPI/node-service-api-request-handlers) | ![mit]  | ![node-service-api-request-handlers-version] |
 
@@ -71,5 +72,6 @@ make add-component COMPONENT=my-new-component
 [mit]: https://img.shields.io/badge/license-MIT-green?style=flat-square&labelColor=black
 [js-api-client-version]: https://img.shields.io/npm/v/@crystallize/js-api-client?label=version&style=flat-square
 [reactjs-hooks-version]: https://img.shields.io/npm/v/@crystallize/reactjs-hooks?label=version&style=flat-square
+[reactjs-components-version]: https://img.shields.io/npm/v/@crystallize/reactjs-hooks?label=version&style=flat-square
 [node-service-api-router-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-router?label=version&style=flat-square
 [node-service-api-request-handlers-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-request-handlers?label=version&style=flat-square
