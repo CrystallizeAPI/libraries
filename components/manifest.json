@@ -14,8 +14,12 @@
             "git": "git@github.com:CrystallizeAPI/node-service-api-request-handlers.git"
         },
         "reactjs-hooks": {
-            "name": "React Hooks",
+            "name": "React JS Hooks",
             "git": "git@github.com:CrystallizeAPI/reactjs-hooks.git"
+        },
+        "reactjs-components": {
+            "name": "React JS Components",
+            "git": "git@github.com:CrystallizeAPI/reactjs-components.git"
         }
     }
 }
