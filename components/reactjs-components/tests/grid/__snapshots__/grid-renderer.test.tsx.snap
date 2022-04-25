@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GridRenderer renders a grid correctly 1`] = `
+<CSSGrid
+  cellComponent={[Function]}
+  cells={
+    Array [
+      Object {
+        "item": Object {
+          "name": "Item 1",
+        },
+        "layout": Object {
+          "colspan": 2,
+          "rowspan": 1,
+        },
+      },
+      Object {
+        "item": Object {
+          "name": "Item 2",
+        },
+        "layout": Object {
+          "colspan": 2,
+          "rowspan": 1,
+        },
+      },
+      Object {
+        "item": Object {
+          "name": "Item 3",
+        },
+        "layout": Object {
+          "colspan": 4,
+          "rowspan": 1,
+        },
+      },
+    ]
+  }
+  totalColSpan={4}
+/>
+`;
+
+exports[`GridRenderer renders a table correctly 1`] = `
+<Table
+  cellComponent={[Function]}
+  rows={
+    Array [
+      Object {
+        "columns": Array [
+          Object {
+            "item": Object {
+              "name": "Item 1",
+            },
+            "layout": Object {
+              "colspan": 2,
+              "rowspan": 1,
+            },
+          },
+          Object {
+            "item": Object {
+              "name": "Item 2",
+            },
+            "layout": Object {
+              "colspan": 2,
+              "rowspan": 1,
+            },
+          },
+        ],
+      },
+      Object {
+        "columns": Array [
+          Object {
+            "item": Object {
+              "name": "Item 3",
+            },
+            "layout": Object {
+              "colspan": 4,
+              "rowspan": 1,
+            },
+          },
+        ],
+      },
+    ]
+  }
+  totalColSpan={4}
+/>
+`;

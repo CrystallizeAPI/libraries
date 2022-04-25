@@ -1,2 +1,2 @@
-export * from './CSSGrid';
-export * from './Table';
+export * from './css-grid';
+export * from './table';

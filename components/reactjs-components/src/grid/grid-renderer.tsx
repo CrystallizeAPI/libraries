@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import { CSSGrid } from './CSSGrid';
-import { Table } from './Table';
+import { CSSGrid } from './css-grid';
+import { Table } from './table';
 import { GridRendererProps, GridRenderingType } from './types';
 
 const getTotalGridDimensions = (rows: any[]): number => {
