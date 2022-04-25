@@ -42,7 +42,7 @@
         "typescript": "^4.5.5"
     },
     "dependencies": {
-        "@crystallize/js-api-client": "*",
+        "@crystallize/js-api-client": "^0.6.0",
         "react": "*",
         "react-dom": "*"
     }
