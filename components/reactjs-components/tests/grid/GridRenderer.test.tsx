@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
-import { GridRenderer } from '../GridRenderer';
-import { GridRenderingType } from '../types';
+import { GridRenderer, GridRenderingType } from '../../src/grid';
 import { CellComponent, model } from './utils';
 
 describe('GridRenderer', () => {

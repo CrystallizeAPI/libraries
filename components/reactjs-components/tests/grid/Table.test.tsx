@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { Table } from '../Table';
+import { Table } from '../../src/grid';
 import { CellComponent, model } from './utils';
 
 const { rows } = model;

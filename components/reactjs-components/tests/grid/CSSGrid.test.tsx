@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { CSSGrid } from '../CSSGrid';
+import { CSSGrid } from '../../src/grid';
 import { CellComponent, model, toCells } from './utils';
 
 const { rows } = model;
