@@ -72,6 +72,6 @@ make add-component COMPONENT=my-new-component
 [mit]: https://img.shields.io/badge/license-MIT-green?style=flat-square&labelColor=black
 [js-api-client-version]: https://img.shields.io/npm/v/@crystallize/js-api-client?label=version&style=flat-square
 [reactjs-hooks-version]: https://img.shields.io/npm/v/@crystallize/reactjs-hooks?label=version&style=flat-square
-[reactjs-components-version]: https://img.shields.io/npm/v/@crystallize/reactjs-hooks?label=version&style=flat-square
+[reactjs-components-version]: https://img.shields.io/npm/v/@crystallize/reactjs-components?label=version&style=flat-square
 [node-service-api-router-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-router?label=version&style=flat-square
 [node-service-api-request-handlers-version]: https://img.shields.io/npm/v/@crystallize/node-service-api-request-handlers?label=version&style=flat-square
