@@ -16,7 +16,7 @@ export const CrystallizeGrid: FC = () => {
                 grid: {
                     __args: {
                         id: '5ea19e7aba5038001c0180b6',
-                        language: 'en'
+                        language: 'en',
                     },
                     id: true,
                     name: true,
@@ -24,7 +24,7 @@ export const CrystallizeGrid: FC = () => {
                         columns: {
                             layout: {
                                 rowspan: true,
-                                colspan: true
+                                colspan: true,
                             },
                             item: {
                                 __on: [
@@ -38,17 +38,17 @@ export const CrystallizeGrid: FC = () => {
                                                     url: true,
                                                     variants: {
                                                         width: true,
-                                                        url: true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    )
-                                ]
-                            }
-                        }
-                    }
-                }
+                                                        url: true,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    ),
+                                ],
+                            },
+                        },
+                    },
+                },
             };
             const response = await fetch<any>(query);
             setGrid(response.grid);

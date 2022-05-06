@@ -14,12 +14,12 @@ export const CrystallizeVideo: FC = () => {
                 catalogue: {
                     __args: {
                         path: '/stories/color-is-back',
-                        language: 'en'
+                        language: 'en',
                     },
                     videos: {
                         __aliasFor: 'component',
                         __args: {
-                            id: 'video'
+                            id: 'video',
                         },
                         content: {
                             __on: {
@@ -31,14 +31,14 @@ export const CrystallizeVideo: FC = () => {
                                         url: true,
                                         variants: {
                                             width: true,
-                                            url: true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                            url: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
             const response = await fetch<any>(query);
             console.log(response);

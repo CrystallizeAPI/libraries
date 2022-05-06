@@ -10,7 +10,7 @@ export const Footer: FC = () => {
 
     const changeTenant = (newTenant: string) => {
         dispatch.updateConfiguration({
-            tenantIdentifier: newTenant
+            tenantIdentifier: newTenant,
         });
         writeStorage('tenant', newTenant);
     };

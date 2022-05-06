@@ -13,25 +13,25 @@ export const CrystallizeContentTransformer: FC = () => {
                 catalogue: {
                     __args: {
                         path: '/shop/decoration/shelves-in-wood-hey',
-                        language: 'en'
+                        language: 'en',
                     },
                     description: {
                         __aliasFor: 'component',
                         __args: {
-                            id: 'description'
+                            id: 'description',
                         },
                         content: {
                             __on: {
                                 __typeName: 'ParagraphCollectionContent',
                                 paragraphs: {
                                     body: {
-                                        json: true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                        json: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
             const response = await fetch<any>(query);
             setParagraphs(response.catalogue.description.content.paragraphs);

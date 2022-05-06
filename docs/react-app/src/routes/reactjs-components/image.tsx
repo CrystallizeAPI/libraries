@@ -17,7 +17,7 @@ export const CrystallizeImage: FC = () => {
                 catalogue: {
                     __args: {
                         path: '/shop/chairs',
-                        language: 'en'
+                        language: 'en',
                     },
                     children: {
                         __on: [
@@ -29,16 +29,16 @@ export const CrystallizeImage: FC = () => {
                                         altText: true,
                                         variants: {
                                             width: true,
-                                            url: true
-                                        }
-                                    }
-                                }
+                                            url: true,
+                                        },
+                                    },
+                                },
                             }),
                             builder.onDocument(),
-                            builder.onFolder()
-                        ]
-                    }
-                }
+                            builder.onFolder(),
+                        ],
+                    },
+                },
             };
             const response = await fetch<any>(query);
             const products = response.catalogue.children.filter((item: any) => item.__typename === 'Product');

@@ -15,7 +15,7 @@ export const Hydrater: FC = () => {
     const { what } = useParams();
     const { state, apiClient } = useCrystallize();
     const [form, setForm] = useState({
-        items: ['b-1628520141076', 'b-1628514494819']
+        items: ['b-1628520141076', 'b-1628514494819'],
     });
     const [result, setResult] = useState('');
 
@@ -78,7 +78,7 @@ const response = await hydrater([${form.items.map((e) => `'${e}'`).join(',')}], 
                             onChange={(event) => {
                                 setForm({
                                     ...form,
-                                    items: event.target.value.split(',')
+                                    items: event.target.value.split(','),
                                 });
                             }}
                         />

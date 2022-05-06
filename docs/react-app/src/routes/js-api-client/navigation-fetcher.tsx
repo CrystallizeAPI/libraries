@@ -19,7 +19,7 @@ export const NavigationFetcher: FC = () => {
     const { state, apiClient } = useCrystallize();
     const [form, setForm] = useState({
         path: '/',
-        depth: 2
+        depth: 2,
     });
     const [result, setResult] = useState<any>(null);
 
@@ -92,7 +92,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                             onChange={(event) => {
                                 setForm({
                                     ...form,
-                                    path: event.target.value
+                                    path: event.target.value,
                                 });
                             }}
                         />
@@ -108,7 +108,7 @@ const response = await fetch('${form.path}', 'en', ${form.depth});`;
                             onChange={(event) => {
                                 setForm({
                                     ...form,
-                                    depth: parseInt(event.target.value)
+                                    depth: parseInt(event.target.value),
                                 });
                             }}
                         />
