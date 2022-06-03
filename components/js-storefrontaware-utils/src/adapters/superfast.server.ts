@@ -53,6 +53,14 @@ export const createSuperFastAdapter = (
                     config.configuration = cypher(`${process.env.ENCRYPTED_PARAMS_SECRET}`).decryptMap(
                         config.configuration,
                     );
+                } else {
+                    // this is where we would still decrypt the "public" secret, only PUBLIC_KEY for now
+                    config.configuration = {
+                        ...config.configuration,
+                        PUBLIC_KEY: cypher(`${process.env.ENCRYPTED_PARAMS_SECRET}`).decrypt(
+                            config.configuration.PUBLIC_KEY,
+                        ),
+                    };
                 }
                 return config;
             }
