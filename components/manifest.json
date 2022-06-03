@@ -20,6 +20,10 @@
         "reactjs-components": {
             "name": "React JS Components",
             "git": "git@github.com:CrystallizeAPI/reactjs-components.git"
+        },
+        "js-storefrontaware-utils": {
+            "name": "(Java|Type)Script Storefront Aware Utils",
+            "git": "git@github.com:CrystallizeAPI/js-storefrontaware-utils.git"
         }
     }
 }

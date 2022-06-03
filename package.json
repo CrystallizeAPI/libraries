@@ -2,6 +2,7 @@
     "private": true,
     "workspaces": [
         "components/js-api-client",
+        "components/js-storefrontaware-utils",
         "components/reactjs-hooks",
         "components/reactjs-components",
         "components/node-service-api-router",
@@ -12,7 +13,7 @@
         "prettier": "2.6.0"
     },
     "scripts": {
-        "watch": "concurrently 'cd components/js-api-client && yarn watch' 'cd components/reactjs-components && yarn watch' 'cd components/reactjs-hooks && yarn watch' 'cd components/node-service-api-request-handlers && yarn watch' 'cd components/node-service-api-router && yarn watch'"
+        "watch": "concurrently 'cd components/js-api-client && yarn watch' 'cd components/js-storefrontaware-utils && yarn watch' 'cd components/reactjs-components && yarn watch' 'cd components/reactjs-hooks && yarn watch' 'cd components/node-service-api-request-handlers && yarn watch' 'cd components/node-service-api-router && yarn watch'"
     },
     "volta": {
         "node": "16.14.2",
