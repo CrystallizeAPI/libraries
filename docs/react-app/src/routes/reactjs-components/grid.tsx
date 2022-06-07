@@ -62,6 +62,9 @@ export const CrystallizeGrid: FC = () => {
 
     <h2>Table Grid</h2>
     {grid && <GridRenderer grid={grid} type={GridRenderingType.Table} cellComponent={Cell} />}
+
+     <h2>Row Span</h2>
+    {grid && <GridRenderer grid={grid} type={GridRenderingType.RowCol} cellComponent={Cell} />}
 `;
 
     return (
@@ -69,11 +72,17 @@ export const CrystallizeGrid: FC = () => {
             <h1>Grid Component</h1>
             <Code language="javascript">{usageCode}</Code>
 
+            <hr />
             <h2>CSS Grid</h2>
             {grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />}
 
+            <hr />
             <h2>Table Grid</h2>
             {grid && <GridRenderer grid={grid} type={GridRenderingType.Table} cellComponent={Cell} />}
+
+            <hr />
+            <h2>Row Span</h2>
+            {grid && <GridRenderer grid={grid} type={GridRenderingType.RowCol} cellComponent={Cell} />}
         </div>
     );
 };
