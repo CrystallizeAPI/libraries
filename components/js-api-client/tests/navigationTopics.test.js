@@ -1,4 +1,5 @@
 const { createNavigationFetcher, createClient } = require('../dist/index.js');
+const { walkTree } = require('./util');
 
 test('Test Nav fetching Topic: /', async () => {
     const CrystallizeClient = createClient({
@@ -12,6 +13,11 @@ test('Test Nav fetching Topic: /', async () => {
     expect(response.tree[0].name).toBe('Specials');
     expect(response.tree[0].path).toBe('/specials');
     expect(response.tree[1].children[0].path).toBe('/room/livingroom');
+
+    // Verify all tree nodes have id properties
+    walkTree(response.tree, (node) => {
+        expect(node).toHaveProperty('id');
+    });
 });
 
 test('Test Nav fetching Topic: /specials', async () => {
@@ -25,6 +31,11 @@ test('Test Nav fetching Topic: /specials', async () => {
     expect(response.tree.name).toBe('Specials');
     expect(response.tree.path).toBe('/specials');
     expect(response.tree.children[1].path).toBe('/specials/new-arrival');
+
+    // Verify all tree nodes have id properties
+    walkTree([response.tree], (node) => {
+        expect(node).toHaveProperty('id');
+    });
 });
 
 test('Test Nav fetching Topic: /specials + extra data + specific level', async () => {
@@ -78,4 +89,9 @@ test('Test Nav fetching Topic: /specials + extra data + specific level', async (
     expect(response.tree.children[0].parent.path).toBe('/specials');
 
     expect(response.tree.children[0].items.edges[0].node.path).toBe('/shop/plants/monstera-deliciosa');
+
+    // Verify all tree nodes have id properties
+    walkTree([response.tree], (node) => {
+        expect(node).toHaveProperty('id');
+    });
 });
