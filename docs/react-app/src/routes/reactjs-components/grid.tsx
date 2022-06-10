@@ -1,7 +1,7 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { Image } from '@crystallize/reactjs-components/dist/image';
-import { GridPositionnable, GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
+import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
 import { FC, useEffect, useState } from 'react';
 import { Code } from '../../components/Code';
 
@@ -16,6 +16,9 @@ export const CrystallizeGrid: FC = () => {
                 grid: {
                     __args: {
                         id: '5ea19e7aba5038001c0180b6',
+                        //id: '626ea0599161f671155db9a9',
+                        // id: '62a23c5e860bd16784ae5bec',
+                        // id: '62a23c5e860bd16784ae5bec',
                         language: 'en',
                     },
                     id: true,
@@ -67,13 +70,6 @@ export const CrystallizeGrid: FC = () => {
     {grid && <GridRenderer grid={grid} type={GridRenderingType.RowCol} cellComponent={Cell} />}
 `;
 
-    const styleForCell = (cell: any, positionInfos: GridPositionnable, styles: React.CSSProperties) => {
-        return {
-            backgroundColor: positionInfos.rowIndex % 2 === 0 ? '#f0f0f0' : 'red',
-            ...styles,
-        };
-    };
-
     return (
         <div>
             <h1>Grid Component</h1>
@@ -81,14 +77,7 @@ export const CrystallizeGrid: FC = () => {
 
             <hr />
             <h2>CSS Grid</h2>
-            {grid && (
-                <GridRenderer
-                    grid={grid}
-                    type={GridRenderingType.Div}
-                    cellComponent={Cell}
-                    styleForCell={styleForCell}
-                />
-            )}
+            {grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />}
 
             <hr />
             <h2>Table Grid</h2>
@@ -102,7 +91,6 @@ export const CrystallizeGrid: FC = () => {
 };
 
 const Cell: FC<{ cell: any }> = ({ cell }) => {
-    // console.log(cell);
     if (!cell.item) {
         return null;
     }
