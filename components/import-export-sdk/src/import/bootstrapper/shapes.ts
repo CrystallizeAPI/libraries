@@ -21,6 +21,7 @@ const handleShape = ({
             input: shape,
         });
         massClient.enqueue.pimApi(query, variables);
+        return;
     }
 
     const { query, variables } = createMutation({

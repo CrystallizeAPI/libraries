@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { gql } from 'graphql-tag';
 import { VariablesType } from '@crystallize/js-api-client';
 import { UpdateInputSchema } from './types';
 

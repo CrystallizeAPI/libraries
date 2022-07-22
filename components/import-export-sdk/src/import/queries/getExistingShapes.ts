@@ -23,7 +23,7 @@ export const getExistingShapes = async ({
     }
 
     const res = await client.pimApi(query, { tenantId: ctx.tenantId });
-    const shapes: Shape[] | undefined = res?.data?.getMany?.shapes;
+    const shapes: Shape[] | undefined = res?.data?.getMany;
 
     if (!shapes) {
         throw new Error(`Error fetching existing shapes`);
