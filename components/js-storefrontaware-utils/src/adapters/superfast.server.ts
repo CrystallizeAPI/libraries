@@ -153,11 +153,7 @@ async function fetchSuperFastConfig(domainkey: string, credentials: ClientConfig
     };
 }
 
-export function encryptValue (
-    value: string,
-    secretKey: string,
-    algorithm: string,
-): string {
+export function encryptValue(value: string, secretKey: string, algorithm: string): string {
     const initVector = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv(algorithm, secretKey, initVector);
     let encryptedData = cipher.update(value, 'utf-8', 'hex');
@@ -165,11 +161,7 @@ export function encryptValue (
     return `${initVector.toString('hex')}:${encryptedData}`;
 }
 
-export function decryptValue (
-    value: string,
-    secretKey: string,
-    algorithm: string,
-): string {
+export function decryptValue(value: string, secretKey: string, algorithm: string): string {
     const [initVector, encryptedData] = value.split(':');
     const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(initVector, 'hex'));
     let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
@@ -187,8 +179,8 @@ const cypher = (
     const key = crypto.createHash('sha256').update(String(secret)).digest('base64').substring(0, 32);
     const algorithm = 'aes-256-cbc';
 
-    const encrypt = (value: string) => encryptValue(value, key, algorithm)
-    const decrypt = (value: string) => decryptValue(value, key, algorithm)
+    const encrypt = (value: string) => encryptValue(value, key, algorithm);
+    const decrypt = (value: string) => decryptValue(value, key, algorithm);
 
     return {
         encrypt,
