@@ -153,30 +153,42 @@ async function fetchSuperFastConfig(domainkey: string, credentials: ClientConfig
     };
 }
 
+export function encryptValue (
+    value: string,
+    secretKey: string,
+    algorithm: string,
+): string {
+    const initVector = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(algorithm, secretKey, initVector);
+    let encryptedData = cipher.update(value, 'utf-8', 'hex');
+    encryptedData += cipher.final('hex');
+    return `${initVector.toString('hex')}:${encryptedData}`;
+}
+
+export function decryptValue (
+    value: string,
+    secretKey: string,
+    algorithm: string,
+): string {
+    const [initVector, encryptedData] = value.split(':');
+    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(initVector, 'hex'));
+    let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
+    decryptedData += decipher.final('utf8');
+    return decryptedData;
+}
+
 const cypher = (
     secret: string,
 ): {
-    encrypt: (text: string) => string;
-    decrypt: (text: string) => string;
+    encrypt: (value: string) => string;
+    decrypt: (value: string) => string;
     decryptMap: (map: { [key: string]: string }) => { [key: string]: string };
 } => {
     const key = crypto.createHash('sha256').update(String(secret)).digest('base64').substring(0, 32);
     const algorithm = 'aes-256-cbc';
-    function encrypt(value: string): string {
-        const initVector = crypto.randomBytes(16);
-        const cipher = crypto.createCipheriv(algorithm, key, initVector);
-        let encryptedData = cipher.update(value, 'utf-8', 'hex');
-        encryptedData += cipher.final('hex');
-        return `${initVector.toString('hex')}:${encryptedData}`;
-    }
 
-    function decrypt(value: string): string {
-        const [initVector, encryptedData] = value.split(':');
-        const decipher = crypto.createDecipheriv(algorithm, key, Buffer.from(initVector, 'hex'));
-        let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
-        decryptedData += decipher.final('utf8');
-        return decryptedData;
-    }
+    const encrypt = (value: string) => encryptValue(value, key, algorithm)
+    const decrypt = (value: string) => decryptValue(value, key, algorithm)
 
     return {
         encrypt,
