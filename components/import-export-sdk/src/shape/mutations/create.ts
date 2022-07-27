@@ -1,9 +1,9 @@
-import { z } from 'zod';
 import { VariablesType } from '@crystallize/js-api-client';
-import { ShapeCreateInputSchema } from './types';
+import { ShapeCreateInputSchema } from '../schema';
+import { ShapeCreateInput } from '../types';
 
 interface CreateProps {
-    input: z.infer<typeof ShapeCreateInputSchema>;
+    input: ShapeCreateInput;
 }
 
 const query = `

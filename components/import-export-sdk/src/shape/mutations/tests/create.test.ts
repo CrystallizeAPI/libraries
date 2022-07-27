@@ -1,7 +1,7 @@
 import test from 'ava';
 import { z, ZodError } from 'zod';
 import { createShapeMutation } from '../create';
-import { ShapeCreateInputSchema } from '../types';
+import { ShapeCreateInputSchema } from '../../schema';
 
 interface testCase {
     name: string;
@@ -104,7 +104,7 @@ const testCases: testCase[] = [
             {
                 code: 'custom',
                 message: 'Incorrect config type provided on shape component',
-                path: ['components', 0, 'config'],
+                path: ['components', 0],
             },
         ]),
     },
