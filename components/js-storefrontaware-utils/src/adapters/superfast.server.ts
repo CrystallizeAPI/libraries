@@ -32,8 +32,10 @@ export const createSuperFastAdapter = (
      * 1. Memory cache (using ttl)
      * 2. storageClient (using ttl)
      * 3. API
+     *
+     * @param withSecrets Set to true to decrypt all secrets
      */
-    async function config(withSecrets: boolean): Promise<TStoreFrontConfig> {
+    async function config(withSecrets: boolean = false): Promise<TStoreFrontConfig> {
         const domainkey = hostname.split('.')[0];
 
         // First try to load config from in-memory cache
