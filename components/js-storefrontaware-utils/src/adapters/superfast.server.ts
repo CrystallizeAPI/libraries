@@ -9,6 +9,8 @@ type TStorage = {
 
 type MemoryCache = Record<string, { expiresAt: number; value: any }>;
 
+const getExpiry = (ttl: number): number => Math.floor(Date.now() / 1000) + ttl;
+
 /**
  * Create Superfast adapter
  *
@@ -21,8 +23,6 @@ export const createSuperFastAdapter = (
     ttl: number,
 ): TStoreFrontAdapter => {
     const memoryCache: MemoryCache = {};
-
-    const getExpiry = (): number => Math.floor(Date.now() / 1000) + ttl;
     const { decrypt, decryptMap } = cypher(process.env.ENCRYPTED_PARAMS_SECRET as string);
 
     /**
@@ -58,7 +58,7 @@ export const createSuperFastAdapter = (
 
         if (config !== undefined) {
             memoryCache[domainkey] = {
-                expiresAt: getExpiry(),
+                expiresAt: getExpiry(ttl),
                 value: config,
             };
 
