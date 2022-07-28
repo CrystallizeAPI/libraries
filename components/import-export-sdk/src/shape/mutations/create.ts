@@ -1,9 +1,9 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { ShapeCreateInputSchema } from '../schema';
-import { ShapeCreateInput } from '../types';
+import { CreateShapeInputSchema } from '../schema';
+import { CreateShapeInput } from '../types';
 
 interface CreateProps {
-    input: ShapeCreateInput;
+    input: CreateShapeInput;
 }
 
 const query = `
@@ -23,7 +23,7 @@ export const createShapeMutation = ({
     query: string;
     variables: VariablesType;
 } => {
-    const data = ShapeCreateInputSchema.parse(input);
+    const data = CreateShapeInputSchema.parse(input);
 
     return {
         query,

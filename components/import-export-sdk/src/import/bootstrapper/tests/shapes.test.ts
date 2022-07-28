@@ -1,11 +1,11 @@
-import { ClientInterface, MassClientInterface } from '@crystallize/js-api-client';
-import test from 'ava';
-import { BootstrapperContext, Shape } from '../../types';
+import { MassClientInterface } from '@crystallize/js-api-client';
+import { equal } from 'assert';
+import { BootstrapperContext, ExistingShape } from '../../types';
 import { handleShapes } from '../shapes';
 
 interface testCase {
     name: string;
-    existingShapes: Shape[];
+    existingShapes: ExistingShape[];
     expectedCreateMutations?: number;
     expectedUpdateMutations?: number;
 }
@@ -38,9 +38,11 @@ const testCases: testCase[] = [
 ];
 
 testCases.forEach((tc) =>
-    test(tc.name, async (t) => {
+    it(tc.name, async () => {
         const ctx = {
-            tenantId: 'some-id',
+            tenant: {
+                id: 'some-id',
+            },
             schema: {
                 shapes: [
                     {
@@ -57,27 +59,29 @@ testCases.forEach((tc) =>
             },
         } as BootstrapperContext;
 
-        const mockClient = {
+        let createMutations = 0;
+        let updateMutations = 0;
+        const mockMassClient = {
             pimApi: (_query, _variables) =>
                 Promise.resolve({
                     shape: {
                         getMany: tc.existingShapes,
                     },
                 }),
-        } as ClientInterface;
-
-        let createMutations = 0;
-        let updateMutations = 0;
-        const mockMassClient = {
             enqueue: {
-                pimApi: (_, variables) => {
+                pimApi: (_query, variables) => {
                     variables?.identifier ? updateMutations++ : createMutations++;
                 },
             },
         } as MassClientInterface;
 
-        await handleShapes({ ctx, client: mockClient, massClient: mockMassClient });
-        t.is(createMutations, tc.expectedCreateMutations || 0);
-        t.is(updateMutations, tc.expectedUpdateMutations || 0);
+        await handleShapes({
+            ctx: {
+                ...ctx,
+                massClient: mockMassClient,
+            },
+        });
+        equal(createMutations, tc.expectedCreateMutations || 0);
+        equal(updateMutations, tc.expectedUpdateMutations || 0);
     }),
 );

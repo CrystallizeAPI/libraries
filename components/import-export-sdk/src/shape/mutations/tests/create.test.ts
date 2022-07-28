@@ -1,11 +1,11 @@
-import test from 'ava';
 import { z, ZodError } from 'zod';
 import { createShapeMutation } from '../create';
-import { ShapeCreateInputSchema } from '../../schema';
+import { CreateShapeInputSchema } from '../../schema';
+import { deepEqual, equal, fail } from 'assert';
 
 interface testCase {
     name: string;
-    input: z.infer<typeof ShapeCreateInputSchema>;
+    input: z.infer<typeof CreateShapeInputSchema>;
     error?: ZodError;
 }
 
@@ -59,7 +59,7 @@ const testCases: testCase[] = [
         input: {
             name: 'some invalid shape',
             type: 'product',
-        } as z.infer<typeof ShapeCreateInputSchema>,
+        } as z.infer<typeof CreateShapeInputSchema>,
         error: new ZodError([
             {
                 code: 'invalid_type',
@@ -111,33 +111,27 @@ const testCases: testCase[] = [
 ];
 
 testCases.forEach((tc) =>
-    test(tc.name, (t) => {
-        try {
-            const { query, variables } = createShapeMutation({ input: tc.input });
-            if (tc.error) {
-                t.fail();
-            }
+    it(tc.name, () => {
+        if (tc.error) {
+            expect(() => createShapeMutation({ input: tc.input })).toThrow(tc.error);
+            return;
+        }
 
-            const re = / /g;
-            t.is(
-                query.replace(re, ''),
-                `
-                    mutation CREATE_SHAPE($input: CreateShapeInput!) {
-                        shape {
-                            create(input: $input) {
-                                identifier
-                                name
-                            }
+        const { query, variables } = createShapeMutation({ input: tc.input });
+        const re = / /g;
+        equal(
+            query.replace(re, ''),
+            `
+                mutation CREATE_SHAPE($input: CreateShapeInput!) {
+                    shape {
+                        create(input: $input) {
+                            identifier
+                            name
                         }
                     }
-                `.replace(re, ''),
-            );
-            t.deepEqual(variables, { input: tc.input });
-        } catch (err: any) {
-            if (!tc.error) {
-                t.fail();
-            }
-            t.deepEqual(err.issues, tc.error?.issues);
-        }
+                }
+            `.replace(re, ''),
+        );
+        deepEqual(variables, { input: tc.input });
     }),
 );

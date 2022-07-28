@@ -1,5 +1,5 @@
 import { ClientInterface } from '@crystallize/js-api-client';
-import { BootstrapperContext, Tenant } from '../types';
+import { Tenant } from '../types';
 
 const query = `
     query GET_TENANT($identifier: String!) {
@@ -8,31 +8,39 @@ const query = `
                 id
                 identifier
                 staticAuthToken
+                defaults {
+                    language
+                }
             }
         }
     }
 `;
 
 export const getTenant = async ({
-    ctx,
+    tenantIdentifier,
     client,
 }: {
-    ctx: BootstrapperContext;
+    tenantIdentifier: string;
     client: ClientInterface;
 }): Promise<Tenant> => {
-    if (!ctx.tenantIdentifier) {
-        throw new Error('Crystallize tenant identifier must be set');
+    if (!tenantIdentifier) {
+        throw new Error('missing tenant identifier');
     }
 
-    const res = await client.pimApi(query, { identifier: ctx.tenantIdentifier });
-    const tenant: Tenant | undefined = res?.tenant?.get;
+    let tenant: Tenant;
+    try {
+        const res = await client.pimApi(query, { identifier: tenantIdentifier });
+        tenant = res?.tenant?.get as Tenant;
+    } catch (err: any) {
+        if (err.code === 403) {
+            throw new Error(`provided access tokens do not have access to tenant "${tenantIdentifier}"`);
+        }
+        throw err;
+    }
 
     if (!tenant) {
-        throw new Error(`You do not have access to tenant "${ctx.tenantIdentifier}"`);
+        throw new Error(`unable to get tenant "${tenantIdentifier}"`);
     }
 
-    if (ctx.logLevel === 'debug') {
-        ctx.eventEmitter.emit('DEBUG', res);
-    }
     return tenant;
 };

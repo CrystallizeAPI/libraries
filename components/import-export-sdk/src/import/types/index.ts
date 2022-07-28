@@ -1,42 +1,56 @@
 import { z } from 'zod';
 import EventEmitter from 'events';
-import { ShapeComponentSchema, ShapeTypeEnum } from '../../shape';
+import { ClientInterface, MassClientInterface } from '@crystallize/js-api-client';
+import { ImportSpecSchema, ShapeImportSpecSchema, TopicChildImportSpecSchema, TopicImportSpecSchema } from '../schema';
 
-const shapeSchema = z.object({
-    identifier: z.string().min(1),
-    name: z.string().min(1),
-    type: ShapeTypeEnum,
-    components: z.array(ShapeComponentSchema).optional(),
-});
+export enum EventTypes {
+    error = 'error',
+    warn = 'warn',
+    debug = 'debug',
+    end = 'end',
+}
 
-export const importSchema = z.object({
-    shapes: z.array(shapeSchema).optional(),
-});
+export interface TopicChildImportSpec {
+    id?: string;
+    name: string;
+    pathIdentifier?: string;
+    children?: TopicChildImportSpec[];
+}
 
-export type ImportSchema = z.infer<typeof importSchema>;
-export type ShapeSchema = z.infer<typeof shapeSchema>;
-export type ShapeComponentSchema = z.infer<typeof ShapeComponentSchema>;
+export type ImportSpec = z.infer<typeof ImportSpecSchema>;
+export type ShapeImportSpec = z.infer<typeof ShapeImportSpecSchema>;
+export type TopicImportSpec = z.infer<typeof TopicImportSpecSchema>;
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+
+export interface CreateBootstrapperProps {
+    tenantIdentifier: string;
+    accessTokenId: string;
+    accessTokenSecret: string;
+    schema: ImportSpec;
+    logLevel?: LogLevel;
+    silent?: boolean;
+}
 
 export interface Bootstrapper {
     ctx: BootstrapperContext;
     events: EventEmitter;
-    setAccessToken: (id: string, secret: string) => void;
-    setTenantIdentifier: (identifier: string) => void;
-    setSchema: (spec: ImportSchema) => void;
-    setLogLevel: (level: LogLevel) => void;
     execute: (options?: ExecutionOptions) => Promise<void>;
 }
 
+/**
+ * BootstrapperContext is a readonly object passed created when initialising
+ * the Bootstrapper, and passed through the execution. The context is not the
+ * state (used for caching) and should not be mutated after creation.
+ */
 export interface BootstrapperContext {
-    tenantId: string;
-    tenantIdentifier: string;
-    accessTokenId?: string;
-    accessTokenSecret?: string;
-    schema?: ImportSchema;
+    tenant: Tenant;
+    accessTokenId: string;
+    accessTokenSecret: string;
+    schema: ImportSpec;
     logLevel: LogLevel;
     eventEmitter: EventEmitter;
+    massClient: MassClientInterface;
 }
 
 export interface ExecutionOptions {
@@ -47,8 +61,22 @@ export interface Tenant {
     id: string;
     identifier: string;
     staticAuthToken?: string;
+    defaults: {
+        language: string;
+    };
 }
 
-export interface Shape {
+export interface Topic {
+    id: string;
+    path: string;
+    descendants?: Topic[];
+}
+
+export interface ExistingShape {
     identifier: string;
+}
+
+export interface ExistingTopic {
+    id: string;
+    path: string;
 }

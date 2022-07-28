@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { VariablesType } from '@crystallize/js-api-client';
-import { ShapeUpdateInputSchema } from '../schema';
-import { ShapeUpdateInput } from '../types';
+import { UpdateShapeInputSchema } from '../schema';
+import { UpdateShapeInput } from '../types';
 
 interface UpdateProps {
     tenantId: string;
     identifier: string;
-    input: ShapeUpdateInput;
+    input: UpdateShapeInput;
 }
 
 const query = `
@@ -28,7 +28,7 @@ export const updateShapeMutation = ({
     query: string;
     variables: VariablesType;
 } => {
-    const data = ShapeUpdateInputSchema.parse(input);
+    const data = UpdateShapeInputSchema.parse(input);
 
     return {
         query,

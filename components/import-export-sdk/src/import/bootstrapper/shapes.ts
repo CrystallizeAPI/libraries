@@ -1,52 +1,41 @@
-import { ClientInterface, MassClientInterface } from '@crystallize/js-api-client';
 import { createShapeMutation, updateShapeMutation } from '../../shape';
 import { getExistingShapes } from '../queries/getExistingShapes';
-import { BootstrapperContext, Shape, ShapeSchema } from '../types';
+import { BootstrapperContext, ExistingShape, ShapeImportSpec } from '../types';
 
 const handleShape = ({
     ctx,
     shape,
     existingShapes,
-    massClient,
 }: {
     ctx: BootstrapperContext;
-    shape: ShapeSchema;
-    existingShapes: Shape[];
-    massClient: MassClientInterface;
+    shape: ShapeImportSpec;
+    existingShapes: ExistingShape[];
 }): void => {
     if (shape.identifier && existingShapes.find(({ identifier }) => identifier === shape.identifier)) {
         const { query, variables } = updateShapeMutation({
-            tenantId: ctx.tenantId,
+            tenantId: ctx.tenant.id,
             identifier: shape.identifier,
             input: shape,
         });
-        massClient.enqueue.pimApi(query, variables);
+        ctx.massClient.enqueue.pimApi(query, variables);
         return;
     }
 
     const { query, variables } = createShapeMutation({
         input: {
             ...shape,
-            tenantId: ctx.tenantId,
+            tenantId: ctx.tenant.id,
         },
     });
-    massClient.enqueue.pimApi(query, variables);
+    ctx.massClient.enqueue.pimApi(query, variables);
 };
 
-export const handleShapes = async ({
-    ctx,
-    client,
-    massClient,
-}: {
-    ctx: BootstrapperContext;
-    client: ClientInterface;
-    massClient: MassClientInterface;
-}) => {
+export const handleShapes = async ({ ctx }: { ctx: BootstrapperContext }) => {
     const { schema } = ctx;
     if (!schema?.shapes?.length) {
         return;
     }
 
-    const existingShapes = await getExistingShapes({ ctx, client });
-    schema.shapes.forEach((shape) => handleShape({ ctx, shape, existingShapes, massClient }));
+    const existingShapes = await getExistingShapes({ ctx });
+    schema.shapes.forEach((shape) => handleShape({ ctx, shape, existingShapes }));
 };

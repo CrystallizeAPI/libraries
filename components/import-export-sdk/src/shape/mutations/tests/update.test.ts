@@ -1,11 +1,11 @@
-import test from 'ava';
 import { z, ZodError } from 'zod';
 import { updateShapeMutation } from '../update';
-import { ShapeUpdateInputSchema } from '../../schema';
+import { UpdateShapeInputSchema } from '../../schema';
+import { deepEqual, equal } from 'assert';
 
 interface testCase {
     name: string;
-    input: z.infer<typeof ShapeUpdateInputSchema>;
+    input: z.infer<typeof UpdateShapeInputSchema>;
     error?: ZodError;
 }
 
@@ -52,7 +52,7 @@ const testCases: testCase[] = [
     },
     {
         name: 'Throws a validation error when structure does not match ShapeUpdateInputSchema',
-        input: {} as z.infer<typeof ShapeUpdateInputSchema>,
+        input: {} as z.infer<typeof UpdateShapeInputSchema>,
         error: new ZodError([
             {
                 code: 'invalid_type',
@@ -102,21 +102,27 @@ const testCases: testCase[] = [
 ];
 
 testCases.forEach((tc) =>
-    test(tc.name, (t) => {
-        try {
-            const { query, variables } = updateShapeMutation({
-                input: tc.input,
-                identifier: 'shape-identifier',
-                tenantId: '123',
-            });
-            if (tc.error) {
-                t.fail();
-            }
+    it(tc.name, () => {
+        if (tc.error) {
+            expect(() =>
+                updateShapeMutation({
+                    input: tc.input,
+                    identifier: 'shape-identifier',
+                    tenantId: '123',
+                }),
+            ).toThrow(tc.error);
+            return;
+        }
 
-            const re = / /g;
-            t.is(
-                query.replace(re, ''),
-                `
+        const { query, variables } = updateShapeMutation({
+            input: tc.input,
+            identifier: 'shape-identifier',
+            tenantId: '123',
+        });
+        const re = / /g;
+        equal(
+            query.replace(re, ''),
+            `
                     mutation UPDATE_SHAPE($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
                         shape {
                             update (tenantId: $tenantId, identifier: $identifier, input: $input) {
@@ -126,13 +132,7 @@ testCases.forEach((tc) =>
                         }
                     }
                 `.replace(re, ''),
-            );
-            t.deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: '123' });
-        } catch (err: any) {
-            if (!tc.error) {
-                t.fail();
-            }
-            t.deepEqual(err.issues, tc.error?.issues);
-        }
+        );
+        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: '123' });
     }),
 );

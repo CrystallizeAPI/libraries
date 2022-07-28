@@ -1,5 +1,4 @@
-import { ClientInterface } from '@crystallize/js-api-client';
-import { BootstrapperContext, Shape } from '../types';
+import { BootstrapperContext, ExistingShape } from '../types';
 
 const query = `
     query GET_EXISTING_SHAPES($tenantId: ID!) {
@@ -11,19 +10,9 @@ const query = `
     }
 `;
 
-export const getExistingShapes = async ({
-    ctx,
-    client,
-}: {
-    ctx: BootstrapperContext;
-    client: ClientInterface;
-}): Promise<Shape[]> => {
-    if (!ctx.tenantId) {
-        throw new Error('Missing tenant id in context');
-    }
-
-    const res = await client.pimApi(query, { tenantId: ctx.tenantId });
-    const shapes: Shape[] | undefined = res?.shape?.getMany;
+export const getExistingShapes = async ({ ctx }: { ctx: BootstrapperContext }): Promise<ExistingShape[]> => {
+    const res = await ctx.massClient.pimApi(query, { tenantId: ctx.tenant.id });
+    const shapes: ExistingShape[] | undefined = res?.shape?.getMany;
 
     if (!shapes) {
         throw new Error(`Error fetching existing shapes`);

@@ -1,56 +1,60 @@
 import EventEmitter from 'events';
 import { execute } from './execute';
-import { Bootstrapper, BootstrapperContext, LogLevel, importSchema, ImportSchema } from '../types';
+import { Bootstrapper, BootstrapperContext, EventTypes, CreateBootstrapperProps } from '../types';
+import { getTenant } from '../queries/getTenant';
+import { createClient, createMassCallClient } from '@crystallize/js-api-client';
 
-interface ICreateBootstrapperProps {
-    tenantIdentifier?: string;
-    accessTokenId?: string;
-    accessTokenSecret?: string;
-    schema?: ImportSchema;
-    logLevel?: LogLevel;
-    silent?: boolean;
-}
-
-export const createBootstrapper = ({
-    tenantIdentifier = '',
+export const createBootstrapper = async ({
+    tenantIdentifier,
     accessTokenId,
     accessTokenSecret,
     schema,
     logLevel = 'error',
-}: ICreateBootstrapperProps): Bootstrapper => {
+}: CreateBootstrapperProps): Promise<Bootstrapper> => {
+    if (!tenantIdentifier) {
+        throw new Error('missing tenant identifier');
+    }
+    if (!accessTokenId || !accessTokenSecret) {
+        throw new Error('missing access token id or secret');
+    }
+    if (!schema) {
+        throw new Error('missing schema');
+    }
+
+    const client = createClient({
+        tenantIdentifier,
+        accessTokenId,
+        accessTokenSecret,
+    });
+
+    const tenant = await getTenant({ tenantIdentifier, client });
+
     const events = new EventEmitter();
+    const massClient = createMassCallClient(client, {
+        onFailure: async (batch, exception, promise) => {
+            ctx.eventEmitter.emit(EventTypes.error, exception);
+            return false;
+        },
+        afterRequest: async (batch, promise, results) => {
+            if (ctx.logLevel === 'debug') {
+                ctx.eventEmitter.emit(EventTypes.debug, results);
+            }
+        },
+    });
+
     const ctx: BootstrapperContext = {
-        tenantId: '',
-        tenantIdentifier: '',
+        tenant,
+        accessTokenId,
+        accessTokenSecret,
         logLevel,
+        schema,
         eventEmitter: events,
+        massClient,
     };
-
-    const setAccessToken = (id: string, secret: string) => {
-        ctx.accessTokenId = id;
-        ctx.accessTokenSecret = secret;
-    };
-    const setTenantIdentifier = (identifier: string) => {
-        ctx.tenantIdentifier = identifier;
-    };
-    const setSchema = (spec: ImportSchema) => {
-        ctx.schema = importSchema.parse(spec);
-    };
-    const setLogLevel = (logLevel: LogLevel) => {
-        ctx.logLevel = logLevel;
-    };
-
-    if (accessTokenId && accessTokenSecret) setAccessToken(accessTokenId, accessTokenSecret);
-    if (tenantIdentifier) setTenantIdentifier(tenantIdentifier);
-    if (schema) setSchema(schema);
 
     return {
         ctx,
         events,
-        setAccessToken,
-        setTenantIdentifier,
-        setSchema,
-        setLogLevel,
         execute: (options) => execute({ ctx, options }),
     };
 };
