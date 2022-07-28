@@ -79,86 +79,92 @@ export const createSuperFastAdapter = (
     return { config };
 };
 
-async function fetchSuperFastConfig(domainkey: string, credentials: ClientConfiguration): Promise<TStoreFrontConfig> {
-    const query = `query {
-        catalogue(path:"/tenants/${domainkey}") {
-            name
-            components{
-                id
-                content {
-                    __typename
-                    ...on SingleLineContent{
-                        text
-                    }
-                    ...on RichTextContent {
-                        html
-                    }
-                    ...on SelectionContent {
-                        options {
-                            key
-                            value
-                        }
-                    }
-                    ...on BooleanContent {
+const QUERY_SUPERFAST_CONFIG = `query FETCH_SUPERFAST_CONFIG ($path: String!) {
+    catalogue(path:$path) {
+        name
+        components{
+            id
+            content {
+                __typename
+                ...on SingleLineContent{
+                    text
+                }
+                ...on RichTextContent {
+                    html
+                }
+                ...on SelectionContent {
+                    options {
+                        key
                         value
                     }
-                    ...on ImageContent {
-                        firstImage{
-                            url
-                        }
+                }
+                ...on BooleanContent {
+                    value
+                }
+                ...on ImageContent {
+                    firstImage{
+                        url
                     }
-                    ...on PropertiesTableContent {
-                        sections {
-                            title
-                            properties {
-                                key
-                                value
-                            }
+                }
+                ...on PropertiesTableContent {
+                    sections {
+                        title
+                        properties {
+                            key
+                            value
                         }
                     }
                 }
             }
         }
-    }`;
+    }
+}`;
+
+function componentToString(component: any): string | boolean {
+    switch (component?.content?.__typename) {
+        case 'SingleLineContent':
+            return component.content.text;
+        case 'RichTextContent':
+            return component.content.html.join('');
+        case 'SelectionContent':
+            return component.content.options[0].key;
+        case 'BooleanContent':
+            return component.content.value;
+        case 'ImageContent':
+            return component.content.firstImage.url;
+        case 'PropertiesTableContent':
+            return component.content.sections.reduce((result: any, section: any) => {
+                section.properties.forEach((property: any) => {
+                    result[property.key] = property.value;
+                });
+                return result;
+            }, {});
+        default:
+            return false;
+    }
+}
+
+async function fetchSuperFastConfig(domainkey: string, credentials: ClientConfiguration): Promise<TStoreFrontConfig> {
+    const path = `/tenants/${domainkey}`;
 
     const client = createClient(credentials);
-    const tenant = await client.catalogueApi(query);
-    const components = tenant.catalogue.components.reduce((result: any, component: any) => {
-        function toString(component: any): string | boolean {
-            switch (component?.content?.__typename) {
-                case 'SingleLineContent':
-                    return component.content.text;
-                case 'RichTextContent':
-                    return component.content.html.join('');
-                case 'SelectionContent':
-                    return component.content.options[0].key;
-                case 'BooleanContent':
-                    return component.content.value;
-                case 'ImageContent':
-                    return component.content.firstImage.url;
-                case 'PropertiesTableContent':
-                    return component.content.sections.reduce((result: any, section: any) => {
-                        section.properties.forEach((property: any) => {
-                            result[property.key] = property.value;
-                        });
-                        return result;
-                    }, {});
-                default:
-                    return false;
-            }
-        }
+    const tenant = await client.catalogueApi(QUERY_SUPERFAST_CONFIG, { path });
+
+    const data: Array<any> = tenant.catalogue.components;
+    const components = data.reduce<Record<string, any>>((result, component) => {
         return {
             ...result,
-            [component.id]: toString(component),
+            [component.id]: componentToString(component),
         };
     }, {});
+
     return {
         identifier: domainkey,
         tenantIdentifier: components['tenant-identifier'],
         language: 'en',
-        storefront: components['storefront'],
-        logo: components['logos'],
-        theme: components['theme'],
-        configuration: components['configuration'],
+        storefront: components.storefront,
+        logo: components.logos,
+        theme: components.theme,
+        configuration: components.configuration,
     };
 }
