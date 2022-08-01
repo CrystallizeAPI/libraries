@@ -1,21 +1,21 @@
 import fetch from 'node-fetch';
 
-export interface ClientConfiguration {
+export type ClientConfiguration = {
     tenantIdentifier: string;
     accessTokenId?: string;
     accessTokenSecret?: string;
-}
+};
 
 export type VariablesType = { [key: string]: string | number | string[] | number[] };
 export type ApiCaller<T> = (query: string, variables?: VariablesType) => Promise<T>;
 
-export interface ClientInterface {
+export type ClientInterface = {
     catalogueApi: ApiCaller<any>;
     searchApi: ApiCaller<any>;
     orderApi: ApiCaller<any>;
     subscriptionApi: ApiCaller<any>;
     pimApi: ApiCaller<any>;
-}
+};
 
 async function post<T>(
     path: string,
@@ -55,18 +55,59 @@ async function post<T>(
     }
 }
 
+function createApiCaller(
+    uri: string,
+    configuration: ClientConfiguration,
+    getTenantId: () => Promise<string>,
+): ApiCaller<any> {
+    /**
+     * Call a crystallize. Will automatically handle access tokens
+     * @param query The GraphQL query
+     * @param variables Variables to inject into query.
+     */
+    return async function callApi<T>(query: string, variables?: VariablesType): Promise<T> {
+        const tenantId = await getTenantId();
+        return post<T>(uri, configuration, query, { tenantId, ...variables });
+    };
+}
+
+const apiHost = (path: string[], prefix: 'api' | 'pim' = 'api') =>
+    `https://${prefix}.crystallize.com/${path.join('/')}`;
+
+/**
+ * Create one api client for each api endpoint Crystallize offers (catalogue, search, order, subscription, pim).
+ *
+ * @param configuration
+ * @returns ClientInterface
+ */
 export function createClient(configuration: ClientConfiguration): ClientInterface {
-    function createApiCaller(uri: string): ApiCaller<any> {
-        return function callApi<T>(query: string, variables?: VariablesType): Promise<T> {
-            return post<T>(uri, configuration, query, variables);
-        };
-    }
+    const identifier = configuration.tenantIdentifier;
+
+    const getTenantId = async (): Promise<string> => {
+        if (process.env?.TENANT_ID) {
+            return process.env.TENANT_ID;
+        }
+
+        const result = (await post(
+            apiHost(['graphql'], 'pim'),
+            configuration,
+            `query FETCH_TENANT_CONFIG ($identifier: String!) {
+                tenant {
+                    get(identifier: $identifier) {
+                        id 
+                    }
+                }
+            }`,
+            { identifier },
+        )) as { tenant: { get: { id: string } } };
+        return result.tenant.get.id;
+    };
 
     return {
-        catalogueApi: createApiCaller(`https://api.crystallize.com/${configuration.tenantIdentifier}/catalogue`),
-        searchApi: createApiCaller(`https://api.crystallize.com/${configuration.tenantIdentifier}/search`),
-        orderApi: createApiCaller(`https://api.crystallize.com/${configuration.tenantIdentifier}/orders`),
-        subscriptionApi: createApiCaller(`https://api.crystallize.com/${configuration.tenantIdentifier}/subscriptions`),
-        pimApi: createApiCaller(`https://pim.crystallize.com/graphql`),
+        catalogueApi: createApiCaller(apiHost([identifier, 'catalogue']), configuration, getTenantId),
+        searchApi: createApiCaller(apiHost([identifier, 'search']), configuration, getTenantId),
+        orderApi: createApiCaller(apiHost([identifier, 'orders']), configuration, getTenantId),
+        subscriptionApi: createApiCaller(apiHost([identifier, 'subscriptions']), configuration, getTenantId),
+        pimApi: createApiCaller(apiHost(['graphql'], 'pim'), configuration, getTenantId),
     };
 }
