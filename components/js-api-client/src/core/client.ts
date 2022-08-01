@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 
 export type ClientConfiguration = {
     tenantIdentifier: string;
+    tenantId?: string;
     accessTokenId?: string;
     accessTokenSecret?: string;
 };
@@ -34,7 +35,14 @@ async function post<T>(
                 'X-Crystallize-Access-Token-Id': config.accessTokenId || '',
                 'X-Crystallize-Access-Token-Secret': config.accessTokenSecret || '',
             },
-            body: JSON.stringify({ query, variables }),
+            body: JSON.stringify({
+                query,
+                variables: {
+                    tenantId: config?.tenantId,
+                    tenantIdentifier: config?.tenantIdentifier,
+                    ...variables,
+                },
+            }),
         });
 
         if (response.ok && 204 === response.status) {
@@ -55,19 +63,14 @@ async function post<T>(
     }
 }
 
-function createApiCaller(
-    uri: string,
-    configuration: ClientConfiguration,
-    getTenantId: () => Promise<string>,
-): ApiCaller<any> {
+function createApiCaller(uri: string, configuration: ClientConfiguration): ApiCaller<any> {
     /**
      * Call a crystallize. Will automatically handle access tokens
      * @param query The GraphQL query
      * @param variables Variables to inject into query.
      */
-    return async function callApi<T>(query: string, variables?: VariablesType): Promise<T> {
-        const tenantId = await getTenantId();
-        return post<T>(uri, configuration, query, { tenantId, ...variables });
+    return function callApi<T>(query: string, variables?: VariablesType): Promise<T> {
+        return post<T>(uri, configuration, query, variables);
     };
 }
 
@@ -83,31 +86,11 @@ const apiHost = (path: string[], prefix: 'api' | 'pim' = 'api') =>
 export function createClient(configuration: ClientConfiguration): ClientInterface {
     const identifier = configuration.tenantIdentifier;
 
-    const getTenantId = async (): Promise<string> => {
-        if (process.env?.TENANT_ID) {
-            return process.env.TENANT_ID;
-        }
-
-        const result = (await post(
-            apiHost(['graphql'], 'pim'),
-            configuration,
-            `query FETCH_TENANT_CONFIG ($identifier: String!) {
-                tenant {
-                    get(identifier: $identifier) {
-                        id 
-                    }
-                }
-            }`,
-            { identifier },
-        )) as { tenant: { get: { id: string } } };
-        return result.tenant.get.id;
-    };
-
     return {
-        catalogueApi: createApiCaller(apiHost([identifier, 'catalogue']), configuration, getTenantId),
-        searchApi: createApiCaller(apiHost([identifier, 'search']), configuration, getTenantId),
-        orderApi: createApiCaller(apiHost([identifier, 'orders']), configuration, getTenantId),
-        subscriptionApi: createApiCaller(apiHost([identifier, 'subscriptions']), configuration, getTenantId),
-        pimApi: createApiCaller(apiHost(['graphql'], 'pim'), configuration, getTenantId),
+        catalogueApi: createApiCaller(apiHost([identifier, 'catalogue']), configuration),
+        searchApi: createApiCaller(apiHost([identifier, 'search']), configuration),
+        orderApi: createApiCaller(apiHost([identifier, 'orders']), configuration),
+        subscriptionApi: createApiCaller(apiHost([identifier, 'subscriptions']), configuration),
+        pimApi: createApiCaller(apiHost(['graphql'], 'pim'), configuration),
     };
 }
