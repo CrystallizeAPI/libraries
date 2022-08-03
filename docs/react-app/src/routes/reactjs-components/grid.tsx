@@ -28,6 +28,8 @@ export const CrystallizeGrid: FC = () => {
                             layout: {
                                 rowspan: true,
                                 colspan: true,
+                                colIndex: true,
+                                rowIndex: true,
                             },
                             item: {
                                 __on: [
