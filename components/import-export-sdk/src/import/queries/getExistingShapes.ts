@@ -1,4 +1,4 @@
-import { BootstrapperContext, ExistingShape } from '../types';
+import { BootstrapperContext, EventTypes, ExistingShape } from '../types';
 
 const query = `
     query GET_EXISTING_SHAPES($tenantId: ID!) {
@@ -19,7 +19,7 @@ export const getExistingShapes = async ({ ctx }: { ctx: BootstrapperContext }): 
     }
 
     if (ctx.logLevel === 'debug') {
-        ctx.eventEmitter.emit('DEBUG', res);
+        ctx.eventEmitter.emit(EventTypes.debug, res);
     }
     return shapes;
 };

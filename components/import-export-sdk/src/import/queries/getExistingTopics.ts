@@ -1,4 +1,4 @@
-import { BootstrapperContext, ExistingTopic, Topic } from '../types';
+import { BootstrapperContext, EventTypes, ExistingTopic, Topic } from '../types';
 
 const query = `
     query GET_EXISTING_TOPICS($language: String!, $tenantId: ID!) {
@@ -24,7 +24,7 @@ export const getExistingTopics = async ({ ctx }: { ctx: BootstrapperContext }): 
     }
 
     if (ctx.logLevel === 'debug') {
-        ctx.eventEmitter.emit('DEBUG', res);
+        ctx.eventEmitter.emit(EventTypes.debug, res);
     }
 
     return topics.flatMap((topic) => {
