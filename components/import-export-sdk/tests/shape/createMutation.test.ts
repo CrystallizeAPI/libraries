@@ -1,7 +1,7 @@
 import { z, ZodError } from 'zod';
 import { createShapeMutation } from '../../src/shape/mutations/create';
 import { CreateShapeInput, CreateShapeInputSchema } from '../../src/schema/shape';
-import { deepEqual, equal, fail } from 'assert';
+import { deepEqual, equal } from 'assert';
 
 interface testCase {
     name: string;
