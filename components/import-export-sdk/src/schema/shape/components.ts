@@ -1,29 +1,6 @@
 import { z } from 'zod';
+import { ShapeComponentTypeEnum } from './enums';
 
-/** @internal */
-export const ShapeTypeEnum = z.enum(['product', 'document', 'folder']);
-
-/** @internal */
-export const ShapeComponentTypeEnum = z.enum([
-    'boolean',
-    'componentChoice',
-    'contentChunk',
-    'datetime',
-    'gridRelations',
-    'images',
-    'itemRelations',
-    'location',
-    'numeric',
-    'paragraphCollection',
-    'propertiesTable',
-    'richText',
-    'selection',
-    'singleLine',
-    'videos',
-    'files',
-]);
-
-/** @internal */
 export const MinMaxComponentConfigSchema = z
     .object({
         min: z.number().positive().optional(),
@@ -42,12 +19,10 @@ export const MinMaxComponentConfigSchema = z
         },
     );
 
-/** @internal */
 export const ComponentChoiceComponentConfigSchema: any = z.object({
     choices: z.array(z.lazy(() => ShapeComponentSchema)),
 });
 
-/** @internal */
 export const ContentChunkComponentConfigSchema: any = z.object({
     components: z
         .array(z.lazy(() => ShapeComponentSchema))
@@ -60,7 +35,6 @@ export const ContentChunkComponentConfigSchema: any = z.object({
     repeatable: z.boolean().default(false),
 });
 
-/** @internal */
 export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
         acceptedContentTypes: z
@@ -78,20 +52,17 @@ export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
     }),
 );
 
-/** @internal */
 export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
         acceptedShapeIdentifiers: z.array(z.string()).optional(),
     }),
 );
 
-/** @internal */
 export const NumericComponentConfigSchema = z.object({
     decimalPlaces: z.number().positive().optional(),
     units: z.array(z.string()).optional(),
 });
 
-/** @internal */
 export const PropertiesTableComponentConfigSchema = z.object({
     sections: z.array(
         z.object({
@@ -101,7 +72,6 @@ export const PropertiesTableComponentConfigSchema = z.object({
     ),
 });
 
-/** @internal */
 export const SelectionComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
         options: z
@@ -116,7 +86,6 @@ export const SelectionComponentConfigSchema = MinMaxComponentConfigSchema.and(
     }),
 );
 
-/** @internal */
 export const ShapeComponentConfigSchema = z.object({
     componentChoice: ComponentChoiceComponentConfigSchema.optional(),
     contentChunk: ContentChunkComponentConfigSchema.optional(),
@@ -127,7 +96,6 @@ export const ShapeComponentConfigSchema = z.object({
     selection: SelectionComponentConfigSchema.optional(),
 });
 
-/** @internal */
 export const ShapeComponentSchema = z
     .object({
         id: z.string().min(1),
@@ -151,19 +119,13 @@ export const ShapeComponentSchema = z
         },
     );
 
-/** @internal */
-export const CreateShapeInputSchema = z.object({
-    identifier: z.string().optional(),
-    name: z.string().min(1),
-    tenantId: z.string().min(1),
-    type: ShapeTypeEnum,
-    meta: z.record(z.string()).optional(),
-    components: z.array(ShapeComponentSchema).optional(),
-});
-
-/** @internal */
-export const UpdateShapeInputSchema = z.object({
-    name: z.string(),
-    meta: z.record(z.string()).optional(),
-    components: z.array(ShapeComponentSchema).optional(),
-});
+export type MinMaxComponentConfig = z.infer<typeof MinMaxComponentConfigSchema>;
+export type ComponentChoiceComponentConfig = z.infer<typeof ComponentChoiceComponentConfigSchema>;
+export type ContentChunkComponentConfig = z.infer<typeof ContentChunkComponentConfigSchema>;
+export type FileComponentConfig = z.infer<typeof FileComponentConfigSchema>;
+export type ItemRelationsComponentConfig = z.infer<typeof ItemRelationsComponentConfigSchema>;
+export type NumericComponentConfig = z.infer<typeof NumericComponentConfigSchema>;
+export type PropertiesTableComponentConfig = z.infer<typeof PropertiesTableComponentConfigSchema>;
+export type SelectionComponentConfig = z.infer<typeof SelectionComponentConfigSchema>;
+export type ShapeComponentConfig = z.infer<typeof ShapeComponentConfigSchema>;
+export type ShapeComponent = z.infer<typeof ShapeComponentSchema>;

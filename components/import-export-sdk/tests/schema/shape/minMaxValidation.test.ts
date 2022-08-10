@@ -1,6 +1,6 @@
 import { deepEqual } from 'assert';
 import { ZodError } from 'zod';
-import { MinMaxComponentConfigSchema } from '..';
+import { MinMaxComponentConfigSchema } from '../../../src/schema/shape';
 
 interface testCase {
     name: string;

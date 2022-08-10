@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import EventEmitter from 'events';
-import { ClientInterface, MassClientInterface } from '@crystallize/js-api-client';
+import { MassClientInterface } from '@crystallize/js-api-client';
 import { ImportSpecSchema, ShapeImportSpecSchema, TopicChildImportSpecSchema, TopicImportSpecSchema } from '../schema';
 
 export enum EventTypes {

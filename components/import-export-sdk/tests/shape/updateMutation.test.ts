@@ -1,11 +1,11 @@
 import { z, ZodError } from 'zod';
-import { createShapeMutation } from '../create';
-import { CreateShapeInputSchema } from '../../schema';
-import { deepEqual, equal, fail } from 'assert';
+import { updateShapeMutation } from '../../src/shape/mutations/update';
+import { UpdateShapeInput, UpdateShapeInputSchema } from '../../src/schema/shape';
+import { deepEqual, equal } from 'assert';
 
 interface testCase {
     name: string;
-    input: z.infer<typeof CreateShapeInputSchema>;
+    input: UpdateShapeInput;
     error?: ZodError;
 }
 
@@ -13,17 +13,13 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a basic shape',
         input: {
-            tenantId: '123',
             name: 'Some Shape',
-            type: 'product',
         },
     },
     {
         name: 'Returns the query and variables for a shape with components',
         input: {
-            tenantId: '123',
             name: 'Some Shape',
-            type: 'product',
             components: [
                 {
                     id: 'someSingleLine',
@@ -55,17 +51,14 @@ const testCases: testCase[] = [
         },
     },
     {
-        name: 'Throws a validation error when structure does not match ShapeCreateInputSchema',
-        input: {
-            name: 'some invalid shape',
-            type: 'product',
-        } as z.infer<typeof CreateShapeInputSchema>,
+        name: 'Throws a validation error when structure does not match ShapeUpdateInputSchema',
+        input: {} as z.infer<typeof UpdateShapeInputSchema>,
         error: new ZodError([
             {
                 code: 'invalid_type',
                 expected: 'string',
                 received: 'undefined',
-                path: ['tenantId'],
+                path: ['name'],
                 message: 'Required',
             },
         ]),
@@ -73,9 +66,7 @@ const testCases: testCase[] = [
     {
         name: 'Throws a validation error when component config does not match component type',
         input: {
-            tenantId: '123',
             name: 'some invalid shape',
-            type: 'product',
             components: [
                 {
                     id: 'someSingleLine',
@@ -113,25 +104,35 @@ const testCases: testCase[] = [
 testCases.forEach((tc) =>
     it(tc.name, () => {
         if (tc.error) {
-            expect(() => createShapeMutation({ input: tc.input })).toThrow(tc.error);
+            expect(() =>
+                updateShapeMutation({
+                    input: tc.input,
+                    identifier: 'shape-identifier',
+                    tenantId: '123',
+                }),
+            ).toThrow(tc.error);
             return;
         }
 
-        const { query, variables } = createShapeMutation({ input: tc.input });
+        const { query, variables } = updateShapeMutation({
+            input: tc.input,
+            identifier: 'shape-identifier',
+            tenantId: '123',
+        });
         const re = / /g;
         equal(
             query.replace(re, ''),
             `
-                mutation CREATE_SHAPE($input: CreateShapeInput!) {
-                    shape {
-                        create(input: $input) {
-                            identifier
-                            name
+                    mutation UPDATE_SHAPE($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
+                        shape {
+                            update (tenantId: $tenantId, identifier: $identifier, input: $input) {
+                                identifier
+                                name
+                            }
                         }
                     }
-                }
-            `.replace(re, ''),
+                `.replace(re, ''),
         );
-        deepEqual(variables, { input: tc.input });
+        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: '123' });
     }),
 );

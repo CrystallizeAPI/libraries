@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { CreateChildTopicInput } from '../types';
+
+export type CreateChildTopicInput = {
+    name: string;
+    children?: CreateChildTopicInput[];
+    pathIdentifier?: string;
+};
 
 export const CreateChildTopicInputSchema: z.ZodType<CreateChildTopicInput> = z.lazy(() =>
     z.object({
@@ -29,3 +34,7 @@ export const UpdateTopicInputSchema = z.object({
     parentId: z.string().optional(),
     pathIdentifier: z.string().optional(),
 });
+
+export type BulkCreateTopicInput = z.infer<typeof BulkCreateTopicInputSchema>;
+export type CreateTopicInput = z.infer<typeof CreateTopicInputSchema>;
+export type UpdateTopicInput = z.infer<typeof UpdateTopicInputSchema>;

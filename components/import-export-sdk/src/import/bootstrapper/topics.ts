@@ -1,9 +1,9 @@
 import { bulkCreateTopicsMutation } from '../../topic/mutations/bulkCreate';
 import { createTopicMutation } from '../../topic/mutations/create';
 import { updateTopicMutation } from '../../topic/mutations/update';
-import { CreateChildTopicInput } from '../../topic/types';
+import { CreateChildTopicInput } from '../../schema/topic';
 import { getExistingTopics } from '../queries/getExistingTopics';
-import { BootstrapperContext, EventTypes, ExistingTopic, TopicChildImportSpec, TopicImportSpec } from '../types';
+import { BootstrapperContext, TopicChildImportSpec, TopicImportSpec } from '../types';
 
 export const handleTopics = async ({ ctx }: { ctx: BootstrapperContext }) => {
     const { schema } = ctx;

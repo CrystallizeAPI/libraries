@@ -1,6 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateTopicInputSchema } from '../schema';
-import { CreateTopicInput } from '../types';
+import { CreateTopicInputSchema, CreateTopicInput } from '../../schema/topic';
 
 interface CreateProps {
     language: string;
@@ -8,7 +7,7 @@ interface CreateProps {
 }
 
 const query = `
-mutation CREATE_TOPIC($id: ID!, $language: String!, $input: CreateTopicInput!) {
+mutation CREATE_TOPIC($language: String!, $input: CreateTopicInput!) {
     topic {
         create(language: $language, input: $input) {
             id

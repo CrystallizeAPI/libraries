@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ShapeComponentSchema, ShapeTypeEnum } from '../../shape';
+import { ShapeComponentSchema, ShapeTypeEnum } from '../../schema/shape';
 import { TopicChildImportSpec } from '../types';
 
 export const ShapeImportSpecSchema = z.object({

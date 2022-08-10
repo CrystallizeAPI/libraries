@@ -1,7 +1,5 @@
-import { z } from 'zod';
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateShapeInputSchema } from '../schema';
-import { UpdateShapeInput } from '../types';
+import { UpdateShapeInputSchema, UpdateShapeInput } from '../../schema/shape';
 
 interface UpdateProps {
     tenantId: string;
