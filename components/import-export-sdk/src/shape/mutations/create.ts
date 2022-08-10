@@ -6,7 +6,7 @@ interface CreateProps {
 }
 
 const query = `
-mutation CREATE_SHAPE($input: CreateShapeInput!) {
+mutation CREATE_SHAPE ($input: CreateShapeInput!) {
     shape {
         create(input: $input) {
             identifier
@@ -16,7 +16,7 @@ mutation CREATE_SHAPE($input: CreateShapeInput!) {
 }
 `;
 
-export const createShapeMutation = ({
+export const create = ({
     input,
 }: CreateProps): {
     query: string;

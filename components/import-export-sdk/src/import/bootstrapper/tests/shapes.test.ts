@@ -62,10 +62,10 @@ testCases.forEach((tc) =>
         let createMutations = 0;
         let updateMutations = 0;
         const mockMassClient = {
-            pimApi: (_query, _variables) =>
+            pimApi: (_query, { identifier }: { identifier: string }) =>
                 Promise.resolve({
                     shape: {
-                        getMany: tc.existingShapes,
+                        get: tc.existingShapes.find((existing) => existing.identifier === identifier),
                     },
                 }),
             enqueue: {

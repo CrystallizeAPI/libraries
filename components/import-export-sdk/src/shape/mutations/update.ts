@@ -8,7 +8,7 @@ interface UpdateProps {
 }
 
 const query = `
-mutation UPDATE_SHAPE($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
+mutation UPDATE_SHAPE ($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
     shape {
         update (tenantId: $tenantId, identifier: $identifier, input: $input) {
             identifier
@@ -18,7 +18,7 @@ mutation UPDATE_SHAPE($tenantId: ID!, $identifier: String!, $input: UpdateShapeI
 }
 `;
 
-export const updateShapeMutation = ({
+export const update = ({
     tenantId,
     identifier,
     input,
