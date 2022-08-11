@@ -8,7 +8,7 @@ interface UpdateProps {
 }
 
 const query = `
-mutation UPDATE_TOPIC($id: ID!, $language: String!, $input: UpdateTopicInput!) {
+mutation UPDATE_TOPIC ($id: ID!, $language: String!, $input: UpdateTopicInput!) {
     topic {
         update(id: $id, language: $language, input: $input) {
             id

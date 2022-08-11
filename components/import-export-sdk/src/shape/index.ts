@@ -13,13 +13,13 @@ export { update } from './mutations/update';
 
 export const shape = async ({
     client,
-    tenantId,
     shape,
 }: {
     client: ClientInterface;
-    tenantId: string;
     shape: z.infer<typeof ShapeImportSpecSchema>;
 }) => {
+    const tenantId = client.config.tenantId || '';
+
     if (await get({ client, tenantId, identifier: shape.identifier })) {
         return update({
             tenantId,

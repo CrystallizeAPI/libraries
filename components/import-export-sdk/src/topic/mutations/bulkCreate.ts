@@ -9,7 +9,7 @@ interface BulkCreateProps {
 }
 
 const query = `
-mutation BULK_CREATE_TOPICS($tenantId: ID!, $language: String!, $input: [BulkCreateTopicInput!]!) {
+mutation BULK_CREATE_TOPICS ($tenantId: ID!, $language: String!, $input: [BulkCreateTopicInput!]!) {
     topic {
         bulkCreate(tenantId: $tenantId, language: $language, input: $input) {
             id

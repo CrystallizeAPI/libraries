@@ -73,6 +73,10 @@ testCases.forEach((tc) =>
                     variables?.identifier ? updateMutations++ : createMutations++;
                 },
             },
+            config: {
+                tenantIdentifier: 'some-tenant-identifier',
+                tenantId: 'some-tenant-id',
+            },
         } as MassClientInterface;
 
         await handleShapes({

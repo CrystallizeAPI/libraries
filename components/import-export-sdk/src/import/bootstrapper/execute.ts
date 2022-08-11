@@ -21,7 +21,7 @@ export const execute = async ({ ctx, options }: { ctx: BootstrapperContext; opti
     }
 
     if (ctx.logLevel === 'debug') {
-        ctx.eventEmitter.emit(EventTypes.debug, `Executing ${ctx.massClient.queue.length} mutations`);
+        ctx.eventEmitter.emit(EventTypes.debug, `Executing mutations`);
     }
 
     await ctx.massClient.execute();

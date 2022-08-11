@@ -9,7 +9,7 @@ export const handleShapes = async ({ ctx }: { ctx: BootstrapperContext }) => {
 
     await Promise.all(
         schema.shapes.map((schema) =>
-            shape({ client: ctx.massClient, tenantId: ctx.tenant.id, shape: schema }).then(({ query, variables }) =>
+            shape({ client: ctx.massClient, shape: schema }).then(({ query, variables }) =>
                 ctx.massClient.enqueue.pimApi(query, variables),
             ),
         ),

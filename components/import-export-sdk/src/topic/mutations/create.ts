@@ -7,7 +7,7 @@ interface CreateProps {
 }
 
 const query = `
-mutation CREATE_TOPIC($language: String!, $input: CreateTopicInput!) {
+mutation CREATE_TOPIC ($language: String!, $input: CreateTopicInput!) {
     topic {
         create(language: $language, input: $input) {
             id
