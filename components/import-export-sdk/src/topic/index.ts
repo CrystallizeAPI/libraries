@@ -17,30 +17,30 @@ const countChildren = (children: Topic[]): number =>
 export const topic = async ({
     client,
     language,
-    topic: topicData,
+    data,
 }: {
     client: ClientInterface;
     language: string;
-    topic: z.infer<typeof TopicSchema>;
+    data: z.infer<typeof TopicSchema>;
 }) => {
-    if (topicData.id) {
-        const { query, variables } = await getTopicQuery({ id: topicData.id, language });
+    if (data.id) {
+        const { query, variables } = await getTopicQuery({ id: data.id, language });
         const existingTopic: Topic | undefined = await client.pimApi(query, variables).then((res) => res?.topic?.get);
         if (existingTopic) {
             const { query, variables } = updateTopicMutation({
-                id: topicData.id,
+                id: data.id,
                 language,
-                input: UpdateTopicInputSchema.parse(topicData),
+                input: UpdateTopicInputSchema.parse(data),
             });
             return client.pimApi(query, variables);
         }
     }
 
-    if (!topicData.children?.length || countChildren(topicData.children) < MAX_CHILD_COUNT) {
+    if (!data.children?.length || countChildren(data.children) < MAX_CHILD_COUNT) {
         const { query, variables } = createTopicMutation({
             language,
             input: CreateTopicInputSchema.parse({
-                ...topicData,
+                ...data,
                 tenantId: client.config.tenantId,
             }),
         });
@@ -50,17 +50,17 @@ export const topic = async ({
     const { query, variables } = createTopicMutation({
         language,
         input: CreateTopicInputSchema.parse({
-            ...topicData,
+            ...data,
             tenantId: client.config.tenantId,
             children: [],
         }),
     });
     const { id } = await client.pimApi(query, variables).then((res) => res.topic.create);
-    for (const child of topicData.children) {
+    for (const child of data.children) {
         await topic({
             client,
             language,
-            topic: {
+            data: {
                 ...child,
                 parentId: id,
             },

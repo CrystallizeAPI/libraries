@@ -4,7 +4,7 @@
     "main": "dist/index.js",
     "license": "MIT",
     "scripts": {
-        "build": "yarn tsc",
+        "build": "rm -rf dist && yarn tsc && cp package.json dist/package.json",
         "build:watch": "yarn tsc -W",
         "test": "jest",
         "test:watch": "jest --watch"

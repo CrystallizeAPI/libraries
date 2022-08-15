@@ -1,11 +1,11 @@
-import { z, ZodError } from 'zod';
+import { ZodError } from 'zod';
 import { VariablesType } from '@crystallize/js-api-client';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';
-import { Shape, ShapeSchema } from '../../src/schema/shape';
+import { Shape } from '../../src/schema/shape';
 
 interface testCase {
     name: string;
-    input: z.infer<typeof ShapeSchema>;
+    input: Shape;
     existingShape?: Shape;
     expectedCalls?: { query: string; variables: VariablesType }[];
     error?: ZodError;
@@ -144,7 +144,7 @@ testCases.forEach((tc) =>
         } as any;
 
         if (tc.error) {
-            expect(await shape({ client: mockClient, shape: tc.input })).toThrow(tc.error);
+            expect(await shape({ client: mockClient, data: tc.input })).toThrow(tc.error);
             return;
         }
 
@@ -152,7 +152,7 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        await shape({ client: mockClient, shape: tc.input });
+        await shape({ client: mockClient, data: tc.input });
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);

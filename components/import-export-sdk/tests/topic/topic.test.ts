@@ -1,11 +1,11 @@
-import { z, ZodError } from 'zod';
+import { ZodError } from 'zod';
 import { getTopicQuery, createTopicMutation, updateTopicMutation, topic } from '../../src/topic';
 import { VariablesType } from '@crystallize/js-api-client';
-import { Topic, TopicSchema } from '../../src/schema/topic';
+import { Topic } from '../../src/schema/topic';
 
 interface testCase {
     name: string;
-    input: z.infer<typeof TopicSchema>;
+    input: Topic;
     existingTopic?: Topic;
     expectedCalls?: { query: string; variables: VariablesType }[];
     error?: ZodError;
@@ -230,7 +230,7 @@ testCases.forEach((tc) =>
         } as any;
 
         if (tc.error) {
-            expect(await topic({ client: mockClient, language: 'en', topic: tc.input })).toThrow(tc.error);
+            expect(await topic({ client: mockClient, language: 'en', data: tc.input })).toThrow(tc.error);
             return;
         }
 
@@ -238,7 +238,7 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        await topic({ client: mockClient, language: 'en', topic: tc.input });
+        await topic({ client: mockClient, language: 'en', data: tc.input });
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
