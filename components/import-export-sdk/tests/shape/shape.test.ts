@@ -25,6 +25,13 @@ const testCases: testCase[] = [
                     type: 'boolean',
                 },
             ],
+            variantComponents: [
+                {
+                    id: 'variantComponentId',
+                    name: 'Some Variant Component',
+                    type: 'singleLine',
+                },
+            ],
         },
         expectedCalls: [
             getShapeQuery({
@@ -44,6 +51,13 @@ const testCases: testCase[] = [
                             type: 'boolean',
                         },
                     ],
+                    variantComponents: [
+                        {
+                            id: 'variantComponentId',
+                            name: 'Some Variant Component',
+                            type: 'singleLine',
+                        },
+                    ],
                 },
             }),
         ],
@@ -59,6 +73,20 @@ const testCases: testCase[] = [
             identifier: 'some-shape',
             name: 'Some Shape 2',
             type: 'product',
+            components: [
+                {
+                    id: 'componentId',
+                    name: 'Some Component',
+                    type: 'boolean',
+                },
+            ],
+            variantComponents: [
+                {
+                    id: 'variantComponentId',
+                    name: 'Some Variant Component',
+                    type: 'singleLine',
+                },
+            ],
         },
         expectedCalls: [
             getShapeQuery({
@@ -70,6 +98,20 @@ const testCases: testCase[] = [
                 identifier: 'some-shape',
                 input: {
                     name: 'Some Shape 2',
+                    components: [
+                        {
+                            id: 'componentId',
+                            name: 'Some Component',
+                            type: 'boolean',
+                        },
+                    ],
+                    variantComponents: [
+                        {
+                            id: 'variantComponentId',
+                            name: 'Some Variant Component',
+                            type: 'singleLine',
+                        },
+                    ],
                 },
             }),
         ],

@@ -12,12 +12,14 @@ export const CreateShapeInputSchema = z.object({
     type: ShapeTypeEnum,
     meta: z.record(z.string()).optional(),
     components: z.array(ShapeComponentSchema).optional(),
+    variantComponents: z.array(ShapeComponentSchema).optional(),
 });
 
 export const UpdateShapeInputSchema = z.object({
     name: z.string(),
     meta: z.record(z.string()).optional(),
     components: z.array(ShapeComponentSchema).optional(),
+    variantComponents: z.array(ShapeComponentSchema).optional(),
 });
 
 export const ShapeSchema = z.object({
@@ -25,6 +27,7 @@ export const ShapeSchema = z.object({
     name: z.string().min(1),
     type: ShapeTypeEnum,
     components: z.array(ShapeComponentSchema).optional(),
+    variantComponents: z.array(ShapeComponentSchema).optional(),
 });
 
 export type CreateShapeInput = z.infer<typeof CreateShapeInputSchema>;
