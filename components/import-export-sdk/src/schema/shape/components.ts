@@ -59,7 +59,7 @@ export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.an
 );
 
 export const NumericComponentConfigSchema = z.object({
-    decimalPlaces: z.number().positive().optional(),
+    decimalPlaces: z.number().min(0).optional(),
     units: z.array(z.string()).optional(),
 });
 

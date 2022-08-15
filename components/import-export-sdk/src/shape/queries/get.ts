@@ -3,7 +3,7 @@ import { VariablesType } from '@crystallize/js-api-client';
 const query = `
     query GET_SHAPE ($tenantId: ID!, $identifier: String!) {
         shape {
-            get(identifier: $identifier) {
+            get(tenantId: $tenantId, identifier: $identifier) {
                 identifier
             }
         }
