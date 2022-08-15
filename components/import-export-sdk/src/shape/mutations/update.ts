@@ -18,7 +18,7 @@ mutation UPDATE_SHAPE ($tenantId: ID!, $identifier: String!, $input: UpdateShape
 }
 `;
 
-export const update = ({
+export const updateShapeMutation = ({
     tenantId,
     identifier,
     input,

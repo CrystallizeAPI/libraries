@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import EventEmitter from 'events';
 import { MassClientInterface } from '@crystallize/js-api-client';
-import { ImportSpecSchema, ShapeImportSpecSchema } from '../schema';
+import { ImportSpecSchema } from '../schema';
 import { TopicSchema } from '../../schema/topic';
+import { ShapeSchema } from '../../schema/shape';
 
 export enum EventTypes {
     error = 'error',
@@ -19,7 +20,7 @@ export interface TopicChildImportSpec {
 }
 
 export type ImportSpec = z.infer<typeof ImportSpecSchema>;
-export type ShapeImportSpec = z.infer<typeof ShapeImportSpecSchema>;
+export type ShapeImportSpec = z.infer<typeof ShapeSchema>;
 export type TopicImportSpec = z.infer<typeof TopicSchema>;
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';

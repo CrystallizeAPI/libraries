@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod';
-import { create } from '../../src/shape/mutations/create';
+import { createShapeMutation } from '../../src/shape/mutations/create';
 import { CreateShapeInput, CreateShapeInputSchema } from '../../src/schema/shape';
 import { deepEqual, equal } from 'assert';
 
@@ -113,11 +113,11 @@ const testCases: testCase[] = [
 testCases.forEach((tc) =>
     it(tc.name, () => {
         if (tc.error) {
-            expect(() => create({ input: tc.input })).toThrow(tc.error);
+            expect(() => createShapeMutation({ input: tc.input })).toThrow(tc.error);
             return;
         }
 
-        const { query, variables } = create({ input: tc.input });
+        const { query, variables } = createShapeMutation({ input: tc.input });
         const re = / /g;
         equal(
             query.replace(re, ''),

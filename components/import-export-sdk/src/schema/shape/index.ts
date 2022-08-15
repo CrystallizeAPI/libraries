@@ -20,5 +20,13 @@ export const UpdateShapeInputSchema = z.object({
     components: z.array(ShapeComponentSchema).optional(),
 });
 
+export const ShapeSchema = z.object({
+    identifier: z.string().min(2).max(24),
+    name: z.string().min(1),
+    type: ShapeTypeEnum,
+    components: z.array(ShapeComponentSchema).optional(),
+});
+
 export type CreateShapeInput = z.infer<typeof CreateShapeInputSchema>;
 export type UpdateShapeInput = z.infer<typeof UpdateShapeInputSchema>;
+export type Shape = z.infer<typeof ShapeSchema>;

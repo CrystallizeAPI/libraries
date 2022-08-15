@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod';
-import { update } from '../../src/shape/mutations/update';
+import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { UpdateShapeInput, UpdateShapeInputSchema } from '../../src/schema/shape';
 import { deepEqual, equal } from 'assert';
 
@@ -105,7 +105,7 @@ testCases.forEach((tc) =>
     it(tc.name, () => {
         if (tc.error) {
             expect(() =>
-                update({
+                updateShapeMutation({
                     input: tc.input,
                     identifier: 'shape-identifier',
                     tenantId: '123',
@@ -114,7 +114,7 @@ testCases.forEach((tc) =>
             return;
         }
 
-        const { query, variables } = update({
+        const { query, variables } = updateShapeMutation({
             input: tc.input,
             identifier: 'shape-identifier',
             tenantId: '123',

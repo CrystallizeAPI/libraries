@@ -9,6 +9,7 @@ import { getTopicQuery } from './queries/get';
 export { bulkCreateTopicsMutation } from './mutations/bulkCreate';
 export { createTopicMutation } from './mutations/create';
 export { updateTopicMutation } from './mutations/update';
+export { getTopicQuery } from './queries/get';
 
 const countChildren = (children: Topic[]): number =>
     children.reduce((acc, child) => (child.children?.length ? acc + 1 + countChildren(child.children) : acc + 1), 0);

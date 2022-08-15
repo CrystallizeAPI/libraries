@@ -1,15 +1,12 @@
 import { z, ZodError } from 'zod';
-import { createTopicMutation, topic } from '../../src/topic';
-import { ExistingTopic } from '../../src/import';
+import { getTopicQuery, createTopicMutation, updateTopicMutation, topic } from '../../src/topic';
 import { VariablesType } from '@crystallize/js-api-client';
-import { getTopicQuery } from '../../src/topic/queries/get';
-import { updateTopicMutation } from '../../src/topic/mutations/update';
-import { TopicSchema } from '../../src/schema/topic';
+import { Topic, TopicSchema } from '../../src/schema/topic';
 
 interface testCase {
     name: string;
     input: z.infer<typeof TopicSchema>;
-    existingTopic?: ExistingTopic;
+    existingTopic?: Topic;
     expectedCalls?: { query: string; variables: VariablesType }[];
     error?: ZodError;
 }
@@ -163,7 +160,7 @@ const testCases: testCase[] = [
         },
         existingTopic: {
             id: 'some-topic-id',
-        } as ExistingTopic,
+        } as Topic,
         expectedCalls: [
             getTopicQuery({
                 id: 'some-topic-id',

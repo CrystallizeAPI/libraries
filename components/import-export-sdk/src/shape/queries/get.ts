@@ -1,5 +1,4 @@
-import { ClientInterface } from '@crystallize/js-api-client';
-import { ExistingShape } from '../../import';
+import { VariablesType } from '@crystallize/js-api-client';
 
 const query = `
     query GET_SHAPE ($tenantId: ID!, $identifier: String!) {
@@ -11,12 +10,13 @@ const query = `
     }
 `;
 
-export const get = ({
-    client,
+export const getShapeQuery = ({
     tenantId,
     identifier,
 }: {
-    client: ClientInterface;
     tenantId: string;
     identifier: string;
-}): Promise<ExistingShape | undefined> => client.pimApi(query, { tenantId, identifier }).then((res) => res?.shape?.get);
+}): { query: string; variables: VariablesType } => ({
+    query,
+    variables: { tenantId, identifier },
+});

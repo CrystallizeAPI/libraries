@@ -16,7 +16,7 @@ mutation CREATE_SHAPE ($input: CreateShapeInput!) {
 }
 `;
 
-export const create = ({
+export const createShapeMutation = ({
     input,
 }: CreateProps): {
     query: string;
