@@ -22,7 +22,7 @@ export const topic = async ({
     client: ClientInterface;
     language: string;
     data: z.infer<typeof TopicSchema>;
-}) => {
+}): Promise<Topic> => {
     if (data.id) {
         const { query, variables } = await getTopicQuery({ id: data.id, language });
         const existingTopic: Topic | undefined = await client.pimApi(query, variables).then((res) => res?.topic?.get);
@@ -32,7 +32,7 @@ export const topic = async ({
                 language,
                 input: UpdateTopicInputSchema.parse(data),
             });
-            return client.pimApi(query, variables);
+            return client.pimApi(query, variables).then((res) => res?.topic?.update);
         }
     }
 
@@ -44,7 +44,7 @@ export const topic = async ({
                 tenantId: client.config.tenantId,
             }),
         });
-        return client.pimApi(query, variables);
+        return client.pimApi(query, variables).then((res) => res?.topic?.create);
     }
 
     const { query, variables } = createTopicMutation({
@@ -55,7 +55,7 @@ export const topic = async ({
             children: [],
         }),
     });
-    const { id } = await client.pimApi(query, variables).then((res) => res.topic.create);
+    const { id }: Topic = await client.pimApi(query, variables).then((res) => res.topic.create);
     for (const child of data.children) {
         await topic({
             client,
@@ -66,4 +66,8 @@ export const topic = async ({
             },
         });
     }
+    return {
+        ...data,
+        id,
+    };
 };

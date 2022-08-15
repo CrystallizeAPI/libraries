@@ -9,7 +9,7 @@ export { getShapeQuery } from './queries/get';
 export { createShapeMutation } from './mutations/create';
 export { updateShapeMutation } from './mutations/update';
 
-export const shape = async ({ client, data }: { client: ClientInterface; data: Shape }) => {
+export const shape = async ({ client, data }: { client: ClientInterface; data: Shape }): Promise<Shape> => {
     const tenantId = client.config.tenantId;
     if (!tenantId) {
         throw new Error('Missing tenantId config in API client');

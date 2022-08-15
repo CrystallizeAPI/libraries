@@ -205,18 +205,28 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest.fn().mockResolvedValue({
-            topic: {
-                create: {
-                    id: 'some-id',
-                },
-            },
-        });
+        let mockPimApi = jest.fn();
 
         if (tc.existingTopic) {
-            mockPimApi = mockPimApi.mockResolvedValueOnce({
+            mockPimApi = mockPimApi
+                .mockResolvedValueOnce({
+                    topic: {
+                        get: tc.existingTopic,
+                    },
+                })
+                .mockResolvedValue({
+                    topic: {
+                        update: {
+                            id: 'some-id',
+                        },
+                    },
+                });
+        } else {
+            mockPimApi = mockPimApi.mockResolvedValue({
                 topic: {
-                    get: tc.existingTopic,
+                    create: {
+                        id: 'some-id',
+                    },
                 },
             });
         }
@@ -238,7 +248,8 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        await topic({ client: mockClient, language: 'en', data: tc.input });
+        const { id } = await topic({ client: mockClient, language: 'en', data: tc.input });
+        expect(id).toBe('some-id');
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);

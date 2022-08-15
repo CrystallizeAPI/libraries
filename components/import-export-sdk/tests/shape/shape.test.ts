@@ -120,20 +120,25 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest
-            .fn()
-            .mockResolvedValueOnce({
+        let mockPimApi = jest.fn().mockResolvedValueOnce({
+            shape: {
+                get: tc.existingShape || null,
+            },
+        });
+
+        if (tc.existingShape) {
+            mockPimApi = mockPimApi.mockResolvedValue({
                 shape: {
-                    get: tc.existingShape || null,
-                },
-            })
-            .mockResolvedValue({
-                shape: {
-                    create: {
-                        identifier: 'some-shape',
-                    },
+                    update: tc.input,
                 },
             });
+        } else {
+            mockPimApi = mockPimApi.mockResolvedValue({
+                shape: {
+                    create: tc.input,
+                },
+            });
+        }
 
         const mockClient = {
             pimApi: mockPimApi,
@@ -152,7 +157,9 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        await shape({ client: mockClient, data: tc.input });
+        const { name, identifier } = await shape({ client: mockClient, data: tc.input });
+        expect(name).toBe(tc.input.name);
+        expect(identifier).toBe(tc.input.identifier);
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
