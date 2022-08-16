@@ -47,26 +47,12 @@ jobs:
                   echo ::group::..:: Mono Repo Tests ::..
                   yarn install
                   echo ::endgroup::
-                  for COMPONENT in `ls components`; do
-                      if [ -d "components/${COMPONENT}" ]; then
-                        echo ::group::..:: ${COMPONENT} ::..
-                        cd components/${COMPONENT} && yarn install && cd -;
-                        echo ::endgroup::
-                      fi  
-                  done
 
             - name: 🏄 Run the tests
               run: |
                   echo ::group::..:: Mono Repo Tests ::..
-                  echo "Nothing yet."
+                  yarn test
                   echo ::endgroup::
-                  for COMPONENT in `ls components`; do
-                      if [ -d "components/${COMPONENT}" ]; then
-                        echo ::group::..:: ${COMPONENT} ::..
-                        cd components/${COMPONENT} && yarn build && yarn test && cd -;
-                        echo ::endgroup::
-                      fi  
-                  done
 
     builds:
         name: 👀 Test Standalone Builds
