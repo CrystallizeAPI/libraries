@@ -1,12 +1,8 @@
 {
     "private": true,
     "workspaces": [
-        "components/js-api-client",
-        "components/js-storefrontaware-utils",
-        "components/reactjs-hooks",
-        "components/reactjs-components",
-        "components/node-service-api-router",
-        "components/node-service-api-request-handlers"
+        "components/*",
+        "apps/*"
     ],
     "devDependencies": {
         "concurrently": "^7.1.0",
@@ -16,7 +12,8 @@
     "scripts": {
         "build": "turbo run build",
         "test": "turbo run test",
-        "dev": "turbo run watch --parallel"
+        "dev": "turbo run watch --parallel",
+        "demo": "turbo run start --filter demo"
     },
     "volta": {
         "node": "16.14.2",
