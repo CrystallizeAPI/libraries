@@ -6,7 +6,7 @@ on:
 
 jobs:
     deploy:
-        name: 🚀 Deploy on Github.io
+        name: Deploy Preview branch on Github.io
         runs-on: ubuntu-latest
         concurrency:
             group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,7 +29,7 @@ jobs:
               run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
 
             - name: 🍿 Deploy
-              uses: peaceiris/actions-gh-pages@v3.8
+              uses: peaceiris/actions-gh-pages@v3.7.3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./apps/demo/build
