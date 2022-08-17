@@ -2,7 +2,7 @@
     "name": "@crystallize/demo",
     "version": "0.1.0",
     "private": true,
-    "homepage": "libraries",
+    "homepage": ".",
     "dependencies": {
         "@crystallize/js-api-client": "*",
         "@crystallize/reactjs-components": "*",

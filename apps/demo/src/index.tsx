@@ -7,7 +7,7 @@ import { IconContext } from 'react-icons';
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter basename="libraries">
+        <BrowserRouter basename={process.env.BASENAME || 'libraries'}>
             <IconContext.Provider value={{ className: 'r-icon' }}>
                 <App />
             </IconContext.Provider>
