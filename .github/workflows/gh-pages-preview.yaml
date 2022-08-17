@@ -6,7 +6,7 @@ on:
 
 jobs:
     deploy:
-        name: 🚀 Deploy on Github.io
+        name: Deploy Preview branch on Github.io
         runs-on: ubuntu-latest
         concurrency:
             group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,18 +19,27 @@ jobs:
               with:
                   node-version: 18
 
+            - name: Get branch name
+              id: branch-name
+              uses: tj-actions/branch-names@v5.4
+
+            - name: Set .homepage in package.json
+              uses: jossef/action-set-json-field@v2
+              with:
+                  file: apps/demo/package.json
+                  field: homepage
+                  value: libraries/${{ steps.branch-name.outputs.current_branch }}
+
             - name: 🥖 Build the React App
+              env:
+                  REACT_APP_BASENAME: libraries/${{ steps.branch-name.outputs.current_branch }}
               run: |
                   yarn
                   yarn build --filter demo
 
-            - name: Set branch name
-              id: branch
-              run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
-
             - name: 🍿 Deploy
-              uses: peaceiris/actions-gh-pages@v3
+              uses: peaceiris/actions-gh-pages@v3.7.3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./apps/demo/build
-                  destination_dir: ./${{ steps.branch.outputs.BRANCH_NAME }}
+                  destination_dir: ./${{ steps.branch-name.outputs.current_branch }}
