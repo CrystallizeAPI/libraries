@@ -24,13 +24,17 @@ jobs:
                   yarn
                   yarn build --filter demo
 
-            - name: Set branch name
-              id: branch
-              run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
+            - name: Get branch name
+              id: branch-name
+              uses: tj-actions/branch-names@v5.4
+
+            - name: Running on the default branch.
+              run: |
+                  echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
 
             - name: 🍿 Deploy
               uses: peaceiris/actions-gh-pages@v3.7.3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./apps/demo/build
-                  destination_dir: ./${{ steps.branch.outputs.BRANCH_NAME }}
+                  destination_dir: ./${{ steps.branch-name.outputs.current_branch }}
