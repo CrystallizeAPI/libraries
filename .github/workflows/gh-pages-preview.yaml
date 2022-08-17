@@ -48,4 +48,4 @@ jobs:
               uses: marocchino/sticky-pull-request-comment@v2
               with:
                   message: |
-                      Preview app available at <https://crystallizeapi.github.io/${{ steps.branch-name.outputs.current_branch }}>
+                      Preview app available at <https://crystallizeapi.github.io/libraries/${{ steps.branch-name.outputs.current_branch }}>
