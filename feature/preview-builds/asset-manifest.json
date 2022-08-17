@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/preview-builds/static/css/main.7f5a151f.css",
+    "main.js": "/libraries/feature/preview-builds/static/js/main.798e4485.js",
+    "static/media/crystallize.svg": "/libraries/feature/preview-builds/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/preview-builds/index.html",
+    "main.7f5a151f.css.map": "/libraries/feature/preview-builds/static/css/main.7f5a151f.css.map",
+    "main.798e4485.js.map": "/libraries/feature/preview-builds/static/js/main.798e4485.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f5a151f.css",
+    "static/js/main.798e4485.js"
+  ]
+}
