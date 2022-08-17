@@ -28,7 +28,7 @@ jobs:
               with:
                   file: apps/demo/package.json
                   field: homepage
-                  value: ${{ steps.branch-name.outputs.current_branch }}
+                  value: libraries/${{ steps.branch-name.outputs.current_branch }}
 
             - name: 🥖 Build the React App
               env:
