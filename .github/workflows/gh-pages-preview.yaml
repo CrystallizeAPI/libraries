@@ -43,3 +43,9 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./apps/demo/build
                   destination_dir: ./${{ steps.branch-name.outputs.current_branch }}
+
+            - name: Link to preview build in PR
+              uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                  message: |
+                      Preview app available at <https://crystallizeapi.github.io/${{ steps.branch-name.outputs.current_branch }}>
