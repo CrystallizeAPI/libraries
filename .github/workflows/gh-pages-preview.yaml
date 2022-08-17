@@ -32,7 +32,7 @@ jobs:
 
             - name: 🥖 Build the React App
               env:
-                  BASENAME: ${{ steps.branch-name.outputs.current_branch }}
+                  REACT_APP_BASENAME: ${{ steps.branch-name.outputs.current_branch }}
               run: |
                   yarn
                   yarn build --filter demo
