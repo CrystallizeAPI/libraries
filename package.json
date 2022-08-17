@@ -12,6 +12,7 @@
     "scripts": {
         "build": "turbo run build",
         "test": "turbo run test",
+        "prettier": "prettier --write .",
         "dev": "turbo run watch --parallel",
         "demo": "turbo run start --filter demo"
     },
