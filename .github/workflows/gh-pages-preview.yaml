@@ -1,0 +1,37 @@
+
+name: GitHub Pages Preview
+
+on:
+    pull_request:
+        types: [opened, synchronize]
+
+jobs:
+    deploy:
+        name: 🚀 Deploy on Github.io
+        runs-on: ubuntu-latest
+        concurrency:
+            group: ${{ github.workflow }}-${{ github.ref }}
+        steps:
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: 🥖 Build the React App
+              run: |
+                  yarn
+                  yarn build --filter demo
+
+            - name: Set branch name
+              id: branch
+              run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
+
+            - name: 🍿 Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./apps/demo/build
+                  destination_dir: ./${{ steps.branch.outputs.BRANCH_NAME }}
