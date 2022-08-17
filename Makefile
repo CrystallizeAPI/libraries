@@ -35,13 +35,8 @@ codeclean: ## Code Clean
 .PHONY: tests
 tests: ## Run the tests
 	@echo " ..:: Mono Repo Testing ::.."
+	@yarn test
 	@yarn prettier --check .
-	@for COMPONENT in $(shell ls components); do \
-    	if [ -d "components/$${COMPONENT}" ]; then \
-    		echo " ..:: Testing $${COMPONENT} ::.."; \
-			cd components/$${COMPONENT} && yarn install && yarn build && yarn test; cd -; \
-		fi \
-	done
 
 .PHONY: bump
 bump: ## Bump all components

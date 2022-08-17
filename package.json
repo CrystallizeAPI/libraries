@@ -10,10 +10,13 @@
     ],
     "devDependencies": {
         "concurrently": "^7.1.0",
-        "prettier": "2.6.0"
+        "prettier": "2.6.0",
+        "turbo": "^1.4.3"
     },
     "scripts": {
-        "watch": "concurrently 'cd components/js-api-client && yarn watch' 'cd components/js-storefrontaware-utils && yarn watch' 'cd components/reactjs-components && yarn watch' 'cd components/reactjs-hooks && yarn watch' 'cd components/node-service-api-request-handlers && yarn watch' 'cd components/node-service-api-router && yarn watch'"
+        "build": "turbo run build",
+        "test": "turbo run test",
+        "dev": "turbo run watch --parallel"
     },
     "volta": {
         "node": "16.14.2",
