@@ -11,6 +11,7 @@ export const Home: FC = () => {
             <br />
 
             <br />
+            <h1>TEST</h1>
             <p className="text-center">
                 This demo application has been created to show how to use the different Crystallize libraries.
             </p>
