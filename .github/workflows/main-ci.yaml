@@ -22,6 +22,7 @@ jobs:
     test:
         name: 🧪 Tests
         runs-on: ubuntu-latest
+        needs: [lint]
         strategy:
             matrix:
                 node: [14, 16, 18]
@@ -52,7 +53,7 @@ jobs:
     builds:
         name: 👀 Test Standalone Builds
         runs-on: ubuntu-latest
-        needs: [lint, test]
+        needs: [lint]
         strategy:
             matrix:
                 node: [14, 16, 18]
