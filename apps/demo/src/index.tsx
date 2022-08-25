@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 
-console.log(process.env.REACT_APP_BASENAME || 'libraries')
+console.log(process.env.REACT_APP_BASENAME || 'libraries');
 
 ReactDOM.render(
     <React.StrictMode>
