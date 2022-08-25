@@ -2,6 +2,10 @@ name: GitHub Pages
 
 on:
     push:
+        paths:
+            - 'apps/**/*'
+            - 'components/**/*'
+            - '.github/workflows/gh-pages.yaml'
         branches:
             - main
 
