@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { IdSchema, KeyValuePairSchema } from '../shared';
 import { ShapeComponentSchema } from './components';
 import { ShapeTypeEnum } from './enums';
 
@@ -8,9 +9,9 @@ export * from './enums';
 export const CreateShapeInputSchema = z.object({
     identifier: z.string().optional(),
     name: z.string().min(1),
-    tenantId: z.string().min(1),
+    tenantId: IdSchema,
     type: ShapeTypeEnum,
-    meta: z.record(z.string()).optional(),
+    meta: KeyValuePairSchema.optional(),
     components: z.array(ShapeComponentSchema).optional(),
     variantComponents: z.array(ShapeComponentSchema).optional(),
 });
