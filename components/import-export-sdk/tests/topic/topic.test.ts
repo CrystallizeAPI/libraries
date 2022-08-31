@@ -1,4 +1,5 @@
 import { ZodError } from 'zod';
+import { ObjectId } from 'mongodb';
 import { getTopicQuery, createTopicMutation, updateTopicMutation, topic } from '../../src/topic';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Topic } from '../../src/schema/topic';
@@ -11,21 +12,26 @@ interface testCase {
     error?: ZodError;
 }
 
+const mockTenantId = new ObjectId().toString();
+const mockParentId = new ObjectId().toString();
+const mockChildId = new ObjectId().toString();
+
 const testCases: testCase[] = [
     {
         name: 'Creates a simple topic',
         input: {
             name: 'Some Topic',
-            parentId: 'some-parent-id',
+            language: 'en',
+            parentId: mockParentId,
             pathIdentifier: 'some-path-identifier',
         },
         expectedCalls: [
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     name: 'Some Topic',
-                    parentId: 'some-parent-id',
+                    parentId: mockParentId,
                     pathIdentifier: 'some-path-identifier',
                 },
             }),
@@ -35,7 +41,7 @@ const testCases: testCase[] = [
         name: 'Creates a simple topic with a small number of children',
         input: {
             name: 'Some Topic',
-            parentId: 'some-parent-id',
+            parentId: mockParentId,
             pathIdentifier: 'some-path-identifier',
             children: [
                 {
@@ -59,9 +65,9 @@ const testCases: testCase[] = [
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     name: 'Some Topic',
-                    parentId: 'some-parent-id',
+                    parentId: mockParentId,
                     pathIdentifier: 'some-path-identifier',
                     children: [
                         {
@@ -88,7 +94,7 @@ const testCases: testCase[] = [
         name: 'Creates topics in batches when there are too many children for 1 query',
         input: {
             name: 'Some Topic',
-            parentId: 'some-parent-id',
+            parentId: mockParentId,
             pathIdentifier: 'some-path-identifier',
             children: [
                 {
@@ -110,9 +116,9 @@ const testCases: testCase[] = [
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     name: 'Some Topic',
-                    parentId: 'some-parent-id',
+                    parentId: mockParentId,
                     pathIdentifier: 'some-path-identifier',
                     children: [],
                 },
@@ -120,8 +126,8 @@ const testCases: testCase[] = [
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
-                    parentId: 'some-id',
+                    tenantId: mockTenantId,
+                    parentId: mockChildId,
                     name: 'Some Child 1',
                     pathIdentifier: 'some-child-1',
                     children: [],
@@ -131,18 +137,18 @@ const testCases: testCase[] = [
                 createTopicMutation({
                     language: 'en',
                     input: {
-                        tenantId: 'some-tenant-id',
+                        tenantId: mockTenantId,
                         name: `Some Grandchild ${i + 1}`,
-                        parentId: 'some-id',
+                        parentId: mockChildId,
                     },
                 }),
             ),
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     name: 'Some Child 2',
-                    parentId: 'some-id',
+                    parentId: mockChildId,
                     children: new Array(50).fill('').map((_, i) => ({
                         name: `Some Grandchild ${i + 1}`,
                     })),
@@ -153,9 +159,9 @@ const testCases: testCase[] = [
     {
         name: 'Updates a topic when topic.id is provided and the topic already exists',
         input: {
-            id: 'some-topic-id',
+            id: 'someMockedId',
             name: 'Some Topic',
-            parentId: 'some-parent-id',
+            parentId: mockParentId,
             pathIdentifier: 'some-path-identifier',
         },
         existingTopic: {
@@ -163,15 +169,15 @@ const testCases: testCase[] = [
         } as Topic,
         expectedCalls: [
             getTopicQuery({
-                id: 'some-topic-id',
+                id: 'someMockedId',
                 language: 'en',
             }),
             updateTopicMutation({
-                id: 'some-topic-id',
+                id: 'someMockedId',
                 language: 'en',
                 input: {
                     name: 'Some Topic',
-                    parentId: 'some-parent-id',
+                    parentId: mockParentId,
                     pathIdentifier: 'some-path-identifier',
                 },
             }),
@@ -180,22 +186,22 @@ const testCases: testCase[] = [
     {
         name: 'Creates a topic when topic.id is provided and the topic does not already exist',
         input: {
-            id: 'some-topic-id',
+            id: 'someMockedId',
             name: 'Some Topic',
-            parentId: 'some-parent-id',
+            parentId: mockParentId,
             pathIdentifier: 'some-path-identifier',
         },
         expectedCalls: [
             getTopicQuery({
-                id: 'some-topic-id',
+                id: 'someMockedId',
                 language: 'en',
             }),
             createTopicMutation({
                 language: 'en',
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     name: 'Some Topic',
-                    parentId: 'some-parent-id',
+                    parentId: mockParentId,
                     pathIdentifier: 'some-path-identifier',
                 },
             }),
@@ -217,7 +223,7 @@ testCases.forEach((tc) =>
                 .mockResolvedValue({
                     topic: {
                         update: {
-                            id: 'some-id',
+                            id: mockChildId,
                         },
                     },
                 });
@@ -225,7 +231,7 @@ testCases.forEach((tc) =>
             mockPimApi = mockPimApi.mockResolvedValue({
                 topic: {
                     create: {
-                        id: 'some-id',
+                        id: mockChildId,
                     },
                 },
             });
@@ -235,12 +241,12 @@ testCases.forEach((tc) =>
             pimApi: mockPimApi,
             config: {
                 tenantIdentifier: 'some-tenant-identifier',
-                tenantId: 'some-tenant-id',
+                tenantId: mockTenantId,
             },
         } as any;
 
         if (tc.error) {
-            expect(await topic({ client: mockClient, language: 'en', data: tc.input })).toThrow(tc.error);
+            expect(await topic(tc.input)(mockClient)).toThrow(tc.error);
             return;
         }
 
@@ -248,8 +254,8 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        const { id } = await topic({ client: mockClient, language: 'en', data: tc.input });
-        expect(id).toBe('some-id');
+        const { id } = await topic(tc.input)(mockClient);
+        expect(id).toBe(mockChildId);
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);

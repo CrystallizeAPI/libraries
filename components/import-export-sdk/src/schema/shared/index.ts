@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const IdSchema = z.string().min(12).max(12);
+export const IdSchema = z.string().min(24).max(24);
 export const KeyValuePairSchema = z.record(z.string());
 export const DateTimeSchema = z.string().refine(
     (str) => Date.parse(str),

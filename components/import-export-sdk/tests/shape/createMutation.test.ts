@@ -1,7 +1,10 @@
 import { z, ZodError } from 'zod';
+import { ObjectId } from 'mongodb';
 import { createShapeMutation } from '../../src/shape/mutations/create';
 import { CreateShapeInput, CreateShapeInputSchema } from '../../src/schema/shape';
 import { deepEqual, equal } from 'assert';
+
+const mockTenantId = new ObjectId().toString();
 
 interface testCase {
     name: string;
@@ -13,7 +16,7 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a basic shape',
         input: {
-            tenantId: '123',
+            tenantId: mockTenantId,
             name: 'Some Shape',
             type: 'product',
         },
@@ -21,7 +24,7 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a shape with components',
         input: {
-            tenantId: '123',
+            tenantId: mockTenantId,
             name: 'Some Shape',
             type: 'product',
             components: [
@@ -73,7 +76,7 @@ const testCases: testCase[] = [
     {
         name: 'Throws a validation error when component config does not match component type',
         input: {
-            tenantId: '123',
+            tenantId: mockTenantId,
             name: 'some invalid shape',
             type: 'product',
             components: [

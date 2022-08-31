@@ -1,7 +1,10 @@
 import { z, ZodError } from 'zod';
+import { ObjectId } from 'mongodb';
 import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { UpdateShapeInput, UpdateShapeInputSchema } from '../../src/schema/shape';
 import { deepEqual, equal } from 'assert';
+
+const mockTenantId = new ObjectId().toString();
 
 interface testCase {
     name: string;
@@ -108,7 +111,7 @@ testCases.forEach((tc) =>
                 updateShapeMutation({
                     input: tc.input,
                     identifier: 'shape-identifier',
-                    tenantId: '123',
+                    tenantId: mockTenantId,
                 }),
             ).toThrow(tc.error);
             return;
@@ -117,7 +120,7 @@ testCases.forEach((tc) =>
         const { query, variables } = updateShapeMutation({
             input: tc.input,
             identifier: 'shape-identifier',
-            tenantId: '123',
+            tenantId: mockTenantId,
         });
         const re = / /g;
         equal(
@@ -133,6 +136,6 @@ testCases.forEach((tc) =>
                     }
                 `.replace(re, ''),
         );
-        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: '123' });
+        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: mockTenantId });
     }),
 );

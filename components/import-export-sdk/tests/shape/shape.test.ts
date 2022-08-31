@@ -1,7 +1,10 @@
 import { ZodError } from 'zod';
+import { ObjectId } from 'mongodb';
 import { VariablesType } from '@crystallize/js-api-client';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';
 import { Shape } from '../../src/schema/shape';
+
+const mockTenantId = new ObjectId().toString();
 
 interface testCase {
     name: string;
@@ -35,12 +38,12 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: 'some-tenant-id',
+                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             createShapeMutation({
                 input: {
-                    tenantId: 'some-tenant-id',
+                    tenantId: mockTenantId,
                     identifier: 'some-shape',
                     name: 'Some Shape',
                     type: 'product',
@@ -90,11 +93,11 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: 'some-tenant-id',
+                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             updateShapeMutation({
-                tenantId: 'some-tenant-id',
+                tenantId: mockTenantId,
                 identifier: 'some-shape',
                 input: {
                     name: 'Some Shape 2',
@@ -144,12 +147,12 @@ testCases.forEach((tc) =>
             pimApi: mockPimApi,
             config: {
                 tenantIdentifier: 'some-tenant-identifier',
-                tenantId: 'some-tenant-id',
+                tenantId: mockTenantId,
             },
         } as any;
 
         if (tc.error) {
-            expect(await shape({ client: mockClient, data: tc.input })).toThrow(tc.error);
+            expect(await shape(tc.input).execute(mockClient)).toThrow(tc.error);
             return;
         }
 
@@ -157,9 +160,9 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        const { name, identifier } = await shape({ client: mockClient, data: tc.input });
-        expect(name).toBe(tc.input.name);
-        expect(identifier).toBe(tc.input.identifier);
+        const s = await shape(tc.input).execute(mockClient);
+        expect(s?.name).toBe(tc.input.name);
+        expect(s?.identifier).toBe(tc.input.identifier);
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);

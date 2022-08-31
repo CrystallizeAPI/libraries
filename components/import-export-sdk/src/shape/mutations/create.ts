@@ -21,6 +21,7 @@ export const createShapeMutation = ({
 }: CreateProps): {
     query: string;
     variables: VariablesType;
+    type: 'create' | 'update';
 } => {
     const data = CreateShapeInputSchema.parse(input);
 
@@ -29,5 +30,6 @@ export const createShapeMutation = ({
         variables: {
             input: data,
         },
+        type: 'create',
     };
 };

@@ -59,6 +59,7 @@ export const UpdateTopicInputSchema = z.object({
 });
 
 export type Topic = {
+    language?: string;
     name: string;
     id?: string;
     parentId?: string;
@@ -68,6 +69,7 @@ export type Topic = {
 
 export const TopicSchema: z.ZodType<Topic> = z.lazy(() =>
     z.object({
+        language: z.string().optional(),
         id: z.string().optional(),
         parentId: z.string().optional(),
         name: z.string().min(1),

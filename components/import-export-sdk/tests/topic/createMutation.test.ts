@@ -1,7 +1,10 @@
 import { ZodError } from 'zod';
+import { ObjectId } from 'mongodb';
 import { CreateTopicInput } from '../../src/schema/topic';
 import { deepEqual, equal } from 'assert';
 import { createTopicMutation } from '../../src/topic/mutations/create';
+
+const mockTenantId = new ObjectId().toString();
 
 interface testCase {
     name: string;
@@ -13,14 +16,14 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a basic topic',
         input: {
-            tenantId: '123',
+            tenantId: mockTenantId,
             name: 'Some Topic ',
         },
     },
     {
         name: 'Returns the query and variables for a topic with children',
         input: {
-            tenantId: '123',
+            tenantId: mockTenantId,
             name: 'Some Topic',
             children: [
                 {

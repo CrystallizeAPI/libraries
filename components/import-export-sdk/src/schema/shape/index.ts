@@ -23,10 +23,14 @@ export const UpdateShapeInputSchema = z.object({
     variantComponents: z.array(ShapeComponentSchema).optional(),
 });
 
-export const ShapeSchema = z.object({
-    identifier: z.string().min(2).max(24),
+/** @internal */
+export const basicShapeSchema = z.object({
+    identifier: z.string().min(2).max(64),
     name: z.string().min(1),
     type: ShapeTypeEnum,
+});
+
+export const ShapeSchema = basicShapeSchema.extend({
     components: z.array(ShapeComponentSchema).optional(),
     variantComponents: z.array(ShapeComponentSchema).optional(),
 });

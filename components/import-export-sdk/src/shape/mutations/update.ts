@@ -1,8 +1,9 @@
 import { VariablesType } from '@crystallize/js-api-client';
 import { UpdateShapeInputSchema, UpdateShapeInput } from '../../schema/shape';
+import { Id } from '../../schema/shared';
 
 interface UpdateProps {
-    tenantId: string;
+    tenantId: Id;
     identifier: string;
     input: UpdateShapeInput;
 }
@@ -25,6 +26,7 @@ export const updateShapeMutation = ({
 }: UpdateProps): {
     query: string;
     variables: VariablesType;
+    type: 'create' | 'update';
 } => {
     const data = UpdateShapeInputSchema.parse(input);
 
@@ -35,5 +37,6 @@ export const updateShapeMutation = ({
             identifier,
             input: data,
         },
+        type: 'update',
     };
 };

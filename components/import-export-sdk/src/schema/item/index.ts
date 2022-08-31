@@ -1,6 +1,49 @@
 import { z } from 'zod';
-import { DateTimeSchema, IdSchema } from '../shared';
+import { basicShapeSchema, Shape, ShapeSchema } from '../shape';
+import { DateTimeSchema, Id, IdSchema } from '../shared';
+import { Topic, TopicSchema } from '../topic';
 import { ComponentInputSchema } from './components';
+import { ItemType, ItemTypeEnum } from './enums';
+
+export type Item = {
+    id: Id;
+    tenantId: Id;
+    language: string;
+    createdAt?: string;
+    updatedAt?: string;
+    type: ItemType;
+    name?: string;
+    externalReference?: string;
+    shape?: z.infer<typeof basicShapeSchema>;
+    components?: any[];
+    topics?: Topic[];
+    relatingItems?: Item[];
+    tree?: {
+        path?: string;
+    };
+};
+
+export const ItemSchema: z.ZodType<Item> = z.lazy(() =>
+    z.object({
+        id: IdSchema,
+        tenantId: IdSchema,
+        language: z.string().min(1),
+        createdAt: DateTimeSchema.optional(),
+        updatedAt: DateTimeSchema.optional(),
+        type: ItemTypeEnum,
+        name: z.string().optional(),
+        externalReference: z.string().optional(),
+        components: z.array(z.any()).optional(),
+        shape: basicShapeSchema.optional(),
+        topics: z.array(TopicSchema).optional(),
+        relatingItems: z.array(ItemSchema).optional(),
+        tree: z
+            .object({
+                path: z.string().optional(),
+            })
+            .optional(),
+    }),
+);
 
 const createItemInputSchema = z.object({
     tenantId: IdSchema,

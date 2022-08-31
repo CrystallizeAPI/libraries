@@ -1,32 +1,33 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateTopicInputSchema, UpdateTopicInput } from '../../schema/topic';
+import { UpdateProductInput, UpdateProductInputSchema } from '../../schema/item';
 import { Id } from '../../schema/shared';
 
 interface UpdateProps {
     id: Id;
+    input: UpdateProductInput;
     language: string;
-    input: UpdateTopicInput;
 }
 
 const query = `
-mutation UPDATE_TOPIC ($id: ID!, $language: String!, $input: UpdateTopicInput!) {
-    topic {
-        update(id: $id, language: $language, input: $input) {
+mutation UPDATE_PRODUCT ($id: ID!, $input: UpdateProductInput!, $language: String!) {
+    product {
+        update(id: $id, input: $input, language: $language) {
             id
+            name
         }
     }
 }
 `;
 
-export const updateTopicMutation = ({
+export const updateProductMutation = ({
     id,
-    language,
     input,
+    language,
 }: UpdateProps): {
     query: string;
     variables: VariablesType;
 } => {
-    const data = UpdateTopicInputSchema.parse(input);
+    const data = UpdateProductInputSchema.parse(input);
 
     return {
         query,
