@@ -246,7 +246,7 @@ testCases.forEach((tc) =>
         } as any;
 
         if (tc.error) {
-            expect(await topic(tc.input)(mockClient)).toThrow(tc.error);
+            expect(await topic(tc.input).execute(mockClient)).toThrow(tc.error);
             return;
         }
 
@@ -254,8 +254,8 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        const { id } = await topic(tc.input)(mockClient);
-        expect(id).toBe(mockChildId);
+        const t = await topic(tc.input).execute(mockClient);
+        expect(t?.id).toBe(mockChildId);
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);

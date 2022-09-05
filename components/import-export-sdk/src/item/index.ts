@@ -1,5 +1,6 @@
-import { ClientInterface } from '@crystallize/js-api-client';
+import { VariablesType } from '@crystallize/js-api-client';
 import { CreateProductInputSchema, Item, UpdateProductInputSchema } from '../schema/item';
+import { ThinClient } from '../shared/thin-client';
 import { createProductMutation } from './mutations/createProduct';
 import { updateProductMutation } from './mutations/updateProduct';
 import { getItemQuery } from './queries/get';
@@ -8,39 +9,64 @@ export { createProductMutation } from './mutations/createProduct';
 export { updateProductMutation } from './mutations/updateProduct';
 export { getItemQuery } from './queries/get';
 
-export const item = (item: Item): ((client: ClientInterface) => Promise<Item>) => {
-    return async (client: ClientInterface) => {
+interface ItemOperation {
+    exists: (client: ThinClient) => Promise<boolean>;
+    execute: (client: ThinClient) => Promise<Item | undefined>;
+    enqueue: (client: ThinClient) => Promise<void>;
+}
+
+export const item = (data: Item): ItemOperation => {
+    const exists = async (client: ThinClient): Promise<boolean> => {
+        if (data.id) {
+            return false;
+        }
+
+        const { query, variables } = getItemQuery({
+            id: data.id,
+            language: data.language,
+            versionLabel: 'current',
+        });
+        return client.pimApi(query, variables).then((res) => !!res?.item?.get);
+    };
+
+    const determineMutation = async (
+        client: ThinClient,
+    ): Promise<{ query: string; variables: VariablesType; type: 'create' | 'update' }> => {
         const tenantId = client.config.tenantId;
         if (!tenantId) {
             throw new Error('Missing tenantId config in API client');
         }
 
-        let existingItem: Item | undefined;
-        if (item.id) {
-            const { query, variables } = getItemQuery({
-                id: item.id,
-                language: item.language,
-                versionLabel: 'current',
-            });
-            existingItem = await client.pimApi(query, variables).then((res) => res?.item?.get);
-        }
-
-        if (existingItem) {
-            const { query, variables } = updateProductMutation({
-                id: existingItem.id,
-                language: item.language,
+        if (await exists(client)) {
+            return updateProductMutation({
+                id: data.id,
+                language: data.language,
                 input: UpdateProductInputSchema.parse(item),
             });
-            return client.pimApi(query, variables).then((res) => res?.product?.update);
         }
 
-        const { query, variables } = createProductMutation({
-            language: item.language,
+        return createProductMutation({
+            language: data.language,
             input: CreateProductInputSchema.parse({
                 ...item,
                 tenantId,
             }),
         });
-        return client.pimApi(query, variables).then((res) => res?.product?.create);
+    };
+
+    const execute = async (client: ThinClient) => {
+        const { query, variables, type } = await determineMutation(client);
+        return client.pimApi(query, variables).then((res) => res?.product?.[type]);
+    };
+
+    const enqueue = async (massClient: ThinClient): Promise<void> => {
+        const { query, variables } = await determineMutation(massClient);
+        massClient.enqueue.pimApi(query, variables);
+    };
+
+    return {
+        exists,
+        execute,
+        enqueue,
     };
 };

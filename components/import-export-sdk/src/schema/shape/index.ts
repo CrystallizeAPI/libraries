@@ -6,15 +6,28 @@ import { ShapeTypeEnum } from './enums';
 export * from './components';
 export * from './enums';
 
-export const CreateShapeInputSchema = z.object({
-    identifier: z.string().optional(),
-    name: z.string().min(1),
-    tenantId: IdSchema,
-    type: ShapeTypeEnum,
-    meta: KeyValuePairSchema.optional(),
-    components: z.array(ShapeComponentSchema).optional(),
-    variantComponents: z.array(ShapeComponentSchema).optional(),
-});
+export const CreateShapeInputSchema = z
+    .object({
+        identifier: z.string().optional(),
+        name: z.string().min(1),
+        tenantId: IdSchema,
+        type: ShapeTypeEnum,
+        meta: KeyValuePairSchema.optional(),
+        components: z.array(ShapeComponentSchema).optional(),
+        variantComponents: z.array(ShapeComponentSchema).optional(),
+    })
+    .refine(
+        ({ type, variantComponents }) => {
+            if (type !== 'product' && !!variantComponents) {
+                return false;
+            }
+            return true;
+        },
+        ({ name, identifier }) => ({
+            message: `[shape:${identifier || name}]: Only shapes of type product can have variantComponents`,
+            path: ['variantComponents'],
+        }),
+    );
 
 export const UpdateShapeInputSchema = z.object({
     name: z.string(),

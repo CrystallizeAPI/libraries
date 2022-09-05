@@ -23,6 +23,7 @@ export const createProductMutation = ({
 }: CreateProps): {
     query: string;
     variables: VariablesType;
+    type: 'create' | 'update';
 } => {
     const data = CreateProductInputSchema.parse(input);
 
@@ -32,5 +33,6 @@ export const createProductMutation = ({
             language,
             input: data,
         },
+        type: 'create',
     };
 };
