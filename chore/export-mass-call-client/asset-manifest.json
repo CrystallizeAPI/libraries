@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/chore/export-mass-call-client/static/css/main.7f5a151f.css",
+    "main.js": "/libraries/chore/export-mass-call-client/static/js/main.a040acee.js",
+    "static/media/crystallize.svg": "/libraries/chore/export-mass-call-client/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/chore/export-mass-call-client/index.html",
+    "main.7f5a151f.css.map": "/libraries/chore/export-mass-call-client/static/css/main.7f5a151f.css.map",
+    "main.a040acee.js.map": "/libraries/chore/export-mass-call-client/static/js/main.a040acee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f5a151f.css",
+    "static/js/main.a040acee.js"
+  ]
+}
