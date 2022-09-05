@@ -1,6 +1,6 @@
-import { deepEqual } from 'assert';
+import test from 'ava';
 import { ZodError } from 'zod';
-import { MinMaxComponentConfigSchema } from '../../../src/schema/shape';
+import { MinMaxComponentConfigSchema } from '../../src/shape';
 
 interface testCase {
     name: string;
@@ -71,17 +71,18 @@ const testCases: testCase[] = [
 ];
 
 testCases.forEach((tc) =>
-    it(tc.name, () => {
+    test(tc.name, (t) => {
         try {
             MinMaxComponentConfigSchema.parse({ min: tc.min, max: tc.max });
             if (tc.error) {
-                fail();
+                t.fail('validation should error');
             }
+            t.pass();
         } catch (err: any) {
             if (!tc.error) {
-                fail();
+                t.fail('validation should not error');
             }
-            deepEqual(err.issues, tc.error?.issues);
+            t.deepEqual(err.issues, tc.error?.issues);
         }
     }),
 );
