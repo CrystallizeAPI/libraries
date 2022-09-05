@@ -1,6 +1,6 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateShapeInputSchema, UpdateShapeInput } from '../../schema/shape';
-import { Id } from '../../schema/shared';
+import { UpdateShapeInputSchema, UpdateShapeInput } from '@crystallize/schema/shape';
+import { Id } from '@crystallize/schema/shared';
 
 interface UpdateProps {
     tenantId: Id;

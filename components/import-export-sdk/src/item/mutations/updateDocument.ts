@@ -1,16 +1,16 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateProductInput, UpdateProductInputSchema } from '@crystallize/schema/item';
+import { UpdateDocumentInput, UpdateDocumentInputSchema } from '@crystallize/schema/item';
 import { Id } from '@crystallize/schema/shared';
 
 interface UpdateProps {
     id: Id;
-    input: UpdateProductInput;
+    input: UpdateDocumentInput;
     language: string;
 }
 
 const query = `
-mutation UPDATE_PRODUCT ($id: ID!, $input: UpdateProductInput!, $language: String!) {
-    product {
+mutation UPDATE_DOCUMENT ($id: ID!, $input: UpdateDocumentInput!, $language: String!) {
+    document {
         update(id: $id, input: $input, language: $language) {
             id
             name
@@ -19,7 +19,7 @@ mutation UPDATE_PRODUCT ($id: ID!, $input: UpdateProductInput!, $language: Strin
 }
 `;
 
-export const updateProductMutation = ({
+export const updateDocumentMutation = ({
     id,
     input,
     language,
@@ -28,7 +28,7 @@ export const updateProductMutation = ({
     variables: VariablesType;
     type: 'create' | 'update';
 } => {
-    const data = UpdateProductInputSchema.parse(input);
+    const data = UpdateDocumentInputSchema.parse(input);
 
     return {
         query,

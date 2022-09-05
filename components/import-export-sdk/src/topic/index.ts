@@ -1,4 +1,4 @@
-import { CreateTopicInputSchema, UpdateTopicInputSchema, MAX_CHILD_COUNT, TopicSchema, Topic } from '../schema/topic';
+import { CreateTopicInputSchema, UpdateTopicInputSchema, MAX_CHILD_COUNT, Topic } from '@crystallize/schema/topic';
 import { ThinClient } from '../shared/thin-client';
 import { createTopicMutation } from './mutations/create';
 import { updateTopicMutation } from './mutations/update';

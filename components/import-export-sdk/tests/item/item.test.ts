@@ -1,10 +1,11 @@
 import { ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
 import { VariablesType } from '@crystallize/js-api-client';
-import { item, getItemQuery } from '../../src/item';
-import { Item } from '../../src/schema/item';
+import { Item } from '@crystallize/schema/item';
+import { getItemQuery, item, updateFolderMutation, updateProductMutation } from '../../src/item';
 
 const mockTenantId = new ObjectId().toString();
+const mockItemId = new ObjectId().toString();
 
 interface testCase {
     name: string;
@@ -15,18 +16,42 @@ interface testCase {
 }
 
 const testCases: testCase[] = [
-    // {
-    //     name: 'Creates a basic item',
-    //     input: {
-    //         name: 'Some Folder',
-    //         type: 'folder',
-    //     },
-    //     expectedCalls: [
-    //         {
-    //             getItemQuery()
-    //         },
-    //     ],
-    // },
+    {
+        name: 'Creates a basic folder',
+        input: {
+            language: 'en',
+            tenantId: mockTenantId,
+            id: mockItemId,
+            name: 'Some Folder',
+            type: 'folder',
+            shape: {
+                identifier: 'some-shape',
+            },
+        },
+        existingItem: {
+            id: mockItemId,
+            tenantId: mockTenantId,
+            language: 'en',
+            name: 'Some Folder',
+            type: 'folder',
+            shape: {
+                identifier: 'some-shape',
+            },
+            tree: {
+                path: '/some-folder',
+            },
+        },
+        expectedCalls: [
+            getItemQuery({ id: mockItemId, language: 'en', versionLabel: 'current' }),
+            updateFolderMutation({
+                id: mockItemId,
+                input: {
+                    name: 'Some Folder',
+                },
+                language: 'en',
+            }),
+        ],
+    },
 ];
 
 testCases.forEach((tc) =>
@@ -39,13 +64,13 @@ testCases.forEach((tc) =>
 
         if (tc.existingItem) {
             mockPimApi = mockPimApi.mockResolvedValue({
-                shape: {
+                [tc.input.type]: {
                     update: tc.input,
                 },
             });
         } else {
             mockPimApi = mockPimApi.mockResolvedValue({
-                shape: {
+                [tc.input.type]: {
                     create: tc.input,
                 },
             });
@@ -60,7 +85,7 @@ testCases.forEach((tc) =>
         } as any;
 
         if (tc.error) {
-            expect(await item(tc.input)(mockClient)).toThrow(tc.error);
+            expect(await item(tc.input).execute(mockClient)).toThrow(tc.error);
             return;
         }
 
@@ -68,11 +93,13 @@ testCases.forEach((tc) =>
             throw new Error('no expected mutations provided for test');
         }
 
-        const { name } = await item(tc.input)(mockClient);
-        expect(name).toBe(tc.input.name);
+        const i = await item(tc.input).execute(mockClient);
+
         expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
             expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
         });
+
+        expect(i?.name).toBe(tc.input.name);
     }),
 );

@@ -1,14 +1,14 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateProductInput, CreateProductInputSchema } from '@crystallize/schema/item';
+import { CreateFolderInput, CreateFolderInputSchema } from '@crystallize/schema/item';
 
 interface CreateProps {
-    input: CreateProductInput;
+    input: CreateFolderInput;
     language: string;
 }
 
 const query = `
-mutation CREATE_PRODUCT ($input: CreateProductInput!, $language: String!) {
-    product {
+mutation CREATE_FOLDER ($input: CreateFolderInput!, $language: String!) {
+    folder {
         create(input: $input, language: $language) {
             id
             name
@@ -17,7 +17,7 @@ mutation CREATE_PRODUCT ($input: CreateProductInput!, $language: String!) {
 }
 `;
 
-export const createProductMutation = ({
+export const createFolderMutation = ({
     input,
     language,
 }: CreateProps): {
@@ -25,7 +25,7 @@ export const createProductMutation = ({
     variables: VariablesType;
     type: 'create' | 'update';
 } => {
-    const data = CreateProductInputSchema.parse(input);
+    const data = CreateFolderInputSchema.parse(input);
 
     return {
         query,

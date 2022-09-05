@@ -1,7 +1,7 @@
 import { z, ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
+import { CreateShapeInput, CreateShapeInputSchema } from '@crystallize/schema/shape';
 import { createShapeMutation } from '../../src/shape/mutations/create';
-import { CreateShapeInput, CreateShapeInputSchema } from '../../src/schema/shape';
 import { deepEqual, equal } from 'assert';
 
 const mockTenantId = new ObjectId().toString();

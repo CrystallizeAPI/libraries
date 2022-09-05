@@ -10,7 +10,6 @@
         "test:watch": "jest --watch"
     },
     "devDependencies": {
-        "@ava/typescript": "^3.0.1",
         "@tsconfig/node16": "^1.0.3",
         "@types/jest": "^28.1.6",
         "@types/node": "^18.0.6",
@@ -22,6 +21,6 @@
     },
     "dependencies": {
         "@crystallize/js-api-client": "*",
-        "zod": "^3.17.9"
+        "@crystallize/schema": "*"
     }
 }

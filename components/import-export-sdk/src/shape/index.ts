@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateShapeInputSchema, Shape, UpdateShapeInputSchema } from '../schema/shape';
+import { CreateShapeInputSchema, Shape, UpdateShapeInputSchema } from '@crystallize/schema/shape';
 import { ThinClient } from '../shared/thin-client';
 import { createShapeMutation } from './mutations/create';
 import { updateShapeMutation } from './mutations/update';
