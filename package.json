@@ -1,13 +1,8 @@
 {
     "private": true,
     "workspaces": [
-        "components/import-export-sdk",
-        "components/js-api-client",
-        "components/js-storefrontaware-utils",
-        "components/reactjs-hooks",
-        "components/reactjs-components",
-        "components/node-service-api-router",
-        "components/node-service-api-request-handlers"
+        "components/*",
+        "apps/*"
     ],
     "devDependencies": {
         "concurrently": "^7.1.0",
