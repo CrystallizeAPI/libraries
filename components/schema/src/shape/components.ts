@@ -19,21 +19,38 @@ export const MinMaxComponentConfigSchema = z
         },
     );
 
-export const ComponentChoiceComponentConfigSchema: any = z.object({
-    choices: z.array(z.lazy(() => ShapeComponentSchema)),
-});
+export type ComponentChoiceComponentConfig = {
+    choices: any[];
+};
 
-export const ContentChunkComponentConfigSchema: any = z.object({
-    components: z
-        .array(z.lazy(() => ShapeComponentSchema))
-        .refine(
-            (components) => !components.find((cmp) => cmp.type === 'componentChoice' || cmp.type === 'contentChunk'),
-            {
-                message: 'Nesting "componentChoice" or "contentChunk" structural components is not allowed',
-            },
-        ),
-    repeatable: z.boolean().default(false),
-});
+export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoiceComponentConfig> = z
+    .lazy(() =>
+        z.object({
+            choices: z.array(ShapeComponentInputSchema),
+        }),
+    )
+    .refine(({ choices }) => !choices.find((cmp) => cmp.type === 'componentChoice' || cmp.type === 'contentChunk'), {
+        message: 'Nesting "componentChoice" or "contentChunk" structural components is not allowed',
+    });
+
+export type ContentChunkComponentConfig = {
+    components: any[];
+    repeatable?: boolean;
+};
+
+export const ContentChunkComponentConfigInputSchema: z.ZodType<ContentChunkComponentConfig> = z
+    .lazy(() =>
+        z.object({
+            components: z.array(ShapeComponentInputSchema),
+            repeatable: z.boolean().default(false),
+        }),
+    )
+    .refine(
+        ({ components }) => !components.find((cmp) => cmp.type === 'componentChoice' || cmp.type === 'contentChunk'),
+        {
+            message: 'Nesting "componentChoice" or "contentChunk" structural components is not allowed',
+        },
+    );
 
 export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
@@ -72,7 +89,7 @@ export const PropertiesTableComponentConfigSchema = z.object({
     ),
 });
 
-export const SelectionComponentConfigSchema = MinMaxComponentConfigSchema.and(
+export const SelectionComponentConfigInputSchema = MinMaxComponentConfigSchema.and(
     z.object({
         options: z
             .array(
@@ -86,15 +103,47 @@ export const SelectionComponentConfigSchema = MinMaxComponentConfigSchema.and(
     }),
 );
 
-export const ShapeComponentConfigSchema = z.object({
-    componentChoice: ComponentChoiceComponentConfigSchema.optional(),
-    contentChunk: ContentChunkComponentConfigSchema.optional(),
+export const ShapeComponentConfigInputSchema = z.object({
+    componentChoice: ComponentChoiceComponentConfigInputSchema.optional(),
+    contentChunk: ContentChunkComponentConfigInputSchema.optional(),
     files: FileComponentConfigSchema.optional(),
     itemRelations: ItemRelationsComponentConfigSchema.optional(),
     numeric: NumericComponentConfigSchema.optional(),
     propertiesTable: PropertiesTableComponentConfigSchema.optional(),
-    selection: SelectionComponentConfigSchema.optional(),
+    selection: SelectionComponentConfigInputSchema.optional(),
 });
+
+export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSchema.or(
+    ContentChunkComponentConfigInputSchema,
+)
+    .or(FileComponentConfigSchema)
+    .or(ItemRelationsComponentConfigSchema)
+    .or(NumericComponentConfigSchema)
+    .or(PropertiesTableComponentConfigSchema)
+    .or(SelectionComponentConfigInputSchema);
+
+export const ShapeComponentInputSchema = z
+    .object({
+        id: z.string().min(1),
+        name: z.string().min(1),
+        type: ShapeComponentTypeEnum,
+        description: z.string().optional(),
+        config: ShapeComponentConfigInputSchema.optional(),
+    })
+    .refine(
+        ({ type, config }) => {
+            if (!config) {
+                return true;
+            }
+
+            // Check if there are any config options that don't match the type
+            // of the component.
+            return !Object.entries(config).find(([key, value]) => value && key !== type);
+        },
+        {
+            message: 'Incorrect config type provided on shape component',
+        },
+    );
 
 export const ShapeComponentSchema = z
     .object({
@@ -120,12 +169,14 @@ export const ShapeComponentSchema = z
     );
 
 export type MinMaxComponentConfig = z.infer<typeof MinMaxComponentConfigSchema>;
-export type ComponentChoiceComponentConfig = z.infer<typeof ComponentChoiceComponentConfigSchema>;
-export type ContentChunkComponentConfig = z.infer<typeof ContentChunkComponentConfigSchema>;
 export type FileComponentConfig = z.infer<typeof FileComponentConfigSchema>;
 export type ItemRelationsComponentConfig = z.infer<typeof ItemRelationsComponentConfigSchema>;
 export type NumericComponentConfig = z.infer<typeof NumericComponentConfigSchema>;
 export type PropertiesTableComponentConfig = z.infer<typeof PropertiesTableComponentConfigSchema>;
-export type SelectionComponentConfig = z.infer<typeof SelectionComponentConfigSchema>;
+export type SelectionComponentConfig = z.infer<typeof SelectionComponentConfigInputSchema>;
+
+export type ShapeComponentConfigInput = z.infer<typeof ShapeComponentConfigInputSchema>;
+export type ShapeComponentInput = z.infer<typeof ShapeComponentInputSchema>;
+
 export type ShapeComponentConfig = z.infer<typeof ShapeComponentConfigSchema>;
 export type ShapeComponent = z.infer<typeof ShapeComponentSchema>;

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { IdSchema, KeyValuePairSchema } from '../shared';
-import { ShapeComponentSchema } from './components';
+import { ShapeComponentInputSchema, ShapeComponentSchema } from './components';
 import { ShapeTypeEnum } from './enums';
 
 export * from './components';
@@ -13,8 +13,8 @@ export const CreateShapeInputSchema = z
         tenantId: IdSchema,
         type: ShapeTypeEnum,
         meta: KeyValuePairSchema.optional(),
-        components: z.array(ShapeComponentSchema).optional(),
-        variantComponents: z.array(ShapeComponentSchema).optional(),
+        components: z.array(ShapeComponentInputSchema).optional(),
+        variantComponents: z.array(ShapeComponentInputSchema).optional(),
     })
     .refine(
         ({ type, variantComponents }) => {
@@ -32,8 +32,8 @@ export const CreateShapeInputSchema = z
 export const UpdateShapeInputSchema = z.object({
     name: z.string(),
     meta: z.record(z.string()).optional(),
-    components: z.array(ShapeComponentSchema).optional(),
-    variantComponents: z.array(ShapeComponentSchema).optional(),
+    components: z.array(ShapeComponentInputSchema).optional(),
+    variantComponents: z.array(ShapeComponentInputSchema).optional(),
 });
 
 /** @internal */

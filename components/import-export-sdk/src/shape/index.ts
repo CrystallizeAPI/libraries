@@ -1,5 +1,13 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateShapeInputSchema, Shape, UpdateShapeInputSchema } from '@crystallize/schema/shape';
+import {
+    ComponentChoiceComponentConfig,
+    ContentChunkComponentConfig,
+    CreateShapeInputSchema,
+    Shape,
+    ShapeComponent,
+    ShapeComponentInput,
+    UpdateShapeInputSchema,
+} from '@crystallize/schema/shape';
 import { ThinClient } from '../shared/thin-client';
 import { createShapeMutation } from './mutations/create';
 import { updateShapeMutation } from './mutations/update';
@@ -15,6 +23,53 @@ interface ShapeOperation {
     execute: (client: ThinClient) => Promise<Shape | undefined>;
     enqueue: (massClient: ThinClient) => Promise<void>;
 }
+
+/**
+ * shapeComponentToInput converts a provided ShapeComponent to the respective
+ * ShapeComponentInput type. The only difference in structure between these two
+ * types is the way `config` is mapped.
+ *
+ * @param component ShapeComponent
+ * @returns ShapeComponentInput
+ */
+const shapeComponentToInput = (component: ShapeComponent): ShapeComponentInput => {
+    if (!component.config) {
+        return component as ShapeComponentInput;
+    }
+
+    if (component.type === 'contentChunk') {
+        const config = component.config as ContentChunkComponentConfig;
+        return {
+            ...component,
+            config: {
+                contentChunk: {
+                    ...config,
+                    components: config.components.map(shapeComponentToInput),
+                },
+            },
+        };
+    }
+
+    if (component.type === 'componentChoice') {
+        const config = component.config as ComponentChoiceComponentConfig;
+        return {
+            ...component,
+            config: {
+                componentChoice: {
+                    ...config,
+                    choices: config.choices.map(shapeComponentToInput),
+                },
+            },
+        };
+    }
+
+    return {
+        ...component,
+        config: {
+            [component.type]: component.config,
+        },
+    };
+};
 
 /**
  * shape returns an object of shape operation functions.
@@ -48,13 +103,19 @@ export const shape = (data: Shape): ShapeOperation => {
             return updateShapeMutation({
                 tenantId,
                 identifier: data.identifier,
-                input: UpdateShapeInputSchema.parse(data),
+                input: UpdateShapeInputSchema.parse({
+                    ...data,
+                    components: data.components?.map(shapeComponentToInput),
+                    variantComponents: data.variantComponents?.map(shapeComponentToInput),
+                }),
             });
         }
 
         return createShapeMutation({
             input: CreateShapeInputSchema.parse({
                 ...data,
+                components: data.components?.map(shapeComponentToInput),
+                variantComponents: data.variantComponents?.map(shapeComponentToInput),
                 tenantId,
             }),
         });
