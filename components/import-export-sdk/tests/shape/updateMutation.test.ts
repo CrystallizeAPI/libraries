@@ -1,6 +1,6 @@
 import { z, ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
-import { UpdateShapeInput, UpdateShapeInputSchema } from '@crystallize/schema/shape';
+import { UpdateShapeInput } from '@crystallize/schema/shape';
 import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { deepEqual, equal } from 'assert';
 
@@ -55,7 +55,7 @@ const testCases: testCase[] = [
     },
     {
         name: 'Throws a validation error when structure does not match ShapeUpdateInputSchema',
-        input: {} as z.infer<typeof UpdateShapeInputSchema>,
+        input: {} as UpdateShapeInput,
         error: new ZodError([
             {
                 code: 'invalid_type',
@@ -131,6 +131,7 @@ testCases.forEach((tc) =>
                             update (tenantId: $tenantId, identifier: $identifier, input: $input) {
                                 identifier
                                 name
+                                type
                             }
                         }
                     }

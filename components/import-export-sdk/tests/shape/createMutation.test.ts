@@ -1,6 +1,6 @@
 import { z, ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
-import { CreateShapeInput, CreateShapeInputSchema } from '@crystallize/schema/shape';
+import { CreateShapeInput } from '@crystallize/schema/shape';
 import { createShapeMutation } from '../../src/shape/mutations/create';
 import { deepEqual, equal } from 'assert';
 
@@ -62,7 +62,7 @@ const testCases: testCase[] = [
         input: {
             name: 'some invalid shape',
             type: 'product',
-        } as z.infer<typeof CreateShapeInputSchema>,
+        } as CreateShapeInput,
         error: new ZodError([
             {
                 code: 'invalid_type',
@@ -130,6 +130,7 @@ testCases.forEach((tc) =>
                         create(input: $input) {
                             identifier
                             name
+                            type
                         }
                     }
                 }

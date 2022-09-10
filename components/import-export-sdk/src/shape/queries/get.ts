@@ -16,6 +16,7 @@ const query = (config?: GetConfig) => `
             get(tenantId: $tenantId, identifier: $identifier) {
                 identifier
                 name
+                type
                 ${
                     config?.includeComponents
                         ? `

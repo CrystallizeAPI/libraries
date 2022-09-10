@@ -11,6 +11,7 @@ mutation CREATE_SHAPE ($input: CreateShapeInput!) {
         create(input: $input) {
             identifier
             name
+            type
         }
     }
 }

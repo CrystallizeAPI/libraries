@@ -15,6 +15,7 @@ const query = (config?: GetManyConfig) => `
             getMany(tenantId: $tenantId) {
                 identifier
                 name
+                type
                 ${
                     config?.includeComponents
                         ? `

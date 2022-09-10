@@ -14,6 +14,7 @@ mutation UPDATE_SHAPE ($tenantId: ID!, $identifier: String!, $input: UpdateShape
         update (tenantId: $tenantId, identifier: $identifier, input: $input) {
             identifier
             name
+            type
         }
     }
 }
