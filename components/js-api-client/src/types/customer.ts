@@ -4,6 +4,7 @@ import { Address, addressInputRequest } from './address';
 export const orderCustomerInputRequest = z
     .object({
         identifier: z.string().optional(),
+        email: z.string().email().optional(),
         firstName: z.string().optional(),
         middleName: z.string().optional(),
         lastName: z.string().optional(),
