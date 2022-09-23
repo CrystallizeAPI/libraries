@@ -1,0 +1,18 @@
+{
+  "name": "@crystallize/dto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Raymond Julin <raymond@crystallize.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "object-path": "^0.11.8",
+    "zod": "^3.19.1"
+  },
+  "scripts": {
+    "test": "node -r @swc-node/register src/index.test.ts"
+  },
+  "devDependencies": {
+    "@swc-node/register": "^1.5.1"
+  }
+}
