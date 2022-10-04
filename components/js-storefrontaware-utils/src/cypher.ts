@@ -9,11 +9,14 @@ export function encryptValue(value: string, secretKey: string, algorithm: string
 }
 
 export function decryptValue(value: string, secretKey: string, algorithm: string): string {
-    const [initVector, encryptedData] = value.split(':');
-    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(initVector, 'hex'));
-    let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
-    decryptedData += decipher.final('utf8');
-    return decryptedData;
+    if (value.includes(':')) {
+        const [initVector, encryptedData] = value.split(':');
+        const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(initVector, 'hex'));
+        let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
+        decryptedData += decipher.final('utf8');
+        return decryptedData;
+    }
+    return value;
 }
 
 /**
