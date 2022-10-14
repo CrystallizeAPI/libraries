@@ -54,19 +54,6 @@ const testCases: testCase[] = [
         },
     },
     {
-        name: 'Throws a validation error when structure does not match ShapeUpdateInputSchema',
-        input: {} as UpdateShapeInput,
-        error: new ZodError([
-            {
-                code: 'invalid_type',
-                expected: 'string',
-                received: 'undefined',
-                path: ['name'],
-                message: 'Required',
-            },
-        ]),
-    },
-    {
         name: 'Throws a validation error when component config does not match component type',
         input: {
             name: 'some invalid shape',

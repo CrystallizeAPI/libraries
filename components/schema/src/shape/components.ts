@@ -3,8 +3,8 @@ import { ShapeComponentTypeEnum } from './enums';
 
 export const MinMaxComponentConfigSchema = z
     .object({
-        min: z.number().positive().optional(),
-        max: z.number().min(1).optional(),
+        min: z.number().min(0).optional().nullable(),
+        max: z.number().min(1).optional().nullable(),
     })
     .refine(
         ({ min, max }) => {
@@ -58,10 +58,11 @@ export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
             .array(
                 z.object({
                     contentType: z.string(),
-                    extensionLabel: z.string().optional(),
+                    extensionLabel: z.string().optional().nullable(),
                 }),
             )
-            .optional(),
+            .optional()
+            .nullable(),
         maxFileSize: z.object({
             size: z.number(),
             unit: z.enum(['Bytes', 'GiB', 'KiB', 'MiB']),
@@ -71,7 +72,7 @@ export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
 
 export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
-        acceptedShapeIdentifiers: z.array(z.string()).optional(),
+        acceptedShapeIdentifiers: z.array(z.string()).optional().nullable(),
     }),
 );
 
@@ -83,7 +84,7 @@ export const NumericComponentConfigSchema = z.object({
 export const PropertiesTableComponentConfigSchema = z.object({
     sections: z.array(
         z.object({
-            title: z.string().optional(),
+            title: z.string().optional().nullable(),
             keys: z.array(z.string()),
         }),
     ),
@@ -99,7 +100,8 @@ export const SelectionComponentConfigInputSchema = MinMaxComponentConfigSchema.a
                     isPreselected: z.boolean().default(false),
                 }),
             )
-            .optional(),
+            .optional()
+            .nullable(),
     }),
 );
 
@@ -127,8 +129,8 @@ export const ShapeComponentInputSchema = z
         id: z.string().min(1),
         name: z.string().min(1),
         type: ShapeComponentTypeEnum,
-        description: z.string().optional(),
-        config: ShapeComponentConfigInputSchema.optional(),
+        description: z.string().optional().nullable(),
+        config: ShapeComponentConfigInputSchema.optional().nullable(),
     })
     .refine(
         ({ type, config }) => {
@@ -150,8 +152,8 @@ export const ShapeComponentSchema = z
         id: z.string().min(1),
         name: z.string().min(1),
         type: ShapeComponentTypeEnum,
-        description: z.string().optional(),
-        config: ShapeComponentConfigSchema.optional(),
+        description: z.string().optional().nullable(),
+        config: ShapeComponentConfigSchema.optional().nullable(),
     })
     .refine(
         ({ type, config }) => {

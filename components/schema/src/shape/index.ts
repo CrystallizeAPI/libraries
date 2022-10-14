@@ -12,9 +12,9 @@ export const CreateShapeInputSchema = z
         name: z.string().min(1),
         tenantId: IdSchema,
         type: ShapeTypeEnum,
-        meta: KeyValuePairSchema.optional(),
-        components: z.array(ShapeComponentInputSchema).optional(),
-        variantComponents: z.array(ShapeComponentInputSchema).optional(),
+        meta: KeyValuePairSchema.optional().nullable(),
+        components: z.array(ShapeComponentInputSchema).optional().nullable(),
+        variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
     })
     .refine(
         ({ type, variantComponents }) => {
@@ -30,10 +30,10 @@ export const CreateShapeInputSchema = z
     );
 
 export const UpdateShapeInputSchema = z.object({
-    name: z.string(),
-    meta: z.record(z.string()).optional(),
-    components: z.array(ShapeComponentInputSchema).optional(),
-    variantComponents: z.array(ShapeComponentInputSchema).optional(),
+    name: z.string().optional(),
+    meta: z.record(z.string()).optional().nullable(),
+    components: z.array(ShapeComponentInputSchema).optional().nullable(),
+    variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
 });
 
 /** @internal */
