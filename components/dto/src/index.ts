@@ -1,71 +1,33 @@
-import z from 'zod';
+import z, { Schema } from 'zod';
 import _ from 'object-path';
+import { buildMatcher } from './matchers'
+import { debug } from './util'
+import type { DtoMapping, DtoOperation, DtoFunction, DtoNode, DtoConfig, DtoArrayRule } from './types/internal'
 
-const debug = (...args) => {
-    if (process.env.DEBUG) {
-        console.log(...args);
-    }
-}
-
-type LooseObject = Record<string, any>;
-
-function buildMatcher (rules: LooseObject | string) {
-    return (data: LooseObject) => {
-        debug("match", typeof rules, rules, data.id);
-        if (typeof rules === "string") {
-            return data.id === rules;
-        }
-        const entries = Object.entries(rules);
-        return !entries.find(([key, value]) => {
-            return data[key] === value;
-        });
-    };
-}
+export * from './types'
+export * from './matchers'
 
 const dtoMatchers = {
-    array: {
-        find (matcher, input: Record<string, any>) {
-            const data = _.get(input, matcher.key);
-            const matcherFn = typeof matcher === "function" ? matcher : buildMatcher(matcher.matcher);
-            const item = data?.find?.(matcherFn);
-            return parseNode(matcher.dto, item);
-        },
-        filter (matcher, input: Record<string, any>) {
-            const data = _.get(input, matcher.key);
-            const matcherFn = typeof matcher === "function" ? matcher : buildMatcher(matcher.matcher);
-            const item = data?.filter?.(matcherFn);
-            return parseNode(matcher.dto, item);
-        }
-    }
-}
-
-export const matchers = {
-    find: (key, matcher, dto) => {
-        return { type: "array.find", key, matcher, dto }
+    first (matcher, input: Record<string, any>) {
+        const data = _.get(input, matcher.key);
+        const matcherFn = typeof matcher === "function" ? matcher : buildMatcher(matcher.matcher);
+        const item = data?.[0]?.(matcherFn);
+        return parseNode(matcher.dto, item);
     },
-    filter: (key, matcher, dto) => {
-        return { type: "array.filter", key, matcher, dto }
+    find (matcher, input: Record<string, any>) {
+        const data = _.get(input, matcher.key);
+        const matcherFn = typeof matcher === "function" ? matcher : buildMatcher(matcher.matcher);
+        const item = data?.find?.(matcherFn);
+        return parseNode(matcher.dto, item);
+    },
+    filter (matcher, input: Record<string, any>) {
+        const data = _.get(input, matcher.key);
+        const matcherFn = typeof matcher === "function" ? matcher : buildMatcher(matcher.matcher);
+        const item = data?.filter?.(matcherFn);
+        return parseNode(matcher.dto, item);
     }
 }
-export const component = (matcher, dto) => matchers.find("components", matcher, dto);
 
-type DtoNode = {
-    _key: string;
-    _z: any;
-}
-type DtoMatcher = <T>(input: T) => boolean;
-type DtoMatcherRule = Record<string, any>;
-type DtoOperation = {
-    key: string;
-    type: string;
-    match: DtoMatcher | DtoMatcherRule
-    dto: DtoMapping
-}
-type DtoFunction = (input: any) => any
-type DtoMapping = string | [string, DtoMapping] | DtoConfig | DtoFunction | DtoNode | DtoOperation
-type DtoConfig = {
-    [key: string]: DtoMapping
-}
 
 function parseNode<T> (
     mapping: DtoMapping,
@@ -76,7 +38,7 @@ function parseNode<T> (
     }
 
     if (Array.isArray(mapping)) {
-        const [path, map] = mapping as [string, any]
+        const [path, map] = mapping as DtoArrayRule
         const localInput = _.get(input, path)
         if (typeof map === "string") {
             return _.get(localInput, map);
@@ -94,37 +56,47 @@ function parseNode<T> (
     }
 
     if (typeof mapping === "object") {
-        const type = mapping?.type ?? "o"
-        if (type === "array.find") {
-            return dtoMatchers.array.find(mapping, input);
+        const type = mapping?._type ?? "o"
+        const formatObject = (mapping, input) => {
+            if (type === "find") {
+                return dtoMatchers.find(mapping, input);
+            }
+            else if (type === "filter") {
+                return dtoMatchers.filter(mapping, input);
+            }
+            return Object.entries(mapping).reduce((memo, [key, mapping]) => {
+                const localInput = _.get(input, key);
+                return {
+                    ...memo,
+                    [key]: parseNode(mapping, input),
+                }
+            }, {} as T)
         }
-        return Object.entries(mapping).reduce((memo, [key, mapping]) => {
-            const localInput = _.get(input, key);
-            let value;
-            if (Array.isArray(localInput)) {
-                value = localInput.map(input => parseNode(mapping, input))
-            } else {
-                value = parseNode(mapping, localInput);
-            }
-            return {
-                ...memo,
-                [key]: value
-            }
-        }, {} as T)
-        return dto(mapping as DtoConfig)(input)
+        if (Array.isArray(input)) {
+            return input.map(input => formatObject(mapping, input));
+        } else {
+            return formatObject(mapping, input);
+        }
     }
 }
 
 export function dto<T>(config: DtoConfig) {
-    return (input: Record<string,any>) => {
-        return Object.entries(config).reduce<T>((memo, [key, mapping]) => {
-            let value = parseNode<T>(mapping, input);
-            return {
-                ...memo,
-                [key]: value,
-            }
-        }, {} as T)
+    const handler = (input: Record<string,any>) => {
+        return parseNode<T>(config, input);
     }
+
+    handler.extend = (newConfig: DtoConfig) => {
+        return dto({
+            ...config,
+            ...newConfig,
+        })
+    }
+
+    return handler
+}
+
+export const pick = function (...args: any[]): Record<string,string> {
+    return Object.fromEntries(args.flatMap(a => a).map(a => ([a,a])))
 }
 
 dto.string = (key: string): DtoNode => {
@@ -132,27 +104,4 @@ dto.string = (key: string): DtoNode => {
         _key: key,
         _z: z.string(),
     }
-}
-
-const productTransformer = {
-    id: 'id',
-    name: 'name',
-    path: 'patch',
-    tenantIdentifier: 'tenantIdentifier.content.text',
-    tenantId: 'tenantId.content.text',
-    logo: {
-        'logos.content.firstImage': { key: '@', url: '@' }
-    },
-    logos: {
-        'logos.content.images': [
-            {
-                key: '@',
-                url: '@',
-            }
-        ]
-    },
-    configuration: {
-        'configuration.content.sections': section => {
-        },
-    },
 }

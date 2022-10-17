@@ -89,9 +89,18 @@ const transformer = dto<TenantDto>({
     // A component mapper function to make it very easy to grab one component by id
     foo: component("foo", "content.text"),
 
-    bars: component("bar", ["content.is", {
-        keys: "keys",
-    }]),
+    // Filter a component, flatten a deep value
+    // {
+    //     id: "bar",
+    //     content: {
+    //         is: {
+    //             with: "keys",
+    //             yes: "many",
+    //             keys: "yes",
+    //         }
+    //     },
+    // },
+    bars: component("bar", ["content.is", { keys: "keys" }]),
 
     fooManual: component(o => o.id === "foo", "content.text"),
 

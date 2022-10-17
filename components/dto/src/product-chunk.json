@@ -1,0 +1,580 @@
+{
+    "id": "629eff167f8dec7a0f401818",
+    "name": "Multisensor 7",
+    "type": "product",
+    "language": "en",
+    "path": "/products/multisensor-7",
+    "components": [
+        {
+            "id": "manufacturer",
+            "name": "Manufacturer",
+            "type": "itemRelations",
+            "content": {
+                "items": [
+                    {
+                        "id": "629f99a062124d71ea56e082",
+                        "name": "Aeotec",
+                        "path": "/brands/aeotec"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "summary",
+            "name": "Summary",
+            "type": "richText",
+            "content": {
+                "json": [
+                    {
+                        "kind": "block",
+                        "type": "paragraph",
+                        "metadata": {},
+                        "children": [
+                            {
+                                "kind": "inline",
+                                "metadata": {},
+                                "textContent": "Aeotec's latest 700 series 6-in-1 indoor sensor: accurate sensors of motion, light, temperature, humidity, vibration, and UV measurements. 70% faster wireless communication, 240% increased maximum detection range, 64% better battery performance, calculates spatial measurements 18% faster than the last Gen5 version."
+                            }
+                        ]
+                    }
+                ],
+                "html": [
+                    "<p>Aeotec&#039;s latest 700 series 6-in-1 indoor sensor: accurate sensors of motion, light, temperature, humidity, vibration, and UV measurements. 70% faster wireless communication, 240% increased maximum detection range, 64% better battery performance, calculates spatial measurements 18% faster than the last Gen5 version.</p>"
+                ],
+                "plainText": [
+                    "Aeotec's latest 700 series 6-in-1 indoor sensor: accurate sensors of motion, light, temperature, humidity, vibration, and UV measurements. 70% faster wireless communication, 240% increased maximum detection range, 64% better battery performance, calculates spatial measurements 18% faster than the last Gen5 version."
+                ]
+            }
+        },
+        {
+            "id": "description",
+            "name": "Description",
+            "type": "paragraphCollection",
+            "content": {
+                "paragraphs": [
+                    {
+                        "title": {
+                            "text": "Details"
+                        },
+                        "body": {
+                            "json": [
+                                {
+                                    "kind": "block",
+                                    "type": "paragraph",
+                                    "metadata": {},
+                                    "children": []
+                                },
+                                {
+                                    "kind": "block",
+                                    "metadata": {},
+                                    "type": "unordered-list",
+                                    "children": [
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Measured temperature range: -10°C to 50°C /14°F to 122°F."
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Max motion detection range:  12 meters/33 feet, beat Gen5 at 5 meters"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "The light sensor measures 0 to 30,000 lux."
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Measured humidity range: 20%RH to 90%RH"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Uses Z-Wave Plus with Gen7 and 700 series wireless technology."
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "S2 Security"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Battery life ~3 years using 2x CR123A batteries（package comes with 2 batteries）"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "list-item",
+                                            "metadata": {},
+                                            "children": [
+                                                {
+                                                    "kind": "inline",
+                                                    "metadata": {},
+                                                    "textContent": "Repeater function when USB powered"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "html": [
+                                "<p></p>",
+                                "<ul><li>Measured temperature range: -10°C to 50°C /14°F to 122°F.</li><li>Max motion detection range:  12 meters/33 feet, beat Gen5 at 5 meters</li><li>The light sensor measures 0 to 30,000 lux.</li><li>Measured humidity range: 20%RH to 90%RH</li><li>Uses Z-Wave Plus with Gen7 and 700 series wireless technology.</li><li>S2 Security</li><li>Battery life ~3 years using 2x CR123A batteries（package comes with 2 batteries）</li><li>Repeater function when USB powered</li></ul>"
+                            ],
+                            "plainText": [
+                                "",
+                                "Measured temperature range: -10°C to 50°C /14°F to 122°F.\n\nMax motion detection range:  12 meters/33 feet, beat Gen5 at 5 meters\n\nThe light sensor measures 0 to 30,000 lux.\n\nMeasured humidity range: 20%RH to 90%RH\n\nUses Z-Wave Plus with Gen7 and 700 series wireless technology.\n\nS2 Security\n\nBattery life ~3 years using 2x CR123A batteries（package comes with 2 batteries）\n\nRepeater function when USB powered"
+                            ]
+                        },
+                        "images": null
+                    }
+                ]
+            }
+        },
+        {
+            "id": "images",
+            "name": "Images",
+            "type": "images",
+            "content": {
+                "images": [
+                    {
+                        "url": "https://media.crystallize.com/raymond-test/22/6/7/2/multisensor7_01_1024x10242x.webp",
+                        "altText": null,
+                        "key": "raymond-test/22/6/7/2/multisensor7_01_1024x10242x.webp",
+                        "variants": [
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@100/multisensor7_01_1024x10242x.avif",
+                                "width": 100,
+                                "key": "raymond-test/22/6/7/2/@100/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@100/multisensor7_01_1024x10242x.webp",
+                                "width": 100,
+                                "key": "raymond-test/22/6/7/2/@100/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@200/multisensor7_01_1024x10242x.avif",
+                                "width": 200,
+                                "key": "raymond-test/22/6/7/2/@200/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@200/multisensor7_01_1024x10242x.webp",
+                                "width": 200,
+                                "key": "raymond-test/22/6/7/2/@200/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@500/multisensor7_01_1024x10242x.avif",
+                                "width": 500,
+                                "key": "raymond-test/22/6/7/2/@500/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@500/multisensor7_01_1024x10242x.webp",
+                                "width": 500,
+                                "key": "raymond-test/22/6/7/2/@500/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@768/multisensor7_01_1024x10242x.avif",
+                                "width": 768,
+                                "key": "raymond-test/22/6/7/2/@768/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@768/multisensor7_01_1024x10242x.webp",
+                                "width": 768,
+                                "key": "raymond-test/22/6/7/2/@768/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1024/multisensor7_01_1024x10242x.avif",
+                                "width": 1024,
+                                "key": "raymond-test/22/6/7/2/@1024/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1024/multisensor7_01_1024x10242x.webp",
+                                "width": 1024,
+                                "key": "raymond-test/22/6/7/2/@1024/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1366/multisensor7_01_1024x10242x.avif",
+                                "width": 1366,
+                                "key": "raymond-test/22/6/7/2/@1366/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1366/multisensor7_01_1024x10242x.webp",
+                                "width": 1366,
+                                "key": "raymond-test/22/6/7/2/@1366/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1600/multisensor7_01_1024x10242x.avif",
+                                "width": 1600,
+                                "key": "raymond-test/22/6/7/2/@1600/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1600/multisensor7_01_1024x10242x.webp",
+                                "width": 1600,
+                                "key": "raymond-test/22/6/7/2/@1600/multisensor7_01_1024x10242x.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1920/multisensor7_01_1024x10242x.avif",
+                                "width": 1920,
+                                "key": "raymond-test/22/6/7/2/@1920/multisensor7_01_1024x10242x.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/raymond-test/22/6/7/2/@1920/multisensor7_01_1024x10242x.webp",
+                                "width": 1920,
+                                "key": "raymond-test/22/6/7/2/@1920/multisensor7_01_1024x10242x.webp"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "specs",
+            "name": "Specs",
+            "type": "propertiesTable",
+            "content": {
+                "sections": [
+                    {
+                        "title": "Technology",
+                        "properties": [
+                            {
+                                "key": "Z-wave",
+                                "value": null
+                            },
+                            {
+                                "key": "Zigbee",
+                                "value": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "chunk",
+            "name": "Chunk",
+            "type": "contentChunk",
+            "content": {
+                "chunks": [
+                    [
+                        {
+                            "id": "name",
+                            "name": "Name",
+                            "type": "singleLine",
+                            "content": {
+                                "text": "Test"
+                            }
+                        },
+                        {
+                            "id": "date",
+                            "name": "Date",
+                            "type": "datetime",
+                            "content": {
+                                "datetime": "2022-09-01T10:00:00.000Z"
+                            }
+                        }
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "choice",
+            "name": "Choice",
+            "type": "componentChoice",
+            "content": {
+                "selectedComponent": {
+                    "id": "where",
+                    "name": "Where",
+                    "type": "location",
+                    "content": {
+                        "lat": 60.39126279999999,
+                        "long": 5.3220544
+                    }
+                }
+            }
+        }
+    ],
+    "variants": [
+        {
+            "id": "629eff167f8dec7a0f401819",
+            "name": "Multisensor 7 - EU",
+            "sku": "multisensor-7-1654587158709",
+            "components": null,
+            "price": 25,
+            "priceVariants": [
+                {
+                    "identifier": "default",
+                    "name": "Default",
+                    "price": 25,
+                    "currency": "eur"
+                }
+            ],
+            "stockLocations": [
+                {
+                    "identifier": "default",
+                    "name": "Default",
+                    "stock": 4
+                }
+            ],
+            "isDefault": true,
+            "images": [
+                {
+                    "url": "https://media.crystallize.com/raymond-test/22/6/7/1/multisensor7_01_1024x10242x.webp",
+                    "altText": null,
+                    "key": "raymond-test/22/6/7/1/multisensor7_01_1024x10242x.webp",
+                    "variants": [
+                        {
+                            "key": "raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.avif",
+                            "width": 100,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.webp",
+                            "width": 100,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.avif",
+                            "width": 200,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.webp",
+                            "width": 200,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.avif",
+                            "width": 500,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.webp",
+                            "width": 500,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.avif",
+                            "width": 768,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.webp",
+                            "width": 768,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.avif",
+                            "width": 1024,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.webp",
+                            "width": 1024,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.avif",
+                            "width": 1366,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.webp",
+                            "width": 1366,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.avif",
+                            "width": 1600,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.webp",
+                            "width": 1600,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.avif",
+                            "width": 1920,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.webp",
+                            "width": 1920,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.webp"
+                        }
+                    ]
+                }
+            ],
+            "subscriptionPlans": null
+        },
+        {
+            "id": "629f9ad944c62068f008d1bc",
+            "name": "Multisensor 7 - US",
+            "sku": "a-unique-sku-669471274921397",
+            "components": null,
+            "price": 24,
+            "priceVariants": [
+                {
+                    "identifier": "default",
+                    "name": "Default",
+                    "price": 24,
+                    "currency": "eur"
+                }
+            ],
+            "stockLocations": [
+                {
+                    "identifier": "default",
+                    "name": "Default",
+                    "stock": 0
+                }
+            ],
+            "isDefault": false,
+            "images": [
+                {
+                    "url": "https://media.crystallize.com/raymond-test/22/6/7/1/multisensor7_01_1024x10242x.webp",
+                    "altText": null,
+                    "key": "raymond-test/22/6/7/1/multisensor7_01_1024x10242x.webp",
+                    "variants": [
+                        {
+                            "key": "raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.avif",
+                            "width": 100,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.webp",
+                            "width": 100,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@100/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.avif",
+                            "width": 200,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.webp",
+                            "width": 200,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@200/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.avif",
+                            "width": 500,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.webp",
+                            "width": 500,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@500/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.avif",
+                            "width": 768,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.webp",
+                            "width": 768,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@768/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.avif",
+                            "width": 1024,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.webp",
+                            "width": 1024,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1024/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.avif",
+                            "width": 1366,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.webp",
+                            "width": 1366,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1366/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.avif",
+                            "width": 1600,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.webp",
+                            "width": 1600,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1600/multisensor7_01_1024x10242x.webp"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.avif",
+                            "width": 1920,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.avif"
+                        },
+                        {
+                            "key": "raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.webp",
+                            "width": 1920,
+                            "url": "https://media.crystallize.com/raymond-test/22/6/7/1/@1920/multisensor7_01_1024x10242x.webp"
+                        }
+                    ]
+                }
+            ],
+            "subscriptionPlans": null
+        }
+    ],
+    "vatType": {
+        "name": "NO",
+        "percent": 25
+    },
+    "topics": null
+}

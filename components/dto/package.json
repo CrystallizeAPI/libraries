@@ -10,9 +10,19 @@
     "zod": "^3.19.1"
   },
   "scripts": {
-    "test": "node -r @swc-node/register src/index.test.ts"
+    "dto": "node -r @swc-node/register",
+    "tests": "node -r @swc-node/register test/index.test.ts && ava",
+    "test": "ava"
+  },
+  "ava": {
+      "extensions": ["ts", "tsx"],
+      "require": ["@swc-node/register"],
+      "files": [
+          "test/**.test.ts"
+      ]
   },
   "devDependencies": {
-    "@swc-node/register": "^1.5.1"
+    "@swc-node/register": "^1.5.1",
+    "ava": "^4.3.3"
   }
 }

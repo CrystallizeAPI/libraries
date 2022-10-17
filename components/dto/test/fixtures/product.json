@@ -1,0 +1,223 @@
+{
+    "id": "62cd25899ec614b59ccfa490",
+    "name": "Professional Starter Kit",
+    "type": "document",
+    "path": "/shop/outfits/professional-starter-kit",
+    "components": [
+        {
+            "id": "title",
+            "name": "Title",
+            "type": "singleLine",
+            "content": {
+                "text": "Professional Starter Kit"
+            }
+        },
+        {
+            "id": "description",
+            "name": "Description",
+            "type": "richText",
+            "content": {
+                "json": [
+                    {
+                        "kind": "block",
+                        "type": "paragraph",
+                        "metadata": {},
+                        "children": [
+                            {
+                                "kind": "inline",
+                                "metadata": {},
+                                "textContent": "for your perfect start!"
+                            }
+                        ]
+                    }
+                ],
+                "html": [
+                    "<p>for your perfect start!</p>"
+                ],
+                "plainText": [
+                    "for your perfect start!"
+                ]
+            }
+        },
+        {
+            "id": "shoppable-image",
+            "name": "Shoppable image",
+            "type": "images",
+            "content": {
+                "images": [
+                    {
+                        "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/winner-look-1.png",
+                        "altText": null,
+                        "key": "pewag-racing/22/7/13/15/winner-look-1.png",
+                        "variants": [
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@100/winner-look-1.avif",
+                                "width": 100,
+                                "key": "pewag-racing/22/7/13/15/@100/winner-look-1.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@100/winner-look-1.webp",
+                                "width": 100,
+                                "key": "pewag-racing/22/7/13/15/@100/winner-look-1.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@100/winner-look-1.png",
+                                "width": 100,
+                                "key": "pewag-racing/22/7/13/15/@100/winner-look-1.png"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@200/winner-look-1.avif",
+                                "width": 200,
+                                "key": "pewag-racing/22/7/13/15/@200/winner-look-1.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@200/winner-look-1.webp",
+                                "width": 200,
+                                "key": "pewag-racing/22/7/13/15/@200/winner-look-1.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@200/winner-look-1.png",
+                                "width": 200,
+                                "key": "pewag-racing/22/7/13/15/@200/winner-look-1.png"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@500/winner-look-1.avif",
+                                "width": 500,
+                                "key": "pewag-racing/22/7/13/15/@500/winner-look-1.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@500/winner-look-1.webp",
+                                "width": 500,
+                                "key": "pewag-racing/22/7/13/15/@500/winner-look-1.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@500/winner-look-1.png",
+                                "width": 500,
+                                "key": "pewag-racing/22/7/13/15/@500/winner-look-1.png"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@768/winner-look-1.avif",
+                                "width": 768,
+                                "key": "pewag-racing/22/7/13/15/@768/winner-look-1.avif"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@768/winner-look-1.webp",
+                                "width": 768,
+                                "key": "pewag-racing/22/7/13/15/@768/winner-look-1.webp"
+                            },
+                            {
+                                "url": "https://media.crystallize.com/pewag-racing/22/7/13/15/@768/winner-look-1.png",
+                                "width": 768,
+                                "key": "pewag-racing/22/7/13/15/@768/winner-look-1.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "merchandising",
+            "name": "Merchandising",
+            "type": "contentChunk",
+            "content": {
+                "chunks": [
+                    [
+                        {
+                            "id": "products",
+                            "name": "Products",
+                            "type": "itemRelations",
+                            "content": {
+                                "items": [
+                                    {
+                                        "id": "62b9ae9b595a18833445961a",
+                                        "name": "Swim cap",
+                                        "path": "/shop/swimming/swim-cap"
+                                    },
+                                    {
+                                        "id": "62b9af67b82d4ab5635331ee",
+                                        "name": "Chipband",
+                                        "path": "/shop/accessories/chipband"
+                                    },
+                                    {
+                                        "id": "62b9af689ec614b59ccf213b",
+                                        "name": "Racenumber belt",
+                                        "path": "/shop/accessories/racenumber-belt"
+                                    },
+                                    {
+                                        "id": "62b9af699ec614b59ccf2143",
+                                        "name": "Socks",
+                                        "path": "/shop/accessories/socks"
+                                    },
+                                    {
+                                        "id": "62b9af64595a18833445967a",
+                                        "name": "Cycling bottle - 0,75 liter",
+                                        "path": "/shop/accessories/cycling-bottle-075-liter"
+                                    },
+                                    {
+                                        "id": "62b9aff79ec614b59ccf214e",
+                                        "name": "ITU suit",
+                                        "path": "/shop/triathlon-specific/itu-suit"
+                                    },
+                                    {
+                                        "id": "62b9af05595a188334459660",
+                                        "name": "Hoodie",
+                                        "path": "/shop/casual-style/hoodie"
+                                    },
+                                    {
+                                        "id": "62b9af009ec614b59ccf211c",
+                                        "name": "T-shirt",
+                                        "path": "/shop/casual-style/t-shirt"
+                                    },
+                                    {
+                                        "id": "62b9af039ec614b59ccf2123",
+                                        "name": "Polo-shirt",
+                                        "path": "/shop/casual-style/polo-shirt"
+                                    },
+                                    {
+                                        "id": "62b9ae2e9ec614b59ccf2081",
+                                        "name": "Running cap",
+                                        "path": "/shop/running/running-cap"
+                                    },
+                                    {
+                                        "id": "62d6c251618237eb97a56f6b",
+                                        "name": "Running shirt - shortsleeve",
+                                        "path": "/shop/running/running-shirt-shortsleeve"
+                                    },
+                                    {
+                                        "id": "62b9ad92b82d4ab56353314a",
+                                        "name": "Squadra jersey",
+                                        "path": "/shop/cycling/squadra-jersey"
+                                    },
+                                    {
+                                        "id": "62b9aff8595a188334459681",
+                                        "name": "Triathlon short",
+                                        "path": "/shop/triathlon-specific/triathlon-short"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hotspot-x",
+                            "name": "Hotspot X",
+                            "type": "numeric",
+                            "content": {
+                                "number": 50,
+                                "unit": "%"
+                            }
+                        },
+                        {
+                            "id": "hotspot-y",
+                            "name": "Hotspot Y",
+                            "type": "numeric",
+                            "content": {
+                                "number": 50,
+                                "unit": "%"
+                            }
+                        }
+                    ]
+                ]
+            }
+        }
+    ],
+    "topics": null
+}
