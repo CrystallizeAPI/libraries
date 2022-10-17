@@ -37,6 +37,6 @@
         "concurrently": "^7.4.0",
         "jsonwebtoken": "^8.5.1",
         "typescript": "^4.6.3",
-        "node-fetch": "^2"
+        "node-fetch": "^3"
     }
 }
