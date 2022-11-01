@@ -74,11 +74,11 @@ export const images = (options: ImagesOptions = {}): DtoArrayRule => {
     }
 
     if (options?.variants) {
-        fields.variants = {
+        fields.variants = ['variants', {
             key: 'key',
             url: 'url',
             width: 'width',
-        };
+        }];
     }
     return [options?.path ?? 'images', fields]
 }

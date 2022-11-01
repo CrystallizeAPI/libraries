@@ -55,6 +55,5 @@ test.only('Image component', t => {
         images: component.image('shoppable-image'),
     })
     const value = transformer(input);
-    console.log(value.images)
-    t.is(value.images, expect)
+    t.deepEqual(value.images, expect)
 })
