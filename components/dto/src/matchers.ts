@@ -50,12 +50,48 @@ export const filter = (
     return { _type: "filter", key, matcher, dto, ...options }
 }
 
-export const component = (matcher: DtoOperation["matcher"], dto: DtoMapping, options: DtoOptions = {}) => {
-    return find("components", matcher, dto, options);
+/**
+* Mapper to search the `components` array by `id` and apply `dto` mapping
+*
+* ```ts
+* component('my-single-line', 'content.text')
+* component('my-rich-text', {
+*   html: 'content.html',
+*   text: 'content.plainText',
+* })
+* ```
+*/
+export const component = (id: DtoOperation["matcher"], dto: DtoMapping, options: DtoOptions = {}) => {
+    return find("components", id, dto, options);
 }
 
-component.image = (matcher: DtoOperation["matcher"]) => {
-    return component(matcher, images({
+/**
+* Mapper to search the `components` array by `id` and apply a default image mapping
+*
+* ```ts
+* component.image('my-images', {
+*   variants: true, // default value
+*   path: 'content.images' // default value. ov
+* })
+* // will use the same mapper as
+* const mapper = {
+*   key: 'key',
+*   url: 'url',
+*   altText: 'altText',
+*   variants: {
+*       key: 'url',
+*       url: 'url',
+*       width: 'width',
+*   }
+* }
+* component('my-rich-text', {
+*   html: 'content.html',
+*   text: 'content.plainText',
+* })
+* ```
+*/
+component.image = (id: DtoOperation["matcher"]) => {
+    return component(id, images({
         variants: true,
         path: 'content.images',
     }))

@@ -65,7 +65,6 @@ function parseNode<T> (
                 return dtoMatchers.filter(mapping, input);
             }
             return Object.entries(mapping).reduce((memo, [key, mapping]) => {
-                const localInput = _.get(input, key);
                 return {
                     ...memo,
                     [key]: parseNode(mapping, input),
@@ -80,10 +79,39 @@ function parseNode<T> (
     }
 }
 
-export function dto<T>(config: DtoConfig) {
+type Transformer = ((config: DtoConfig) => any) & {
+    /**
+    * Combine existing DTO with new config (patching)
+    *
+    * ```ts
+    * type Value = {id: string}
+    * const transformer = dto<Value>({
+    *   id: 'path.to.id'
+    * }).extend({
+    *   id: 'override.path'
+    * })
+    * const value: Value = transformer({ override: { path: "1" } })
+    * ```
+    */
+    extend: (newConfig: DtoConfig) => ReturnType<typeof dto>
+}
+
+/**
+* Create a new DTO transformer with `DtoConfig`
+*
+* ```ts
+* type Value = {id: string}
+* const transformer = dto<Value>({
+*   id: 'path.to.id'
+* })
+* const value: Value = transformer({ path: { to: { id: "1" } } })
+* ```
+*/
+export function dto<T>(config: DtoConfig): Transformer {
     const handler = (input: Record<string,any>) => {
         return parseNode<T>(config, input);
     }
+
 
     handler.extend = (newConfig: DtoConfig) => {
         return dto({
