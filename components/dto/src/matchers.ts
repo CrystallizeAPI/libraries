@@ -7,6 +7,7 @@ import type {
     DtoMatcher,
     DtoArrayRule,
 } from './types/internal'
+import { images } from './matchers/images'
 
 type LooseObject = Record<string, any>;
 
@@ -84,10 +85,6 @@ export const component = (id: DtoOperation["matcher"], dto: DtoMapping, options:
 *       width: 'width',
 *   }
 * }
-* component('my-rich-text', {
-*   html: 'content.html',
-*   text: 'content.plainText',
-* })
 * ```
 */
 component.image = (id: DtoOperation["matcher"]) => {
@@ -97,24 +94,24 @@ component.image = (id: DtoOperation["matcher"]) => {
     }))
 }
 
-export type ImagesOptions = {
-    variants?: boolean
-    path?: string;
-}
 
-export const images = (options: ImagesOptions = {}): DtoArrayRule => {
-    const fields: DtoMapping = {
-        key: 'key',
-        url: 'url',
-        altText: 'altText',
-    }
-
-    if (options?.variants) {
-        fields.variants = ['variants', {
-            key: 'key',
-            url: 'url',
-            width: 'width',
-        }];
-    }
-    return [options?.path ?? 'images', fields]
+/**
+* Mapper to search the `components` array by `id` and apply a default image relation mapping
+*
+* ```ts
+* component.relation('my-images')
+* // will use the same mapper as
+* const mapper = {
+*   name: 'name',
+*   path: 'path',
+* }
+* ```
+*/
+component.relation = (id: DtoOperation["matcher"]) => {
+    return component(id, [
+        "content.items", {
+            name: 'name',
+            path: 'path',
+        }
+    ])
 }
