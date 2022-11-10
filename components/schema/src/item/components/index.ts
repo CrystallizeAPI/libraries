@@ -36,26 +36,22 @@ export type ComponentInput = {
 };
 
 export const ComponentInputSchema: z.ZodType<ComponentInput> = z.lazy(() =>
-    z
-        .object({
-            componentId: z.string().min(1),
-            files: z.array(FileInputSchema).optional(),
-            images: z.array(ImageInputSchema).optional(),
-            videos: z.array(VideoInputSchema).optional(),
-            componentChoice: ComponentInputSchema.optional(),
-            contentChunk: ContentChunkContentInputSchema.optional(),
-            boolean: BooleanContentInputSchema.optional(),
-            datetime: DatetimeContentInputSchema.optional(),
-            gridRelations: GridRelationsContentInputSchema.optional(),
-            itemRelations: ItemRelationsContentInputSchema.optional(),
-            location: LocationContentInputSchema.optional(),
-            numeric: NumericComponentContentInputSchema.optional(),
-            paragraphCollection: ParagraphCollectionContentInputSchema.optional(),
-            richText: RichTextContentInputSchema.optional(),
-            selection: SelectionComponentContentInputSchema.optional(),
-            singleLine: SingleLineContentInputSchema.optional(),
-        })
-        .refine((obj) => Object.keys(obj).length === 2, {
-            message: 'Must only provide 1 component input per component',
-        }),
+    z.object({
+        componentId: z.string().min(1),
+        files: z.array(FileInputSchema).optional(),
+        images: z.array(ImageInputSchema).optional(),
+        videos: z.array(VideoInputSchema).optional(),
+        componentChoice: ComponentInputSchema.optional(),
+        contentChunk: ContentChunkContentInputSchema.optional(),
+        boolean: BooleanContentInputSchema.optional(),
+        datetime: DatetimeContentInputSchema.optional(),
+        gridRelations: GridRelationsContentInputSchema.optional(),
+        itemRelations: ItemRelationsContentInputSchema.optional(),
+        location: LocationContentInputSchema.optional(),
+        numeric: NumericComponentContentInputSchema.optional(),
+        paragraphCollection: ParagraphCollectionContentInputSchema.optional(),
+        richText: RichTextContentInputSchema.optional(),
+        selection: SelectionComponentContentInputSchema.optional(),
+        singleLine: SingleLineContentInputSchema.optional(),
+    }),
 );
