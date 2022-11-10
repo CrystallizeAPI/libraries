@@ -36,6 +36,7 @@ export const ProductPriceVariantSchema = z.object({
 });
 
 export const ProductVariantSchema = z.object({
+    isDefault: z.boolean().default(false),
     sku: z.string().min(1),
     name: z.string().min(1),
     externalReference: z.string().optional(),
