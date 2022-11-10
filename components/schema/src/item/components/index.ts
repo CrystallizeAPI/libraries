@@ -55,7 +55,7 @@ export const ComponentInputSchema: z.ZodType<ComponentInput> = z.lazy(() =>
             selection: SelectionComponentContentInputSchema.optional(),
             singleLine: SingleLineContentInputSchema.optional(),
         })
-        .refine((obj) => Object.keys(obj).length === 1, {
+        .refine((obj) => Object.keys(obj).length === 2, {
             message: 'Must only provide 1 component input per component',
         }),
 );
