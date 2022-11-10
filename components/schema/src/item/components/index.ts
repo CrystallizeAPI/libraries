@@ -9,7 +9,7 @@ import { ItemRelationsContentInput, ItemRelationsContentInputSchema } from './it
 import { LocationContentInput, LocationContentInputSchema } from './location';
 import { NumericComponentContentInput, NumericComponentContentInputSchema } from './numeric';
 import { ParagraphCollectionContentInput, ParagraphCollectionContentInputSchema } from './paragraphCollection';
-import { PropertiesTableContentInput } from './propertiesTable';
+import { PropertiesTableContentInput, PropertiesTableContentInputSchema } from './propertiesTable';
 import { RichTextContentInput, RichTextContentInputSchema } from './richText';
 import { SelectionComponentContentInput, SelectionComponentContentInputSchema } from './selection';
 import { SingleLineContentInput, SingleLineContentInputSchema } from './singleLine';
@@ -50,6 +50,7 @@ export const ComponentInputSchema: z.ZodType<ComponentInput> = z.lazy(() =>
         location: LocationContentInputSchema.optional(),
         numeric: NumericComponentContentInputSchema.optional(),
         paragraphCollection: ParagraphCollectionContentInputSchema.optional(),
+        propertiesTable: PropertiesTableContentInputSchema.optional(),
         richText: RichTextContentInputSchema.optional(),
         selection: SelectionComponentContentInputSchema.optional(),
         singleLine: SingleLineContentInputSchema.optional(),
