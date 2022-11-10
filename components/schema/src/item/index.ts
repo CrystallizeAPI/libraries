@@ -23,6 +23,29 @@ export type Item = {
     };
 };
 
+export const ProductVariantAttributeSchema = z.object({
+    attribute: z.string().min(1),
+    value: z.string().min(1),
+});
+
+export const ProductPriceVariantSchema = z.object({
+    identifier: z.string().min(1),
+    currency: z.string().optional(),
+    name: z.string().optional(),
+    price: z.number().optional(),
+});
+
+export const ProductVariantSchema = z.object({
+    sku: z.string().min(1),
+    name: z.string().min(1),
+    externalReference: z.string().optional(),
+    attributes: z.array(ProductVariantAttributeSchema).optional(),
+    price: z.number().optional(),
+    priceVariants: z.array(ProductPriceVariantSchema).optional(),
+    stock: z.number().optional(),
+    components: z.array(z.any()).optional(),
+});
+
 export const ItemSchema: z.ZodType<Item> = z.lazy(() =>
     z.object({
         id: IdSchema,
@@ -42,6 +65,12 @@ export const ItemSchema: z.ZodType<Item> = z.lazy(() =>
                 path: z.string().optional(),
             })
             .optional(),
+    }),
+);
+
+export const ProductSchema = ItemSchema.and(
+    z.object({
+        variants: z.array(ProductVariantSchema).optional(),
     }),
 );
 
@@ -72,11 +101,17 @@ export const ProductVariantAttributeInputSchema = z.object({
     value: z.string().min(1),
 });
 
+export const PriceVariantReferenceInputSchema = z.object({
+    identifier: z.string().min(1),
+    price: z.number(),
+});
+
 export const CreateProductVariantInputSchema = z.object({
     isDefault: z.boolean(),
     sku: z.string().min(1),
     name: z.string().optional(),
     price: z.number().optional(),
+    priceVariants: z.array(PriceVariantReferenceInputSchema).optional(),
     stock: z.number().optional(),
     attributes: z.array(ProductVariantAttributeInputSchema).optional(),
     components: z.array(ComponentInputSchema).optional(),
@@ -88,6 +123,7 @@ export const UpdateProductVariantInputSchema = z.object({
     sku: z.string().optional(),
     name: z.string().optional(),
     price: z.number().optional(),
+    priceVariants: z.array(PriceVariantReferenceInputSchema).optional(),
     stock: z.number().optional(),
     attributes: z.array(ProductVariantAttributeInputSchema).optional(),
     components: z.array(ComponentInputSchema).optional(),
@@ -106,6 +142,11 @@ export const UpdateProductInputSchema = updateItemInputSchema.extend({
     variants: z.array(UpdateProductVariantInputSchema).optional(),
     vatTypeId: IdSchema.optional(),
 });
+
+export type Product = z.infer<typeof ProductSchema>;
+export type ProductVariant = z.infer<typeof ProductVariantSchema>;
+export type ProductVariantAttribute = z.infer<typeof ProductVariantAttributeSchema>;
+export type ProductPriceVariant = z.infer<typeof ProductPriceVariantSchema>;
 
 export type ProductVariantAttributeInput = z.infer<typeof ProductVariantAttributeInputSchema>;
 export type CreateProductVariantInput = z.infer<typeof CreateProductVariantInputSchema>;
