@@ -26,6 +26,7 @@ export const CrystallizeImage: FC = () => {
                                 defaultVariant: {
                                     price: true,
                                     firstImage: {
+                                        url: true,
                                         altText: true,
                                         variants: {
                                             width: true,
