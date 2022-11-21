@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feat-wh-jscomp/static/css/main.eb35dbfc.css",
+    "main.js": "/libraries/feat-wh-jscomp/static/js/main.3f0647c0.js",
+    "static/media/crystallize.svg": "/libraries/feat-wh-jscomp/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feat-wh-jscomp/index.html",
+    "main.eb35dbfc.css.map": "/libraries/feat-wh-jscomp/static/css/main.eb35dbfc.css.map",
+    "main.3f0647c0.js.map": "/libraries/feat-wh-jscomp/static/js/main.3f0647c0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb35dbfc.css",
+    "static/js/main.3f0647c0.js"
+  ]
+}
