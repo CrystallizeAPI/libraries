@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const IdSchema = z.string().min(24).max(24);
 export const KeyValuePairSchema = z.record(z.string());
 export const DateTimeSchema = z.string().refine(
-    (str) => Date.parse(str),
+    (str) => Number.isInteger(Date.parse(str)),
     (str) => ({ message: `${str} is not a valid date` }),
 );
 
