@@ -1,0 +1,10 @@
+{
+    "extends": "@tsconfig/node16/tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./build",
+        "declaration": true,
+        "module": "ES2020",
+        "moduleResolution": "node"
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

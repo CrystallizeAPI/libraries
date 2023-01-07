@@ -1,0 +1,30 @@
+{
+    "type": "module",
+    "name": "@crystallize/doc2crystallize",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">=16.0"
+    },
+    "scripts": {
+        "start": "node -r dotenv/config build/index.js",
+        "watch": "tsc -W",
+        "build": "tsc"
+    },
+    "private": true,
+    "volta": {
+        "node": "16.14.2",
+        "yarn": "1.22.18"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.1",
+        "md5": "^2.3.0",
+        "node-fetch": "^3.3.0",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "@tsconfig/node16": "^1",
+        "@types/md5": "^2.3.2",
+        "@types/node": "^18.0.6",
+        "typescript": "^4.7.4"
+    }
+}
