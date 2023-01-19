@@ -36,7 +36,7 @@
         "@crystallize/js-api-client": "*",
         "concurrently": "^7.4.0",
         "jsonwebtoken": "^8.5.1",
-        "node-fetch": "^2",
+        "node-fetch": "^3",
         "razorpay": "^2.8.3",
         "typescript": "^4.6.3"
     }
