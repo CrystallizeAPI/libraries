@@ -7,6 +7,7 @@ export type ProductHydrater = (
     extraQuery?: any,
     perProduct?: (item: string, index: number) => any,
     perVariant?: (item: string, index: number) => any,
+    usePIMApi?: boolean,
 ) => Promise<any>;
 
 function byPaths(client: ClientInterface): ProductHydrater {
@@ -60,13 +61,13 @@ function byPaths(client: ClientInterface): ProductHydrater {
     };
 }
 
-function bySkus(client: ClientInterface): ProductHydrater {
-    async function getPathForSkus(skus: string[], language: string, usePIMApi?: boolean): Promise<string[]> {
+function bySkus(client: ClientInterface, options?: { useSyncApiForSKUs?: boolean }): ProductHydrater {
+    async function getPathForSkus(skus: string[], language: string): Promise<string[]> {
         const pathsSet = new Set<string>();
 
         let afterCursor: any;
         async function getNextPage() {
-            if (usePIMApi) {
+            if (options?.useSyncApiForSKUs) {
                 const pimAPIResponse = await client.pimApi(
                     `query GET_PRODUCTS_BY_SKU (
                         $skus: [String!]
@@ -75,6 +76,7 @@ function bySkus(client: ClientInterface): ProductHydrater {
                         ) {
                         product {
                             getVariants(skus: $skus, language: $language, tenantId: $tenantId) {
+                                sku
                                 product {
                                     tree {
                                         path
@@ -90,7 +92,12 @@ function bySkus(client: ClientInterface): ProductHydrater {
                     },
                 );
 
-                pimAPIResponse.product.getVariants.forEach((product: any) => pathsSet.add(product.tree.path));
+                skus.forEach((sku) => {
+                    const match = pimAPIResponse.product.getVariants.find((v: any) => v.sku === sku);
+                    if (match) {
+                        pathsSet.add(match.product.tree.path);
+                    }
+                });
             } else {
                 const searchAPIResponse = await client.searchApi(
                     `query GET_PRODUCTS_BY_SKU ($skus: [String!], $after: String, $language: String!) {
@@ -156,12 +163,14 @@ function bySkus(client: ClientInterface): ProductHydrater {
     };
 }
 
-export function createProductHydrater(client: ClientInterface): {
-    byPaths: ProductHydrater;
-    bySkus: ProductHydrater;
-} {
+export function createProductHydrater(
+    client: ClientInterface,
+    options?: {
+        useSyncApiForSKUs?: boolean;
+    },
+) {
     return {
         byPaths: byPaths(client),
-        bySkus: bySkus(client),
+        bySkus: bySkus(client, options),
     };
 }
