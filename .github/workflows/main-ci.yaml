@@ -27,8 +27,6 @@ jobs:
             matrix:
                 node: [16, 18]
         env:
-            CRYSTALLIZE_ACCESS_TOKEN_ID: ${{ secrets.CRYSTALLIZE_ACCESS_TOKEN_ID}}
-            CRYSTALLIZE_ACCESS_TOKEN_SECRET: ${{ secrets.CRYSTALLIZE_ACCESS_TOKEN_SECRET}}
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         steps:
