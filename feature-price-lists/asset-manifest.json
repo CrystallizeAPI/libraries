@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/libraries/feature-price-lists/static/css/main.a64e6318.css",
-    "main.js": "/libraries/feature-price-lists/static/js/main.e351e0ef.js",
+    "main.js": "/libraries/feature-price-lists/static/js/main.cb0e714e.js",
     "static/media/crystallize.svg": "/libraries/feature-price-lists/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
     "index.html": "/libraries/feature-price-lists/index.html",
     "main.a64e6318.css.map": "/libraries/feature-price-lists/static/css/main.a64e6318.css.map",
-    "main.e351e0ef.js.map": "/libraries/feature-price-lists/static/js/main.e351e0ef.js.map"
+    "main.cb0e714e.js.map": "/libraries/feature-price-lists/static/js/main.cb0e714e.js.map"
   },
   "entrypoints": [
     "static/css/main.a64e6318.css",
-    "static/js/main.e351e0ef.js"
+    "static/js/main.cb0e714e.js"
   ]
 }
