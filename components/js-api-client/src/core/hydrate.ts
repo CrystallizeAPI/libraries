@@ -73,6 +73,8 @@ function byPaths(client: ClientInterface, options?: ProductHydraterOptions): Pro
                                 ? {
                                       priceFor: {
                                           __args: { marketIdentifiers: options.marketIdentifiers },
+                                          identifier: true,
+                                          price: true,
                                       },
                                   }
                                 : {}),
