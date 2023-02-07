@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { IdSchema } from '../shared';
 import { ShapeComponentTypeEnum } from './enums';
 
 export const MinMaxComponentConfigSchema = z
@@ -73,6 +74,15 @@ export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
 export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.and(
     z.object({
         acceptedShapeIdentifiers: z.array(z.string()).optional().nullable(),
+        quickSelect: z
+            .object({
+                folders: z
+                    .array(z.object({ folderId: IdSchema }))
+                    .optional()
+                    .nullable(),
+            })
+            .optional()
+            .nullable(),
     }),
 );
 

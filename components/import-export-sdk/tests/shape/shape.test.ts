@@ -66,6 +66,68 @@ const testCases: testCase[] = [
         ],
     },
     {
+        name: 'Creates an item relations component with quick select config',
+        input: {
+            identifier: 'some-shape',
+            name: 'Some Shape',
+            type: 'product',
+            components: [
+                {
+                    id: 'componentId',
+                    name: 'Some Component',
+                    type: 'itemRelations',
+                    config: {
+                        quickSelect: {
+                            folders: [
+                                {
+                                    folderId: '5dc3fce0ff634e6254b41f90',
+                                },
+                                {
+                                    folderId: '62e8cc2b01c1e875dce7e061',
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        },
+        expectedCalls: [
+            getShapeQuery({
+                tenantId: mockTenantId,
+                identifier: 'some-shape',
+            }),
+            createShapeMutation({
+                input: {
+                    tenantId: mockTenantId,
+                    identifier: 'some-shape',
+                    name: 'Some Shape',
+                    type: 'product',
+                    components: [
+                        {
+                            id: 'componentId',
+                            name: 'Some Component',
+                            type: 'itemRelations',
+                            config: {
+                                itemRelations: {
+                                    quickSelect: {
+                                        folders: [
+                                            {
+                                                folderId: '5dc3fce0ff634e6254b41f90',
+                                            },
+                                            {
+                                                folderId: '62e8cc2b01c1e875dce7e061',
+                                            },
+                                        ],
+                                    },
+                                },
+                            },
+                        },
+                    ],
+                },
+            }),
+        ],
+    },
+    {
         name: 'Updates a basic shape',
         existingShape: {
             identifier: 'some-shape',

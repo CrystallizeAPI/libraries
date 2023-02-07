@@ -4,6 +4,11 @@ export const basicComponentConfigFragment = `
             min
             max
             acceptedShapeIdentifiers
+            quickSelect {
+                folders {
+                    folderId
+                }
+            }
         }
         ... on NumericComponentConfig {
             decimalPlaces
