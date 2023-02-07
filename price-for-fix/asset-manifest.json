@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/price-for-fix/static/css/main.a64e6318.css",
+    "main.js": "/libraries/price-for-fix/static/js/main.607a17e4.js",
+    "static/media/crystallize.svg": "/libraries/price-for-fix/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/price-for-fix/index.html",
+    "main.a64e6318.css.map": "/libraries/price-for-fix/static/css/main.a64e6318.css.map",
+    "main.607a17e4.js.map": "/libraries/price-for-fix/static/js/main.607a17e4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.607a17e4.js"
+  ]
+}
