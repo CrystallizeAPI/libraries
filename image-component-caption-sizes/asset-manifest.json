@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/libraries/image-component-caption-sizes/static/css/main.a64e6318.css",
-    "main.js": "/libraries/image-component-caption-sizes/static/js/main.e083ce61.js",
+    "main.js": "/libraries/image-component-caption-sizes/static/js/main.9f7af7cd.js",
     "static/media/crystallize.svg": "/libraries/image-component-caption-sizes/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
     "index.html": "/libraries/image-component-caption-sizes/index.html",
     "main.a64e6318.css.map": "/libraries/image-component-caption-sizes/static/css/main.a64e6318.css.map",
-    "main.e083ce61.js.map": "/libraries/image-component-caption-sizes/static/js/main.e083ce61.js.map"
+    "main.9f7af7cd.js.map": "/libraries/image-component-caption-sizes/static/js/main.9f7af7cd.js.map"
   },
   "entrypoints": [
     "static/css/main.a64e6318.css",
-    "static/js/main.e083ce61.js"
+    "static/js/main.9f7af7cd.js"
   ]
 }
