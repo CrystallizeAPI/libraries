@@ -3,6 +3,7 @@ import { ClientInterface } from '@crystallize/js-api-client';
 export type TStoreFrontConfig = {
     identifier: string;
     tenantIdentifier: string;
+    tenantId?: string;
     language: string;
     storefront: string;
     logo: string;

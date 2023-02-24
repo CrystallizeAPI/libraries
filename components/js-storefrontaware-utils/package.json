@@ -1,7 +1,7 @@
 {
     "name": "@crystallize/js-storefrontaware-utils",
     "license": "MIT",
-    "version": "0.2.3",
+    "version": "1.0.0",
     "author": "Crystallize <hello@crystallize.com> (https://crystallize.com)",
     "contributors": [
         "Sébastien Morel <sebastien@crystallize.com>"
@@ -19,8 +19,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "devDependencies": {
-        "@tsconfig/node16": "^1.0.2",
-        "@types/node": "^17.0.23",
+        "@tsconfig/node18": "^1.0.1",
+        "@types/node": "^18.11.15",
         "jest": "^27.5.1"
     },
     "dependencies": {

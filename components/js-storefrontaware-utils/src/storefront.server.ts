@@ -1,4 +1,4 @@
-import { createClient } from '@crystallize/js-api-client';
+import { createClient, CreateClientOptions } from '@crystallize/js-api-client';
 import { TStoreFront, TStoreFrontAdapter } from './types';
 
 export type StoreFrontOptions = {
@@ -16,6 +16,7 @@ export type StoreFrontOptions = {
 export const createStoreFront = async (
     adapter: TStoreFrontAdapter,
     options: StoreFrontOptions | boolean = false,
+    clientOptions?: CreateClientOptions,
 ): Promise<TStoreFront> => {
     options = typeof options === 'boolean' ? { withSecrets: options } : options;
     const withSecrets = options?.withSecrets ?? false;
@@ -23,10 +24,14 @@ export const createStoreFront = async (
     const config = await adapter.config(withSecrets);
     return {
         config,
-        apiClient: createClient({
-            tenantIdentifier: config.tenantIdentifier,
-            accessTokenId: withSecrets ? config.configuration?.ACCESS_TOKEN_ID || '' : '',
-            accessTokenSecret: withSecrets ? config.configuration?.ACCESS_TOKEN_SECRET || '' : '',
-        }),
+        apiClient: createClient(
+            {
+                tenantIdentifier: config.tenantIdentifier,
+                tenantId: config.tenantId,
+                accessTokenId: withSecrets ? config.configuration?.ACCESS_TOKEN_ID || '' : '',
+                accessTokenSecret: withSecrets ? config.configuration?.ACCESS_TOKEN_SECRET || '' : '',
+            },
+            clientOptions,
+        ),
     };
 };

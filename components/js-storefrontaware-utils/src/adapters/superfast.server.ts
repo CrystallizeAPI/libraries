@@ -161,6 +161,7 @@ async function fetchSuperFastConfig(domainkey: string, credentials: ClientConfig
     return {
         identifier: domainkey,
         tenantIdentifier: components['tenant-identifier'],
+        tenantId: components['tenant-id'] || undefined,
         language: 'en',
         storefront: components.storefront,
         logo: components.logos,
