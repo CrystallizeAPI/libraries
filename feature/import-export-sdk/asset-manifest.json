@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/libraries/feature/import-export-sdk/static/css/main.7f5a151f.css",
-    "main.js": "/libraries/feature/import-export-sdk/static/js/main.fe5bbb23.js",
+    "main.css": "/libraries/feature/import-export-sdk/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/import-export-sdk/static/js/main.c21cb0ff.js",
     "static/media/crystallize.svg": "/libraries/feature/import-export-sdk/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
     "index.html": "/libraries/feature/import-export-sdk/index.html",
-    "main.7f5a151f.css.map": "/libraries/feature/import-export-sdk/static/css/main.7f5a151f.css.map",
-    "main.fe5bbb23.js.map": "/libraries/feature/import-export-sdk/static/js/main.fe5bbb23.js.map"
+    "main.a64e6318.css.map": "/libraries/feature/import-export-sdk/static/css/main.a64e6318.css.map",
+    "main.c21cb0ff.js.map": "/libraries/feature/import-export-sdk/static/js/main.c21cb0ff.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f5a151f.css",
-    "static/js/main.fe5bbb23.js"
+    "static/css/main.a64e6318.css",
+    "static/js/main.c21cb0ff.js"
   ]
 }
