@@ -1,10 +1,11 @@
 {
     "name": "@crystallize/import-export-sdk",
     "version": "0.0.1-9",
-    "main": "dist/index.js",
     "license": "MIT",
     "scripts": {
-        "build": "rm -rf dist && yarn tsc && cp package.json dist/package.json",
+        "build:json": "json -f ./dist/package.json -I -e \"delete this.ava; delete this.devDependencies; delete this.scripts; delete this.exports\"",
+        "build:copy-files": "cp package.json ./dist/package.json &&  cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
+        "build": "rm -rf dist && yarn tsc && yarn run build:copy-files && yarn run build:json",
         "build:watch": "yarn tsc -W",
         "test": "jest",
         "test:watch": "jest --watch"

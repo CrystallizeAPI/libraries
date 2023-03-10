@@ -1,10 +1,11 @@
 {
     "name": "@crystallize/schema",
     "version": "0.0.2",
-    "main": "dist/index.js",
     "license": "MIT",
     "scripts": {
-        "build": "rm -rf dist && yarn tsc && cp package.json dist/package.json",
+        "build:json": "json -f ./dist/package.json -I -e \"delete this.ava; delete this.devDependencies; delete this.scripts; delete this.exports\"",
+        "build:copy-files": "cp package.json ./dist/package.json &&  cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
+        "build": "rm -rf dist && yarn tsc && yarn run build:copy-files && yarn run build:json",
         "build:watch": "yarn tsc -W",
         "test": "ava",
         "test:watch": "ava --watch"
@@ -14,8 +15,10 @@
         "@tsconfig/node18": "^1.0.1",
         "@types/node": "^18.0.6",
         "ava": "^4.3.3",
+        "json": "^11.0.0",
         "mongodb": "^4.9.1",
         "ts-node": "^10.9.1",
+        "tsup": "^6.6.3",
         "typescript": "^4.7.4"
     },
     "dependencies": {
