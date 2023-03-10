@@ -1,6 +1,6 @@
 {
     "name": "@crystallize/import-export-sdk",
-    "version": "0.0.1-9",
+    "version": "0.0.1",
     "license": "MIT",
     "scripts": {
         "build:json": "json -f ./dist/package.json -I -e \"delete this.ava; delete this.devDependencies; delete this.scripts; delete this.exports\"",
