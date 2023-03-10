@@ -1,32 +1,67 @@
 import test from 'ava';
 import { ZodError } from 'zod';
-import { MinMaxComponentConfigSchema } from '../../src/shape';
+import { MinMaxComponentConfig, MinMaxComponentConfigSchema } from '../../src/shape';
 
 interface testCase {
     name: string;
-    min?: number;
-    max?: number;
+    min?: number | null;
+    max?: number | null;
     error?: ZodError;
+    expected?: MinMaxComponentConfig;
 }
 
 const testCases: testCase[] = [
     {
         name: 'parses a valid min value',
         min: 1,
+        expected: {
+            min: 1,
+            max: undefined,
+        },
     },
     {
         name: 'parses a valid max value',
         max: 1,
+        expected: {
+            min: undefined,
+            max: 1,
+        },
     },
     {
         name: 'parses a valid min and max value',
         min: 1,
         max: 2,
+        expected: {
+            min: 1,
+            max: 2,
+        },
     },
     {
         name: 'parses when min and max are equal',
         min: 1,
         max: 1,
+        expected: {
+            min: 1,
+            max: 1,
+        },
+    },
+    {
+        name: 'does not error when min is null',
+        min: null,
+        max: 1,
+        expected: {
+            min: null,
+            max: 1,
+        },
+    },
+    {
+        name: 'does not error when max is null',
+        min: 1,
+        max: null,
+        expected: {
+            min: 1,
+            max: 1,
+        },
     },
     {
         name: 'errors when min is negative',
@@ -73,11 +108,11 @@ const testCases: testCase[] = [
 testCases.forEach((tc) =>
     test(tc.name, (t) => {
         try {
-            MinMaxComponentConfigSchema.parse({ min: tc.min, max: tc.max });
+            const actual = MinMaxComponentConfigSchema.parse({ min: tc.min, max: tc.max });
             if (tc.error) {
                 t.fail('validation should error');
             }
-            t.pass();
+            t.deepEqual(actual, tc.expected);
         } catch (err: any) {
             if (!tc.error) {
                 t.fail('validation should not error');

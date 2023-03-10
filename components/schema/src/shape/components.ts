@@ -7,6 +7,21 @@ export const MinMaxComponentConfigSchema = z
         min: z.number().min(0).optional().nullable(),
         max: z.number().min(1).optional().nullable(),
     })
+    .transform(({ min, max }) => {
+        // API throws an error of max being less than min, if max is explicitly null.
+        // This transform can be removed if the API issue is resolved.
+        if (min && max === null) {
+            return {
+                min,
+                max: min,
+            };
+        }
+
+        return {
+            min,
+            max,
+        };
+    })
     .refine(
         ({ min, max }) => {
             if (min && max) {
