@@ -60,7 +60,6 @@ const testCases: testCase[] = [
         max: null,
         expected: {
             min: 1,
-            max: 1,
         },
     },
     {
