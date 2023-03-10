@@ -12,18 +12,20 @@ interface testCase {
 
 const testCases: testCase[] = [
     {
+        name: 'parses empty config',
+        expected: {},
+    },
+    {
         name: 'parses a valid min value',
         min: 1,
         expected: {
             min: 1,
-            max: undefined,
         },
     },
     {
         name: 'parses a valid max value',
         max: 1,
         expected: {
-            min: undefined,
             max: 1,
         },
     },
@@ -46,11 +48,26 @@ const testCases: testCase[] = [
         },
     },
     {
+        name: 'does not error when min is undefined',
+        min: undefined,
+        max: 1,
+        expected: {
+            max: 1,
+        },
+    },
+    {
+        name: 'does not error when max is undefined',
+        min: 1,
+        max: undefined,
+        expected: {
+            min: 1,
+        },
+    },
+    {
         name: 'does not error when min is null',
         min: null,
         max: 1,
         expected: {
-            min: null,
             max: 1,
         },
     },
@@ -61,6 +78,12 @@ const testCases: testCase[] = [
         expected: {
             min: 1,
         },
+    },
+    {
+        name: 'does not error when both min and max are null',
+        min: null,
+        max: null,
+        expected: {},
     },
     {
         name: 'errors when min is negative',
