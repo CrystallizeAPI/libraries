@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/new-text-editor-support/static/css/main.a64e6318.css",
+    "main.js": "/libraries/new-text-editor-support/static/js/main.fea588d1.js",
+    "static/media/crystallize.svg": "/libraries/new-text-editor-support/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/new-text-editor-support/index.html",
+    "main.a64e6318.css.map": "/libraries/new-text-editor-support/static/css/main.a64e6318.css.map",
+    "main.fea588d1.js.map": "/libraries/new-text-editor-support/static/js/main.fea588d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.fea588d1.js"
+  ]
+}
