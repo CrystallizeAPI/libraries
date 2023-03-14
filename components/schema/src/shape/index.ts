@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { IdSchema, KeyValuePairSchema } from '../shared';
-import { ShapeComponentInputSchema, ShapeComponentSchema } from './components';
-import { ShapeTypeEnum } from './enums';
+import { IdSchema, KeyValuePairSchema } from '../shared/index.js';
+import { ShapeComponentInputSchema, ShapeComponentSchema } from './components.js';
+import { ShapeTypeEnum } from './enums.js';
 
-export * from './components';
-export * from './enums';
+export * from './components.js';
+export * from './enums.js';
 
 export const CreateShapeInputSchema = z
     .object({
@@ -36,7 +36,6 @@ export const UpdateShapeInputSchema = z.object({
     variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
 });
 
-/** @internal */
 export const basicShapeSchema = z.object({
     identifier: z.string().min(2).max(64),
     name: z.string().min(1),

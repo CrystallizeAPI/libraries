@@ -1,6 +1,6 @@
 import test from 'ava';
 import { ZodError } from 'zod';
-import { MinMaxComponentConfig, MinMaxComponentConfigSchema } from '../../src/shape';
+import { MinMaxComponentConfig, MinMaxComponentConfigSchema } from '../../src/shape/index.js';
 
 interface testCase {
     name: string;

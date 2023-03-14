@@ -1,19 +1,19 @@
 import { z } from 'zod';
-import { BooleanContentInput, BooleanContentInputSchema } from './boolean';
-import { ContentChunkContentInput, ContentChunkContentInputSchema } from './contentChunk';
-import { DatetimeContentInput, DatetimeContentInputSchema } from './datetime';
-import { FileInput, FileInputSchema } from './files';
-import { GridRelationsContentInput, GridRelationsContentInputSchema } from './gridRelations';
-import { ImageInput, ImageInputSchema } from './images';
-import { ItemRelationsContentInput, ItemRelationsContentInputSchema } from './itemRelations';
-import { LocationContentInput, LocationContentInputSchema } from './location';
-import { NumericComponentContentInput, NumericComponentContentInputSchema } from './numeric';
-import { ParagraphCollectionContentInput, ParagraphCollectionContentInputSchema } from './paragraphCollection';
-import { PropertiesTableContentInput, PropertiesTableContentInputSchema } from './propertiesTable';
-import { RichTextContentInput, RichTextContentInputSchema } from './richText';
-import { SelectionComponentContentInput, SelectionComponentContentInputSchema } from './selection';
-import { SingleLineContentInput, SingleLineContentInputSchema } from './singleLine';
-import { VideoInput, VideoInputSchema } from './videos';
+import { BooleanContentInput, BooleanContentInputSchema } from './boolean/index.js';
+import { ContentChunkContentInput, ContentChunkContentInputSchema } from './contentChunk/index.js';
+import { DatetimeContentInput, DatetimeContentInputSchema } from './datetime/index.js';
+import { FileInput, FileInputSchema } from './files/index.js';
+import { GridRelationsContentInput, GridRelationsContentInputSchema } from './gridRelations/index.js';
+import { ImageInput, ImageInputSchema } from './images/index.js';
+import { ItemRelationsContentInput, ItemRelationsContentInputSchema } from './itemRelations/index.js';
+import { LocationContentInput, LocationContentInputSchema } from './location/index.js';
+import { NumericComponentContentInput, NumericComponentContentInputSchema } from './numeric/index.js';
+import { ParagraphCollectionContentInput, ParagraphCollectionContentInputSchema } from './paragraphCollection/index.js';
+import { PropertiesTableContentInput, PropertiesTableContentInputSchema } from './propertiesTable/index.js';
+import { RichTextContentInput, RichTextContentInputSchema } from './richText/index.js';
+import { SelectionComponentContentInput, SelectionComponentContentInputSchema } from './selection/index.js';
+import { SingleLineContentInput, SingleLineContentInputSchema } from './singleLine/index.js';
+import { VideoInput, VideoInputSchema } from './videos/index.js';
 
 export type ComponentInput = {
     componentId: string;

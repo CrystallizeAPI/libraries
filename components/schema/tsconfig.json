@@ -1,6 +1,7 @@
 {
     "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
+        "module": "ESNext",
         "outDir": "./dist",
         "declaration": true,
         "sourceMap": true,

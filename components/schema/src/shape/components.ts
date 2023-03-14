@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { IdSchema } from '../shared';
-import { ShapeComponentTypeEnum } from './enums';
+import { IdSchema } from '../shared/index.js';
+import { ShapeComponentTypeEnum } from './enums.js';
 
 const minValueSchema = z.number().min(0).nullable().optional();
 const maxValueSchema = z.number().min(1).nullable().optional();

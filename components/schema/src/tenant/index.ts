@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { CreateShapeInputSchema, ShapeSchema } from '../shape';
-import { IdSchema } from '../shared';
+import { CreateShapeInputSchema, ShapeSchema } from '../shape/index.js';
+import { IdSchema } from '../shared/index.js';
 
 export const TenantDefaultsInputSchema = z.object({
     currency: z.string().optional(),
