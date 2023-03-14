@@ -5,36 +5,33 @@
     "type": "module",
     "exports": {
         "./item": {
-            "import": "./item/index.js",
-            "require": "./item/index.cjs",
-            "types": "./item/index.d.ts"
+            "import": "./dist/item/index.js",
+            "require": "./dist/item/index.cjs",
+            "types": "./dist/item/index.d.ts"
         },
         "./shape": {
-            "import": "./shape/index.js",
-            "require": "./shape/index.cjs",
-            "types": "./shape/index.d.ts"
+            "import": "./dist/shape/index.js",
+            "require": "./dist/shape/index.cjs",
+            "types": "./dist/shape/index.d.ts"
         },
         "./shared": {
-            "import": "./shared/index.js",
-            "require": "./shared/index.cjs",
-            "types": "./shared/index.d.ts"
+            "import": "./dist/shared/index.js",
+            "require": "./dist/shared/index.cjs",
+            "types": "./dist/shared/index.d.ts"
         },
         "./tenant": {
-            "import": "./tenant/index.js",
-            "require": "./tenant/index.cjs",
-            "types": "./tenant/index.d.ts"
+            "import": "./dist/tenant/index.js",
+            "require": "./dist/tenant/index.cjs",
+            "types": "./dist/tenant/index.d.ts"
         },
         "./topic": {
-            "import": "./topic/index.js",
-            "require": "./topic/index.cjs",
-            "types": "./topic/index.d.ts"
+            "import": "./dist/topic/index.js",
+            "require": "./dist/topic/index.cjs",
+            "types": "./dist/topic/index.d.ts"
         }
     },
     "scripts": {
-        "build:json": "json -f ./dist/package.json -I -e \"delete this.ava; delete this.devDependencies; delete this.scripts;\"",
-        "build:copy-files": "cp package.json ./dist/package.json &&  cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
-        "build": "rm -rf dist && tsup src/**/index.ts --format esm,cjs --dts && yarn run build:copy-files && yarn run build:json",
-        "build:watch": "yarn tsc -W",
+        "build": "rm -rf dist && tsup src/**/index.ts --format esm,cjs --dts",
         "test": "ava",
         "test:watch": "ava --watch"
     },
