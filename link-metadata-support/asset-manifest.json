@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/link-metadata-support/static/css/main.a64e6318.css",
+    "main.js": "/libraries/link-metadata-support/static/js/main.52529ae3.js",
+    "static/media/crystallize.svg": "/libraries/link-metadata-support/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/link-metadata-support/index.html",
+    "main.a64e6318.css.map": "/libraries/link-metadata-support/static/css/main.a64e6318.css.map",
+    "main.52529ae3.js.map": "/libraries/link-metadata-support/static/js/main.52529ae3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.52529ae3.js"
+  ]
+}
