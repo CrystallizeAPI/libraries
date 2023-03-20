@@ -1,7 +1,7 @@
 {
     "name": "@crystallize/node-service-api-request-handlers",
     "license": "MIT",
-    "version": "3.4.3",
+    "version": "3.5.0",
     "author": "Crystallize <hello@crystallize.com> (https://crystallize.com)",
     "contributors": [
         "Sébastien Morel <sebastien@crystallize.com>"
@@ -33,6 +33,7 @@
         "zod": "*"
     },
     "dependencies": {
+        "@adyen/api-library": "^13.0.0",
         "@crystallize/js-api-client": "*",
         "concurrently": "^7.4.0",
         "jsonwebtoken": "^8.5.1",
