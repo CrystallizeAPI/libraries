@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/add-adyen-doc/static/css/main.a64e6318.css",
+    "main.js": "/libraries/add-adyen-doc/static/js/main.50e324fb.js",
+    "static/media/crystallize.svg": "/libraries/add-adyen-doc/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/add-adyen-doc/index.html",
+    "main.a64e6318.css.map": "/libraries/add-adyen-doc/static/css/main.a64e6318.css.map",
+    "main.50e324fb.js.map": "/libraries/add-adyen-doc/static/js/main.50e324fb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.50e324fb.js"
+  ]
+}
