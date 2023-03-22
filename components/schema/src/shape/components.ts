@@ -22,7 +22,7 @@ export const MinMaxComponentConfigSchema = minMaxSchema
     })
     .refine(
         ({ min, max }) => {
-            if (min && max) {
+            if (typeof min === 'number' && typeof max === 'number') {
                 return min <= max;
             }
             return true;
@@ -97,6 +97,17 @@ export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.an
             .optional()
             .nullable(),
     }),
+).refine(
+    ({ max }) => {
+        if (max) {
+            return max <= 50;
+        }
+        return true;
+    },
+    {
+        message: 'Max may not be greater than 50',
+        path: ['max'],
+    },
 );
 
 export const NumericComponentConfigSchema = z.object({
