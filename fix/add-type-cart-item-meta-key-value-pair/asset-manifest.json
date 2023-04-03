@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/fix/add-type-cart-item-meta-key-value-pair/static/css/main.a64e6318.css",
+    "main.js": "/libraries/fix/add-type-cart-item-meta-key-value-pair/static/js/main.b881a744.js",
+    "static/media/crystallize.svg": "/libraries/fix/add-type-cart-item-meta-key-value-pair/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/fix/add-type-cart-item-meta-key-value-pair/index.html",
+    "main.a64e6318.css.map": "/libraries/fix/add-type-cart-item-meta-key-value-pair/static/css/main.a64e6318.css.map",
+    "main.b881a744.js.map": "/libraries/fix/add-type-cart-item-meta-key-value-pair/static/js/main.b881a744.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.b881a744.js"
+  ]
+}
