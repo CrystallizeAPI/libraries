@@ -1,6 +1,6 @@
 {
     "name": "@crystallize/schema",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "license": "MIT",
     "type": "module",
     "exports": {
@@ -13,30 +13,25 @@
     "main": "./dist/index.cjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
-        "test": "ava --verbose",
-        "test:watch": "ava --watch"
+        "build": "rm -rf dist && yarn tsup src/index.ts --format esm,cjs --dts",
+        "watch": "yarn tsc -W",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "bump": "yarn tsc && yarn version --no-git-tag-version --new-version"
     },
     "devDependencies": {
-        "@ava/typescript": "^3.0.1",
         "@tsconfig/node18": "^1.0.1",
         "@types/node": "^18.0.6",
-        "ava": "^4.3.3",
+        "@types/jest": "^28.1.6",
         "json": "^11.0.0",
         "mongodb": "^4.9.1",
-        "ts-node": "^10.9.1",
         "tsup": "^6.6.3",
+        "jest": "^27.5.1",
+        "ts-jest": "^28.0.7",
+        "ts-node": "^10.9.1",
         "typescript": "^4.7.4"
     },
-    "dependencies": {
-        "zod": "3.19.1"
-    },
-    "ava": {
-        "extensions": {
-            "ts": "module"
-        },
-        "nodeArguments": [
-            "--loader=ts-node/esm"
-        ]
+    "peerDependencies": {
+        "zod": "*"
     }
 }

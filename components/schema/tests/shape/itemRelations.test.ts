@@ -1,4 +1,3 @@
-import test from 'ava';
 import { ZodError } from 'zod';
 import { ItemRelationsComponentConfig, ItemRelationsComponentConfigSchema } from '../../src/shape/index.js';
 
@@ -40,19 +39,16 @@ const testCases: testCase[] = [
     },
 ];
 
-testCases.forEach((tc) =>
-    test(tc.name, (t) => {
-        try {
-            const actual = ItemRelationsComponentConfigSchema.parse({ min: tc.min, max: tc.max });
-            if (tc.error) {
-                t.fail('validation should error');
-            }
-            t.deepEqual(actual, tc.expected);
-        } catch (err: any) {
-            if (!tc.error) {
-                t.fail('validation should not error');
-            }
-            t.deepEqual(err.issues, tc.error?.issues);
+test('itemRelations.test', () => {
+    testCases.forEach((tc) => {
+        const shouldBeSuccess = tc.expected !== undefined;
+        const result: any = ItemRelationsComponentConfigSchema.safeParse({ min: tc.min, max: tc.max });
+        expect(result.success).toBe(shouldBeSuccess);
+
+        if (shouldBeSuccess) {
+            expect(result?.data).toStrictEqual(tc.expected);
+        } else {
+            expect(result?.error).toStrictEqual(tc.error);
         }
-    }),
-);
+    });
+});

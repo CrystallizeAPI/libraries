@@ -1,6 +1,6 @@
 {
     "name": "@crystallize/import-export-sdk",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "license": "MIT",
     "type": "module",
     "exports": {
@@ -13,7 +13,7 @@
     "main": "./dist/index.cjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
+        "build": "rm -rf dist && yarn tsup src/index.ts --format esm,cjs --dts",
         "test": "jest",
         "test:watch": "jest --watch"
     },

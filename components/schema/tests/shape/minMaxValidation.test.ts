@@ -1,4 +1,3 @@
-import test from 'ava';
 import { ZodError } from 'zod';
 import { MinMaxComponentConfig, MinMaxComponentConfigSchema } from '../../src/shape/index.js';
 
@@ -94,6 +93,7 @@ const testCases: testCase[] = [
                 minimum: 0,
                 type: 'number',
                 inclusive: true,
+                exact: false,
                 message: 'Number must be greater than or equal to 0',
                 path: ['min'],
             },
@@ -108,6 +108,7 @@ const testCases: testCase[] = [
                 minimum: 1,
                 type: 'number',
                 inclusive: true,
+                exact: false,
                 message: 'Number must be greater than or equal to 1',
                 path: ['max'],
             },
@@ -127,19 +128,16 @@ const testCases: testCase[] = [
     },
 ];
 
-testCases.forEach((tc) =>
-    test(tc.name, (t) => {
-        try {
-            const actual = MinMaxComponentConfigSchema.parse({ min: tc.min, max: tc.max });
-            if (tc.error) {
-                t.fail('validation should error');
-            }
-            t.deepEqual(actual, tc.expected);
-        } catch (err: any) {
-            if (!tc.error) {
-                t.fail('validation should not error');
-            }
-            t.deepEqual(err.issues, tc.error?.issues);
+test('minMaxValidation.test', () => {
+    testCases.forEach((tc) => {
+        const shouldBeSuccess = tc.expected !== undefined;
+        const result: any = MinMaxComponentConfigSchema.safeParse({ min: tc.min, max: tc.max });
+        expect(result.success).toBe(shouldBeSuccess);
+
+        if (shouldBeSuccess) {
+            expect(result?.data).toStrictEqual(tc.expected);
+        } else {
+            expect(result?.error).toStrictEqual(tc.error);
         }
-    }),
-);
+    });
+});
