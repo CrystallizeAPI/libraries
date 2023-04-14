@@ -26,6 +26,8 @@ const testCases: testCase[] = [
             type: 'folder',
             shape: {
                 identifier: 'some-shape',
+                name: 'some shape',
+                type: 'folder',
             },
         },
         existingItem: {
@@ -36,6 +38,8 @@ const testCases: testCase[] = [
             type: 'folder',
             shape: {
                 identifier: 'some-shape',
+                name: 'some shape',
+                type: 'folder',
             },
             tree: {
                 path: '/some-folder',
