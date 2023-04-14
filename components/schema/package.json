@@ -14,7 +14,7 @@
     "types": "./dist/index.d.ts",
     "scripts": {
         "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
-        "test": "ava",
+        "test": "ava --verbose",
         "test:watch": "ava --watch"
     },
     "devDependencies": {
