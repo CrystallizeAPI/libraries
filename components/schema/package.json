@@ -11,6 +11,7 @@
         }
     },
     "main": "./dist/index.cjs",
+    "types": "./dist/index.d.ts",
     "scripts": {
         "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
         "test": "ava",
