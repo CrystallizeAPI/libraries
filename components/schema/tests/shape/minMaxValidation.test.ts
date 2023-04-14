@@ -91,6 +91,7 @@ const testCases: testCase[] = [
         error: new ZodError([
             {
                 code: 'too_small',
+                exact: false,
                 minimum: 0,
                 type: 'number',
                 inclusive: true,
@@ -105,6 +106,7 @@ const testCases: testCase[] = [
         error: new ZodError([
             {
                 code: 'too_small',
+                exact: false,
                 minimum: 1,
                 type: 'number',
                 inclusive: true,
