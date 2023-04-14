@@ -1,5 +1,5 @@
 import { ZodError } from 'zod';
-import { UpdateTopicInput } from '@crystallize/schema/topic';
+import { UpdateTopicInput } from '@crystallize/schema';
 import { deepEqual, equal } from 'assert';
 import { updateTopicMutation } from '../../src/topic/mutations/update';
 

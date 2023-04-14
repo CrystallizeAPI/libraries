@@ -1,6 +1,6 @@
 import { z, ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
-import { UpdateShapeInput } from '@crystallize/schema/shape';
+import { UpdateShapeInput } from '@crystallize/schema';
 import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { deepEqual, equal } from 'assert';
 

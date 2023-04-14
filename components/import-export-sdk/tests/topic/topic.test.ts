@@ -1,7 +1,7 @@
 import { ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
 import { VariablesType } from '@crystallize/js-api-client';
-import { Topic } from '@crystallize/schema/topic';
+import { Topic } from '@crystallize/schema';
 import { getTopicQuery, createTopicMutation, updateTopicMutation, topic } from '../../src/topic';
 
 interface testCase {

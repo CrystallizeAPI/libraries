@@ -1,7 +1,7 @@
 import { ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
 import { VariablesType } from '@crystallize/js-api-client';
-import { Shape } from '@crystallize/schema/shape';
+import { Shape } from '@crystallize/schema';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';
 
 const mockTenantId = new ObjectId().toString();

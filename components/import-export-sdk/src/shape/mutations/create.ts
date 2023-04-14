@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateShapeInputSchema, CreateShapeInput } from '@crystallize/schema/shape';
+import { CreateShapeInputSchema, CreateShapeInput } from '@crystallize/schema';
 
 interface CreateProps {
     input: CreateShapeInput;

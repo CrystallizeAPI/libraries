@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateTopicInputSchema, CreateTopicInput } from '@crystallize/schema/topic';
+import { CreateTopicInputSchema, CreateTopicInput } from '@crystallize/schema';
 
 interface CreateProps {
     language: string;

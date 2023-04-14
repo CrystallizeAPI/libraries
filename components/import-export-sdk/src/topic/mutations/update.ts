@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateTopicInputSchema, UpdateTopicInput } from '@crystallize/schema/topic';
+import { UpdateTopicInputSchema, UpdateTopicInput } from '@crystallize/schema';
 import { Id } from '@crystallize/schema/shared';
 
 interface UpdateProps {

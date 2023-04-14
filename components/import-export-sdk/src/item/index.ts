@@ -7,7 +7,7 @@ import {
     UpdateDocumentInputSchema,
     UpdateFolderInputSchema,
     UpdateProductInputSchema,
-} from '@crystallize/schema/item';
+} from '@crystallize/schema';
 
 import { createDocumentMutation } from './mutations/createDocument';
 import { createFolderMutation } from './mutations/createFolder';

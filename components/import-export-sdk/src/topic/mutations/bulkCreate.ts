@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { VariablesType } from '@crystallize/js-api-client';
-import { BulkCreateTopicInputSchema, BulkCreateTopicInput } from '@crystallize/schema/topic';
+import { BulkCreateTopicInputSchema, BulkCreateTopicInput } from '@crystallize/schema';
 
 interface BulkCreateProps {
     tenantId: string;

@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateProductInput, CreateProductInputSchema } from '@crystallize/schema/item';
+import { CreateProductInput, CreateProductInputSchema } from '@crystallize/schema';
 
 interface CreateProps {
     input: CreateProductInput;

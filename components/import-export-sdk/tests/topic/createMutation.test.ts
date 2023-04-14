@@ -1,6 +1,6 @@
 import { ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
-import { CreateTopicInput } from '@crystallize/schema/topic';
+import { CreateTopicInput } from '@crystallize/schema';
 import { deepEqual, equal } from 'assert';
 import { createTopicMutation } from '../../src/topic/mutations/create';
 

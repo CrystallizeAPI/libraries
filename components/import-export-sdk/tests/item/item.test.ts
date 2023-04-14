@@ -1,7 +1,7 @@
 import { ZodError } from 'zod';
 import { ObjectId } from 'mongodb';
 import { VariablesType } from '@crystallize/js-api-client';
-import { Item } from '@crystallize/schema/item';
+import { Item } from '@crystallize/schema';
 import { getItemQuery, item, updateFolderMutation } from '../../src/item';
 
 const mockTenantId = new ObjectId().toString();

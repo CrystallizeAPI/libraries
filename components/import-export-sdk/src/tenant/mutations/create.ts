@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateTenantInputSchema, CreateTenantInput } from '@crystallize/schema/tenant';
+import { CreateTenantInputSchema, CreateTenantInput } from '@crystallize/schema';
 
 interface CreateProps {
     input: CreateTenantInput;

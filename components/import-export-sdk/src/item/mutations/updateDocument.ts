@@ -1,6 +1,6 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { UpdateDocumentInput, UpdateDocumentInputSchema } from '@crystallize/schema/item';
-import { Id } from '@crystallize/schema/shared';
+import { UpdateDocumentInput, UpdateDocumentInputSchema } from '@crystallize/schema';
+import { Id } from '@crystallize/schema';
 
 interface UpdateProps {
     id: Id;

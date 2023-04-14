@@ -4,34 +4,14 @@
     "license": "MIT",
     "type": "module",
     "exports": {
-        "./item": {
-            "import": "./dist/item/index.js",
-            "require": "./dist/item/index.cjs",
-            "types": "./dist/item/index.d.ts"
-        },
-        "./shape": {
-            "import": "./dist/shape/index.js",
-            "require": "./dist/shape/index.cjs",
-            "types": "./dist/shape/index.d.ts"
-        },
-        "./shared": {
-            "import": "./dist/shared/index.js",
-            "require": "./dist/shared/index.cjs",
-            "types": "./dist/shared/index.d.ts"
-        },
-        "./tenant": {
-            "import": "./dist/tenant/index.js",
-            "require": "./dist/tenant/index.cjs",
-            "types": "./dist/tenant/index.d.ts"
-        },
-        "./topic": {
-            "import": "./dist/topic/index.js",
-            "require": "./dist/topic/index.cjs",
-            "types": "./dist/topic/index.d.ts"
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs",
+            "types": "./dist/it/index.d.ts"
         }
     },
     "scripts": {
-        "build": "rm -rf dist && tsup src/**/index.ts --format esm,cjs --dts",
+        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
         "test": "ava",
         "test:watch": "ava --watch"
     },

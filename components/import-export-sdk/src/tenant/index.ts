@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateTenantInput, CreateTenantInputSchema, Tenant } from '@crystallize/schema/tenant';
+import { CreateTenantInput, CreateTenantInputSchema, Tenant } from '@crystallize/schema';
 import { ThinClient } from '../shared/thin-client';
 import { createTenantMutation } from './mutations/create';
 

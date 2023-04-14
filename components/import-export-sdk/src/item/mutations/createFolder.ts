@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { CreateFolderInput, CreateFolderInputSchema } from '@crystallize/schema/item';
+import { CreateFolderInput, CreateFolderInputSchema } from '@crystallize/schema';
 
 interface CreateProps {
     input: CreateFolderInput;

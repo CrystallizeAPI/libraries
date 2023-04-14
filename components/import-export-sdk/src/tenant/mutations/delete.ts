@@ -1,6 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { Id } from '@crystallize/schema/shared';
-import { CreateTenantInputSchema, CreateTenantInput } from '@crystallize/schema/tenant';
+import { Id } from '@crystallize/schema';
 
 interface DeleteProps {
     id: Id;
