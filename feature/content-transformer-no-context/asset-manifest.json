@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/content-transformer-no-context/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/content-transformer-no-context/static/js/main.7c09f85d.js",
+    "static/media/crystallize.svg": "/libraries/feature/content-transformer-no-context/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/content-transformer-no-context/index.html",
+    "main.a64e6318.css.map": "/libraries/feature/content-transformer-no-context/static/css/main.a64e6318.css.map",
+    "main.7c09f85d.js.map": "/libraries/feature/content-transformer-no-context/static/js/main.7c09f85d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.7c09f85d.js"
+  ]
+}
