@@ -1,6 +1,10 @@
 {
     "type": "oss-monorepository",
     "many-repositories": {
+        "import-export-sdk": {
+            "name": "Import Export SDK",
+            "git": "git@github.com:CrystallizeAPI/import-export-sdk.git"
+        },
         "js-api-client": {
             "name": "(Java|Type)Script API Client",
             "git": "git@github.com:CrystallizeAPI/js-api-client.git"
@@ -24,6 +28,10 @@
         "js-storefrontaware-utils": {
             "name": "(Java|Type)Script Storefront Aware Utils",
             "git": "git@github.com:CrystallizeAPI/js-storefrontaware-utils.git"
+        },
+        "schema": {
+            "name": "Schema",
+            "git": "git@github.com:CrystallizeAPI/schema.git"
         }
     }
 }
