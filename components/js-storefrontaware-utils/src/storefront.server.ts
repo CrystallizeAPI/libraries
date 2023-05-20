@@ -28,8 +28,8 @@ export const createStoreFront = async (
             {
                 tenantIdentifier: config.tenantIdentifier,
                 tenantId: config.tenantId,
-                accessTokenId: withSecrets ? config.configuration?.ACCESS_TOKEN_ID || '' : '',
-                accessTokenSecret: withSecrets ? config.configuration?.ACCESS_TOKEN_SECRET || '' : '',
+                accessTokenId: withSecrets ? config.configuration?.CRYSTALLIZE_ACCESS_TOKEN_ID || '' : '',
+                accessTokenSecret: withSecrets ? config.configuration?.CRYSTALLIZE_ACCESS_TOKEN_SECRET || '' : '',
             },
             clientOptions,
         ),

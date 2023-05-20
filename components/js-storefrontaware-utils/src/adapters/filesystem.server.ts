@@ -13,8 +13,8 @@ export const createFilesystemAdapter = (filename: string): TStoreFrontAdapter =>
                 ...unfilteredSecrets,
                 configuration: {
                     ...unfilteredSecrets.configuration,
-                    ACCESS_TOKEN_ID: '',
-                    ACCESS_TOKEN_SECRET: '',
+                    CRYSTALLIZE_ACCESS_TOKEN_ID: '',
+                    CRYSTALLIZE_ACCESS_TOKEN_SECRET: '',
                 },
             };
         },
