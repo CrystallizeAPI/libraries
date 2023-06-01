@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/fix/min-max-validation-is-0/static/css/main.a64e6318.css",
+    "main.js": "/libraries/fix/min-max-validation-is-0/static/js/main.bbc023af.js",
+    "static/media/crystallize.svg": "/libraries/fix/min-max-validation-is-0/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/fix/min-max-validation-is-0/index.html",
+    "main.a64e6318.css.map": "/libraries/fix/min-max-validation-is-0/static/css/main.a64e6318.css.map",
+    "main.bbc023af.js.map": "/libraries/fix/min-max-validation-is-0/static/js/main.bbc023af.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.bbc023af.js"
+  ]
+}
