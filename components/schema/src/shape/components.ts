@@ -3,7 +3,7 @@ import { IdSchema } from '../shared/index.js';
 import { ShapeComponentTypeEnum } from './enums.js';
 
 const minValueSchema = z.number().min(0).nullable().optional();
-const maxValueSchema = z.number().min(1).nullable().optional();
+const maxValueSchema = z.number().min(0).nullable().optional();
 const minMaxSchema = z.object({ min: minValueSchema, max: maxValueSchema });
 
 export const MinMaxComponentConfigSchema = minMaxSchema
@@ -11,19 +11,23 @@ export const MinMaxComponentConfigSchema = minMaxSchema
         // API throws an error of max being less than min if max is explicitly null.
         // This transform can be removed if the API issue is resolved.
         const result: z.infer<typeof minMaxSchema> = {};
-        if (!!min) {
+        if (min !== null && min !== undefined) {
             result.min = min;
         }
-        if (!!max) {
+        if (max !== null && max !== undefined) {
             result.max = max;
         }
-
         return result;
     })
     .refine(
         ({ min, max }) => {
             if (typeof min === 'number' && typeof max === 'number') {
-                return min <= max;
+                if (min === max) {
+                    return true;
+                }
+                if (min > max) {
+                    return false;
+                }
             }
             return true;
         },

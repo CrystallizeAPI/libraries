@@ -85,6 +85,15 @@ const testCases: testCase[] = [
         expected: {},
     },
     {
+        name: 'does not error when both min and max are 0',
+        min: 0,
+        max: 0,
+        expected: {
+            min: 0,
+            max: 0,
+        },
+    },
+    {
         name: 'errors when min is negative',
         min: -1,
         error: new ZodError([
@@ -96,21 +105,6 @@ const testCases: testCase[] = [
                 exact: false,
                 message: 'Number must be greater than or equal to 0',
                 path: ['min'],
-            },
-        ]),
-    },
-    {
-        name: 'errors when max is less than 1',
-        max: 0,
-        error: new ZodError([
-            {
-                code: 'too_small',
-                minimum: 1,
-                type: 'number',
-                inclusive: true,
-                exact: false,
-                message: 'Number must be greater than or equal to 1',
-                path: ['max'],
             },
         ]),
     },
@@ -132,6 +126,10 @@ test('minMaxValidation.test', () => {
     testCases.forEach((tc) => {
         const shouldBeSuccess = tc.expected !== undefined;
         const result: any = MinMaxComponentConfigSchema.safeParse({ min: tc.min, max: tc.max });
+
+        if (result.success !== shouldBeSuccess) {
+            console.log(tc, result);
+        }
         expect(result.success).toBe(shouldBeSuccess);
 
         if (shouldBeSuccess) {
