@@ -127,9 +127,6 @@ test('minMaxValidation.test', () => {
         const shouldBeSuccess = tc.expected !== undefined;
         const result: any = MinMaxComponentConfigSchema.safeParse({ min: tc.min, max: tc.max });
 
-        if (result.success !== shouldBeSuccess) {
-            console.log(tc, result);
-        }
         expect(result.success).toBe(shouldBeSuccess);
 
         if (shouldBeSuccess) {
