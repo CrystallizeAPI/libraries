@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/update/zod/static/css/main.a64e6318.css",
+    "main.js": "/libraries/update/zod/static/js/main.af3b0342.js",
+    "static/media/crystallize.svg": "/libraries/update/zod/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/update/zod/index.html",
+    "main.a64e6318.css.map": "/libraries/update/zod/static/css/main.a64e6318.css.map",
+    "main.af3b0342.js.map": "/libraries/update/zod/static/js/main.af3b0342.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.af3b0342.js"
+  ]
+}
