@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature-vipps-integration/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature-vipps-integration/static/js/main.7437ea83.js",
+    "static/media/crystallize.svg": "/libraries/feature-vipps-integration/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature-vipps-integration/index.html",
+    "main.a64e6318.css.map": "/libraries/feature-vipps-integration/static/css/main.a64e6318.css.map",
+    "main.7437ea83.js.map": "/libraries/feature-vipps-integration/static/js/main.7437ea83.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.7437ea83.js"
+  ]
+}
