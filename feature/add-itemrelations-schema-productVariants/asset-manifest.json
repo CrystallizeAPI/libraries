@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/add-itemrelations-schema-productVariants/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/add-itemrelations-schema-productVariants/static/js/main.92969823.js",
+    "static/media/crystallize.svg": "/libraries/feature/add-itemrelations-schema-productVariants/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/add-itemrelations-schema-productVariants/index.html",
+    "main.a64e6318.css.map": "/libraries/feature/add-itemrelations-schema-productVariants/static/css/main.a64e6318.css.map",
+    "main.92969823.js.map": "/libraries/feature/add-itemrelations-schema-productVariants/static/js/main.92969823.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.92969823.js"
+  ]
+}
