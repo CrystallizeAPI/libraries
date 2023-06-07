@@ -3,6 +3,10 @@ export const basicComponentConfigFragment = `
         ... on ItemRelationsComponentConfig {
             min
             max
+            minItems
+            maxItems
+            minSkus
+            maxSkus
             acceptedShapeIdentifiers
             quickSelect {
                 folders {

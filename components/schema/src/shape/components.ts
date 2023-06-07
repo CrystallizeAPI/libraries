@@ -5,6 +5,14 @@ import { ShapeComponentTypeEnum } from './enums.js';
 const minValueSchema = z.number().min(0).nullable().optional();
 const maxValueSchema = z.number().min(0).nullable().optional();
 const minMaxSchema = z.object({ min: minValueSchema, max: maxValueSchema });
+const minMaxItemRelationsSchema = z.object({
+    min: minValueSchema,
+    max: maxValueSchema,
+    minItems: minValueSchema,
+    maxItems: maxValueSchema,
+    minSkus: minValueSchema,
+    maxSkus: maxValueSchema,
+});
 
 export const MinMaxComponentConfigSchema = minMaxSchema
     .transform(({ min, max }) => {
@@ -26,6 +34,65 @@ export const MinMaxComponentConfigSchema = minMaxSchema
                     return true;
                 }
                 if (min > max) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        {
+            message: 'Min cannot be greater than max',
+            path: ['min'],
+        },
+    );
+
+export const MinMaxItemRelationsComponentConfigSchema = minMaxItemRelationsSchema
+    .transform(({ min, max, minSkus, minItems, maxSkus, maxItems }) => {
+        // API throws an error of max being less than min if max is explicitly null.
+        // This transform can be removed if the API issue is resolved.
+        const result: z.infer<typeof minMaxItemRelationsSchema> = {};
+        if (min !== null && min !== undefined) {
+            result.min = min;
+        }
+        if (minSkus !== null && minSkus !== undefined) {
+            result.minSkus = minSkus;
+        }
+        if (minItems !== null && minItems !== undefined) {
+            result.minItems = minItems;
+        }
+        if (max !== null && max !== undefined) {
+            result.max = max;
+        }
+        if (maxSkus !== null && maxSkus !== undefined) {
+            result.maxSkus = maxSkus;
+        }
+        if (maxItems !== null && maxItems !== undefined) {
+            result.maxItems = maxItems;
+        }
+        return result;
+    })
+    .refine(
+        ({ min, max, minItems, maxItems, minSkus, maxSkus }) => {
+            if (typeof min === 'number' && typeof max === 'number') {
+                if (min === max) {
+                    return true;
+                }
+                if (min > max) {
+                    return false;
+                }
+            }
+            if (typeof minItems === 'number' && typeof maxItems === 'number') {
+                if (minItems === maxItems) {
+                    return true;
+                }
+                if (minItems > maxItems) {
+                    return false;
+                }
+            }
+            if (typeof minSkus === 'number' && typeof maxSkus === 'number') {
+                if (minSkus === maxSkus) {
+                    return true;
+                }
+                if (minSkus > maxSkus) {
                     return false;
                 }
             }
@@ -88,7 +155,7 @@ export const FileComponentConfigSchema = MinMaxComponentConfigSchema.and(
     }),
 );
 
-export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.and(
+export const ItemRelationsComponentConfigSchema = MinMaxItemRelationsComponentConfigSchema.and(
     z.object({
         acceptedShapeIdentifiers: z.array(z.string()).optional().nullable(),
         quickSelect: z
@@ -101,18 +168,54 @@ export const ItemRelationsComponentConfigSchema = MinMaxComponentConfigSchema.an
             .optional()
             .nullable(),
     }),
-).refine(
-    ({ max }) => {
-        if (max) {
-            return max <= 50;
-        }
-        return true;
-    },
-    {
-        message: 'Max may not be greater than 50',
-        path: ['max'],
-    },
-);
+).superRefine(({ max, min, minItems, maxItems, minSkus, maxSkus }, ctx) => {
+    if (max && max > 50) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.too_big,
+            maximum: 50,
+            type: 'number',
+            inclusive: true,
+            message: 'Max cannot be greater than 50',
+        });
+    }
+    if (maxItems && maxItems > 50) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.too_big,
+            maximum: 50,
+            type: 'number',
+            inclusive: true,
+            message: 'MaxItems cannot be greater than 50',
+        });
+    }
+    if (maxSkus && maxSkus > 50) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.too_big,
+            maximum: 50,
+            type: 'number',
+            inclusive: true,
+            message: 'MaxSkus cannot be greater than 50',
+        });
+    }
+});
+
+// .refine(
+//     ({ max, maxSkus, maxItems }) => {
+//         if (max) {
+//             return max <= 50;
+//         }
+//         if (maxSkus) {
+//             return maxSkus <= 50;
+//         }
+//         if (maxItems) {
+//             return maxItems <= 50;
+//         }†
+//         return true;
+//     },
+//     {
+//         message: 'Max may not be greater than 50',
+//         path: ['max'],
+//     },
+// );
 
 export const NumericComponentConfigSchema = z.object({
     decimalPlaces: z.number().min(0).optional(),
@@ -209,6 +312,7 @@ export const ShapeComponentSchema = z
     );
 
 export type MinMaxComponentConfig = z.infer<typeof MinMaxComponentConfigSchema>;
+export type MinMaxItemRelationsComponentConfig = z.infer<typeof MinMaxItemRelationsComponentConfigSchema>;
 export type FileComponentConfig = z.infer<typeof FileComponentConfigSchema>;
 export type ItemRelationsComponentConfig = z.infer<typeof ItemRelationsComponentConfigSchema>;
 export type NumericComponentConfig = z.infer<typeof NumericComponentConfigSchema>;

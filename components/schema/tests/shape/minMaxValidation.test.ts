@@ -1,12 +1,16 @@
 import { ZodError } from 'zod';
-import { MinMaxComponentConfig, MinMaxComponentConfigSchema } from '../../src/shape/index.js';
+import { MinMaxItemRelationsComponentConfig, MinMaxItemRelationsComponentConfigSchema } from '../../src/shape/index.js';
 
 interface testCase {
     name: string;
     min?: number | null;
     max?: number | null;
+    minItems?: number | null;
+    maxItems?: number | null;
+    minSkus?: number | null;
+    maxSkus?: number | null;
     error?: ZodError;
-    expected?: MinMaxComponentConfig;
+    expected?: MinMaxItemRelationsComponentConfig;
 }
 
 const testCases: testCase[] = [
@@ -22,10 +26,24 @@ const testCases: testCase[] = [
         },
     },
     {
+        name: 'parses a valid minItems value',
+        minItems: 1,
+        expected: {
+            minItems: 1,
+        },
+    },
+    {
         name: 'parses a valid max value',
         max: 1,
         expected: {
             max: 1,
+        },
+    },
+    {
+        name: 'parses a valid maxItems value',
+        maxItems: 1,
+        expected: {
+            maxItems: 1,
         },
     },
     {
@@ -44,6 +62,15 @@ const testCases: testCase[] = [
         expected: {
             min: 1,
             max: 1,
+        },
+    },
+    {
+        name: 'parses when minSkus and maxSkus are equal',
+        minSkus: 1,
+        maxSkus: 1,
+        expected: {
+            minSkus: 1,
+            maxSkus: 1,
         },
     },
     {
@@ -94,6 +121,15 @@ const testCases: testCase[] = [
         },
     },
     {
+        name: 'does not error when both min and max are 0',
+        minItems: 0,
+        maxItems: 0,
+        expected: {
+            minItems: 0,
+            maxItems: 0,
+        },
+    },
+    {
         name: 'errors when min is negative',
         min: -1,
         error: new ZodError([
@@ -125,7 +161,14 @@ const testCases: testCase[] = [
 test('minMaxValidation.test', () => {
     testCases.forEach((tc) => {
         const shouldBeSuccess = tc.expected !== undefined;
-        const result: any = MinMaxComponentConfigSchema.safeParse({ min: tc.min, max: tc.max });
+        const result: any = MinMaxItemRelationsComponentConfigSchema.safeParse({
+            min: tc.min,
+            max: tc.max,
+            minItems: tc.minItems,
+            maxItems: tc.maxItems,
+            minSkus: tc.minSkus,
+            maxSkus: tc.maxSkus,
+        });
 
         expect(result.success).toBe(shouldBeSuccess);
 
