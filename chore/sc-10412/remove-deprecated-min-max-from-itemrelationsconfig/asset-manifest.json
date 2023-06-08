@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/static/css/main.a64e6318.css",
+    "main.js": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/static/js/main.874e2bcf.js",
+    "static/media/crystallize.svg": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/index.html",
+    "main.a64e6318.css.map": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/static/css/main.a64e6318.css.map",
+    "main.874e2bcf.js.map": "/libraries/chore/sc-10412/remove-deprecated-min-max-from-itemrelationsconfig/static/js/main.874e2bcf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.874e2bcf.js"
+  ]
+}
