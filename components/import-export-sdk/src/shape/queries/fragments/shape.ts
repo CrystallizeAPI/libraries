@@ -1,8 +1,6 @@
 export const basicComponentConfigFragment = `
     fragment basicComponentConfig on ComponentConfig {
         ... on ItemRelationsComponentConfig {
-            min
-            max
             minItems
             maxItems
             minSkus
