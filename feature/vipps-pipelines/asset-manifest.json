@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/vipps-pipelines/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/vipps-pipelines/static/js/main.54868e37.js",
+    "static/media/crystallize.svg": "/libraries/feature/vipps-pipelines/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/vipps-pipelines/index.html",
+    "main.a64e6318.css.map": "/libraries/feature/vipps-pipelines/static/css/main.a64e6318.css.map",
+    "main.54868e37.js.map": "/libraries/feature/vipps-pipelines/static/js/main.54868e37.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.54868e37.js"
+  ]
+}
