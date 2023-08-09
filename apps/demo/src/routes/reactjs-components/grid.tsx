@@ -1,7 +1,7 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
-import { Image } from '@crystallize/reactjs-components/dist/image';
-import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components/dist/grid';
+import { Image } from '@crystallize/reactjs-components';
+import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components';
 import { FC, useEffect, useState } from 'react';
 import { Code } from '../../components/Code';
 
