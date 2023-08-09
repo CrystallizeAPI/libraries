@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feat/export-es-modules-reactjs-components/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feat/export-es-modules-reactjs-components/static/js/main.ceb21cc3.js",
+    "static/media/crystallize.svg": "/libraries/feat/export-es-modules-reactjs-components/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feat/export-es-modules-reactjs-components/index.html",
+    "main.a64e6318.css.map": "/libraries/feat/export-es-modules-reactjs-components/static/css/main.a64e6318.css.map",
+    "main.ceb21cc3.js.map": "/libraries/feat/export-es-modules-reactjs-components/static/js/main.ceb21cc3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.ceb21cc3.js"
+  ]
+}
