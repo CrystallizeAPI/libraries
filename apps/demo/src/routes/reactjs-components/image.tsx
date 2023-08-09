@@ -1,6 +1,6 @@
 import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { useCrystallize } from '@crystallize/reactjs-hooks';
-import { Image } from '@crystallize/reactjs-components/dist/image';
+import { Image } from '@crystallize/reactjs-components';
 import { FC, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import CardGroup from 'react-bootstrap/esm/CardGroup';

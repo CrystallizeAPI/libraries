@@ -1,6 +1,6 @@
 import { useCrystallize } from '@crystallize/reactjs-hooks';
 import { FC, useEffect, useState } from 'react';
-import { ContentTransformer } from '@crystallize/reactjs-components/dist/content-transformer';
+import { ContentTransformer } from '@crystallize/reactjs-components';
 import { Code } from '../../components/Code';
 
 export const CrystallizeContentTransformer: FC = () => {
