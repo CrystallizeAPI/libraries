@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/chore/js-api-client-update-dependencies/static/css/main.a64e6318.css",
+    "main.js": "/libraries/chore/js-api-client-update-dependencies/static/js/main.f11c99a6.js",
+    "static/media/crystallize.svg": "/libraries/chore/js-api-client-update-dependencies/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/chore/js-api-client-update-dependencies/index.html",
+    "main.a64e6318.css.map": "/libraries/chore/js-api-client-update-dependencies/static/css/main.a64e6318.css.map",
+    "main.f11c99a6.js.map": "/libraries/chore/js-api-client-update-dependencies/static/js/main.f11c99a6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.f11c99a6.js"
+  ]
+}
