@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "@crystallize/js-api-client": "*",
-        "@koa/cors": "^3.3.0",
+        "@koa/cors": "^4.0.0",
         "jsonwebtoken": "^8.5.1",
         "koa-bodyparser": "^4.3.0",
         "koa-json": "^2.0.2",
