@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/dintero-payment/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/dintero-payment/static/js/main.aa03a7eb.js",
+    "static/media/crystallize.svg": "/libraries/feature/dintero-payment/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/dintero-payment/index.html",
+    "main.a64e6318.css.map": "/libraries/feature/dintero-payment/static/css/main.a64e6318.css.map",
+    "main.aa03a7eb.js.map": "/libraries/feature/dintero-payment/static/js/main.aa03a7eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.aa03a7eb.js"
+  ]
+}
