@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/dintero-qa/static/css/main.a64e6318.css",
+    "main.js": "/libraries/dintero-qa/static/js/main.43e5d656.js",
+    "static/media/crystallize.svg": "/libraries/dintero-qa/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/dintero-qa/index.html",
+    "main.a64e6318.css.map": "/libraries/dintero-qa/static/css/main.a64e6318.css.map",
+    "main.43e5d656.js.map": "/libraries/dintero-qa/static/js/main.43e5d656.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.43e5d656.js"
+  ]
+}
