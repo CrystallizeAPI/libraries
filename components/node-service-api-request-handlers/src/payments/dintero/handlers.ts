@@ -16,29 +16,35 @@ export async function handleDinteroPaymentSessionPayload(
             Authorization: `Bearer ${authToken.access_token}`,
         },
         body: JSON.stringify({
-            profile_id: 'default',
+            profile_id: args.credentials.profileId ?? 'default',
             order: {
                 currency: cart.total.currency,
                 merchant_reference: payload.cartId,
                 amount: cart.total.gross * 100,
                 vat_amount: cart.total.taxAmount * 100,
                 items: cart.cart.items.map((item, index) => ({
-                    id: item.product.id,
+                    id: item.variant.sku,
                     line_id: index.toString(),
-                    name: item.product.name,
+                    description: item.variant.name,
                     quantity: item.quantity,
                     vat_amount: item.price.taxAmount * 100,
                     amount: item.price.gross * 100,
-                    thumbnail_url: item.images?.[0]?.url ?? '',
+                    thumbnail_url: item.variant.firstImage?.url ?? '',
                     discounts:
                         item.price?.discounts?.map((discount) => ({
                             percent: discount.percent,
                             amount: discount.amount * 100,
                         })) ?? [],
                 })),
+                shipping_address: args.customer?.shippingAddress,
+                billing_address: args.customer?.billingAddress,
             },
             url: {
                 return_url: args.returnUrl,
+                callback_url: args.callbackUrl,
+            },
+            customer: {
+                email: args?.customer?.email ?? '',
             },
         }),
     }).then((res) => res.json());
