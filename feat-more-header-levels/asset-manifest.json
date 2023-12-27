@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feat-more-header-levels/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feat-more-header-levels/static/js/main.47cef74a.js",
+    "static/media/crystallize.svg": "/libraries/feat-more-header-levels/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feat-more-header-levels/index.html",
+    "main.a64e6318.css.map": "/libraries/feat-more-header-levels/static/css/main.a64e6318.css.map",
+    "main.47cef74a.js.map": "/libraries/feat-more-header-levels/static/js/main.47cef74a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.47cef74a.js"
+  ]
+}
