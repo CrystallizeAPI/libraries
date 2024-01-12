@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature/dintero-express-checkout/static/css/main.a64e6318.css",
+    "main.js": "/libraries/feature/dintero-express-checkout/static/js/main.c74587ea.js",
+    "static/media/crystallize.svg": "/libraries/feature/dintero-express-checkout/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature/dintero-express-checkout/index.html",
+    "main.a64e6318.css.map": "/libraries/feature/dintero-express-checkout/static/css/main.a64e6318.css.map",
+    "main.c74587ea.js.map": "/libraries/feature/dintero-express-checkout/static/js/main.c74587ea.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a64e6318.css",
+    "static/js/main.c74587ea.js"
+  ]
+}
