@@ -7,7 +7,7 @@
     "devDependencies": {
         "concurrently": "^7.1.0",
         "prettier": "2.6.0",
-        "turbo": "^1.4.3"
+        "turbo": "^1.11.3"
     },
     "scripts": {
         "build": "turbo run build",
@@ -17,7 +17,8 @@
         "demo": "turbo run start --filter demo"
     },
     "volta": {
-        "node": "16.14.2",
+        "node": "20.11.0",
         "yarn": "1.22.18"
-    }
+    },
+    "dependencies": {}
 }

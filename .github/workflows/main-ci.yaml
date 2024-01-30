@@ -25,7 +25,7 @@ jobs:
         needs: [lint]
         strategy:
             matrix:
-                node: [16, 18]
+                node: [18, 20]
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
@@ -59,7 +59,7 @@ jobs:
         needs: [lint]
         strategy:
             matrix:
-                node: [16, 18]
+                node: [18, 20]
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
@@ -99,7 +99,7 @@ jobs:
             - name: ⎔ Setup node
               uses: actions/setup-node@v3
               with:
-                  node-version: 16
+                  node-version: 20
 
             - name: ⬇️ Checkout repo
               uses: actions/checkout@v3
