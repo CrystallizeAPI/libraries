@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/libraries/feature-js-api-client-v2/static/css/main.44129496.css",
+    "main.js": "/libraries/feature-js-api-client-v2/static/js/main.f02ff41a.js",
+    "static/media/crystallize.svg": "/libraries/feature-js-api-client-v2/static/media/crystallize.00e368738fe2424c778dfa71294453f6.svg",
+    "index.html": "/libraries/feature-js-api-client-v2/index.html",
+    "main.44129496.css.map": "/libraries/feature-js-api-client-v2/static/css/main.44129496.css.map",
+    "main.f02ff41a.js.map": "/libraries/feature-js-api-client-v2/static/js/main.f02ff41a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44129496.css",
+    "static/js/main.f02ff41a.js"
+  ]
+}
