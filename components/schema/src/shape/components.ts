@@ -127,7 +127,7 @@ export const ContentChunkComponentConfigInputSchema: z.ZodType<ContentChunkCompo
     .lazy(() =>
         z.object({
             components: z.array(ShapeComponentInputSchema),
-            repeatable: z.boolean().default(false),
+            repeatable: z.coerce.boolean().default(false),
         }),
     )
     .refine(
@@ -238,7 +238,7 @@ export const SelectionComponentConfigInputSchema = MinMaxComponentConfigSchema.a
                 z.object({
                     key: z.string().min(1),
                     value: z.string().min(1),
-                    isPreselected: z.boolean().default(false),
+                    isPreselected: z.coerce.boolean().default(false),
                 }),
             )
             .optional()
