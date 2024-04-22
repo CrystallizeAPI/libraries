@@ -222,6 +222,17 @@ export const NumericComponentConfigSchema = z.object({
     units: z.array(z.string()).optional(),
 });
 
+export type PieceComponentConfig = {
+    components: any[];
+    repeatable?: boolean;
+};
+
+export const PieceComponentConfigInputSchema: z.ZodType<PieceComponentConfig> = z.lazy(() =>
+    z.object({
+        components: z.array(ShapeComponentInputSchema),
+    }),
+);
+
 export const PropertiesTableComponentConfigSchema = z.object({
     sections: z.array(
         z.object({
@@ -252,6 +263,7 @@ export const ShapeComponentConfigInputSchema = z.object({
     files: FileComponentConfigSchema.optional(),
     itemRelations: ItemRelationsComponentConfigSchema.optional(),
     numeric: NumericComponentConfigSchema.optional(),
+    piece: PieceComponentConfigInputSchema.optional(),
     propertiesTable: PropertiesTableComponentConfigSchema.optional(),
     selection: SelectionComponentConfigInputSchema.optional(),
 });
@@ -262,6 +274,7 @@ export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSch
     .or(FileComponentConfigSchema)
     .or(ItemRelationsComponentConfigSchema)
     .or(NumericComponentConfigSchema)
+    .or(PieceComponentConfigInputSchema)
     .or(PropertiesTableComponentConfigSchema)
     .or(SelectionComponentConfigInputSchema);
 
