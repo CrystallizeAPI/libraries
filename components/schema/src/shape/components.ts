@@ -223,12 +223,13 @@ export const NumericComponentConfigSchema = z.object({
 });
 
 export type PieceComponentConfig = {
+    identifier: string;
     components: any[];
-    repeatable?: boolean;
 };
 
 export const PieceComponentConfigInputSchema: z.ZodType<PieceComponentConfig> = z.lazy(() =>
     z.object({
+        identifier: z.string().min(1),
         components: z.array(ShapeComponentInputSchema),
     }),
 );
