@@ -9,6 +9,7 @@ import { ItemRelationsContentInput, ItemRelationsContentInputSchema } from './it
 import { LocationContentInput, LocationContentInputSchema } from './location/index.js';
 import { NumericComponentContentInput, NumericComponentContentInputSchema } from './numeric/index.js';
 import { ParagraphCollectionContentInput, ParagraphCollectionContentInputSchema } from './paragraphCollection/index.js';
+import { PieceContentInput, PieceContentInputSchema } from './piece/index.js';
 import { PropertiesTableContentInput, PropertiesTableContentInputSchema } from './propertiesTable/index.js';
 import { RichTextContentInput, RichTextContentInputSchema } from './richText/index.js';
 import { SelectionComponentContentInput, SelectionComponentContentInputSchema } from './selection/index.js';
@@ -29,6 +30,7 @@ export type ComponentInput = {
     location?: LocationContentInput;
     numeric?: NumericComponentContentInput;
     paragraphCollection?: ParagraphCollectionContentInput;
+    piece?: PieceContentInput;
     propertiesTable?: PropertiesTableContentInput;
     richText?: RichTextContentInput;
     selection?: SelectionComponentContentInput;
@@ -50,6 +52,7 @@ export const ComponentInputSchema: z.ZodType<ComponentInput> = z.lazy(() =>
         location: LocationContentInputSchema.optional(),
         numeric: NumericComponentContentInputSchema.optional(),
         paragraphCollection: ParagraphCollectionContentInputSchema.optional(),
+        piece: PieceContentInputSchema.optional(),
         propertiesTable: PropertiesTableContentInputSchema.optional(),
         richText: RichTextContentInputSchema.optional(),
         selection: SelectionComponentContentInputSchema.optional(),

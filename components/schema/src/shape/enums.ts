@@ -12,6 +12,7 @@ export const ShapeComponentTypeEnum = z.enum([
     'location',
     'numeric',
     'paragraphCollection',
+    'piece',
     'propertiesTable',
     'richText',
     'selection',
