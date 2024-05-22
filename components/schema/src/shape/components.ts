@@ -107,6 +107,10 @@ export const MinMaxItemRelationsComponentConfigSchema = minMaxItemRelationsSchem
 export type ComponentChoiceComponentConfig = {
     choices: any[];
 };
+export type ComponentMultipleChoiceComponentConfig = {
+    choices: any[];
+    allowDuplicates: boolean;
+};
 
 export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoiceComponentConfig> = z
     .lazy(() =>
@@ -117,6 +121,14 @@ export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoic
     .refine(({ choices }) => !choices.find((cmp) => cmp.type === 'componentChoice' || cmp.type === 'contentChunk'), {
         message: 'Nesting "componentChoice" or "contentChunk" structural components is not allowed',
     });
+
+export const ComponentMultipleChoiceComponentConfigInputSchema: z.ZodType<ComponentMultipleChoiceComponentConfig> = z
+    .lazy(() =>
+        z.object({
+            choices: z.array(ShapeComponentInputSchema),
+            allowDuplicates: z.coerce.boolean(),
+        }),
+    )
 
 export type ContentChunkComponentConfig = {
     components: any[];
@@ -168,7 +180,7 @@ export const ItemRelationsComponentConfigSchema = MinMaxItemRelationsComponentCo
             .optional()
             .nullable(),
     }),
-).superRefine(({ max, min, minItems, maxItems, minSkus, maxSkus }, ctx) => {
+).superRefine(({ max, maxItems, maxSkus }, ctx) => {
     if (max && max > 50) {
         ctx.addIssue({
             code: z.ZodIssueCode.too_big,
@@ -197,25 +209,6 @@ export const ItemRelationsComponentConfigSchema = MinMaxItemRelationsComponentCo
         });
     }
 });
-
-// .refine(
-//     ({ max, maxSkus, maxItems }) => {
-//         if (max) {
-//             return max <= 50;
-//         }
-//         if (maxSkus) {
-//             return maxSkus <= 50;
-//         }
-//         if (maxItems) {
-//             return maxItems <= 50;
-//         }†
-//         return true;
-//     },
-//     {
-//         message: 'Max may not be greater than 50',
-//         path: ['max'],
-//     },
-// );
 
 export const NumericComponentConfigSchema = z.object({
     decimalPlaces: z.number().min(0).optional(),
@@ -260,6 +253,7 @@ export const SelectionComponentConfigInputSchema = MinMaxComponentConfigSchema.a
 
 export const ShapeComponentConfigInputSchema = z.object({
     componentChoice: ComponentChoiceComponentConfigInputSchema.optional(),
+    componentMultipleChoice: ComponentMultipleChoiceComponentConfigInputSchema.optional(),
     contentChunk: ContentChunkComponentConfigInputSchema.optional(),
     files: FileComponentConfigSchema.optional(),
     itemRelations: ItemRelationsComponentConfigSchema.optional(),
@@ -269,15 +263,15 @@ export const ShapeComponentConfigInputSchema = z.object({
     selection: SelectionComponentConfigInputSchema.optional(),
 });
 
-export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSchema.or(
-    ContentChunkComponentConfigInputSchema,
-)
+export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSchema
+    .or(ContentChunkComponentConfigInputSchema)
     .or(FileComponentConfigSchema)
     .or(ItemRelationsComponentConfigSchema)
     .or(NumericComponentConfigSchema)
     .or(PieceComponentConfigInputSchema)
+    .or(ComponentMultipleChoiceComponentConfigInputSchema)
     .or(PropertiesTableComponentConfigSchema)
-    .or(SelectionComponentConfigInputSchema);
+    .or(SelectionComponentConfigInputSchema)
 
 export const ShapeComponentInputSchema = z
     .object({
