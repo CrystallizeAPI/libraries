@@ -2,7 +2,7 @@ import { VariablesType } from '@crystallize/js-api-client';
 import {
     ComponentChoiceComponentConfig,
     ContentChunkComponentConfig,
-    CreateShapeInputSchema,
+    NextPimCreateShapeInputSchema,
     Shape,
     ShapeComponent,
     ShapeComponentInput,
@@ -87,7 +87,7 @@ export const shape = (data: Shape): ShapeOperation => {
             tenantId,
             identifier: data.identifier,
         });
-        const res = await client.pimApi(query, variables).then((res) => res?.shape?.get);
+        const res = await client.nextPimApi(query, variables).then((res) => res?.shape?.get);
         return !!res;
     };
 
@@ -101,7 +101,6 @@ export const shape = (data: Shape): ShapeOperation => {
 
         if (await exists(client)) {
             return updateShapeMutation({
-                tenantId,
                 identifier: data.identifier,
                 input: UpdateShapeInputSchema.parse({
                     ...data,
@@ -112,7 +111,7 @@ export const shape = (data: Shape): ShapeOperation => {
         }
 
         return createShapeMutation({
-            input: CreateShapeInputSchema.parse({
+            input: NextPimCreateShapeInputSchema.parse({
                 ...data,
                 components: data.components?.map(shapeComponentToInput),
                 variantComponents: data.variantComponents?.map(shapeComponentToInput),
@@ -123,12 +122,12 @@ export const shape = (data: Shape): ShapeOperation => {
 
     const execute = async (client: ThinClient): Promise<Shape | undefined> => {
         const { query, variables, type } = await determineMutation(client);
-        return client.pimApi(query, variables).then((res) => res?.shape?.[type]);
+        return client.nextPimApi(query, variables).then((res) => res?.shape?.[type]);
     };
 
     const enqueue = async (client: ThinClient): Promise<void> => {
         const { query, variables } = await determineMutation(client);
-        client.enqueue.pimApi(query, variables);
+        client.enqueue.nextPimApi(query, variables);
     };
 
     return {

@@ -4,6 +4,7 @@ export const ShapeTypeEnum = z.enum(['product', 'document', 'folder']);
 export const ShapeComponentTypeEnum = z.enum([
     'boolean',
     'componentChoice',
+    'componentMultipleChoice',
     'contentChunk',
     'datetime',
     'gridRelations',
