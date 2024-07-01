@@ -25,27 +25,19 @@ clean: ## Clean non-essential files
 			rm -rf components/$${COMPONENT}/dist; \
 			rm -rf components/$${COMPONENT}/build; \
 			rm -f components/$${COMPONENT}/yarn.lock; \
+			rm -f components/$${COMPONENT}/pnpm-lock.yaml; \
 		fi; \
 	done
 
 .PHONY: codeclean
 codeclean: ## Code Clean
-	@yarn prettier --write .
+	@pnpm prettier --write .
 
 .PHONY: tests
 tests: ## Run the tests
 	@echo " ..:: Mono Repo Testing ::.."
 	@yarn test
 	@yarn prettier --check .
-
-.PHONY: bump
-bump: ## Bump all components
-	@for COMPONENT in $(shell ls components); do \
-		if [ -d "components/$${COMPONENT}" ]; then \
-			echo " ..:: Bumping $${COMPONENT} ::.."; \
-			cd components/$${COMPONENT} && yarn bump $(VERSION) && cd - ;\
-		fi; \
-	done
 
 .PHONY: add-component
 add-component: ## Create an empty structure for a new Component

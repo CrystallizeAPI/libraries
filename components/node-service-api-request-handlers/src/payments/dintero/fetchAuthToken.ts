@@ -1,4 +1,4 @@
-import { DinteroCredentials } from './types';
+import { DinteroCredentials } from './types.js';
 
 export const fetchDinteroAuthToken = async (credentials: DinteroCredentials) => {
     const body = JSON.stringify({

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { MagickLinkConfirmArguments, MagickLinkRegisterArguments, MagickLinkUserInfosPayload } from './types';
+import { MagickLinkConfirmArguments, MagickLinkRegisterArguments, MagickLinkUserInfosPayload } from './types.js';
 
 export async function handleMagickLinkRegisterPayload<
     T extends MagickLinkUserInfosPayload = MagickLinkUserInfosPayload,

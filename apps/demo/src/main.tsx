@@ -1,19 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './css/app.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 
-console.log(process.env.REACT_APP_BASENAME || 'libraries');
-
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <BrowserRouter basename={process.env.REACT_APP_BASENAME || 'libraries'}>
+        <BrowserRouter basename={'libraries'}>
             <IconContext.Provider value={{ className: 'r-icon' }}>
                 <App />
             </IconContext.Provider>
         </BrowserRouter>
     </React.StrictMode>,
-    document.getElementById('root'),
 );

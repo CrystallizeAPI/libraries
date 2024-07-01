@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ImageInputSchema } from '../images';
+import { ImageInputSchema } from '../images/index.js';
 
 export const VideoInputSchema = z.object({
     key: z.string().min(1),

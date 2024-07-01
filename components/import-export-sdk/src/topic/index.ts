@@ -1,13 +1,13 @@
 import { CreateTopicInputSchema, UpdateTopicInputSchema, MAX_CHILD_COUNT, Topic } from '@crystallize/schema';
-import { ThinClient } from '../shared/thin-client';
-import { createTopicMutation } from './mutations/create';
-import { updateTopicMutation } from './mutations/update';
-import { getTopicQuery } from './queries/get';
+import { ThinClient } from '../shared/thin-client.js';
+import { createTopicMutation } from './mutations/create.js';
+import { updateTopicMutation } from './mutations/update.js';
+import { getTopicQuery } from './queries/get.js';
 
-export { bulkCreateTopicsMutation } from './mutations/bulkCreate';
-export { createTopicMutation } from './mutations/create';
-export { updateTopicMutation } from './mutations/update';
-export { getTopicQuery } from './queries/get';
+export { bulkCreateTopicsMutation } from './mutations/bulkCreate.js';
+export { createTopicMutation } from './mutations/create.js';
+export { updateTopicMutation } from './mutations/update.js';
+export { getTopicQuery } from './queries/get.js';
 
 const countChildren = (children: Topic[]): number =>
     children.reduce((acc, child) => (child.children?.length ? acc + 1 + countChildren(child.children) : acc + 1), 0);

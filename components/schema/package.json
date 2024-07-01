@@ -13,24 +13,23 @@
     "main": "./dist/index.cjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "rm -rf dist && yarn tsup src/index.ts --format esm,cjs --dts",
-        "watch": "yarn tsc -W",
+        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
+        "watch": "tsc -W",
         "test": "jest",
-        "test:watch": "jest --watch",
-        "bump": "yarn tsc && yarn version --no-git-tag-version --new-version"
+        "test:watch": "jest --watch"
     },
     "dependencies": {
-        "zod": "^3.21.4"
+        "zod": "^3.23.8"
     },
     "devDependencies": {
-        "@tsconfig/node18": "^1.0.1",
-        "@types/jest": "^28.1.6",
-        "@types/node": "^18.0.6",
-        "jest": "^27.5.1",
+        "@tsconfig/node20": "^20.1.4",
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.14.9",
+        "jest": "^29.7.0",
         "json": "^11.0.0",
-        "ts-jest": "^28.0.7",
-        "ts-node": "^10.9.1",
-        "tsup": "^6.6.3",
-        "typescript": "^4.7.4"
+        "ts-jest": "^29.1.5",
+        "ts-node": "^10.9.2",
+        "tsup": "^8.1.0",
+        "typescript": "^5.5.2"
     }
 }

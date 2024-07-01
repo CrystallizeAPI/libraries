@@ -1,4 +1,4 @@
-import { createClient } from './client';
+import { createClient } from './client.js';
 import {
     KlarnaInitiatePaymentArguments,
     KlarnaInitiatePaymentPayload,
@@ -6,7 +6,7 @@ import {
     KlarnaPaymentResponse,
     KlarnaWebhookArguments,
     KlarnaWebhookPayload,
-} from './types';
+} from './types.js';
 
 export async function handleKlarnaInitiatePaymentRequestPayload(
     payload: KlarnaInitiatePaymentPayload,

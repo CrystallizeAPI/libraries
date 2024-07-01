@@ -1,5 +1,5 @@
-import { fetchDinteroAuthToken } from './fetchAuthToken';
-import { DinteroCreateSessionArguments, DinteroPaymentPayload, DinteroPaymentVerificationArguments } from './types';
+import { fetchDinteroAuthToken } from './fetchAuthToken.js';
+import { DinteroCreateSessionArguments, DinteroPaymentPayload, DinteroPaymentVerificationArguments } from './types.js';
 
 export async function handleDinteroPaymentSessionPayload(
     payload: DinteroPaymentPayload,

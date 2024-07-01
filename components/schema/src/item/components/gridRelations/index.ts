@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IdSchema } from '../../../shared';
+import { IdSchema } from '../../../shared/index.js';
 
 export const GridRelationsContentInputSchema = z.object({
     gridIds: z.array(IdSchema).optional(),

@@ -8,15 +8,15 @@ import {
     ShapeComponentInput,
     UpdateShapeInputSchema,
 } from '@crystallize/schema';
-import { ThinClient } from '../shared/thin-client';
-import { createShapeMutation } from './mutations/create';
-import { updateShapeMutation } from './mutations/update';
-import { getShapeQuery } from './queries/get';
+import { ThinClient } from '../shared/thin-client.js';
+import { createShapeMutation } from './mutations/create.js';
+import { updateShapeMutation } from './mutations/update.js';
+import { getShapeQuery } from './queries/get.js';
 
-export { getShapeQuery } from './queries/get';
-export { getManyShapesQuery } from './queries/getMany';
-export { createShapeMutation } from './mutations/create';
-export { updateShapeMutation } from './mutations/update';
+export { getShapeQuery } from './queries/get.js';
+export { getManyShapesQuery } from './queries/getMany.js';
+export { createShapeMutation } from './mutations/create.js';
+export { updateShapeMutation } from './mutations/update.js';
 
 interface ShapeOperation {
     exists: (client: ThinClient) => Promise<boolean>;

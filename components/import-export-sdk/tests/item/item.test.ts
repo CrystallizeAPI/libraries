@@ -1,8 +1,8 @@
 import { ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Item } from '@crystallize/schema';
-import { getItemQuery, item, updateFolderMutation } from '../../src/item';
+import { getItemQuery, item, updateFolderMutation } from '../../src/item/index.js';
 
 const mockTenantId = new ObjectId().toString();
 const mockItemId = new ObjectId().toString();

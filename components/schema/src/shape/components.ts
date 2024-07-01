@@ -122,13 +122,13 @@ export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoic
         message: 'Nesting "componentChoice" or "contentChunk" structural components is not allowed',
     });
 
-export const ComponentMultipleChoiceComponentConfigInputSchema: z.ZodType<ComponentMultipleChoiceComponentConfig> = z
-    .lazy(() =>
+export const ComponentMultipleChoiceComponentConfigInputSchema: z.ZodType<ComponentMultipleChoiceComponentConfig> =
+    z.lazy(() =>
         z.object({
             choices: z.array(ShapeComponentInputSchema),
             allowDuplicates: z.coerce.boolean(),
         }),
-    )
+    );
 
 export type ContentChunkComponentConfig = {
     components: any[];
@@ -263,15 +263,16 @@ export const ShapeComponentConfigInputSchema = z.object({
     selection: SelectionComponentConfigInputSchema.optional(),
 });
 
-export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSchema
-    .or(ContentChunkComponentConfigInputSchema)
+export const ShapeComponentConfigSchema = ComponentChoiceComponentConfigInputSchema.or(
+    ContentChunkComponentConfigInputSchema,
+)
     .or(FileComponentConfigSchema)
     .or(ItemRelationsComponentConfigSchema)
     .or(NumericComponentConfigSchema)
     .or(PieceComponentConfigInputSchema)
     .or(ComponentMultipleChoiceComponentConfigInputSchema)
     .or(PropertiesTableComponentConfigSchema)
-    .or(SelectionComponentConfigInputSchema)
+    .or(SelectionComponentConfigInputSchema);
 
 export const ShapeComponentInputSchema = z
     .object({
