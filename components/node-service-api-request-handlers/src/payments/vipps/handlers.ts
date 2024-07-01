@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { createClient } from './client';
-import { fetchVippsTokenFromOAuthCode } from './fetchTokenFromOAuthCode';
-import { fetchVippsUserInfoFromOAuthToken } from './fetchUserInfoFromOAuthToken';
+import { createClient } from './client.js';
+import { fetchVippsTokenFromOAuthCode } from './fetchTokenFromOAuthCode.js';
+import { fetchVippsUserInfoFromOAuthToken } from './fetchUserInfoFromOAuthToken.js';
 import {
     VippsCreateCheckoutSessionArguments,
     VippsCreateCheckoutSessionResponse,
@@ -15,7 +15,7 @@ import {
     VippsLoginOAuthPayload,
     VippsWebhookArguments,
     VippsWebhookPayload,
-} from './types';
+} from './types.js';
 
 export async function handleVippsInitiatePaymentRequestPayload(
     payload: VippsInitiatePaymentPayload,

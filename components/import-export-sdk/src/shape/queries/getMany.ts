@@ -1,5 +1,5 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { basicComponentConfigFragment, structuralComponentConfigFragment } from './fragments/shape';
+import { basicComponentConfigFragment, structuralComponentConfigFragment } from './fragments/shape.js';
 
 interface GetManyProps {
     tenantId: string;

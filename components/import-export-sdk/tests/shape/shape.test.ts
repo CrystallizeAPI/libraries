@@ -1,5 +1,5 @@
 import { ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Shape } from '@crystallize/schema';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';

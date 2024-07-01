@@ -1,4 +1,4 @@
-import { Cart } from '../../cart/types';
+import { Cart } from '../../cart/types.js';
 import { z } from 'zod';
 import Stripe from 'stripe';
 

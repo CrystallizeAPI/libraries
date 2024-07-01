@@ -1,5 +1,5 @@
 import { createClient, CreateClientOptions } from '@crystallize/js-api-client';
-import { TStoreFront, TStoreFrontAdapter } from './types';
+import { TStoreFront, TStoreFrontAdapter } from './types.js';
 
 export type StoreFrontOptions = {
     withSecrets?: boolean;

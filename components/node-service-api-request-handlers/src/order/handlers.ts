@@ -3,7 +3,7 @@ import {
     CrystallizeOrderFetcherByCustomerIdentifier,
     Order,
 } from '@crystallize/js-api-client';
-import { OrderArguments, OrdersArguments } from './types';
+import { OrderArguments, OrdersArguments } from './types.js';
 
 export async function handleOrderRequestPayload(payload: any, args: OrderArguments): Promise<Order> {
     const fetcher = args.fetcherById ?? CrystallizeOrderFetcherById;

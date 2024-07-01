@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 const fetchResult = async (url: string, init?: RequestInit | any | undefined): Promise<any> => {
     const response = await fetch(url, {
         ...init,

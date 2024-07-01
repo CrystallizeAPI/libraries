@@ -1,5 +1,10 @@
 import { Client, CheckoutAPI } from '@adyen/api-library';
-import { AdyenCreateSessionArguments, AdyenPaymentPayload, AdyenWebhookArguments, AdyenWebhookPayload } from './types';
+import {
+    AdyenCreateSessionArguments,
+    AdyenPaymentPayload,
+    AdyenWebhookArguments,
+    AdyenWebhookPayload,
+} from './types.js';
 
 export async function handleAdyenPaymentSessionPayload(
     payload: AdyenPaymentPayload,

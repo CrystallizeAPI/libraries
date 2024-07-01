@@ -12,9 +12,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: ⬇️ Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
-            - uses: actionsx/prettier@v2
+            - uses: actionsx/prettier@v3
               with:
                   # prettier CLI arguments.
                   args: --check .
@@ -31,26 +31,31 @@ jobs:
             TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         steps:
             - name: 🛑 Cancel Previous Runs
-              uses: styfle/cancel-workflow-action@0.9.1
+              uses: styfle/cancel-workflow-action@0.12.1
 
             - name: ⬇️ Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: ⎔ Setup node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node }}
+
+            - name: ⎔ Set up pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9.4.0
 
             - name: 📥 Download deps
               run: |
                   echo ::group::..:: Mono Repo Tests ::..
-                  yarn
+                  pnpm install
                   echo ::endgroup::
 
             - name: 🏄 Run the tests
               run: |
                   echo ::group::..:: Mono Repo Tests ::..
-                  yarn test
+                  pnpm run test
                   echo ::endgroup::
 
     builds:
@@ -65,20 +70,20 @@ jobs:
             TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         steps:
             - name: 🛑 Cancel Previous Runs
-              uses: styfle/cancel-workflow-action@0.9.1
+              uses: styfle/cancel-workflow-action@0.12.1
 
             - name: ⬇️ Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: ⎔ Setup node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node }}
 
             - name: 📥 Download deps and builds folder by folder
               run: |
                   rm -f package.json
-                  rm -f yarn.lock
+                  rm -f pnpm-lock.yaml
                   rm -rf node_modules
                   for COMPONENT in `ls components`; do
                       if [ -d "components/${COMPONENT}" ]; then
@@ -94,18 +99,18 @@ jobs:
         needs: [lint, test, builds]
         steps:
             - name: 🛑 Cancel Previous Runs
-              uses: styfle/cancel-workflow-action@0.10.0
+              uses: styfle/cancel-workflow-action@0.12.1
+
+            - name: ⬇️ Checkout repo
+              uses: actions/checkout@v4
 
             - name: ⎔ Setup node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: 20
 
-            - name: ⬇️ Checkout repo
-              uses: actions/checkout@v3
-
             - name: 📥 Download deps
-              run: yarn install && yarn build
+              run: pnpm install && pnpm run build
 
             - name: 🚀 Sync it!
               env:

@@ -1,10 +1,10 @@
-import { createClient } from './client';
+import { createClient } from './client.js';
 import {
     QuickPayCreatePaymentLinkArguments,
     QuickPayCreatePaymentLinkPayload,
     QuickPayWebhookArguments,
     QuickPayWebhookPayload,
-} from './types';
+} from './types.js';
 import crypto from 'crypto';
 
 export async function handleQuickPayCreatePaymentLinkRequestPayload(

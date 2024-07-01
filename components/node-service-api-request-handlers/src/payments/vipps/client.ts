@@ -1,5 +1,4 @@
-import fetch from 'node-fetch';
-import { VippsAppCredentials } from './types';
+import { VippsAppCredentials } from './types.js';
 
 const fetchResult = async (url: string, init?: RequestInit | any | undefined): Promise<any> => {
     const headers = {

@@ -675,9 +675,9 @@ This is interesting to see the usage of the function `addVippsReceiptOrder` whic
 The last bit of the Vipps integration is the Polling mechanism, you can use any system to run that code every 2-5 seconds and this library provides you 2 methods to check the payment status:
 
 ```typescript
-fetchVippsCheckoutSession = (url: string, credentials: VippsAppCredentials) => Promise<{ session: any, payment?: any}>
+fetchVippsCheckoutSession = (url: string, credentials: VippsAppCredentials) => Promise<{ session: any; payment?: any }>;
 
-fetchVippsPayment = (reference: string, credentials: VippsAppCredentials) => Promise<any|undefined>
+fetchVippsPayment = (reference: string, credentials: VippsAppCredentials) => Promise<any | undefined>;
 ```
 
 `fetchVippsCheckoutSession` is actually using `fetchVippsPayment` when the Session has a payment associated with it. (during the flow).

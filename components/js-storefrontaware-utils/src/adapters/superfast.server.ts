@@ -1,6 +1,6 @@
 import { ClientConfiguration, ClientInterface, createClient } from '@crystallize/js-api-client';
-import { TStoreFrontAdapter, TStoreFrontConfig } from '../types';
-import { cypher } from '../cypher';
+import { TStoreFrontAdapter, TStoreFrontConfig } from '../types.js';
+import { cypher } from '../cypher.js';
 import { jsonToGraphQLQuery } from 'json-to-graphql-query';
 
 type TStorage = {

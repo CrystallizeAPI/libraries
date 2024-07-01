@@ -1,10 +1,10 @@
 import { VariablesType } from '@crystallize/js-api-client';
 import { CreateTenantInput, CreateTenantInputSchema, Tenant } from '@crystallize/schema';
-import { ThinClient } from '../shared/thin-client';
-import { createTenantMutation } from './mutations/create';
+import { ThinClient } from '../shared/thin-client.js';
+import { createTenantMutation } from './mutations/create.js';
 
-export { createTenantMutation } from './mutations/create';
-export { deleteTenantMutation } from './mutations/delete';
+export { createTenantMutation } from './mutations/create.js';
+export { deleteTenantMutation } from './mutations/delete.js';
 
 interface TenantOperation {
     exists: (client: ThinClient) => Promise<boolean>;

@@ -5,7 +5,7 @@ import {
     RazorPayPaymentPayload,
     RazorPayPaymentVerificationArguments,
     RazorPayVerificationPayload,
-} from './types';
+} from './types.js';
 
 export async function handleRazorPayOrderPayload(
     payload: RazorPayPaymentPayload,
