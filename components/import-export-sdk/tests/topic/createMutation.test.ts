@@ -1,8 +1,9 @@
 import { ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from 'bson';
 import { CreateTopicInput } from '@crystallize/schema';
 import { deepEqual, equal } from 'assert';
 import { createTopicMutation } from '../../src/topic/mutations/create';
+import { expect, it } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 

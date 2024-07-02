@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { KeyValuePairInputSchema } from '../../../shared';
+import { KeyValuePairInputSchema } from '../../../shared/index.js';
 
 export const PropertiesTableComponentSectionInputSchema = z.object({
     properties: z.array(KeyValuePairInputSchema).optional(),

@@ -1,12 +1,10 @@
 {
-    "extends": "@tsconfig/node18/tsconfig.json",
+    "extends": "@tsconfig/node20/tsconfig.json",
     "compilerOptions": {
-        "module": "ESNext",
         "outDir": "./dist",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true
     },
-    "include": ["./src/**/*"],
-    "exclude": ["./**/tests"]
+    "include": ["./src/**/*"]
 }

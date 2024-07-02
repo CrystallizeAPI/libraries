@@ -22,6 +22,7 @@ export type ComponentInput = {
     images?: ImageInput[];
     videos?: VideoInput[];
     componentChoice?: ComponentInput;
+    componentMultipleChoice?: ComponentInput[];
     contentChunk?: ContentChunkContentInput;
     boolean?: BooleanContentInput;
     datetime?: DatetimeContentInput;
@@ -44,6 +45,7 @@ export const ComponentInputSchema: z.ZodType<ComponentInput> = z.lazy(() =>
         images: z.array(ImageInputSchema).optional(),
         videos: z.array(VideoInputSchema).optional(),
         componentChoice: ComponentInputSchema.optional(),
+        componentMultipleChoice: z.array(ComponentInputSchema).optional(),
         contentChunk: ContentChunkContentInputSchema.optional(),
         boolean: BooleanContentInputSchema.optional(),
         datetime: DatetimeContentInputSchema.optional(),

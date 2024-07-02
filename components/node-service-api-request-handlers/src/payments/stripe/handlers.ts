@@ -4,7 +4,7 @@ import {
     StripePaymentIntentPayload,
     StripePaymentIntentWebhookArguments,
     StripePaymentIntentWebhookPayload,
-} from './types';
+} from './types.js';
 
 import Stripe from 'stripe';
 

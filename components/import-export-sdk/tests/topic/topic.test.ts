@@ -1,8 +1,9 @@
 import { ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Topic } from '@crystallize/schema';
 import { getTopicQuery, createTopicMutation, updateTopicMutation, topic } from '../../src/topic';
+import { expect, it, vi } from 'vitest';
 
 interface testCase {
     name: string;
@@ -211,7 +212,7 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest.fn();
+        let mockPimApi = vi.fn();
 
         if (tc.existingTopic) {
             mockPimApi = mockPimApi

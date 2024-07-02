@@ -1,1 +1,1 @@
-export * from './thin-client';
+export * from './thin-client.js';

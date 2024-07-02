@@ -9,23 +9,23 @@ import {
     UpdateProductInputSchema,
 } from '@crystallize/schema';
 
-import { createDocumentMutation } from './mutations/createDocument';
-import { createFolderMutation } from './mutations/createFolder';
-import { createProductMutation } from './mutations/createProduct';
-import { updateDocumentMutation } from './mutations/updateDocument';
-import { updateFolderMutation } from './mutations/updateFolder';
-import { updateProductMutation } from './mutations/updateProduct';
-import { getItemQuery } from './queries/get';
+import { createDocumentMutation } from './mutations/createDocument.js';
+import { createFolderMutation } from './mutations/createFolder.js';
+import { createProductMutation } from './mutations/createProduct.js';
+import { updateDocumentMutation } from './mutations/updateDocument.js';
+import { updateFolderMutation } from './mutations/updateFolder.js';
+import { updateProductMutation } from './mutations/updateProduct.js';
+import { getItemQuery } from './queries/get.js';
 
-import { ThinClient } from '../shared/thin-client';
+import { ThinClient } from '../shared/thin-client.js';
 
-export { createDocumentMutation } from './mutations/createDocument';
-export { updateDocumentMutation } from './mutations/updateDocument';
-export { createFolderMutation } from './mutations/createFolder';
-export { updateFolderMutation } from './mutations/updateFolder';
-export { createProductMutation } from './mutations/createProduct';
-export { updateProductMutation } from './mutations/updateProduct';
-export { getItemQuery } from './queries/get';
+export { createDocumentMutation } from './mutations/createDocument.js';
+export { updateDocumentMutation } from './mutations/updateDocument.js';
+export { createFolderMutation } from './mutations/createFolder.js';
+export { updateFolderMutation } from './mutations/updateFolder.js';
+export { createProductMutation } from './mutations/createProduct.js';
+export { updateProductMutation } from './mutations/updateProduct.js';
+export { getItemQuery } from './queries/get.js';
 
 interface ItemOperation {
     exists: (client: ThinClient) => Promise<boolean>;

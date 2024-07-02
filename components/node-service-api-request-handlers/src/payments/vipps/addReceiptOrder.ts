@@ -1,5 +1,5 @@
-import { createClient } from './client';
-import { AddReceiptToOrderArgs, VippsAppCredentials } from './types';
+import { createClient } from './client.js';
+import { AddReceiptToOrderArgs, VippsAppCredentials } from './types.js';
 
 export const addVippsReceiptOrder = async (
     { orderId, paymentType, receipt }: AddReceiptToOrderArgs,

@@ -17,10 +17,10 @@ jobs:
             group: ${{ github.workflow }}-${{ github.ref }}
         steps:
             - name: ⬇️ Checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: ⎔ Setup node
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: 20
 
@@ -33,13 +33,13 @@ jobs:
 
             - name: 🥖 Build the React App
               run: |
-                  yarn
-                  yarn build --filter demo
+                  pnpm install
+                  pnpm build --filter @crystallize/demo-app
 
             - name: 🍿 Deploy
               uses: peaceiris/actions-gh-pages@v3
               if: ${{ github.ref == 'refs/heads/main' }}
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./apps/demo/build
+                  publish_dir: ./apps/demo/dist
                   keep_files: true

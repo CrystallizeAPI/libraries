@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Cart } from '../../cart/types';
+import { Cart } from '../../cart/types.js';
 
 export const klarnaInitiatePaymentPayload = z
     .object({

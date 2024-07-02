@@ -4,7 +4,7 @@ import {
     MontonioPaymentLinkArguments,
     MontonioWebhookArguments,
     MontonioWebhookPayload,
-} from './types';
+} from './types.js';
 
 export async function handleMontonioCreatePaymentLinkRequestPayload(
     payload: MontonioCreatePaymentLinkPayload,

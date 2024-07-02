@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { State, Dispatch, Actions, Reducer, mapToReducerActions } from './Reducer';
+import { State, Dispatch, Actions, Reducer, mapToReducerActions } from './Reducer.js';
 import { FunctionComponent } from 'react';
 import {
     ClientConfiguration,

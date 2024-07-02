@@ -1,4 +1,4 @@
-import { TStoreFrontAdapter, TStoreFrontConfig } from '../types';
+import { TStoreFrontAdapter, TStoreFrontConfig } from '../types.js';
 
 export const createMemoryAdapter = (config: TStoreFrontConfig): TStoreFrontAdapter => {
     return {
