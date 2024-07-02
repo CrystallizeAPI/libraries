@@ -3,7 +3,7 @@ import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Item } from '@crystallize/schema';
 import { getItemQuery, item, updateFolderMutation } from '../../src/item/index.js';
-
+import { expect, it, vi } from 'vitest';
 const mockTenantId = new ObjectId().toString();
 const mockItemId = new ObjectId().toString();
 
@@ -60,7 +60,7 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest.fn().mockResolvedValueOnce({
+        let mockPimApi = vi.fn().mockResolvedValueOnce({
             item: {
                 get: tc.existingItem || null,
             },
