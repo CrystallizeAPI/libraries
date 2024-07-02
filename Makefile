@@ -36,8 +36,7 @@ codeclean: ## Code Clean
 .PHONY: tests
 tests: ## Run the tests
 	@echo " ..:: Mono Repo Testing ::.."
-	@yarn test
-	@yarn prettier --check .
+	@pnpm test
 
 .PHONY: add-component
 add-component: ## Create an empty structure for a new Component
@@ -63,4 +62,4 @@ add-component-compliance-files: ## Add the compliance files into all the compone
 .PHONY: start-demo-app
 start-demo-app: ## Start Demo App
 	@echo " ..:: Starting Demo App ::.."
-	@cd docs/react-app && npm start
+	@pnpm run demo

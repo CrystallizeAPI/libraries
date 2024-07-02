@@ -3,6 +3,7 @@ import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Shape } from '@crystallize/schema';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';
+import { expect, it, vi } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 
@@ -43,7 +44,6 @@ const testCases: testCase[] = [
             }),
             createShapeMutation({
                 input: {
-                    tenantId: mockTenantId,
                     identifier: 'some-shape',
                     name: 'Some Shape',
                     type: 'product',
@@ -98,7 +98,6 @@ const testCases: testCase[] = [
             }),
             createShapeMutation({
                 input: {
-                    tenantId: mockTenantId,
                     identifier: 'some-shape',
                     name: 'Some Shape',
                     type: 'product',
@@ -159,7 +158,6 @@ const testCases: testCase[] = [
                 identifier: 'some-shape',
             }),
             updateShapeMutation({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
                 input: {
                     name: 'Some Shape 2',
@@ -185,7 +183,7 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest.fn().mockResolvedValueOnce({
+        let mockPimApi = vi.fn().mockResolvedValueOnce({
             shape: {
                 get: tc.existingShape || null,
             },

@@ -3,6 +3,7 @@ import { ObjectId } from 'bson';
 import { CreateShapeInput } from '@crystallize/schema';
 import { createShapeMutation } from '../../src/shape/mutations/create';
 import { deepEqual, equal } from 'assert';
+import { expect, it } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 

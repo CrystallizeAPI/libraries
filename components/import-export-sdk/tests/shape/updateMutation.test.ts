@@ -3,6 +3,7 @@ import { ObjectId } from 'bson';
 import { UpdateShapeInput } from '@crystallize/schema';
 import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { deepEqual, equal } from 'assert';
+import { expect, it } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 
@@ -98,7 +99,6 @@ testCases.forEach((tc) =>
                 updateShapeMutation({
                     input: tc.input,
                     identifier: 'shape-identifier',
-                    tenantId: mockTenantId,
                 }),
             ).toThrow(tc.error);
             return;
@@ -107,7 +107,6 @@ testCases.forEach((tc) =>
         const { query, variables } = updateShapeMutation({
             input: tc.input,
             identifier: 'shape-identifier',
-            tenantId: mockTenantId,
         });
         const re = / /g;
         equal(
