@@ -84,10 +84,9 @@ export const shape = (data: Shape): ShapeOperation => {
             throw new Error('Missing tenantId config in API client');
         }
         const { query, variables } = getShapeQuery({
-            tenantId,
             identifier: data.identifier,
         });
-        const res = await client.nextPimApi(query, variables).then((res) => res?.shape?.get);
+        const res = await client.nextPimApi(query, variables).then((res) => res?.shape);
         return !!res;
     };
 
@@ -122,7 +121,13 @@ export const shape = (data: Shape): ShapeOperation => {
 
     const execute = async (client: ThinClient): Promise<Shape | undefined> => {
         const { query, variables, type } = await determineMutation(client);
-        return client.nextPimApi(query, variables).then((res) => res?.shape?.[type]);
+
+        return client.nextPimApi(query, variables).then((res) => {
+            if (type === 'create') {
+                return res?.createShape;
+            }
+            return res?.updateShape;
+        });
     };
 
     const enqueue = async (client: ThinClient): Promise<void> => {

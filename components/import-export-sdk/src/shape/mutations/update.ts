@@ -8,7 +8,7 @@ interface UpdateProps {
 
 const query = `
 mutation UPDATE_SHAPE ($identifier: String!, $input: UpdateShapeInput!) {
-    updateShape {
+    updateShape(identifier: $identifier, input: $input) {
         ... on Shape {
             identifier
             name

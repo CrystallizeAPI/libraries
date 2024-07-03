@@ -2,7 +2,7 @@
     "name": "@crystallize/js-storefrontaware-utils",
     "license": "MIT",
     "type": "module",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "author": "Crystallize <hello@crystallize.com> (https://crystallize.com)",
     "contributors": [
         "Sébastien Morel <sebastien@crystallize.com>"

@@ -39,7 +39,6 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             createShapeMutation({
@@ -93,7 +92,6 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             createShapeMutation({
@@ -154,7 +152,6 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             updateShapeMutation({
@@ -189,11 +186,18 @@ testCases.forEach((tc) =>
             },
         });
 
+        let mockNextPimApi = vi.fn().mockResolvedValueOnce({
+            shape: tc.existingShape || null,
+        });
+
         if (tc.existingShape) {
             mockPimApi = mockPimApi.mockResolvedValue({
                 shape: {
                     update: tc.input,
                 },
+            });
+            mockNextPimApi = mockNextPimApi.mockResolvedValue({
+                updateShape: tc.input,
             });
         } else {
             mockPimApi = mockPimApi.mockResolvedValue({
@@ -201,10 +205,14 @@ testCases.forEach((tc) =>
                     create: tc.input,
                 },
             });
+            mockNextPimApi = mockNextPimApi.mockResolvedValue({
+                createShape: tc.input,
+            });
         }
 
         const mockClient = {
             pimApi: mockPimApi,
+            nextPimApi: mockNextPimApi,
             config: {
                 tenantIdentifier: 'some-tenant-identifier',
                 tenantId: mockTenantId,
@@ -223,9 +231,9 @@ testCases.forEach((tc) =>
         const s = await shape(tc.input).execute(mockClient);
         expect(s?.name).toBe(tc.input.name);
         expect(s?.identifier).toBe(tc.input.identifier);
-        expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
+        expect(mockNextPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
-            expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
+            expect(mockNextPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
         });
     }),
 );

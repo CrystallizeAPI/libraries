@@ -7,13 +7,11 @@ interface CreateProps {
 
 const query = `
 mutation CREATE_SHAPE ($input: CreateShapeInput!) {
-    shape {
-        create(input: $input) {
-            ... on Shape {
-                identifier
-                name
-                type
-            }
+    createShape(input: $input) {
+        ... on Shape {
+            identifier
+            name
+            type
         }
     }
 }
