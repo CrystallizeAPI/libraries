@@ -2,6 +2,7 @@ import { ZodError } from 'zod';
 import { UpdateTopicInput } from '@crystallize/schema';
 import { deepEqual, equal } from 'assert';
 import { updateTopicMutation } from '../../src/topic/mutations/update';
+import { expect, it } from 'vitest';
 
 interface testCase {
     name: string;

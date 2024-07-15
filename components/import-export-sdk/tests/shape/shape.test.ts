@@ -1,8 +1,9 @@
 import { ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from 'bson';
 import { VariablesType } from '@crystallize/js-api-client';
 import { Shape } from '@crystallize/schema';
 import { createShapeMutation, getShapeQuery, shape, updateShapeMutation } from '../../src/shape';
+import { expect, it, vi } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 
@@ -38,12 +39,10 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             createShapeMutation({
                 input: {
-                    tenantId: mockTenantId,
                     identifier: 'some-shape',
                     name: 'Some Shape',
                     type: 'product',
@@ -93,12 +92,10 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             createShapeMutation({
                 input: {
-                    tenantId: mockTenantId,
                     identifier: 'some-shape',
                     name: 'Some Shape',
                     type: 'product',
@@ -155,11 +152,9 @@ const testCases: testCase[] = [
         },
         expectedCalls: [
             getShapeQuery({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
             }),
             updateShapeMutation({
-                tenantId: mockTenantId,
                 identifier: 'some-shape',
                 input: {
                     name: 'Some Shape 2',
@@ -185,10 +180,14 @@ const testCases: testCase[] = [
 
 testCases.forEach((tc) =>
     it(tc.name, async () => {
-        let mockPimApi = jest.fn().mockResolvedValueOnce({
+        let mockPimApi = vi.fn().mockResolvedValueOnce({
             shape: {
                 get: tc.existingShape || null,
             },
+        });
+
+        let mockNextPimApi = vi.fn().mockResolvedValueOnce({
+            shape: tc.existingShape || null,
         });
 
         if (tc.existingShape) {
@@ -197,16 +196,23 @@ testCases.forEach((tc) =>
                     update: tc.input,
                 },
             });
+            mockNextPimApi = mockNextPimApi.mockResolvedValue({
+                updateShape: tc.input,
+            });
         } else {
             mockPimApi = mockPimApi.mockResolvedValue({
                 shape: {
                     create: tc.input,
                 },
             });
+            mockNextPimApi = mockNextPimApi.mockResolvedValue({
+                createShape: tc.input,
+            });
         }
 
         const mockClient = {
             pimApi: mockPimApi,
+            nextPimApi: mockNextPimApi,
             config: {
                 tenantIdentifier: 'some-tenant-identifier',
                 tenantId: mockTenantId,
@@ -225,9 +231,9 @@ testCases.forEach((tc) =>
         const s = await shape(tc.input).execute(mockClient);
         expect(s?.name).toBe(tc.input.name);
         expect(s?.identifier).toBe(tc.input.identifier);
-        expect(mockPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
+        expect(mockNextPimApi).toHaveBeenCalledTimes(tc.expectedCalls.length);
         tc.expectedCalls.forEach(({ query, variables }, i) => {
-            expect(mockPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
+            expect(mockNextPimApi).toHaveBeenNthCalledWith(i + 1, query, variables);
         });
     }),
 );

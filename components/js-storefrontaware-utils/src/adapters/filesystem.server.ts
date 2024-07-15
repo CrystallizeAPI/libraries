@@ -1,4 +1,4 @@
-import { TStoreFrontAdapter, TStoreFrontConfig } from '../types';
+import { TStoreFrontAdapter, TStoreFrontConfig } from '../types.js';
 import fs from 'fs/promises';
 
 export const createFilesystemAdapter = (filename: string): TStoreFrontAdapter => {

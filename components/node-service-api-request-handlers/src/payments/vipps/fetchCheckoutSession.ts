@@ -1,6 +1,6 @@
-import { createClient } from './client';
-import { fetchVippsPayment } from './fetchPayment';
-import { VippsAppCredentials } from './types';
+import { createClient } from './client.js';
+import { fetchVippsPayment } from './fetchPayment.js';
+import { VippsAppCredentials } from './types.js';
 
 export const fetchVippsCheckoutSession = async (url: string, credentials: VippsAppCredentials) => {
     const client = await createClient({

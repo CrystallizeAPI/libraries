@@ -1,6 +1,5 @@
 import { isFileExists, loadFile } from './fs-utils.js';
 import md5 from 'md5';
-import fetch from 'node-fetch';
 
 const bossmanEndpoint = 'https://bossman.crystallize.com/md2crystal';
 

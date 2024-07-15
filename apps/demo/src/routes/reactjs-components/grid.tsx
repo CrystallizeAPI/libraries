@@ -2,10 +2,10 @@ import { useCrystallize } from '@crystallize/reactjs-hooks';
 import { catalogueFetcherGraphqlBuilder } from '@crystallize/js-api-client';
 import { Image } from '@crystallize/reactjs-components';
 import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Code } from '../../components/Code';
 
-export const CrystallizeGrid: FC = () => {
+export const CrystallizeGrid = () => {
     const { state, helpers } = useCrystallize();
     const [grid, setGrid] = useState<any>(null);
     useEffect(() => {
@@ -92,7 +92,7 @@ export const CrystallizeGrid: FC = () => {
     );
 };
 
-const Cell: FC<{ cell: any }> = ({ cell }) => {
+const Cell = ({ cell }: { cell: any }) => {
     if (!cell.item) {
         return null;
     }

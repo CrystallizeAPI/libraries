@@ -6,7 +6,9 @@ export interface ThinClient {
         tenantIdentifier: string;
     };
     pimApi: ApiCaller<any>;
+    nextPimApi: ApiCaller<any>;
     enqueue: {
         pimApi: (query: string, variables?: VariablesType) => string;
+        nextPimApi: (query: string, variables?: VariablesType) => string;
     };
 }

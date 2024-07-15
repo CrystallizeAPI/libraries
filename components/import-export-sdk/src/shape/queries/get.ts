@@ -1,8 +1,7 @@
 import { VariablesType } from '@crystallize/js-api-client';
-import { basicComponentConfigFragment, structuralComponentConfigFragment } from './fragments/shape';
+import { basicComponentConfigFragment, structuralComponentConfigFragment } from './fragments/shape.js';
 
 interface GetProps {
-    tenantId: string;
     identifier: string;
 }
 
@@ -12,37 +11,35 @@ interface GetConfig {
 
 const query = (config?: GetConfig) => `
     query GET_SHAPE ($tenantId: ID!, $identifier: String!) {
-        shape {
-            get(tenantId: $tenantId, identifier: $identifier) {
-                identifier
-                name
-                type
-                ${
-                    config?.includeComponents
-                        ? `
-                            components {
-                                id
-                                name
-                                description
-                                type
-                                config {
-                                    ...basicComponentConfig
-                                    ...structuralComponentConfig
-                                }
+        shape(identifier: $identifier) {
+            identifier
+            name
+            type
+            ${
+                config?.includeComponents
+                    ? `
+                        components {
+                            id
+                            name
+                            description
+                            type
+                            config {
+                                ...basicComponentConfig
+                                ...structuralComponentConfig
                             }
-                            variantComponents {
-                                id
-                                name
-                                description
-                                type
-                                config {
-                                    ...basicComponentConfig
-                                    ...structuralComponentConfig
-                                }
+                        }
+                        variantComponents {
+                            id
+                            name
+                            description
+                            type
+                            config {
+                                ...basicComponentConfig
+                                ...structuralComponentConfig
                             }
-                        `
-                        : ''
-                }
+                        }
+                    `
+                    : ''
             }
         }
     }
@@ -58,9 +55,9 @@ const query = (config?: GetConfig) => `
 `;
 
 export const getShapeQuery = (
-    { tenantId, identifier }: GetProps,
+    { identifier }: GetProps,
     config?: GetConfig,
 ): { query: string; variables: VariablesType } => ({
     query: query(config),
-    variables: { tenantId, identifier },
+    variables: { identifier },
 });

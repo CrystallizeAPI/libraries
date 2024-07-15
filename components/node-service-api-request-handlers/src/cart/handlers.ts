@@ -1,4 +1,4 @@
-import { Cart, CartHydraterArguments, CartItem, CartPayload, Price } from './types';
+import { Cart, CartHydraterArguments, CartItem, CartPayload, Price } from './types.js';
 import { CrystallizeHydraterBySkus, ProductPriceVariant } from '@crystallize/js-api-client';
 import type { ProductVariant, Product } from '@crystallize/js-api-client';
 

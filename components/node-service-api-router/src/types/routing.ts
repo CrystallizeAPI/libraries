@@ -1,6 +1,6 @@
 import Koa from 'koa';
 export const httpMethods = ['get', 'post', 'put', 'patch', 'delete'] as const;
-export type HttpMethod = typeof httpMethods[number];
+export type HttpMethod = (typeof httpMethods)[number];
 
 export interface ValidatingRoute<T> {
     schema?: any;

@@ -1,14 +1,12 @@
-import { z, ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
-import { CreateShapeInput } from '@crystallize/schema';
+import { ZodError } from 'zod';
+import { NextPimCreateShapeInput } from '@crystallize/schema';
 import { createShapeMutation } from '../../src/shape/mutations/create';
 import { deepEqual, equal } from 'assert';
-
-const mockTenantId = new ObjectId().toString();
+import { expect, it } from 'vitest';
 
 interface testCase {
     name: string;
-    input: CreateShapeInput;
+    input: NextPimCreateShapeInput;
     error?: ZodError;
 }
 
@@ -16,7 +14,6 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a basic shape',
         input: {
-            tenantId: mockTenantId,
             name: 'Some Shape',
             type: 'product',
         },
@@ -24,7 +21,6 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a shape with components',
         input: {
-            tenantId: mockTenantId,
             name: 'Some Shape',
             type: 'product',
             components: [
@@ -60,15 +56,14 @@ const testCases: testCase[] = [
     {
         name: 'Throws a validation error when structure does not match ShapeCreateInputSchema',
         input: {
-            name: 'some invalid shape',
             type: 'product',
-        } as CreateShapeInput,
+        } as NextPimCreateShapeInput,
         error: new ZodError([
             {
                 code: 'invalid_type',
                 expected: 'string',
                 received: 'undefined',
-                path: ['tenantId'],
+                path: ['name'],
                 message: 'Required',
             },
         ]),
@@ -76,7 +71,6 @@ const testCases: testCase[] = [
     {
         name: 'Throws a validation error when component config does not match component type',
         input: {
-            tenantId: mockTenantId,
             name: 'some invalid shape',
             type: 'product',
             components: [
@@ -126,8 +120,8 @@ testCases.forEach((tc) =>
             query.replace(re, ''),
             `
                 mutation CREATE_SHAPE ($input: CreateShapeInput!) {
-                    shape {
-                        create(input: $input) {
+                    createShape(input: $input) {
+                        ... on Shape {
                             identifier
                             name
                             type

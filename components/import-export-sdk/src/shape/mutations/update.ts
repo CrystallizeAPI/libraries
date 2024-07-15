@@ -1,17 +1,15 @@
 import { VariablesType } from '@crystallize/js-api-client';
 import { UpdateShapeInputSchema, UpdateShapeInput } from '@crystallize/schema';
-import { Id } from '@crystallize/schema';
 
 interface UpdateProps {
-    tenantId: Id;
     identifier: string;
     input: UpdateShapeInput;
 }
 
 const query = `
-mutation UPDATE_SHAPE ($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
-    shape {
-        update (tenantId: $tenantId, identifier: $identifier, input: $input) {
+mutation UPDATE_SHAPE ($identifier: String!, $input: UpdateShapeInput!) {
+    updateShape(identifier: $identifier, input: $input) {
+        ... on Shape {
             identifier
             name
             type
@@ -21,7 +19,6 @@ mutation UPDATE_SHAPE ($tenantId: ID!, $identifier: String!, $input: UpdateShape
 `;
 
 export const updateShapeMutation = ({
-    tenantId,
     identifier,
     input,
 }: UpdateProps): {
@@ -34,7 +31,6 @@ export const updateShapeMutation = ({
     return {
         query,
         variables: {
-            tenantId,
             identifier,
             input: data,
         },

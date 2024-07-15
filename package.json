@@ -1,24 +1,24 @@
 {
     "private": true,
+    "name": "crystallize-oss-libraries-monorepo",
     "workspaces": [
         "components/*",
         "apps/*"
     ],
     "devDependencies": {
-        "concurrently": "^7.1.0",
-        "prettier": "2.6.0",
-        "turbo": "^1.12.3"
+        "prettier": "3.3.2",
+        "turbo": "^2.0.6"
     },
     "scripts": {
         "build": "turbo run build",
         "test": "turbo run test",
         "prettier": "prettier --write .",
         "dev": "turbo run watch --parallel",
-        "demo": "turbo run start --filter demo"
+        "demo": "turbo run start --filter @crystallize/demo-app"
     },
+    "packageManager": "pnpm@9.5.0",
     "volta": {
-        "node": "20.11.0",
-        "yarn": "1.22.18"
+        "node": "20.15.0"
     },
     "dependencies": {}
 }

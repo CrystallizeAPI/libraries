@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { ImageInputSchema } from '../images';
-import { RichTextContentInputSchema } from '../richText';
-import { SingleLineContentInputSchema } from '../singleLine';
-import { VideoInputSchema } from '../videos';
+import { ImageInputSchema } from '../images/index.js';
+import { RichTextContentInputSchema } from '../richText/index.js';
+import { SingleLineContentInputSchema } from '../singleLine/index.js';
+import { VideoInputSchema } from '../videos/index.js';
 
 export const ParagraphInputSchema = z.object({
     body: RichTextContentInputSchema.optional(),

@@ -25,27 +25,18 @@ clean: ## Clean non-essential files
 			rm -rf components/$${COMPONENT}/dist; \
 			rm -rf components/$${COMPONENT}/build; \
 			rm -f components/$${COMPONENT}/yarn.lock; \
+			rm -f components/$${COMPONENT}/pnpm-lock.yaml; \
 		fi; \
 	done
 
 .PHONY: codeclean
 codeclean: ## Code Clean
-	@yarn prettier --write .
+	@pnpm prettier --write .
 
 .PHONY: tests
 tests: ## Run the tests
 	@echo " ..:: Mono Repo Testing ::.."
-	@yarn test
-	@yarn prettier --check .
-
-.PHONY: bump
-bump: ## Bump all components
-	@for COMPONENT in $(shell ls components); do \
-		if [ -d "components/$${COMPONENT}" ]; then \
-			echo " ..:: Bumping $${COMPONENT} ::.."; \
-			cd components/$${COMPONENT} && yarn bump $(VERSION) && cd - ;\
-		fi; \
-	done
+	@pnpm test
 
 .PHONY: add-component
 add-component: ## Create an empty structure for a new Component
@@ -71,4 +62,4 @@ add-component-compliance-files: ## Add the compliance files into all the compone
 .PHONY: start-demo-app
 start-demo-app: ## Start Demo App
 	@echo " ..:: Starting Demo App ::.."
-	@cd docs/react-app && npm start
+	@pnpm run demo

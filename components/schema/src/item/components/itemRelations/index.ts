@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IdSchema } from '../../../shared';
+import { IdSchema } from '../../../shared/index.js';
 
 export const ItemRelationsContentInputSchema = z.object({
     itemIds: z.array(IdSchema).optional(),

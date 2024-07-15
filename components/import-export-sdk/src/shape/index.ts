@@ -2,21 +2,21 @@ import { VariablesType } from '@crystallize/js-api-client';
 import {
     ComponentChoiceComponentConfig,
     ContentChunkComponentConfig,
-    CreateShapeInputSchema,
+    NextPimCreateShapeInputSchema,
     Shape,
     ShapeComponent,
     ShapeComponentInput,
     UpdateShapeInputSchema,
 } from '@crystallize/schema';
-import { ThinClient } from '../shared/thin-client';
-import { createShapeMutation } from './mutations/create';
-import { updateShapeMutation } from './mutations/update';
-import { getShapeQuery } from './queries/get';
+import { ThinClient } from '../shared/thin-client.js';
+import { createShapeMutation } from './mutations/create.js';
+import { updateShapeMutation } from './mutations/update.js';
+import { getShapeQuery } from './queries/get.js';
 
-export { getShapeQuery } from './queries/get';
-export { getManyShapesQuery } from './queries/getMany';
-export { createShapeMutation } from './mutations/create';
-export { updateShapeMutation } from './mutations/update';
+export { getShapeQuery } from './queries/get.js';
+export { getManyShapesQuery } from './queries/getMany.js';
+export { createShapeMutation } from './mutations/create.js';
+export { updateShapeMutation } from './mutations/update.js';
 
 interface ShapeOperation {
     exists: (client: ThinClient) => Promise<boolean>;
@@ -84,10 +84,9 @@ export const shape = (data: Shape): ShapeOperation => {
             throw new Error('Missing tenantId config in API client');
         }
         const { query, variables } = getShapeQuery({
-            tenantId,
             identifier: data.identifier,
         });
-        const res = await client.pimApi(query, variables).then((res) => res?.shape?.get);
+        const res = await client.nextPimApi(query, variables).then((res) => res?.shape);
         return !!res;
     };
 
@@ -101,7 +100,6 @@ export const shape = (data: Shape): ShapeOperation => {
 
         if (await exists(client)) {
             return updateShapeMutation({
-                tenantId,
                 identifier: data.identifier,
                 input: UpdateShapeInputSchema.parse({
                     ...data,
@@ -112,7 +110,7 @@ export const shape = (data: Shape): ShapeOperation => {
         }
 
         return createShapeMutation({
-            input: CreateShapeInputSchema.parse({
+            input: NextPimCreateShapeInputSchema.parse({
                 ...data,
                 components: data.components?.map(shapeComponentToInput),
                 variantComponents: data.variantComponents?.map(shapeComponentToInput),
@@ -123,12 +121,18 @@ export const shape = (data: Shape): ShapeOperation => {
 
     const execute = async (client: ThinClient): Promise<Shape | undefined> => {
         const { query, variables, type } = await determineMutation(client);
-        return client.pimApi(query, variables).then((res) => res?.shape?.[type]);
+
+        return client.nextPimApi(query, variables).then((res) => {
+            if (type === 'create') {
+                return res?.createShape;
+            }
+            return res?.updateShape;
+        });
     };
 
     const enqueue = async (client: ThinClient): Promise<void> => {
         const { query, variables } = await determineMutation(client);
-        client.enqueue.pimApi(query, variables);
+        client.enqueue.nextPimApi(query, variables);
     };
 
     return {

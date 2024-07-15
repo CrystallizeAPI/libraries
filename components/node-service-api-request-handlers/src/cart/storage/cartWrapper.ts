@@ -1,6 +1,6 @@
-import { createStateMachine, StateMachine, StateMachineDefinition } from '../../core/statemachine';
-import { BackendStorage } from '../../core/type';
-import { Cart } from '../types';
+import { createStateMachine, StateMachine, StateMachineDefinition } from '../../core/statemachine.js';
+import { BackendStorage } from '../../core/type.js';
+import { Cart } from '../types.js';
 
 export enum State {
     Cart = 'cart',

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ComponentInput, ComponentInputSchema } from '..';
+import { ComponentInput, ComponentInputSchema } from '../index.js';
 
 export type ContentChunkContentInput = {
     chunks: ComponentInput[][];

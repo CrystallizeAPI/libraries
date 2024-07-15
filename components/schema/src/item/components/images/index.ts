@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { KeyValuePairInputSchema } from '../../../shared';
-import { RichTextContentInputSchema } from '../richText';
+import { KeyValuePairInputSchema } from '../../../shared/index.js';
+import { RichTextContentInputSchema } from '../richText/index.js';
 
 export const ImageInputSchema = z.object({
     key: z.string().min(1),

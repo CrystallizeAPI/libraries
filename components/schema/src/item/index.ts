@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { basicShapeSchema, Shape, ShapeSchema } from '../shape/index.js';
+import { basicShapeSchema } from '../shape/index.js';
 import { DateTimeSchema, Id, IdSchema } from '../shared/index.js';
 import { Topic, TopicSchema } from '../topic/index.js';
 import { ComponentInputSchema } from './components/index.js';

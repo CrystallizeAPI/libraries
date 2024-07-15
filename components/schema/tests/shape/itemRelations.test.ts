@@ -1,5 +1,6 @@
 import { ZodError } from 'zod';
 import { ItemRelationsComponentConfig, ItemRelationsComponentConfigSchema } from '../../src/shape/index.js';
+import { expect, test } from 'vitest';
 
 interface testCase {
     name: string;

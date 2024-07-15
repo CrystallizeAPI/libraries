@@ -1,30 +1,40 @@
 {
     "name": "@crystallize/js-storefrontaware-utils",
     "license": "MIT",
-    "version": "2.0.0",
+    "type": "module",
+    "version": "3.0.0",
     "author": "Crystallize <hello@crystallize.com> (https://crystallize.com)",
     "contributors": [
         "Sébastien Morel <sebastien@crystallize.com>"
     ],
     "scripts": {
-        "watch": "yarn tsc -W",
-        "build": "yarn tsc",
-        "test": "jest",
-        "bump": "yarn tsc && yarn version --no-git-tag-version --new-version"
+        "watch": "tsc -W",
+        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
+        "test": "vitest run"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/CrystallizeAPI/js-storefrontaware-utils.git"
     },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
     "devDependencies": {
-        "@tsconfig/node18": "^1.0.1",
-        "@types/node": "^18.11.15",
-        "jest": "^27.5.1"
+        "@tsconfig/node20": "^20.1.4",
+        "@types/node": "^20.14.9",
+        "typescript": "^5.5.2",
+        "vitest": "^1.6.0",
+        "tsup": "^8.1.0"
     },
     "dependencies": {
-        "typescript": "^4.6.3",
-        "@crystallize/js-api-client": "*"
+        "json-to-graphql-query": "^2.2.5",
+        "@crystallize/js-api-client": "workspace:*"
     }
 }

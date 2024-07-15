@@ -1,8 +1,9 @@
-import { z, ZodError } from 'zod';
-import { ObjectId } from 'mongodb';
+import { ZodError } from 'zod';
+import { ObjectId } from 'bson';
 import { UpdateShapeInput } from '@crystallize/schema';
 import { updateShapeMutation } from '../../src/shape/mutations/update';
 import { deepEqual, equal } from 'assert';
+import { expect, it } from 'vitest';
 
 const mockTenantId = new ObjectId().toString();
 
@@ -98,7 +99,6 @@ testCases.forEach((tc) =>
                 updateShapeMutation({
                     input: tc.input,
                     identifier: 'shape-identifier',
-                    tenantId: mockTenantId,
                 }),
             ).toThrow(tc.error);
             return;
@@ -107,15 +107,14 @@ testCases.forEach((tc) =>
         const { query, variables } = updateShapeMutation({
             input: tc.input,
             identifier: 'shape-identifier',
-            tenantId: mockTenantId,
         });
         const re = / /g;
         equal(
             query.replace(re, ''),
             `
-                    mutation UPDATE_SHAPE($tenantId: ID!, $identifier: String!, $input: UpdateShapeInput!) {
-                        shape {
-                            update (tenantId: $tenantId, identifier: $identifier, input: $input) {
+                    mutation UPDATE_SHAPE($identifier: String!, $input: UpdateShapeInput!) {
+                        updateShape (identifier: $identifier, input: $input) {
+                            ... on Shape {
                                 identifier
                                 name
                                 type
@@ -124,6 +123,6 @@ testCases.forEach((tc) =>
                     }
                 `.replace(re, ''),
         );
-        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier', tenantId: mockTenantId });
+        deepEqual(variables, { input: tc.input, identifier: 'shape-identifier' });
     }),
 );
