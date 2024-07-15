@@ -10,7 +10,7 @@ interface GetManyConfig {
 
 const query = (config?: GetManyConfig) => `
     query GET_MANY_SHAPES {
-        shapes(first: 100, after: "${config?.after}") {
+        shapes(first: 100, after: "${config?.after ?? ''}") {
             edges {
                 node {
                     identifier
