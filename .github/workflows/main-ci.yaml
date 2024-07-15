@@ -73,6 +73,11 @@ jobs:
               with:
                   node-version: 20
 
+            - name: ⎔ Set up pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9.5.0
+
             - name: 📥 Download deps
               run: pnpm install && pnpm run build
 
