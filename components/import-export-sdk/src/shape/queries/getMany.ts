@@ -5,41 +5,45 @@ interface GetManyProps {}
 
 interface GetManyConfig {
     includeComponents?: boolean;
+    after?: string;
 }
 
 const query = (config?: GetManyConfig) => `
     query GET_MANY_SHAPES {
-        shapes {
-            identifier
-            name
-            type
-            ${
-                config?.includeComponents
-                    ? `
-                        components {
-                            id
-                            name
-                            description
-                            type
-                            config {
-                                ...basicComponentConfig
-                                ...structuralComponentConfig
-                            }
-                        }
-                        variantComponents {
-                            id
-                            name
-                            description
-                            type
-                            config {
-                                ...basicComponentConfig
-                                ...structuralComponentConfig
-                            }
-                        }
-                    `
-                    : ''
+        shapes(first: 100, after: "${config?.after}") {
+            edges {
+                node {
+                    identifier
+                    name
+                    type
+                    ${
+                        config?.includeComponents
+                            ? `
+                                components {
+                                    id
+                                    name
+                                    description
+                                    type
+                                    config {
+                                        ...basicComponentConfig
+                                        ...structuralComponentConfig
+                                    }
+                                }
+                                variantComponents {
+                                    id
+                                    name
+                                    description
+                                    type
+                                    config {
+                                        ...basicComponentConfig
+                                        ...structuralComponentConfig
+                                    }
+                                }
+                            `
+                            : ''
+                    }
+                }
             }
-
         }
     }
 

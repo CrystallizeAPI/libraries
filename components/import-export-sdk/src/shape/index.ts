@@ -14,7 +14,6 @@ import { updateShapeMutation } from './mutations/update.js';
 import { getShapeQuery } from './queries/get.js';
 
 export { getShapeQuery } from './queries/get.js';
-export { getManyShapesQuery } from './queries/getMany.js';
 export { createShapeMutation } from './mutations/create.js';
 export { updateShapeMutation } from './mutations/update.js';
 

@@ -10,36 +10,38 @@ interface GetConfig {
 }
 
 const query = (config?: GetConfig) => `
-    query GET_SHAPE ($tenantId: ID!, $identifier: String!) {
+    query GET_SHAPE ($identifier: String!) {
         shape(identifier: $identifier) {
-            identifier
-            name
-            type
-            ${
-                config?.includeComponents
-                    ? `
-                        components {
-                            id
-                            name
-                            description
-                            type
-                            config {
-                                ...basicComponentConfig
-                                ...structuralComponentConfig
+            ... on Shape {
+                identifier
+                name
+                type
+                ${
+                    config?.includeComponents
+                        ? `
+                            components {
+                                id
+                                name
+                                description
+                                type
+                                config {
+                                    ...basicComponentConfig
+                                    ...structuralComponentConfig
+                                }
                             }
-                        }
-                        variantComponents {
-                            id
-                            name
-                            description
-                            type
-                            config {
-                                ...basicComponentConfig
-                                ...structuralComponentConfig
+                            variantComponents {
+                                id
+                                name
+                                description
+                                type
+                                config {
+                                    ...basicComponentConfig
+                                    ...structuralComponentConfig
+                                }
                             }
-                        }
-                    `
-                    : ''
+                        `
+                        : ''
+                }
             }
         }
     }
