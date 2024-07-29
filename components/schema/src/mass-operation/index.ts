@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import {
     CreateItemOperationSchema,
+    PublishItemOperationSchema,
+    UnPublishItemOperationSchema,
     UpdateCompomentOperationSchema,
     UpdateItemOperationSchema,
     UpsertItemOperationSchema,
@@ -11,6 +13,8 @@ export const OperationSchema = z.union([
     UpdateItemOperationSchema,
     UpsertItemOperationSchema,
     UpdateCompomentOperationSchema,
+    PublishItemOperationSchema,
+    UnPublishItemOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
