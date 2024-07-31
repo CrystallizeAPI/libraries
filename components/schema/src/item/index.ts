@@ -4,6 +4,7 @@ import { DateTimeSchema, Id, IdSchema } from '../shared/index.js';
 import { Topic, TopicSchema } from '../topic/index.js';
 import { ComponentInputSchema } from './components/index.js';
 import { ItemType, ItemTypeEnum } from './enums.js';
+export * from './components/index.js';
 
 export type Item = {
     id: Id;
