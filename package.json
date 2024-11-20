@@ -16,7 +16,7 @@
         "dev": "turbo run watch --parallel",
         "demo": "turbo run start --filter @crystallize/demo-app"
     },
-    "packageManager": "pnpm@9.5.0",
+    "packageManager": "pnpm@9.12.3",
     "volta": {
         "node": "20.15.0"
     }
