@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-export const IdSchema = z.string().min(24).max(24);
+export const IdSchema = z.string().regex(/^[0-9a-f]{24}$/);
+
 export const KeyValuePairSchema = z.record(z.string());
 export const DateTimeSchema = z.string().refine(
     (str) => Number.isInteger(Date.parse(str)),

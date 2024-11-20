@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ComponentInputSchema } from '../item/components/index.js';
+import { IdSchema } from '../shared/index.js';
 
 export const CreateItemOperationSchema = z.object({
     concern: z.literal('item'),
@@ -7,7 +8,7 @@ export const CreateItemOperationSchema = z.object({
     type: z.enum(['product', 'document', 'folder']),
     shape: z.string().min(1),
     language: z.string().min(1),
-    topics: z.array(z.string()).optional(),
+    topics: z.array(IdSchema).optional(),
     components: z.array(ComponentInputSchema),
 });
 
@@ -18,7 +19,7 @@ export const UpdateItemOperationSchema = CreateItemOperationSchema.omit({
 }).merge(
     z.object({
         action: z.literal('update'),
-        itemId: z.string().min(1),
+        itemId: IdSchema,
     }),
 );
 
@@ -30,19 +31,34 @@ export const UpsertItemOperationSchema = UpdateItemOperationSchema.omit({ action
 
 export const UpdateCompomentOperationSchema = UpdateItemOperationSchema.omit({
     action: true,
+    itemId: true,
     components: true,
     topics: true,
-}).merge(
-    z.object({
-        action: z.literal('updateComponent'),
-        component: ComponentInputSchema,
-    }),
-);
+})
+    .merge(
+        z.object({
+            action: z.literal('updateComponent'),
+            component: ComponentInputSchema,
+        }),
+    )
+    .and(
+        z
+            .object({
+                sku: z.never().optional(),
+                itemId: IdSchema,
+            })
+            .or(
+                z.object({
+                    sku: z.string(),
+                    itemId: z.never().optional(),
+                }),
+            ),
+    );
 
 export const PublishItemOperationSchema = z.object({
     concern: z.literal('item'),
     action: z.literal('publish'),
-    itemId: z.string().min(1),
+    itemId: IdSchema,
     language: z.string().min(1),
     includeDescendants: z.boolean().optional(),
 });
