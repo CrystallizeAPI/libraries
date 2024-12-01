@@ -1,10 +1,9 @@
-import { never, ZodError } from 'zod';
-import { UpdateCompomentOperation, UpdateCompomentOperationSchema } from '../../src/mass-operation/item';
-import { describe, expect, it, test } from 'vitest';
+import { UpdateComponentOperation, UpdateComponentOperationSchema } from '../../src/mass-operation/item';
+import { describe, expect, it } from 'vitest';
 
 describe('Mass Operations - Update Component Operation', {}, async () => {
     it('should NOT fail if the component is valid with only itemId ', () => {
-        const updateComponentOperation: UpdateCompomentOperation = {
+        const updateComponentOperation: UpdateComponentOperation = {
             action: 'updateComponent',
             concern: 'item',
             itemId: '604f7655a16b91dea030895b',
@@ -16,14 +15,14 @@ describe('Mass Operations - Update Component Operation', {}, async () => {
                 },
             },
         };
-        expect(UpdateCompomentOperationSchema.safeParse(updateComponentOperation)).toEqual({
+        expect(UpdateComponentOperationSchema.safeParse(updateComponentOperation)).toEqual({
             success: true,
             data: updateComponentOperation,
         });
     });
 
     it('should NOT fail if the component is valid with only sku ', () => {
-        const updateComponentOperation: UpdateCompomentOperation = {
+        const updateComponentOperation: UpdateComponentOperation = {
             action: 'updateComponent',
             concern: 'item',
             language: 'en',
@@ -35,7 +34,7 @@ describe('Mass Operations - Update Component Operation', {}, async () => {
                 },
             },
         };
-        expect(UpdateCompomentOperationSchema.safeParse(updateComponentOperation)).toEqual({
+        expect(UpdateComponentOperationSchema.safeParse(updateComponentOperation)).toEqual({
             success: true,
             data: updateComponentOperation,
         });
@@ -43,7 +42,7 @@ describe('Mass Operations - Update Component Operation', {}, async () => {
 
     it('should fail if the component contains sku and itemId ', () => {
         // @ts-expect-error
-        const updateComponentOperation: UpdateCompomentOperation = {
+        const updateComponentOperation: UpdateComponentOperation = {
             action: 'updateComponent',
             concern: 'item',
             language: 'en',
@@ -56,14 +55,14 @@ describe('Mass Operations - Update Component Operation', {}, async () => {
                 },
             },
         };
-        expect(UpdateCompomentOperationSchema.safeParse(updateComponentOperation)).toMatchObject({
+        expect(UpdateComponentOperationSchema.safeParse(updateComponentOperation)).toMatchObject({
             success: false,
         });
     });
 
     it('should fail if the component is invalid ', () => {
         // @ts-expect-error
-        const updateComponentOperation: UpdateCompomentOperation = {
+        const updateComponentOperation: UpdateComponentOperation = {
             action: 'updateComponent',
             concern: 'item',
             language: 'en',
@@ -76,7 +75,7 @@ describe('Mass Operations - Update Component Operation', {}, async () => {
                 },
             },
         };
-        expect(UpdateCompomentOperationSchema.safeParse(updateComponentOperation)).toMatchObject({
+        expect(UpdateComponentOperationSchema.safeParse(updateComponentOperation)).toMatchObject({
             success: false,
         });
     });

@@ -29,7 +29,7 @@ export const UpsertItemOperationSchema = UpdateItemOperationSchema.omit({ action
     }),
 );
 
-export const UpdateCompomentOperationSchema = UpdateItemOperationSchema.omit({
+export const UpdateComponentOperationSchema = UpdateItemOperationSchema.omit({
     action: true,
     itemId: true,
     components: true,
@@ -72,6 +72,6 @@ export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ ac
 export type CreateItemOperation = z.infer<typeof CreateItemOperationSchema>;
 export type UpdateItemOperation = z.infer<typeof UpdateItemOperationSchema>;
 export type UpsertItemOperation = z.infer<typeof UpsertItemOperationSchema>;
-export type UpdateCompomentOperation = z.infer<typeof UpdateCompomentOperationSchema>;
+export type UpdateComponentOperation = z.infer<typeof UpdateComponentOperationSchema>;
 export type PublishItemOperation = z.infer<typeof PublishItemOperationSchema>;
 export type UnPublishItemOperation = z.infer<typeof UnPublishItemOperationSchema>;

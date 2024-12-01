@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { basicShapeSchema } from '../shape/index.js';
-import { DateTimeSchema, Id, IdSchema } from '../shared/index.js';
+import { BasicShapeSchema } from '../shape/index.js';
+import { DateTimeSchema, Id, IdSchema, ItemType, ItemTypeEnum } from '../shared/index.js';
 import { Topic, TopicSchema } from '../topic/index.js';
 import { ComponentInputSchema } from './components/index.js';
-import { ItemType, ItemTypeEnum } from './enums.js';
 export * from './components/index.js';
 
 export type Item = {
@@ -15,7 +14,7 @@ export type Item = {
     type: ItemType;
     name?: string;
     externalReference?: string;
-    shape?: z.infer<typeof basicShapeSchema>;
+    shape?: z.infer<typeof BasicShapeSchema>;
     components?: any[];
     topics?: Topic[];
     relatingItems?: Item[];
@@ -59,7 +58,7 @@ export const ItemSchema: z.ZodType<Item> = z.lazy(() =>
         name: z.string().optional(),
         externalReference: z.string().optional(),
         components: z.array(z.any()).optional(),
-        shape: basicShapeSchema.optional(),
+        shape: BasicShapeSchema.optional(),
         topics: z.array(TopicSchema).optional(),
         relatingItems: z.array(ItemSchema).optional(),
         tree: z
@@ -161,3 +160,5 @@ export type CreateProductInput = z.infer<typeof CreateProductInputSchema>;
 export type UpdateDocumentInput = z.infer<typeof UpdateDocumentInputSchema>;
 export type UpdateFolderInput = z.infer<typeof UpdateFolderInputSchema>;
 export type UpdateProductInput = z.infer<typeof UpdateProductInputSchema>;
+
+export type { ComponentInput } from './components/index.js';

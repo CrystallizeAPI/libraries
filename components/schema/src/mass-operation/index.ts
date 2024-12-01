@@ -3,18 +3,21 @@ import {
     CreateItemOperationSchema,
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
-    UpdateCompomentOperationSchema,
+    UpdateComponentOperationSchema,
     UpdateItemOperationSchema,
     UpsertItemOperationSchema,
 } from './item.js';
+import { CreateShapeOperationSchema, UpdateShapeOperationSchema } from './shape.js';
 
 export const OperationSchema = z.union([
     CreateItemOperationSchema,
     UpdateItemOperationSchema,
     UpsertItemOperationSchema,
-    UpdateCompomentOperationSchema,
+    UpdateComponentOperationSchema,
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
+    CreateShapeOperationSchema,
+    UpdateShapeOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -26,3 +29,13 @@ export const OperationsSchema = z.object({
 
 export type Operation = z.infer<typeof OperationSchema>;
 export type Operations = z.infer<typeof OperationsSchema>;
+export type {
+    CreateItemOperation,
+    PublishItemOperation,
+    UnPublishItemOperation,
+    UpdateComponentOperation,
+    UpdateItemOperation,
+    UpsertItemOperation,
+} from './item.js';
+
+export type { CreateShapeOperation, UpdateShapeOperation } from './shape.js';

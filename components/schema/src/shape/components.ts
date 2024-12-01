@@ -2,9 +2,17 @@ import { z } from 'zod';
 import { IdSchema } from '../shared/index.js';
 import { ShapeComponentTypeEnum } from './enums.js';
 
+const GenericComponentConfigSchema = z.object({
+    multilingual: z.boolean().optional(),
+    required: z.boolean().optional(),
+    discoverable: z.boolean().optional(),
+});
+
+type GenericComponentConfig = z.infer<typeof GenericComponentConfigSchema>;
+
 const minValueSchema = z.number().min(0).nullable().optional();
 const maxValueSchema = z.number().min(0).nullable().optional();
-const minMaxSchema = z.object({ min: minValueSchema, max: maxValueSchema });
+const minMaxSchema = GenericComponentConfigSchema.extend({ min: minValueSchema, max: maxValueSchema });
 const minMaxItemRelationsSchema = z.object({
     min: minValueSchema,
     max: maxValueSchema,
@@ -104,17 +112,17 @@ export const MinMaxItemRelationsComponentConfigSchema = minMaxItemRelationsSchem
         },
     );
 
-export type ComponentChoiceComponentConfig = {
+export type ComponentChoiceComponentConfig = GenericComponentConfig & {
     choices: any[];
 };
-export type ComponentMultipleChoiceComponentConfig = {
+export type ComponentMultipleChoiceComponentConfig = GenericComponentConfig & {
     choices: any[];
     allowDuplicates: boolean;
 };
 
 export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoiceComponentConfig> = z
     .lazy(() =>
-        z.object({
+        GenericComponentConfigSchema.extend({
             choices: z.array(ShapeComponentInputSchema),
         }),
     )
@@ -124,20 +132,20 @@ export const ComponentChoiceComponentConfigInputSchema: z.ZodType<ComponentChoic
 
 export const ComponentMultipleChoiceComponentConfigInputSchema: z.ZodType<ComponentMultipleChoiceComponentConfig> =
     z.lazy(() =>
-        z.object({
+        GenericComponentConfigSchema.extend({
             choices: z.array(ShapeComponentInputSchema),
             allowDuplicates: z.coerce.boolean(),
         }),
     );
 
-export type ContentChunkComponentConfig = {
+export type ContentChunkComponentConfig = GenericComponentConfig & {
     components: any[];
     repeatable?: boolean;
 };
 
 export const ContentChunkComponentConfigInputSchema: z.ZodType<ContentChunkComponentConfig> = z
     .lazy(() =>
-        z.object({
+        GenericComponentConfigSchema.extend({
             components: z.array(ShapeComponentInputSchema),
             repeatable: z.coerce.boolean().default(false),
         }),
@@ -177,6 +185,7 @@ export const ItemRelationsComponentConfigSchema = MinMaxItemRelationsComponentCo
                     .optional()
                     .nullable(),
             })
+
             .optional()
             .nullable(),
     }),
@@ -210,24 +219,24 @@ export const ItemRelationsComponentConfigSchema = MinMaxItemRelationsComponentCo
     }
 });
 
-export const NumericComponentConfigSchema = z.object({
+export const NumericComponentConfigSchema = GenericComponentConfigSchema.extend({
     decimalPlaces: z.number().min(0).optional(),
     units: z.array(z.string()).optional(),
 });
 
-export type PieceComponentConfig = {
+export type PieceComponentConfig = GenericComponentConfig & {
     identifier: string;
     components: any[];
 };
 
 export const PieceComponentConfigInputSchema: z.ZodType<PieceComponentConfig> = z.lazy(() =>
-    z.object({
+    GenericComponentConfigSchema.extend({
         identifier: z.string().min(1),
         components: z.array(ShapeComponentInputSchema),
     }),
 );
 
-export const PropertiesTableComponentConfigSchema = z.object({
+export const PropertiesTableComponentConfigSchema = GenericComponentConfigSchema.extend({
     sections: z.array(
         z.object({
             title: z.string().optional().nullable(),
@@ -252,10 +261,19 @@ export const SelectionComponentConfigInputSchema = MinMaxComponentConfigSchema.a
 );
 
 export const ShapeComponentConfigInputSchema = z.object({
+    singleLine: MinMaxComponentConfigSchema.optional(),
+    boolean: GenericComponentConfigSchema.optional(),
+    datetime: GenericComponentConfigSchema.optional(),
+    gridRelations: GenericComponentConfigSchema.optional(),
+    location: GenericComponentConfigSchema.optional(),
+    paragraphCollection: GenericComponentConfigSchema.optional(),
+    richText: GenericComponentConfigSchema.optional(),
     componentChoice: ComponentChoiceComponentConfigInputSchema.optional(),
     componentMultipleChoice: ComponentMultipleChoiceComponentConfigInputSchema.optional(),
     contentChunk: ContentChunkComponentConfigInputSchema.optional(),
     files: FileComponentConfigSchema.optional(),
+    images: GenericComponentConfigSchema.optional(), //@todo: add ImageComponentConfigSchema
+    videos: GenericComponentConfigSchema.optional(), //@todo: add VideoComponentConfigSchema
     itemRelations: ItemRelationsComponentConfigSchema.optional(),
     numeric: NumericComponentConfigSchema.optional(),
     piece: PieceComponentConfigInputSchema.optional(),
@@ -282,6 +300,7 @@ export const ShapeComponentInputSchema = z
         description: z.string().optional().nullable(),
         config: ShapeComponentConfigInputSchema.optional().nullable(),
     })
+
     .refine(
         ({ type, config }) => {
             if (!config) {
@@ -305,6 +324,7 @@ export const ShapeComponentSchema = z
         description: z.string().optional().nullable(),
         config: ShapeComponentConfigSchema.optional().nullable(),
     })
+
     .refine(
         ({ type, config }) => {
             if (!config) {

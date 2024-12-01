@@ -14,6 +14,7 @@ const testCases: testCase[] = [
     {
         name: 'Returns the query and variables for a basic shape',
         input: {
+            identifier: 'shape',
             name: 'Some Shape',
             type: 'product',
         },
@@ -23,6 +24,7 @@ const testCases: testCase[] = [
         input: {
             name: 'Some Shape',
             type: 'product',
+            identifier: 'shape',
             components: [
                 {
                     id: 'someSingleLine',
@@ -63,6 +65,13 @@ const testCases: testCase[] = [
                 code: 'invalid_type',
                 expected: 'string',
                 received: 'undefined',
+                path: ['identifier'],
+                message: 'Required',
+            },
+            {
+                code: 'invalid_type',
+                expected: 'string',
+                received: 'undefined',
                 path: ['name'],
                 message: 'Required',
             },
@@ -73,6 +82,7 @@ const testCases: testCase[] = [
         input: {
             name: 'some invalid shape',
             type: 'product',
+            identifier: 'shape',
             components: [
                 {
                     id: 'someSingleLine',

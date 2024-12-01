@@ -1,70 +1,49 @@
 import { z } from 'zod';
-import { IdSchema, KeyValuePairSchema } from '../shared/index.js';
+import { IdSchema, ItemTypeEnum, KeyValuePairSchema } from '../shared/index.js';
 import { ShapeComponentInputSchema, ShapeComponentSchema } from './components.js';
-import { ShapeTypeEnum } from './enums.js';
 
 export * from './components.js';
 export * from './enums.js';
 
-export const CreateShapeInputSchema = z
+const TypedShapeSchema = z
     .object({
-        identifier: z.string().optional(),
-        name: z.string().min(1),
-        tenantId: IdSchema,
-        type: ShapeTypeEnum,
-        meta: KeyValuePairSchema.optional().nullable(),
-        components: z.array(ShapeComponentInputSchema).optional().nullable(),
+        type: z.literal(ItemTypeEnum.Values.product),
         variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
     })
-    .refine(
-        ({ type, variantComponents }) => {
-            if (type !== 'product' && !!variantComponents) {
-                return false;
-            }
-            return true;
-        },
-        ({ name, identifier }) => ({
-            message: `[shape:${identifier || name}]: Only shapes of type product can have variantComponents`,
-            path: ['variantComponents'],
+    .or(
+        z.object({
+            type: z.literal(ItemTypeEnum.Values.document).or(z.literal(ItemTypeEnum.Values.folder)),
+            variantComponents: z.never().optional(),
         }),
     );
 
-export const NextPimCreateShapeInputSchema = z
-    .object({
-        identifier: z.string().optional(),
-        name: z.string().min(1),
-        type: ShapeTypeEnum,
-        meta: KeyValuePairSchema.optional().nullable(),
-        components: z.array(ShapeComponentInputSchema).optional().nullable(),
-        variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
-    })
-    .refine(
-        ({ type, variantComponents }) => {
-            if (type !== 'product' && !!variantComponents) {
-                return false;
-            }
-            return true;
-        },
-        ({ name, identifier }) => ({
-            message: `[shape:${identifier || name}]: Only shapes of type product can have variantComponents`,
-            path: ['variantComponents'],
-        }),
-    );
+const BaseShapeInputSchema = z.object({
+    identifier: z.string().min(2).max(64),
+    name: z.string().min(1),
+    meta: KeyValuePairSchema.optional().nullable(),
+    components: z.array(ShapeComponentInputSchema).optional().nullable(),
+});
+// @deprecated
+export const CreateShapeInputSchema = BaseShapeInputSchema.extend({
+    tenantId: IdSchema,
+}).and(TypedShapeSchema);
 
-export const UpdateShapeInputSchema = z.object({
-    name: z.string().optional(),
-    meta: z.record(z.string()).optional().nullable(),
+export const NextPimCreateShapeInputSchema = BaseShapeInputSchema.and(TypedShapeSchema);
+
+export const UpdateShapeInputSchema = BaseShapeInputSchema.omit({
+    identifier: true,
+}).extend({
     components: z.array(ShapeComponentInputSchema).optional().nullable(),
     variantComponents: z.array(ShapeComponentInputSchema).optional().nullable(),
 });
 
-export const basicShapeSchema = z.object({
+export const BasicShapeSchema = z.object({
     identifier: z.string().min(2).max(64),
     name: z.string().min(1),
-    type: ShapeTypeEnum,
+    type: ItemTypeEnum,
 });
 
-export const ShapeSchema = basicShapeSchema.extend({
+export const ShapeSchema = BasicShapeSchema.extend({
     components: z.array(ShapeComponentSchema).optional(),
     variantComponents: z.array(ShapeComponentSchema).optional(),
 });

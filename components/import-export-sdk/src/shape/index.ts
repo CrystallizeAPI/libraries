@@ -8,6 +8,7 @@ import {
     ShapeComponentInput,
     UpdateShapeInputSchema,
 } from '@crystallize/schema';
+
 import { ThinClient } from '../shared/thin-client.js';
 import { createShapeMutation } from './mutations/create.js';
 import { updateShapeMutation } from './mutations/update.js';
