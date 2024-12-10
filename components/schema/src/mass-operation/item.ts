@@ -1,77 +1,71 @@
 import { z } from 'zod';
-import { ComponentInputSchema } from '../item/components/index.js';
 import { IdSchema } from '../shared/index.js';
+import { ComponentContentInputSchema } from '../pim/components/component-content-input.js';
 
 export const CreateItemOperationSchema = z.object({
-    concern: z.literal('item'),
-    action: z.literal('create'),
+    intent: z.literal('item/create'),
     type: z.enum(['product', 'document', 'folder']),
     shape: z.string().min(1),
     language: z.string().min(1),
     topics: z.array(IdSchema).optional(),
-    components: z.array(ComponentInputSchema),
+    components: z.array(ComponentContentInputSchema),
 });
 
 export const UpdateItemOperationSchema = CreateItemOperationSchema.omit({
-    action: true,
+    intent: true,
     type: true,
     shape: true,
 }).merge(
     z.object({
-        action: z.literal('update'),
+        intent: z.literal('item/update'),
         itemId: IdSchema,
     }),
 );
 
-export const UpsertItemOperationSchema = UpdateItemOperationSchema.omit({ action: true }).merge(
+export const UpsertItemOperationSchema = UpdateItemOperationSchema.omit({ intent: true }).merge(
     z.object({
-        action: z.literal('upsert'),
+        intent: z.literal('item/upsert'),
     }),
 );
 
-export const UpdateComponentOperationSchema = UpdateItemOperationSchema.omit({
-    action: true,
+export const UpdateItemComponentOperationSchema = UpdateItemOperationSchema.omit({
+    intent: true,
     itemId: true,
     components: true,
     topics: true,
-})
-    .merge(
-        z.object({
-            action: z.literal('updateComponent'),
-            component: ComponentInputSchema,
-        }),
-    )
-    .and(
-        z
-            .object({
-                sku: z.never().optional(),
-                itemId: IdSchema,
-            })
-            .or(
-                z.object({
-                    sku: z.string(),
-                    itemId: z.never().optional(),
-                }),
-            ),
-    );
+}).extend({
+    intent: z.literal('item/updateComponent/item'),
+    component: ComponentContentInputSchema,
+    sku: z.never().optional(),
+    itemId: IdSchema,
+});
+export const UpdateSkuComponentOperationSchema = UpdateItemComponentOperationSchema.omit({
+    intent: true,
+    itemId: true,
+    sku: true,
+}).extend({
+    intent: z.literal('item/updateComponent/sku'),
+    sku: z.string(),
+    itemId: z.never().optional(),
+});
 
 export const PublishItemOperationSchema = z.object({
-    concern: z.literal('item'),
-    action: z.literal('publish'),
+    intent: z.literal('item/publish'),
     itemId: IdSchema,
     language: z.string().min(1),
     includeDescendants: z.boolean().optional(),
 });
 
-export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ action: true }).merge(
+export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ intent: true }).merge(
     z.object({
-        action: z.literal('unpublish'),
+        intent: z.literal('item/unpublish'),
     }),
 );
 
 export type CreateItemOperation = z.infer<typeof CreateItemOperationSchema>;
 export type UpdateItemOperation = z.infer<typeof UpdateItemOperationSchema>;
 export type UpsertItemOperation = z.infer<typeof UpsertItemOperationSchema>;
-export type UpdateComponentOperation = z.infer<typeof UpdateComponentOperationSchema>;
+export type UpdateItemComponentOperation = z.infer<typeof UpdateItemComponentOperationSchema>;
+export type UpdateSkuComponentOperation = z.infer<typeof UpdateSkuComponentOperationSchema>;
 export type PublishItemOperation = z.infer<typeof PublishItemOperationSchema>;
 export type UnPublishItemOperation = z.infer<typeof UnPublishItemOperationSchema>;

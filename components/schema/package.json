@@ -1,19 +1,21 @@
 {
     "name": "@crystallize/schema",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "license": "MIT",
-    "type": "module",
-    "main": "./dist/index.cjs",
     "exports": {
-        ".": {
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs",
-            "types": "./dist/index.d.ts"
+        "./pim": {
+            "types": "./dist/pim/index.d.ts",
+            "import": "./dist/pim/index.mjs",
+            "require": "./dist/pim/index.js"
+        },
+        "./mass-operation": {
+            "types": "./dist/mass-operation/index.d.ts",
+            "import": "./dist/mass-operation/index.mjs",
+            "require": "./dist/mass-operation/index.js"
         }
     },
-    "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "rm -rf dist && tsup src/index.ts --format esm,cjs --dts",
+        "build": "rm -rf dist && tsup src/pim/index.ts --format esm,cjs --dts -d dist/pim  && tsup src/mass-operation/index.ts --format esm,cjs --dts -d dist/mass-operation",
         "watch": "tsc -W",
         "test": "vitest run"
     },

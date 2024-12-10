@@ -30,7 +30,7 @@
     },
     "dependencies": {
         "@crystallize/js-api-client": "workspace:*",
-        "@crystallize/schema": "workspace:*",
+        "@crystallize/schema": "^2.0",
         "zod": "^3.23.8"
     }
 }
