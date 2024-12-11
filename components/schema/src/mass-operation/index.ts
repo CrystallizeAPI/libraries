@@ -8,12 +8,7 @@ import {
     UpdateItemOperationSchema,
     UpsertItemOperationSchema,
 } from './item.js';
-import {
-    CreateProductShapeOperationSchema,
-    CreateFolderShapeOperationSchema,
-    CreateDocumentShapeOperationSchema,
-    UpdateShapeOperationSchema,
-} from './shape.js';
+import { CreateShapeOperationSchema, UpdateShapeOperationSchema, UpsertShapeOperationSchema } from './shape.js';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateItemOperationSchema,
@@ -23,10 +18,9 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     UnPublishItemOperationSchema,
     UpdateItemComponentOperationSchema,
     UpdateSkuComponentOperationSchema,
-    CreateProductShapeOperationSchema,
-    CreateFolderShapeOperationSchema,
-    CreateDocumentShapeOperationSchema,
+    CreateShapeOperationSchema,
     UpdateShapeOperationSchema,
+    UpsertShapeOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -48,9 +42,4 @@ export type {
     UpsertItemOperation,
 } from './item.js';
 
-export type {
-    CreateProductShapeOperation,
-    CreateDocumentShapeOperation,
-    CreateFolderShapeOperation,
-    UpdateShapeOperation,
-} from './shape.js';
+export type { CreateShapeOperation, UpdateShapeOperation, UpsertShapeOperation } from './shape.js';

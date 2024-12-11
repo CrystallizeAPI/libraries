@@ -7,8 +7,8 @@ export const ComponentDefinitionSchema = z.object({
     id: z.string().min(1),
     type: ComponentTypeEnum,
     name: z.string().min(1),
-    description: z.string(),
-    config: ComponentConfigSchema,
+    description: z.string().optional(),
+    config: ComponentConfigSchema.optional(),
 });
 export type ComponentDefinition = z.infer<typeof ComponentDefinitionSchema>;
 
@@ -16,8 +16,8 @@ export const ComponentDefinitionInputSchema = z.object({
     id: z.string().min(1),
     type: ComponentTypeEnum,
     name: z.string().min(1),
-    description: z.string(),
-    config: ComponentConfigInputSchema,
+    description: z.string().optional(),
+    config: ComponentConfigInputSchema.optional(),
 });
 
 export type ComponentDefinitionInput = z.infer<typeof ComponentDefinitionInputSchema>;
