@@ -14,53 +14,65 @@ import { FilesContent, FilesContentSchema } from './types/files.js';
 import { ItemRelationsContent, ItemRelationsContentSchema } from './types/item-relations.js';
 import { PropertiesTableContent, PropertiesTableContentSchema } from './types/properties-table.js';
 import { SelectionContent, SelectionContentSchema } from './types/selection.js';
-import { ComponentSchema } from './component.js';
+import { Component, ComponentSchema } from './component.js';
+import { ComponentType, ComponentTypeEnum } from '../../shared/index.js';
 
-export type NestableComponentContent = {
+type IComponent = {
     componentId: string;
-    files?: FilesContent;
-    images?: ImagesContent;
-    videos?: VideosContent;
-    boolean?: BooleanContent;
-    datetime?: DatetimeContent;
-    gridRelations?: GridRelationsContent;
-    itemRelations?: ItemRelationsContent;
-    location?: LocationContent;
-    numeric?: NumericContent;
-    paragraphCollection?: ParagraphCollectionContent;
-    propertiesTable?: PropertiesTableContent;
-    richText?: RichTextContent;
-    selection?: SelectionContent;
-    singleLine?: SingleLineContent;
-    piece?: PieceContent;
+    name: string;
+    type: ComponentType;
+    content: ComponentContent;
 };
+export type NestableComponentContent =
+    | FilesContent
+    | ImagesContent
+    | VideosContent
+    | BooleanContent
+    | DatetimeContent
+    | GridRelationsContent
+    | ItemRelationsContent
+    | LocationContent
+    | NumericContent
+    | ParagraphCollectionContent
+    | PropertiesTableContent
+    | RichTextContent
+    | SelectionContent
+    | SingleLineContent
+    // PieceContent |
+    | {
+          identifier: string;
+          components: IComponent[];
+      };
 
 export const NestableComponentContentSchema: z.ZodType<NestableComponentContent> = z.lazy(() =>
-    z.object({
-        componentId: z.string().min(1),
-        files: FilesContentSchema.optional(),
-        images: ImagesContentSchema.optional(),
-        videos: VideosContentSchema.optional(),
-        boolean: BooleanContentSchema.optional(),
-        datetime: DatetimeContentSchema.optional(),
-        gridRelations: GridRelationsContentSchema.optional(),
-        itemRelations: ItemRelationsContentSchema.optional(),
-        location: LocationContentSchema.optional(),
-        numeric: NumericContentSchema.optional(),
-        paragraphCollection: ParagraphCollectionContentSchema.optional(),
-        propertiesTable: PropertiesTableContentSchema.optional(),
-        richText: RichTextContentSchema.optional(),
-        selection: SelectionContentSchema.optional(),
-        singleLine: SingleLineContentSchema.optional(),
-        piece: PieceContentSchema.optional(),
-    }),
+    z.union([
+        FilesContentSchema,
+        ImagesContentSchema,
+        VideosContentSchema,
+        BooleanContentSchema,
+        DatetimeContentSchema,
+        GridRelationsContentSchema,
+        ItemRelationsContentSchema,
+        LocationContentSchema,
+        NumericContentSchema,
+        ParagraphCollectionContentSchema,
+        PropertiesTableContentSchema,
+        RichTextContentSchema,
+        SelectionContentSchema,
+        SingleLineContentSchema,
+        z.object({
+            identifier: z.string().min(1),
+            components: z.array(
+                z.object({
+                    componentId: z.string().min(1),
+                    name: z.string().min(1),
+                    type: ComponentTypeEnum,
+                    content: ComponentContentSchema,
+                }),
+            ),
+        }),
+    ]),
 );
-
-export type ComponentContent = NestableComponentContent & {
-    componentChoice?: ChoiceContent;
-    componentMultipleChoice?: MultipleChoicesContent;
-    contentChunk?: ChunksContent;
-};
 
 /*
  * Hoisting Nightmare debug prevention
@@ -69,30 +81,47 @@ export type ComponentContent = NestableComponentContent & {
  *
  * Also we have to duplicate the schema here because of lazy loading
  */
-
+export type ComponentContent =
+    | NestableComponentContent
+    | {
+          selectedComponent: IComponent;
+      }
+    | {
+          selectedComponents: IComponent[];
+      }
+    | {
+          chunks: IComponent[][];
+      };
 export const ComponentContentSchema: z.ZodType<ComponentContent> = z.lazy(() =>
-    NestableComponentContentSchema.and(
+    z.union([
+        FilesContentSchema,
+        ImagesContentSchema,
+        VideosContentSchema,
+        BooleanContentSchema,
+        DatetimeContentSchema,
+        GridRelationsContentSchema,
+        ItemRelationsContentSchema,
+        LocationContentSchema,
+        NumericContentSchema,
+        ParagraphCollectionContentSchema,
+        PropertiesTableContentSchema,
+        RichTextContentSchema,
+        SelectionContentSchema,
+        SingleLineContentSchema,
         z.object({
-            // componentChoice: ChoiceContentSchema.optional(),
-            componentChoice: z
-                .object({
-                    selectedComponent: ComponentSchema,
-                })
-                .optional(),
-            // componentMultipleChoice: MultipleChoicesContentSchema.optional(),
-            componentMultipleChoice: z
-                .object({
-                    selectedComponents: z.array(ComponentSchema),
-                })
-                .optional(),
-            // contentChunk: ChunksContentSchema.optional(),
-            contentChunk: z
-                .object({
-                    chunks: z.array(z.array(ComponentSchema)),
-                })
-                .optional(),
+            identifier: z.string().min(1),
+            components: z.array(ComponentSchema),
         }),
-    ),
+        z.object({
+            selectedComponent: ComponentSchema,
+        }),
+        z.object({
+            selectedComponents: z.array(ComponentSchema),
+        }),
+        z.object({
+            chunks: z.array(z.array(ComponentSchema)),
+        }),
+    ]),
 );
 
 export const ChoiceContentSchema = z.object({

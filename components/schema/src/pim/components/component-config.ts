@@ -14,52 +14,70 @@ import { FilesConfig, FilesConfigSchema } from './types/files.js';
 import { ItemRelationsConfig, ItemRelationsConfigSchema } from './types/item-relations.js';
 import { PropertiesTableConfig, PropertiesTableConfigSchema } from './types/properties-table.js';
 import { SelectionConfig, SelectionConfigSchema } from './types/selection.js';
-import { GenericComponentConfigSchema } from './shared.js';
-import { ComponentDefinitionInputSchema, ComponentDefinitionSchema } from './component-definition.js';
+import { GenericComponentConfig, GenericComponentConfigSchema } from './shared.js';
+import { ComponentDefinition, ComponentDefinitionSchema } from './component-definition.js';
 
-export type NestableComponentConfig = {
-    files?: FilesConfig;
-    images?: ImagesConfig;
-    videos?: VideosConfig;
-    boolean?: BooleanConfig;
-    datetime?: DatetimeConfig;
-    gridRelations?: GridRelationsConfig;
-    itemRelations?: ItemRelationsConfig;
-    location?: LocationConfig;
-    numeric?: NumericConfig;
-    paragraphCollection?: ParagraphCollectionConfig;
-    propertiesTable?: PropertiesTableConfig;
-    richText?: RichTextConfig;
-    selection?: SelectionConfig;
-    singleLine?: SingleLineConfig;
-    piece?: PieceConfig;
-};
+export type NestableComponentConfig =
+    | FilesConfig
+    | ImagesConfig
+    | VideosConfig
+    | BooleanConfig
+    | DatetimeConfig
+    | GridRelationsConfig
+    | ItemRelationsConfig
+    | LocationConfig
+    | NumericConfig
+    | ParagraphCollectionConfig
+    | PropertiesTableConfig
+    | RichTextConfig
+    | SelectionConfig
+    | SingleLineConfig
+
+    // PieceConfig |
+    | (GenericComponentConfig & {
+          identifier: string;
+          components: ComponentDefinition[];
+      });
 
 export const NestableComponentConfigSchema: z.ZodType<NestableComponentConfig> = z.lazy(() =>
-    z.object({
-        files: FilesConfigSchema.optional(),
-        images: ImagesConfigSchema.optional(),
-        videos: VideosConfigSchema.optional(),
-        boolean: BooleanConfigSchema.optional(),
-        datetime: DatetimeConfigSchema.optional(),
-        gridRelations: GridRelationsConfigSchema.optional(),
-        itemRelations: ItemRelationsConfigSchema.optional(),
-        location: LocationConfigSchema.optional(),
-        numeric: NumericConfigSchema.optional(),
-        paragraphCollection: ParagraphCollectionConfigSchema.optional(),
-        propertiesTable: PropertiesTableConfigSchema.optional(),
-        richText: RichTextConfigSchema.optional(),
-        selection: SelectionConfigSchema.optional(),
-        singleLine: SingleLineConfigSchema.optional(),
-        piece: PieceConfigSchema.optional(),
-    }),
+    z.union([
+        FilesConfigSchema,
+        ImagesConfigSchema,
+        VideosConfigSchema,
+        BooleanConfigSchema,
+        DatetimeConfigSchema,
+        GridRelationsConfigSchema,
+        ItemRelationsConfigSchema,
+        LocationConfigSchema,
+        NumericConfigSchema,
+        ParagraphCollectionConfigSchema,
+        PropertiesTableConfigSchema,
+        RichTextConfigSchema,
+        SelectionConfigSchema,
+        SingleLineConfigSchema,
+        GenericComponentConfigSchema.extend({
+            identifier: z.string().min(1),
+            components: z.array(ComponentDefinitionSchema),
+        }),
+    ]),
 );
 
-export type ComponentConfig = NestableComponentConfig & {
-    componentChoice?: ChoiceConfig;
-    componentMultipleChoice?: MultipleChoicesConfig;
-    contentChunk?: ChunksConfig;
-};
+export type ComponentConfig =
+    | NestableComponentConfig
+    // ChoiceConfig
+    | (GenericComponentConfig & {
+          choices: ComponentDefinition[];
+      })
+    // MultipleChoicesConfig
+    | (GenericComponentConfig & {
+          choices: ComponentDefinition[];
+          allowDuplicates: boolean;
+      })
+    // ChunksConfig
+    | (GenericComponentConfig & {
+          components: ComponentDefinition[];
+          repeatable: boolean;
+      });
 
 /*
  * Hoisting Nightmare debug prevention
@@ -69,28 +87,47 @@ export type ComponentConfig = NestableComponentConfig & {
  * Also we have to duplicate the schema here because of lazy loading
  */
 export const ComponentConfigSchema: z.ZodType<ComponentConfig> = z.lazy(() =>
-    NestableComponentConfigSchema.and(
-        z.object({
-            // componentChoice: ChoiceConfigSchema.optional(),
-            componentChoice: GenericComponentConfigSchema.extend({
-                choices: z.array(ComponentDefinitionInputSchema),
-            }).optional(),
-            // componentMultipleChoice: MultipleChoicesConfigSchema.optional(),
-            componentMultipleChoice: GenericComponentConfigSchema.extend({
-                choices: z.array(ComponentDefinitionSchema),
-                allowDuplicates: z.boolean().optional(),
-            }).optional(),
-            // contentChunk: ChunksConfigSchema.optional(),
-            contentChunk: GenericComponentConfigSchema.extend({
-                components: z.array(ComponentDefinitionSchema),
-                repeatable: z.boolean(),
-            }).optional(),
+    z.union([
+        FilesConfigSchema,
+        ImagesConfigSchema,
+        VideosConfigSchema,
+        BooleanConfigSchema,
+        DatetimeConfigSchema,
+        GridRelationsConfigSchema,
+        ItemRelationsConfigSchema,
+        LocationConfigSchema,
+        NumericConfigSchema,
+        ParagraphCollectionConfigSchema,
+        PropertiesTableConfigSchema,
+        RichTextConfigSchema,
+        SelectionConfigSchema,
+        SingleLineConfigSchema,
+        // Piece
+        GenericComponentConfigSchema.extend({
+            identifier: z.string().min(1),
+            components: z.array(ComponentDefinitionSchema),
         }),
-    ),
+        // Choice
+        GenericComponentConfigSchema.extend({
+            choices: z.array(ComponentDefinitionSchema),
+        }),
+
+        // Multiple Choices
+        GenericComponentConfigSchema.extend({
+            choices: z.array(ComponentDefinitionSchema),
+            allowDuplicates: z.boolean().optional(),
+        }),
+
+        //Chnunk
+        GenericComponentConfigSchema.extend({
+            components: z.array(ComponentDefinitionSchema),
+            repeatable: z.boolean(),
+        }),
+    ]),
 );
 
 export const ChoiceConfigSchema = GenericComponentConfigSchema.extend({
-    choices: z.array(ComponentDefinitionInputSchema),
+    choices: z.array(ComponentDefinitionSchema),
 });
 export type ChoiceConfig = z.infer<typeof ChoiceConfigSchema>;
 
