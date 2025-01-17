@@ -62,21 +62,39 @@ export type ComponentContent = NestableComponentContent & {
     contentChunk?: ChunksContent;
 };
 
-export const ComponentContentSchema: z.ZodType<ComponentContent> = z.lazy(() =>
-    NestableComponentContentSchema.and(
-        z.object({
-            componentChoice: ChoiceContentSchema.optional(),
-            componentMultipleChoice: MultipleChoicesContentSchema.optional(),
-            contentChunk: ChunksContentSchema.optional(),
-        }),
-    ),
-);
-
 /*
  * Hoisting Nightmare debug prevention
  * Do not try to put those files elsewhere, because base on how you transpile the code, it may not work
  * as we have recursive imports here
+ *
+ * Also we have to duplicate the schema here because of lazy loading
  */
+
+export const ComponentContentSchema: z.ZodType<ComponentContent> = z.lazy(() =>
+    NestableComponentContentSchema.and(
+        z.object({
+            // componentChoice: ChoiceContentSchema.optional(),
+            componentChoice: z
+                .object({
+                    selectedComponent: ComponentSchema,
+                })
+                .optional(),
+            // componentMultipleChoice: MultipleChoicesContentSchema.optional(),
+            componentMultipleChoice: z
+                .object({
+                    selectedComponents: z.array(ComponentSchema),
+                })
+                .optional(),
+            // contentChunk: ChunksContentSchema.optional(),
+            contentChunk: z
+                .object({
+                    chunks: z.array(z.array(ComponentSchema)),
+                })
+                .optional(),
+        }),
+    ),
+);
+
 export const ChoiceContentSchema = z.object({
     selectedComponent: ComponentSchema,
 });

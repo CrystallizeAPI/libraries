@@ -1,0 +1,30 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "shape/upsert",
+            "type": "document",
+            "name": "Landing page",
+            "identifier": "landing-page",
+            "components": [
+                {
+                    "id": "blocks",
+                    "type": "componentMultipleChoice",
+                    "name": "Blocks",
+                    "config": {
+                        "componentMultipleChoice": {
+                            "choices": [
+                                {
+                                    "id": "banner",
+                                    "type": "piece",
+                                    "name": "Banner",
+                                    "config": {}
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

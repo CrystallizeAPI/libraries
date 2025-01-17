@@ -1,0 +1,33 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "67105ea33fd643312ff491ef",
+            "language": "en",
+            "component": {
+                "componentId": "brief",
+                "componentMultipleChoice": [
+                    {
+                        "componentId": "plop",
+                        "richText": {
+                            "html": [
+                                "<p>Updated brief from MassOperations</p>",
+                                "<p>Updated brief from MassOperations2</p>"
+                            ]
+                        }
+                    },
+                    {
+                        "componentId": "plop2",
+                        "richText": {
+                            "html": [
+                                "<p>Updated brief from MassOperations</p>",
+                                "<p>Updated brief from MassOperations2</p>"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

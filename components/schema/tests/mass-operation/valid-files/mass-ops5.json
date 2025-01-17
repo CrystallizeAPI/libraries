@@ -1,0 +1,33 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "story",
+                "paragraphCollection": {
+                    "paragraphs": [
+                        {
+                            "title": {
+                                "text": "paragraphCollection - Mass operations title"
+                            },
+                            "body": {
+                                "html": ["<p>paragraphCollection - Mass operations Single Item</p>"]
+                            }
+                        },
+                        {
+                            "title": {
+                                "text": "paragraphCollection - Mass operations title 2"
+                            },
+                            "body": {
+                                "html": ["<p>paragraphCollection - Mass operations Single Item 2 </p>"]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

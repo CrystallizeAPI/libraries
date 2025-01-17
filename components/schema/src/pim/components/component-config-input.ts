@@ -61,21 +61,36 @@ export type ComponentConfigInput = NestableComponentConfigInput & {
     contentChunk?: ChunksConfigInput;
 };
 
-export const ComponentConfigInputSchema: z.ZodType<ComponentConfigInput> = z.lazy(() =>
-    NestableComponentConfigInputSchema.and(
-        z.object({
-            componentChoice: ChoiceConfigInputSchema.optional(),
-            componentMultipleChoice: MultipleChoicesConfigInputSchema.optional(),
-            contentChunk: ChunksConfigInputSchema.optional(),
-        }),
-    ),
-);
-
 /*
  * Hoisting Nightmare debug prevention
  * Do not try to put those files elsewhere, because base on how you transpile the code, it may not work
  * as we have recursive imports here
+ *
+ * Also we have to duplicate the schema here because of lazy loading
  */
+export const ComponentConfigInputSchema: z.ZodType<ComponentConfigInput> = z.lazy(() =>
+    NestableComponentConfigInputSchema.and(
+        z.object({
+            // componentChoice: ChoiceConfigInputSchema.optional(),
+            componentChoice: GenericComponentConfigInputSchema.extend({
+                choices: z.array(ComponentDefinitionInputSchema),
+            }).optional(),
+
+            // componentMultipleChoice: MultipleChoicesConfigInputSchema.optional(),
+            componentMultipleChoice: GenericComponentConfigInputSchema.extend({
+                choices: z.array(ComponentDefinitionInputSchema),
+                allowDuplicates: z.boolean().optional(),
+            }).optional(),
+
+            // contentChunk: ChunksConfigInputSchema.optional(),
+            contentChunk: GenericComponentConfigInputSchema.extend({
+                components: z.array(ComponentDefinitionInputSchema),
+                repeatable: z.boolean().optional(),
+            }).optional(),
+        }),
+    ),
+);
+
 export const ChoiceConfigInputSchema = GenericComponentConfigInputSchema.extend({
     choices: z.array(ComponentDefinitionInputSchema),
 });

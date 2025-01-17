@@ -1,0 +1,27 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "multiple-choice",
+                "componentMultipleChoice": [
+                    {
+                        "componentId": "test",
+                        "singleLine": {
+                            "text": "Yeah baby"
+                        }
+                    },
+                    {
+                        "componentId": "test",
+                        "singleLine": {
+                            "text": "Yeah baby2"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

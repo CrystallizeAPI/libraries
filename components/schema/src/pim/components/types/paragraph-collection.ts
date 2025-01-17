@@ -14,7 +14,7 @@ export const ParagraphCollectionConfigSchema = GenericComponentConfigSchema.omit
 export const ParagraphCollectionConfigInputSchema = GenericComponentConfigInputSchema.omit({
     multilingual: true,
 }).extend({
-    multilingual: z.enum(['body', 'images', 'title', 'videos', 'structure']),
+    multilingual: z.array(z.enum(['body', 'images', 'title', 'videos', 'structure'])),
 });
 
 export type ParagraphCollectionConfig = z.infer<typeof ParagraphCollectionConfigSchema>;

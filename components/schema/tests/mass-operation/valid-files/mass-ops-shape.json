@@ -1,0 +1,76 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "piece/upsert",
+            "identifier": "my-super-piece-seo",
+            "name": "My Piece de ouf SEO",
+            "components": [
+                {
+                    "id": "seo-title",
+                    "name": "SEO Title",
+                    "type": "singleLine",
+                    "description": "The SEO TITLE",
+                    "config": {
+                        "singleLine": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "seo-description",
+                    "name": "SEO Description",
+                    "type": "richText",
+                    "description": "The SEO DESCRIPTION",
+                    "config": {
+                        "richText": {
+                            "required": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "shape/upsert",
+            "type": "product",
+            "identifier": "my-identifier-from-mapp-22",
+            "name": "My Identifer from Mapp 22",
+            "components": [
+                {
+                    "id": "my-title",
+                    "name": "Title",
+                    "type": "singleLine",
+                    "description": "description",
+                    "config": {
+                        "singleLine": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "my-enable",
+                    "name": "name",
+                    "type": "boolean",
+                    "description": "description",
+                    "config": {
+                        "boolean": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "my-seo-block",
+                    "name": "SEO",
+                    "type": "piece",
+                    "description": "SEO STUFF",
+                    "config": {
+                        "piece": {
+                            "required": true,
+                            "identifier": "my-super-piece-seo"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

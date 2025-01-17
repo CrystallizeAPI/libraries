@@ -1,0 +1,153 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "title",
+                "singleLine": {
+                    "text": "singleLine - Mass operations Single Item"
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "description",
+                "richText": {
+                    "html": ["<p>richText - Mass operations Single Item</p>"]
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "story",
+                "paragraphCollection": {
+                    "paragraphs": [
+                        {
+                            "title": {
+                                "text": "paragraphCollection - Mass operations title"
+                            },
+                            "body:": {
+                                "html": ["<p>paragraphCollection - Mass operations Single Item</p>"]
+                            }
+                        },
+                        {
+                            "title": {
+                                "text": "paragraphCollection - Mass operations title 2"
+                            },
+                            "body:": {
+                                "html": ["<p>paragraphCollection - Mass operations Single Item 2 </p>"]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "enabled",
+                "boolean": {
+                    "value": true
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "likes",
+                "numeric": {
+                    "number": 84,
+                    "unit": "Heart"
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "publicationdate",
+                "datetime": {
+                    "datetime": "2019-01-01T00:00:00Z"
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "location",
+                "location": {
+                    "lat": 42.42,
+                    "long": 12.12
+                }
+            }
+        },
+        {
+            "intent": "item/updateComponent/item",
+            "itemId": "632958a35dfc2c90cbbad20d",
+            "language": "en",
+            "component": {
+                "componentId": "multiple-choice",
+                "componentMultipleChoice": [
+                    {
+                        "componentId": "test",
+                        "singleLine": {
+                            "text": "Yeah baby"
+                        }
+                    },
+                    {
+                        "componentId": "test",
+                        "singleLine": {
+                            "text": "Yeah baby2"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "intent": "shape/create",
+            "type": "product",
+            "identifier": "my-identifier-from-mapp-1",
+            "name": "name",
+            "components": [
+                {
+                    "id": "my-title",
+                    "name": "Title",
+                    "type": "singleLine",
+                    "description": "description",
+                    "config": {
+                        "singleLine": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "my-enable",
+                    "name": "name",
+                    "type": "boolean",
+                    "description": "description",
+                    "config": {
+                        "boolean": {
+                            "required": true
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
