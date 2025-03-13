@@ -16,6 +16,7 @@ import {
     UpsertPieceOperationSchema,
     UpsertShapeOperationSchema,
 } from './shape.js';
+import { ModifyProductVariantStockOperation, ModifyProductVariantStockOperationSchema } from './product-variant.js';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateItemOperationSchema,
@@ -35,6 +36,8 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     CreatePieceOperationSchema,
     UpdatePieceOperationSchema,
     UpsertPieceOperationSchema,
+
+    ModifyProductVariantStockOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -64,3 +67,5 @@ export type {
     UpdatePieceOperation,
     UpsertPieceOperation,
 } from './shape.js';
+
+export type { ModifyProductVariantStockOperation };
