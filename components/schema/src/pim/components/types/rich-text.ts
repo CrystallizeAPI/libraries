@@ -31,7 +31,7 @@ export const RichTextContentInputSchema = z
             return true;
         },
         {
-            message: 'Invalid json provided to rich text content input',
+            error: 'Invalid json provided to rich text content input',
         },
     );
 export type RichTextContentInput = z.infer<typeof RichTextContentInputSchema>;

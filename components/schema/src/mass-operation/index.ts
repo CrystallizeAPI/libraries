@@ -16,7 +16,15 @@ import {
     UpsertPieceOperationSchema,
     UpsertShapeOperationSchema,
 } from './shape.js';
-import { ModifyProductVariantStockOperation, ModifyProductVariantStockOperationSchema } from './product-variant.js';
+import { ModifyProductVariantStockOperationSchema } from './product-variant.js';
+import {
+    CreateCustomerGroupOperationSchema,
+    CreateCustomerOperationSchema,
+    UpdateCustomerGroupOperationSchema,
+    UpdateCustomerOperationSchema,
+    UpsertCustomerGroupOperationSchema,
+    UpsertCustomerOperationSchema,
+} from './customer.js';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateItemOperationSchema,
@@ -38,6 +46,14 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     UpsertPieceOperationSchema,
 
     ModifyProductVariantStockOperationSchema,
+
+    CreateCustomerGroupOperationSchema,
+    UpdateCustomerGroupOperationSchema,
+    UpsertCustomerGroupOperationSchema,
+
+    CreateCustomerOperationSchema,
+    UpdateCustomerOperationSchema,
+    UpsertCustomerOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -68,4 +84,13 @@ export type {
     UpsertPieceOperation,
 } from './shape.js';
 
-export type { ModifyProductVariantStockOperation };
+export type { ModifyProductVariantStockOperation } from './product-variant.js';
+
+export type {
+    CreateCustomerOperation,
+    UpdateCustomerOperation,
+    UpsertCustomerOperation,
+    CreateCustomerGroupOperation,
+    UpdateCustomerGroupOperation,
+    UpsertCustomerGroupOperation,
+} from './customer.js';

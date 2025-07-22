@@ -5,14 +5,14 @@ import { ComponentDefinitionInputSchema, ComponentDefinitionSchema } from '../co
 export const CreatePieceInputSchema = z.object({
     identifier: z.string().min(2).max(64),
     name: z.string().min(1),
-    components: z.array(ComponentDefinitionInputSchema).optional().nullable(),
+    components: z.array(ComponentDefinitionInputSchema).nullish(),
 });
 
 export const UpdatePieceInputSchema = CreatePieceInputSchema;
 
 export const UpdateShapeInputSchema = CreatePieceInputSchema.extend({
-    meta: KeyValuePairInputSchema.optional().nullable(),
-    variantComponents: z.array(ComponentDefinitionInputSchema).optional().nullable(),
+    meta: KeyValuePairInputSchema.nullish(),
+    variantComponents: z.array(ComponentDefinitionInputSchema).nullish(),
 });
 
 export const CreateShapeInputSchema = UpdateShapeInputSchema.extend({

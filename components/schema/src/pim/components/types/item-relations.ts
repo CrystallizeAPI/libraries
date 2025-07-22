@@ -20,7 +20,7 @@ const extraConfig = z.object({
 export const ItemRelationsConfigSchema = MinMaxComponentConfigSchema.omit({
     min: true,
     max: true,
-}).merge(extraConfig);
+}).extend(extraConfig.shape);
 
 export const ItemRelationsConfigInputSchema = MinMaxComponentConfigInputSchema.and(
     z
@@ -30,7 +30,7 @@ export const ItemRelationsConfigInputSchema = MinMaxComponentConfigInputSchema.a
             minSkus: MinValueSchema,
             maxSkus: MaxValueSchema,
         })
-        .merge(extraConfig),
+        .extend(extraConfig.shape),
 ).refine(
     ({ min, max, minItems, maxItems, minSkus, maxSkus }) => {
         if (typeof min === 'number' && typeof max === 'number') {
@@ -60,7 +60,7 @@ export const ItemRelationsConfigInputSchema = MinMaxComponentConfigInputSchema.a
         return true;
     },
     {
-        message: 'Min cannot be greater than max',
+        error: 'Min cannot be greater than max',
         path: ['min'],
     },
 );

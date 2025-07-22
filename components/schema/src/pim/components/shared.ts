@@ -30,7 +30,7 @@ export const MinMaxComponentConfigInputSchema = GenericComponentConfigInputSchem
         return true;
     },
     {
-        message: 'Min cannot be greater than max',
+        error: 'Min cannot be greater than max',
         path: ['min'],
     },
 );
