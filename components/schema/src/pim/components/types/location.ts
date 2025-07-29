@@ -8,8 +8,8 @@ export type LocationConfig = z.infer<typeof LocationConfigSchema>;
 export type LocationConfigInput = z.infer<typeof LocationConfigInputSchema>;
 
 export const LocationContentSchema = z.object({
-    lat: z.number().optional(),
-    long: z.number().optional(),
+    lat: z.number().nullish(),
+    long: z.number().nullish(),
 });
 export type LocationContent = z.infer<typeof LocationContentSchema>;
 

@@ -68,9 +68,10 @@ export const ItemRelationsConfigInputSchema = MinMaxComponentConfigInputSchema.a
 export type ItemRelationsConfig = z.infer<typeof ItemRelationsConfigSchema>;
 export type ItemRelationsConfigInput = z.infer<typeof ItemRelationsConfigInputSchema>;
 
+//@todo: missing stuff in Core Next
 export const ItemRelationsContentSchema = z.object({
-    itemIds: z.array(IdSchema).optional(),
-    // skus: z.array(z.string()).optional() // @todo missing in Core Next
+    itemIds: z.array(IdSchema).nullish(),
+    // skus: z.array(z.string()).nullish() // @todo missing in Core Next
     // items: @todo
     // productVariants: @todo
 });

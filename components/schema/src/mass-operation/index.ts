@@ -26,6 +26,13 @@ import {
     UpsertCustomerOperationSchema,
 } from './customer.js';
 
+import { RegisterOrderOperationSchema, UpdateOrderOperationSchema, UpsertOrderOperationSchema } from './order.js';
+import {
+    CreateSubscriptionContractOperationSchema,
+    UpdateSubscriptionContractOperationSchema,
+    UpsertSubscriptionContractOperationSchema,
+} from './subscription-contract.js';
+
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateItemOperationSchema,
     UpdateItemOperationSchema,
@@ -54,6 +61,14 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     CreateCustomerOperationSchema,
     UpdateCustomerOperationSchema,
     UpsertCustomerOperationSchema,
+
+    RegisterOrderOperationSchema,
+    UpdateOrderOperationSchema,
+    UpsertOrderOperationSchema,
+
+    CreateSubscriptionContractOperationSchema,
+    UpdateSubscriptionContractOperationSchema,
+    UpsertSubscriptionContractOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -94,3 +109,10 @@ export type {
     UpdateCustomerGroupOperation,
     UpsertCustomerGroupOperation,
 } from './customer.js';
+
+export type { RegisterOrderOperation, UpdateOrderOperation, UpsertOrderOperation } from './order.js';
+export type {
+    CreateSubscriptionContractOperation,
+    UpdateSubscriptionContractOperation,
+    UpsertSubscriptionContractOperation,
+} from './subscription-contract.js';

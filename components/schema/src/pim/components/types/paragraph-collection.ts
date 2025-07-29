@@ -21,10 +21,10 @@ export type ParagraphCollectionConfig = z.infer<typeof ParagraphCollectionConfig
 export type ParagraphCollectionConfigInput = z.infer<typeof ParagraphCollectionConfigInputSchema>;
 
 export const ParagraphContentSchema = z.object({
-    title: SingleLineContentSchema.optional(),
-    body: RichTextContentSchema.optional(),
-    images: z.array(ImageContentSchema).optional(),
-    videos: z.array(VideoContentSchema).optional(),
+    title: SingleLineContentSchema.nullish(),
+    body: RichTextContentSchema.nullish(),
+    images: z.array(ImageContentSchema).nullish(),
+    videos: z.array(VideoContentSchema).nullish(),
 });
 
 export const ParagraphContentInputSchema = z.object({
@@ -35,7 +35,7 @@ export const ParagraphContentInputSchema = z.object({
 });
 
 export const ParagraphCollectionContentSchema = z.object({
-    paragraphs: z.array(ParagraphContentSchema).optional(),
+    paragraphs: z.array(ParagraphContentSchema).nullish(),
 });
 export type ParagraphCollectionContent = z.infer<typeof ParagraphCollectionContentSchema>;
 

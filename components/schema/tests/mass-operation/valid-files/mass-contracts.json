@@ -1,0 +1,86 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "customer/upsert",
+            "identifier": "customer-for-contract-123",
+            "firstName": "John",
+            "lastName": "Doe",
+            "type": "individual"
+        },
+        {
+            "intent": "subscription-contract/create",
+            "customerIdentifier": "customer-for-contract-123",
+            "subscriptionPlan": {
+                "identifier": "premium-monthly-plan",
+                "periodId": "507f1f77bcf86cd799439011",
+                "periodName": "Monthly Premium"
+            },
+            "status": {
+                "activateAt": "2025-10-01T00:00:00Z",
+                "activeUntil": "2026-10-01T00:00:00Z",
+                "renewAt": "2025-11-01T00:00:00Z"
+            },
+            "item": {
+                "sku": "PREMIUM-SUBSCRIPTION-001",
+                "quantity": 1,
+                "name": "Premium Monthly Subscription",
+                "imageUrl": "https://example.com/subscription-icon.png",
+                "meta": [
+                    {
+                        "key": "category",
+                        "value": "premium"
+                    },
+                    {
+                        "key": "features",
+                        "value": "unlimited-access,priority-support"
+                    }
+                ]
+            },
+            "signedAt": "2025-09-26T10:30:00Z",
+            "recurring": {
+                "currency": "USD",
+                "price": 29.99,
+                "period": 1,
+                "unit": "month",
+                "productVariants": [
+                    {
+                        "sku": "PREMIUM-FEATURES",
+                        "quantity": 1,
+                        "name": "Premium Features Access"
+                    }
+                ]
+            },
+            "addresses": [
+                {
+                    "type": "billing",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "street": "123 Main Street",
+                    "city": "New York",
+                    "state": "NY",
+                    "postalCode": "10001",
+                    "country": "US",
+                    "email": "john.doe@example.com"
+                }
+            ],
+            "payment": {
+                "provider": "stripe",
+                "stripe": {
+                    "customerId": "cus_XXXXXXXXXX",
+                    "paymentMethodId": "pm_XXXXXXXXXX"
+                }
+            },
+            "meta": [
+                {
+                    "key": "source",
+                    "value": "web-registration"
+                },
+                {
+                    "key": "promotionCode",
+                    "value": "NEWUSER2025"
+                }
+            ]
+        }
+    ]
+}

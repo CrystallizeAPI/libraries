@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
 import {
     DateTimeSchema,
-    FileSizeUnitEnum,
+    FileSizeUnitSchema,
     KeyValuePairInputSchema,
     KeyValuePairSchema,
 } from '../../../shared/index.js';
@@ -19,7 +19,7 @@ const extraConfig = z.object({
         .optional(),
     maxFileSize: z.object({
         size: z.number(),
-        unit: FileSizeUnitEnum,
+        unit: FileSizeUnitSchema,
     }),
 });
 export const FilesConfigSchema = MinMaxComponentConfigSchema.and(extraConfig);
@@ -29,19 +29,19 @@ export type FilesConfig = z.infer<typeof FilesConfigSchema>;
 export type FilesConfigInput = z.infer<typeof FilesConfigInputSchema>;
 
 export const FileContentSchema = z.object({
-    key: z.string().min(1),
-    contentType: z.string().optional(),
-    title: z.string().optional(),
-    meta: z.array(KeyValuePairSchema).optional(),
-    size: z.number().optional(),
-    createdAt: DateTimeSchema.optional(),
-    updatedAt: DateTimeSchema.optional(),
-    url: z.string().min(1),
+    key: z.string().optional(),
+    contentType: z.string().nullish(),
+    title: z.string().nullish(),
+    meta: z.array(KeyValuePairSchema).nullish(),
+    size: z.number().nullish(),
+    createdAt: DateTimeSchema.nullish(),
+    updatedAt: DateTimeSchema.nullish(),
+    url: z.string().optional(),
 });
 export type FileContent = z.infer<typeof FilesContentSchema>;
 
 export const FilesContentSchema = z.object({
-    files: z.array(FileContentSchema).optional(),
+    files: z.array(FileContentSchema).nullish(),
 });
 export type FilesContent = z.infer<typeof FilesContentSchema>;
 

@@ -1,12 +1,22 @@
 {
     "name": "@crystallize/schema",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "license": "MIT",
     "exports": {
+        "./catalogue": {
+            "types": "./dist/catalogue/index.d.ts",
+            "import": "./dist/catalogue/index.mjs",
+            "require": "./dist/catalogue/index.js"
+        },
         "./pim": {
             "types": "./dist/pim/index.d.ts",
             "import": "./dist/pim/index.mjs",
             "require": "./dist/pim/index.js"
+        },
+        "./shop": {
+            "types": "./dist/shop/index.d.ts",
+            "import": "./dist/shop/index.mjs",
+            "require": "./dist/shop/index.js"
         },
         "./mass-operation": {
             "types": "./dist/mass-operation/index.d.ts",
@@ -15,19 +25,19 @@
         }
     },
     "scripts": {
-        "build": "rm -rf dist && tsup src/pim/index.ts --format esm,cjs --dts -d dist/pim  && tsup src/mass-operation/index.ts --format esm,cjs --dts -d dist/mass-operation",
+        "build": "rm -rf dist && tsup src/pim/index.ts --format esm,cjs --dts -d dist/pim  && tsup src/mass-operation/index.ts --format esm,cjs --dts -d dist/mass-operation && tsup src/catalogue/index.ts --format esm,cjs --dts -d dist/catalogue && tsup src/shop/index.ts --format esm,cjs --dts -d dist/shop",
         "watch": "tsc -W",
         "test": "vitest run"
     },
     "dependencies": {
-        "zod": "^4.0.5"
+        "zod": "^4.0.15"
     },
     "devDependencies": {
         "@tsconfig/node20": "^20.1.6",
-        "@types/node": "^24.0.15",
+        "@types/node": "^24.2.0",
         "json": "^11.0.0",
         "tsup": "^8.5.0",
-        "typescript": "^5.8.3",
+        "typescript": "^5.9.2",
         "vitest": "^3.2.4"
     },
     "files": [

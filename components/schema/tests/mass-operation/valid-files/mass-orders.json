@@ -1,0 +1,217 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "customer/upsert",
+            "identifier": "customer-for-order-123",
+            "firstName": "John",
+            "lastName": "Doe",
+            "type": "individual"
+        },
+        {
+            "intent": "order/register",
+            "additionalInformation": "Please deliver between 9am-5pm",
+            "customer": {
+                "identifier": "plopix",
+                "type": "individual"
+            },
+            "cart": [
+                {
+                    "imageUrl": "https://example.com/product-image.jpg",
+                    "name": "Sample Product",
+                    "productId": "67e5d2d12d31ee752710a74b",
+                    "meta": [
+                        {
+                            "key": "color",
+                            "value": "red"
+                        }
+                    ],
+                    "quantity": 2,
+                    "sku": "SP-RED-001",
+                    "subTotal": {
+                        "currency": "USD",
+                        "gross": 2000,
+                        "net": 1600,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    },
+                    "price": {
+                        "currency": "USD",
+                        "gross": 1000,
+                        "net": 800,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    },
+                    "subscriptionContractId": "67e5d2d12d31ee752710a74b",
+                    "subscription": {
+                        "start": "2024-01-01T00:00:00Z",
+                        "end": "2024-12-31T23:59:59Z",
+                        "name": "Monthly Plan",
+                        "period": 2,
+                        "unit": "month",
+                        "meteredVariables": [
+                            {
+                                "id": "67e5d2d12d31ee752710a74b",
+                                "price": 123,
+                                "usage": 12
+                            },
+                            {
+                                "id": "67e5d2d12d31ee752710a7c",
+                                "price": 123,
+                                "usage": 12
+                            }
+                        ]
+                    }
+                },
+                {
+                    "imageUrl": "https://example.com/product-image.jpg",
+                    "name": "Sample Product 2",
+                    "productId": "67e5d2d12d31ee752710a74c",
+                    "meta": [
+                        {
+                            "key": "color",
+                            "value": "blue"
+                        }
+                    ],
+                    "quantity": 2,
+                    "sku": "SP-BLUE-001",
+                    "subTotal": {
+                        "currency": "USD",
+                        "gross": 2000,
+                        "net": 1600,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    },
+                    "price": {
+                        "currency": "USD",
+                        "gross": 1000,
+                        "net": 800,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    },
+                    "subscriptionContractId": "67e5d2d12d31ee752710a74b",
+                    "subscription": {
+                        "start": "2024-01-01T00:00:00Z",
+                        "end": "2024-12-31T23:59:59Z",
+                        "name": "Monthly Plan",
+                        "period": 2,
+                        "unit": "month",
+                        "meteredVariables": [
+                            {
+                                "id": "67e5d2d12d31ee752710a74b",
+                                "price": 456,
+                                "usage": 42
+                            },
+                            {
+                                "id": "67e5d2d12d31ee752710a7c",
+                                "price": 456,
+                                "usage": 42
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "order/upsert",
+            "id": "67e5d2d12d31ee752710a74d",
+            "customer": {
+                "identifier": "plopix2",
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "plop@sfdf.fr",
+                "type": "individual"
+            },
+            "additionalInformation": "Please deliver between 9am-5pm",
+            "cart": [
+                {
+                    "imageUrl": "https://example.com/product-image.jpg",
+                    "name": "Sample Product",
+                    "productId": "67e5d2d12d31ee752710a74b",
+                    "meta": [
+                        {
+                            "key": "color",
+                            "value": "red"
+                        }
+                    ],
+                    "quantity": 2,
+                    "sku": "SP-RED-001",
+                    "subTotal": {
+                        "currency": "USD",
+                        "gross": 2000,
+                        "net": 1600,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    },
+                    "price": {
+                        "currency": "USD",
+                        "gross": 1000,
+                        "net": 800,
+                        "tax": {
+                            "name": "VAT",
+                            "percent": 20
+                        },
+                        "discounts": [
+                            {
+                                "percent": 10
+                            },
+                            {
+                                "percent": 10
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

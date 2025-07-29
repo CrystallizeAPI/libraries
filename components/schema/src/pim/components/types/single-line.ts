@@ -13,7 +13,7 @@ export type SingleLineConfig = z.infer<typeof SingleLineConfigSchema>;
 export type SingleLineConfigInput = z.infer<typeof SingleLineConfigInputSchema>;
 
 export const SingleLineContentSchema = z.object({
-    text: z.string().optional(),
+    text: z.string().nullish(),
 });
 export type SingleLineContent = z.infer<typeof SingleLineContentSchema>;
 

@@ -23,11 +23,11 @@ export const PropertiesTableContentSchema = z.object({
     sections: z
         .array(
             z.object({
-                title: z.string().optional(),
-                properties: z.array(KeyValuePairSchema).optional(),
+                title: z.string().nullish(),
+                properties: z.array(KeyValuePairSchema).nullish(),
             }),
         )
-        .optional(),
+        .nullish(),
 });
 export type PropertiesTableContent = z.infer<typeof PropertiesTableContentSchema>;
 
