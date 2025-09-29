@@ -8,7 +8,7 @@ export type BooleanConfig = z.infer<typeof BooleanConfigSchema>;
 export type BooleanConfigInput = z.infer<typeof BooleanConfigInputSchema>;
 
 export const BooleanContentSchema = z.object({
-    value: z.boolean().optional(),
+    value: z.boolean().nullish(),
 });
 export type BooleanContent = z.infer<typeof BooleanContentSchema>;
 

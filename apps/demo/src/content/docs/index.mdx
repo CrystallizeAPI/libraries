@@ -1,0 +1,26 @@
+---
+title: Crystallize Libraries Demo App
+description: Get started building Crystallize powered apps with our OSS libraries.
+template: splash
+hero:
+    tagline: Let's demo how to use the different Crystallize libraries.
+    image:
+        file: ../../assets/got.svg
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Libraries
+
+<CardGrid stagger>
+    <Card title="JS|TS API Client" icon="rocket">
+        Helpers to even more easily work with Crystallize APIs in JavaScript and TypeScript. [Check it
+        out!](/libraries/js-api-client)
+    </Card>
+    <Card title="React JS Components" icon="seti:react">
+        Usual React components to build your Crystallize powered apps. [Check it out!](/libraries/reactjs-components)
+    </Card>
+    <Card title="Schema" icon="seti:json">
+        Crystallize types and Zod schema definitions for TypeScript, JavaScript for type safety and runtime validation.
+    </Card>
+</CardGrid>

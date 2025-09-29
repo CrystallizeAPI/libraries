@@ -1,0 +1,29 @@
+---
+title: RichRext Component
+description: Usual React components to build your Crystallize powered apps.
+---
+
+import { Aside, Code } from '@astrojs/starlight/components';
+import { GridDemo } from '../../../ui/components/reactjs-components/grid-demo.tsx';
+import { ContentTransformerDemo } from '../../../ui/components/reactjs-components/content-transformer.tsx';
+
+<Aside type="tip" title="Watch out!">
+    FULL DOCUMENTATION: https://crystallize.com/learn/open-source/sdks-and-libraries/react-js-components
+</Aside>
+
+## DEMO
+
+```javascript
+import { ContentTransformer } from '@crystallize/reactjs-components';
+{
+    paragraphs
+        .filter((paragraph) => paragraph?.body)
+        .map((paragraph, index) => (
+            <div key={index}>
+                <ContentTransformer json={paragraph.body.json} />
+            </div>
+        ));
+}
+```
+
+<ContentTransformerDemo />

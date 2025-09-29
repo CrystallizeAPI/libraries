@@ -3,10 +3,10 @@ import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '.
 import {
     DateTimeSchema,
     IdSchema,
-    ItemTypeEnum,
+    ItemTypeSchema,
     KeyValuePairSchema,
     OwnerSchema,
-    VersionLabelEnum,
+    VersionLabelSchema,
 } from '../../../shared/index.js';
 
 export const GridRelationsConfigSchema = MinMaxComponentConfigSchema;
@@ -16,46 +16,48 @@ export type GridRelationsConfig = z.infer<typeof GridRelationsConfigSchema>;
 export type GridRelationsConfigInput = z.infer<typeof GridRelationsConfigInputSchema>;
 
 export const GridContentSchema = z.object({
-    id: IdSchema,
-    language: z.string(),
-    name: z.string().optional(),
+    id: IdSchema.optional(),
+    language: z.string().optional(),
+    name: z.string().nullish(),
     version: z
         .object({
-            id: IdSchema,
-            label: VersionLabelEnum,
-            createdAt: DateTimeSchema,
+            id: IdSchema.optional(),
+            label: VersionLabelSchema.optional(),
+            createdAt: DateTimeSchema.nullish(),
             owner: OwnerSchema.optional(),
         })
         .optional(),
-    meta: z.array(KeyValuePairSchema).optional(),
-    createdAt: DateTimeSchema,
-    updatedAt: DateTimeSchema.optional(),
+    meta: z.array(KeyValuePairSchema).nullish(),
+    createdAt: DateTimeSchema.optional(),
+    updatedAt: DateTimeSchema.nullish(),
     rows: z
         .array(
             z.object({
                 columns: z
                     .array(
                         z.object({
-                            itemId: IdSchema,
-                            itemType: ItemTypeEnum,
-                            meta: z.array(KeyValuePairSchema).optional(),
-                            layout: z.object({
-                                rowspan: z.number(),
-                                colspan: z.number(),
-                            }),
+                            itemId: IdSchema.nullish(),
+                            itemType: ItemTypeSchema.nullish(),
+                            meta: z.array(KeyValuePairSchema).nullish(),
+                            layout: z
+                                .object({
+                                    rowspan: z.number(),
+                                    colspan: z.number(),
+                                })
+                                .nullish(),
                         }),
                     )
-                    .optional(),
-                meta: z.array(KeyValuePairSchema).optional(),
+                    .nullish(),
+                meta: z.array(KeyValuePairSchema).nullish(),
             }),
         )
-        .optional(),
+        .nullish(),
 });
 export type GridContent = z.infer<typeof GridContentSchema>;
 
 export const GridRelationsContentSchema = z.object({
-    gridIds: z.array(IdSchema).optional(),
-    grids: z.array(GridContentSchema).optional(),
+    gridIds: z.array(IdSchema).nullish(),
+    grids: z.array(GridContentSchema).nullish(),
 });
 export type GridRelationsContent = z.infer<typeof GridRelationsContentSchema>;
 

@@ -1,0 +1,21 @@
+---
+title: Image Component
+description: Usual React components to build your Crystallize powered apps.
+---
+
+import { Aside, Code } from '@astrojs/starlight/components';
+import { ImageDemo } from '../../../ui/components/reactjs-components/image-demo.tsx';
+
+<Aside type="tip" title="Watch out!">
+    FULL DOCUMENTATION: https://crystallize.com/learn/open-source/sdks-and-libraries/react-js-components
+</Aside>
+
+## DEMO
+
+```javascript
+import { Image } from '@crystallize/reactjs-components';
+// fetch data and then
+<Image className="card-img-top img-fluid" {...product.defaultVariant.firstImage} sizes="100w, 700px" />;
+```
+
+<ImageDemo />

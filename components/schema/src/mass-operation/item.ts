@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { IdSchema } from '../shared/index.js';
+import { IdSchema, ItemTypeSchema } from '../shared/index.js';
 import { ComponentContentInputSchema } from '../pim/components/component-content-input.js';
 
 export const CreateItemOperationSchema = z.object({
     intent: z.literal('item/create'),
-    type: z.enum(['product', 'document', 'folder']),
+    type: ItemTypeSchema,
     shape: z.string().min(1),
     language: z.string().min(1),
     topics: z.array(IdSchema).optional(),

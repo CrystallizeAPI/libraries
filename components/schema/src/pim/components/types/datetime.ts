@@ -9,7 +9,7 @@ export type DatetimeConfig = z.infer<typeof DatetimeConfigSchema>;
 export type DatetimeConfigInput = z.infer<typeof DatetimeConfigInputSchema>;
 
 export const DatetimeContentSchema = z.object({
-    datetime: DateTimeSchema.optional(),
+    datetime: DateTimeSchema.nullish(),
 });
 export type DatetimeContent = z.infer<typeof DatetimeContentSchema>;
 

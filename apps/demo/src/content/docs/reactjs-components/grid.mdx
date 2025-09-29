@@ -1,0 +1,34 @@
+---
+title: Grid Component
+description: Usual React components to build your Crystallize powered apps.
+---
+
+import { Aside, Code } from '@astrojs/starlight/components';
+import { GridDemo } from '../../../ui/components/reactjs-components/grid-demo.tsx';
+
+<Aside type="tip" title="Watch out!">
+    FULL DOCUMENTATION: https://crystallize.com/learn/open-source/sdks-and-libraries/react-js-components
+</Aside>
+
+## DEMO
+
+```javascript
+import { GridRenderer, GridRenderingType } from '@crystallize/reactjs-components';
+// fetch data and then
+<h2>CSS Grid</h2>;
+{
+    grid && <GridRenderer grid={grid} type={GridRenderingType.Div} cellComponent={Cell} />;
+}
+
+<h2>Table Grid</h2>;
+{
+    grid && <GridRenderer grid={grid} type={GridRenderingType.Table} cellComponent={Cell} />;
+}
+
+<h2>Row Span</h2>;
+{
+    grid && <GridRenderer grid={grid} type={GridRenderingType.RowCol} cellComponent={Cell} />;
+}
+```
+
+<GridDemo />

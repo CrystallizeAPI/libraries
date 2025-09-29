@@ -6,7 +6,14 @@
         },
         "test": {
             "dependsOn": ["build"],
-            "outputs": []
+            "outputs": [],
+            "env": [
+                "CRYSTALLIZE_TENANT_ID",
+                "CRYSTALLIZE_TENANT_IDENTIFIER",
+                "CRYSTALLIZE_ACCESS_TOKEN_ID",
+                "CRYSTALLIZE_ACCESS_TOKEN_SECRET",
+                "CRYSTALLIZE_ORIGIN"
+            ]
         },
         "watch": {
             "cache": false

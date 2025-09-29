@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CreatePieceInputSchema, CreateShapeInputSchema, UpdateShapeInputSchema } from '../pim/shape/index.js';
+import { CreatePieceInputSchema, CreateShapeInputSchema, UpdateShapeInputSchema } from '../pim/shapes/index.js';
 
 export const CreateShapeOperationSchema = CreateShapeInputSchema.extend({
     intent: z.literal('shape/create'),

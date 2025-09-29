@@ -31,7 +31,7 @@ clean: ## Clean non-essential files
 
 .PHONY: codeclean
 codeclean: ## Code Clean
-	@pnpm prettier --write .
+	@pnpm run prettier:fix
 
 .PHONY: tests
 tests: ## Run the tests
@@ -62,4 +62,4 @@ add-component-compliance-files: ## Add the compliance files into all the compone
 .PHONY: start-demo-app
 start-demo-app: ## Start Demo App
 	@echo " ..:: Starting Demo App ::.."
-	@pnpm run demo
+	@cd apps/demo && pnpm run dev

@@ -11,8 +11,8 @@ export const GenericComponentConfigInputSchema = GenericComponentConfigSchema;
 export type GenericComponentConfigInput = z.infer<typeof GenericComponentConfigInputSchema>;
 
 // Min Max Stuff
-export const MinValueSchema = z.number().min(0).nullable().optional();
-export const MaxValueSchema = z.number().min(0).nullable().optional();
+export const MinValueSchema = z.number().min(0).nullish();
+export const MaxValueSchema = z.number().min(0).nullish();
 export const MinMaxComponentConfigSchema = GenericComponentConfigSchema.extend({
     min: MinValueSchema,
     max: MaxValueSchema,

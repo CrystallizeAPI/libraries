@@ -20,7 +20,7 @@ export type SelectionConfig = z.infer<typeof SelectionConfigSchema>;
 export type SelectionConfigInput = z.infer<typeof SelectionConfigInputSchema>;
 
 export const SelectionContentSchema = z.object({
-    options: z.array(KeyValuePairSchema),
+    options: z.array(KeyValuePairSchema).optional(),
 });
 export type SelectionContent = z.infer<typeof SelectionContentSchema>;
 

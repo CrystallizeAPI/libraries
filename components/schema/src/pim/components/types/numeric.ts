@@ -14,8 +14,8 @@ export type NumericConfig = z.infer<typeof NumericConfigSchema>;
 export type NumericConfigInput = z.infer<typeof NumericConfigInputSchema>;
 
 export const NumericContentSchema = z.object({
-    number: z.number(),
-    unit: z.string().optional(),
+    number: z.number().optional(),
+    unit: z.string().nullish(),
 });
 export type NumericContent = z.infer<typeof NumericContentSchema>;
 
