@@ -3,6 +3,26 @@ import { DateTimeSchema, IdSchema, KeyValuePairSchema } from '../../shared';
 import { CustomerSchema } from '../customers';
 import { PaymentSchema } from '../payment/payment';
 
+export const OrderAppliedPromotionMechanismTypeSchema = z.enum(['custom', 'dynamicFixed', 'fixed', 'percentage', 'xForY']);
+export type OrderAppliedPromotionMechanismType = z.infer<typeof OrderAppliedPromotionMechanismTypeSchema>;
+
+export const OrderItemTypeSchema = z.enum(['bonus', 'digital', 'fee', 'promotion', 'refund', 'service', 'shipping', 'standard', 'subscription', 'tax'])
+export type OrderItemType = z.infer<typeof OrderItemTypeSchema>;
+
+export const OrderPaymentStatusSchema = z.enum(['paid', 'partiallyPaid', 'partiallyRefunded', 'refunded', 'unpaid']);
+export type OrderPaymentStatus = z.infer<typeof OrderPaymentStatusSchema>;
+
+export const OrderTypeSchema = z.enum(['backorder', 'creditNote', 'draft', 'preOrder', 'quote', 'recurring', 'replacement', 'split', 'standard', 'test']);
+export type OrderType = z.infer<typeof OrderTypeSchema>;
+
+export const OrderPriceTaxSchema = z.object({
+    name: z.string().nullish(),
+    percent: z.number().nullish(),
+    amount: z.number().nullish(),
+});
+export type OrderPriceTax = z.infer<typeof OrderPriceTaxSchema>;
+
+
 export const OrderConfirmationSchema = z.object({
     id: z.string(),
     createdAt: DateTimeSchema,
@@ -10,8 +30,8 @@ export const OrderConfirmationSchema = z.object({
 export type OrderConfirmation = z.infer<typeof OrderConfirmationSchema>;
 
 export const OrderPriceSchema = z.object({
-    gross: z.number().optional(),
-    net: z.number().optional(),
+    gross: z.number().nullish(),
+    net: z.number().nullish(),
     currency: z.string(),
     discounts: z
         .array(
@@ -19,13 +39,25 @@ export const OrderPriceSchema = z.object({
                 percent: z.number(),
             }),
         )
-        .optional(),
+        .nullish(),
     tax: z
         .object({
-            name: z.string().optional(),
-            percent: z.number().optional(),
+            name: z.string().nullish(),
+            percent: z.number().nullish(),
         })
-        .optional(),
+        .nullish(),
+    taxBrackets: z.array(
+        z.object({
+            gross: z.number().nullish(),
+            net: z.number().nullish(),
+            tax: z
+                .object({
+                    name: z.string().nullish(),
+                    percent: z.number().nullish(),
+                })
+                .nullish(),
+        }),
+    ).nullish(),
 });
 export type OrderPrice = z.infer<typeof OrderPriceSchema>;
 
@@ -60,6 +92,9 @@ export const OrderItemSchema = z.object({
     subTotal: OrderPriceSchema.optional(),
     meta: z.array(KeyValuePairSchema).optional(),
     subscription: OrderItemSubscriptionSchema.optional(),
+    // order v2
+    group: z.string().optional(),
+    type: OrderItemTypeSchema.optional(),
 });
 export type OrderItem = z.infer<typeof OrderItemSchema>;
 
@@ -99,5 +134,21 @@ export const OrderSchema = z.object({
     total: OrderPriceSchema.nullish(),
     pipelines: z.array(OrderPipelineAssociationSchema).nullish(),
     meta: z.array(KeyValuePairSchema).nullish(),
+    // order v2
+    appliedPromotions: z.array(
+        z.object({
+            identifier: z.string().optional(),
+            name: z.string().optional(),
+            meta: z.array(KeyValuePairSchema).optional(),
+            mechanism: z.object({
+                type: OrderAppliedPromotionMechanismTypeSchema.optional(),
+                value: z.number().optional(),
+            }).optional(),
+        }),
+    ).nullish(),
+    paymentStatus: OrderPaymentStatusSchema.nullish(),
+    relatedOrderIds: z.array(IdSchema).nullish(),
+    type: OrderTypeSchema.nullish(),
+    stockLocationIdentifier: z.string().nullish(),
 });
 export type Order = z.infer<typeof OrderSchema>;

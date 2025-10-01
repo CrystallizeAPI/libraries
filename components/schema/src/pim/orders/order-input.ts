@@ -2,7 +2,17 @@ import { z } from 'zod';
 import { DateTimeSchema, IdSchema, KeyValuePairInputSchema } from '../../shared';
 import { PaymentInputSchema } from '../payment/payment-input.js';
 import { CreateCustomerInputSchema } from '../customers/customer-input';
-import { OrderItemSubscriptionUnitSchema } from './order';
+import { OrderAppliedPromotionMechanismTypeSchema, OrderItemSubscriptionUnitSchema, OrderItemTypeSchema, OrderPaymentStatusSchema, OrderTypeSchema } from './order';
+
+export const OrderAppliedPromotionInputSchema = z.object({
+    identifier: z.string(),
+    name: z.string(),
+    meta: z.array(KeyValuePairInputSchema).nullish(),
+    mechanism: z.object({
+        type: OrderAppliedPromotionMechanismTypeSchema,
+        value: z.number()
+    })
+});
 
 export const OrderItemSubscriptionMeteredVariableInputSchema = z.object({
     id: z.string(),
@@ -17,13 +27,20 @@ export const OrderItemSubscriptionInputSchema = z.object({
     unit: OrderItemSubscriptionUnitSchema,
     start: DateTimeSchema.nullish(),
     end: DateTimeSchema.nullish(),
-    meteredVariables: z.array(OrderItemSubscriptionMeteredVariableInputSchema).optional(),
+    meteredVariables: z.array(OrderItemSubscriptionMeteredVariableInputSchema).nullish(),
 });
 export type OrderItemSubscriptionInput = z.infer<typeof OrderItemSubscriptionInputSchema>;
 
+export const OrderPriceTaxInputSchema = z.object({
+    name: z.string().nullish(),
+    percent: z.number().nullish(),
+    amount: z.number().nullish(),
+});
+export type OrderPriceTaxInput = z.infer<typeof OrderPriceTaxInputSchema>;
+
 export const OrderPriceInputSchema = z.object({
-    gross: z.number().optional(),
-    net: z.number().optional(),
+    gross: z.number().nullish(),
+    net: z.number().nullish(),
     currency: z.string(),
     discounts: z
         .array(
@@ -31,13 +48,15 @@ export const OrderPriceInputSchema = z.object({
                 percent: z.number(),
             }),
         )
-        .optional(),
-    tax: z
-        .object({
-            name: z.string().optional(),
-            percent: z.number().optional(),
-        })
-        .optional(),
+        .nullish(),
+    tax: OrderPriceTaxInputSchema.nullish(),
+    taxBrackets: z.array(
+        z.object({
+            gross: z.number().nullish(),
+            net: z.number().nullish(),
+            tax: OrderPriceTaxInputSchema.nullish(),
+        }),
+    ).nullish(),
 });
 export type OrderPriceInput = z.infer<typeof OrderPriceInputSchema>;
 
@@ -53,6 +72,9 @@ export const OrderItemInputSchema = z
         price: OrderPriceInputSchema.nullish(),
         subTotal: OrderPriceInputSchema.nullish(),
         meta: z.array(KeyValuePairInputSchema).nullish(),
+        // order v2
+        group: z.string().nullish(),
+        type: OrderItemTypeSchema.nullish(),
     })
     .strict();
 export type OrderItemInput = z.infer<typeof OrderItemInputSchema>;
@@ -73,7 +95,14 @@ export const RegisterOrderInputSchema = z.object({
     payment: z.array(PaymentInputSchema).nullish(),
     pipelines: z.array(OrderPipelineAssociationInputSchema).nullish(),
     total: OrderPriceInputSchema.nullish(),
+    // order v2
+    appliedPromotions: z.array(OrderAppliedPromotionInputSchema).nullish(),
+    paymentStatus: OrderPaymentStatusSchema.nullish(),
+    relatedOrderIds: z.array(IdSchema).nullish(),
+    type: OrderTypeSchema.nullish(),
+    stockLocationIdentifier: z.string().nullish(),
 });
+
 export type RegisterOrderInput = z.infer<typeof RegisterOrderInputSchema>;
 
 export const UpdateOrderInputSchema = RegisterOrderInputSchema.partial()
