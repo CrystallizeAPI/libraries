@@ -29,7 +29,7 @@
     "module": "./dist/index.mjs",
     "devDependencies": {
         "@tsconfig/node22": "^22.0.2",
-        "@types/node": "^24.2.0",
+        "@types/node": "^24.7.2",
         "dotenv": "^16.6.1",
         "tsup": "^8.5.0",
         "typescript": "^5.9.2",
