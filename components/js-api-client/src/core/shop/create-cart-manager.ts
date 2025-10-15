@@ -14,6 +14,20 @@ import { transformCartCustomerInput, transformCartInput } from './helpers.js';
 type WithId<R> = R & { id: string };
 
 export const createCartManager = (apiClient: ClientInterface) => {
+    const fetch = async <OnCart, OC = unknown>(id: string, onCart?: OC) => {
+        const query = {
+            cart: {
+                __args: {
+                    id,
+                },
+                id: true,
+                ...onCart,
+            },
+        };
+        const response = await apiClient.shopCartApi<{ cart: WithId<OnCart> }>(jsonToGraphQLQuery({ query }));
+        return response.cart;
+    };
+
     const place = async <OnCart, OC = unknown>(id: string, onCart?: OC) => {
         const mutation = {
             place: {
@@ -26,6 +40,35 @@ export const createCartManager = (apiClient: ClientInterface) => {
         };
         const response = await apiClient.shopCartApi<{ place: WithId<OnCart> }>(jsonToGraphQLQuery({ mutation }));
         return response.place;
+    };
+
+    const abandon = async <OnCart, OC = unknown>(id: string, onCart?: OC) => {
+        const mutation = {
+            abandon: {
+                __args: {
+                    id,
+                },
+                id: true,
+                ...onCart,
+            },
+        };
+        const response = await apiClient.shopCartApi<{ abandon: WithId<OnCart> }>(jsonToGraphQLQuery({ mutation }));
+        return response.abandon;
+    };
+
+    const fulfill = async <OnCart, OC = unknown>(id: string, orderId: string, onCart?: OC) => {
+        const mutation = {
+            fulfill: {
+                __args: {
+                    id,
+                    orderId,
+                },
+                id: true,
+                ...onCart,
+            },
+        };
+        const response = await apiClient.shopCartApi<{ fulfill: WithId<OnCart> }>(jsonToGraphQLQuery({ mutation }));
+        return response.fulfill;
     };
 
     const addSkuItem = async <OnCart, OC = unknown>(id: string, intent: CartSkuItemInput, onCart?: OC) => {
@@ -124,6 +167,9 @@ export const createCartManager = (apiClient: ClientInterface) => {
     return {
         hydrate,
         place,
+        fetch,
+        fulfill,
+        abandon,
         addSkuItem,
         removeItem,
         setMeta,
