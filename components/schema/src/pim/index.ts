@@ -1,5 +1,6 @@
 export * from './shapes/index.js';
 export * from './components/index.js';
+export * from './items/index.js';
 export * from './product-variants/index.js';
 export * from './customers/index.js';
 export * from './orders/index.js';

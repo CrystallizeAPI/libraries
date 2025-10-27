@@ -79,12 +79,12 @@ export type ImagesContent = z.infer<typeof ImagesContentSchema>;
 
 export const ImageContentInputSchema = z.object({
     key: z.string().min(1),
-    mimeType: z.string().optional(),
-    altText: z.string().optional(),
-    caption: RichTextContentInputSchema.optional(),
-    meta: z.array(KeyValuePairInputSchema).optional(),
-    focalPoint: FocalPointInputSchema.optional(),
-    showcase: z.array(ShowcaseInputSchema).optional(),
+    mimeType: z.string().nullish(),
+    altText: z.string().nullish(),
+    caption: RichTextContentInputSchema.nullish(),
+    meta: z.array(KeyValuePairInputSchema).nullish(),
+    focalPoint: FocalPointInputSchema.nullish(),
+    showcase: z.array(ShowcaseInputSchema).nullish(),
 });
 export type ImageContentInput = z.infer<typeof ImageContentInputSchema>;
 

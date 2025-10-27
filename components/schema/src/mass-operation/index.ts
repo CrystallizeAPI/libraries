@@ -1,12 +1,18 @@
 import { z } from 'zod';
 import {
-    CreateItemOperationSchema,
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
     UpdateItemComponentOperationSchema,
     UpdateSkuComponentOperationSchema,
-    UpdateItemOperationSchema,
-    UpsertItemOperationSchema,
+    CreateDocumentOperationSchema,
+    UpdateDocumentOperationSchema,
+    UpsertDocumentOperationSchema,
+    CreateFolderOperationSchema,
+    UpdateFolderOperationSchema,
+    UpsertFolderOperationSchema,
+    CreateProductOperationSchema,
+    UpdateProductOperationSchema,
+    UpsertProductOperationSchema,
 } from './item.js';
 import {
     CreatePieceOperationSchema,
@@ -34,9 +40,17 @@ import {
 } from './subscription-contract.js';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
-    CreateItemOperationSchema,
-    UpdateItemOperationSchema,
-    UpsertItemOperationSchema,
+    CreateDocumentOperationSchema,
+    UpdateDocumentOperationSchema,
+    UpsertDocumentOperationSchema,
+
+    CreateFolderOperationSchema,
+    UpdateFolderOperationSchema,
+    UpsertFolderOperationSchema,
+
+    CreateProductOperationSchema,
+    UpdateProductOperationSchema,
+    UpsertProductOperationSchema,
 
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
@@ -81,9 +95,15 @@ export const OperationsSchema = z.object({
 export type Operation = z.infer<typeof OperationSchema>;
 export type Operations = z.infer<typeof OperationsSchema>;
 export type {
-    CreateItemOperation,
-    UpdateItemOperation,
-    UpsertItemOperation,
+    CreateDocumentOperation,
+    UpdateDocumentOperation,
+    UpsertDocumentOperation,
+    CreateFolderOperation,
+    UpdateFolderOperation,
+    UpsertFolderOperation,
+    CreateProductOperation,
+    UpdateProductOperation,
+    UpsertProductOperation,
     PublishItemOperation,
     UnPublishItemOperation,
     UpdateItemComponentOperation,
