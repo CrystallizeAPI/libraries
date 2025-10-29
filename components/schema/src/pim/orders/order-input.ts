@@ -2,7 +2,13 @@ import { z } from 'zod';
 import { DateTimeSchema, IdSchema, KeyValuePairInputSchema } from '../../shared';
 import { PaymentInputSchema } from '../payment/payment-input.js';
 import { CreateCustomerInputSchema } from '../customers/customer-input';
-import { OrderAppliedPromotionMechanismTypeSchema, OrderItemSubscriptionUnitSchema, OrderItemTypeSchema, OrderPaymentStatusSchema, OrderTypeSchema } from './order';
+import {
+    OrderAppliedPromotionMechanismTypeSchema,
+    OrderItemSubscriptionUnitSchema,
+    OrderItemTypeSchema,
+    OrderPaymentStatusSchema,
+    OrderTypeSchema,
+} from './order';
 
 export const OrderAppliedPromotionInputSchema = z.object({
     identifier: z.string(),
@@ -10,8 +16,8 @@ export const OrderAppliedPromotionInputSchema = z.object({
     meta: z.array(KeyValuePairInputSchema).nullish(),
     mechanism: z.object({
         type: OrderAppliedPromotionMechanismTypeSchema,
-        value: z.number()
-    })
+        value: z.number(),
+    }),
 });
 
 export const OrderItemSubscriptionMeteredVariableInputSchema = z.object({
@@ -50,13 +56,15 @@ export const OrderPriceInputSchema = z.object({
         )
         .nullish(),
     tax: OrderPriceTaxInputSchema.nullish(),
-    taxBrackets: z.array(
-        z.object({
-            gross: z.number().nullish(),
-            net: z.number().nullish(),
-            tax: OrderPriceTaxInputSchema.nullish(),
-        }),
-    ).nullish(),
+    taxBreakdown: z
+        .array(
+            z.object({
+                gross: z.number().nullish(),
+                net: z.number().nullish(),
+                tax: OrderPriceTaxInputSchema.nullish(),
+            }),
+        )
+        .nullish(),
 });
 export type OrderPriceInput = z.infer<typeof OrderPriceInputSchema>;
 

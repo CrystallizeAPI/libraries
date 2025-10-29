@@ -3,16 +3,44 @@ import { DateTimeSchema, IdSchema, KeyValuePairSchema } from '../../shared';
 import { CustomerSchema } from '../customers';
 import { PaymentSchema } from '../payment/payment';
 
-export const OrderAppliedPromotionMechanismTypeSchema = z.enum(['custom', 'dynamicFixed', 'fixed', 'percentage', 'xForY']);
+export const OrderAppliedPromotionMechanismTypeSchema = z.enum([
+    'custom',
+    'dynamicFixed',
+    'fixed',
+    'percentage',
+    'xForY',
+]);
 export type OrderAppliedPromotionMechanismType = z.infer<typeof OrderAppliedPromotionMechanismTypeSchema>;
 
-export const OrderItemTypeSchema = z.enum(['bonus', 'digital', 'fee', 'promotion', 'refund', 'service', 'shipping', 'standard', 'subscription', 'tax'])
+export const OrderItemTypeSchema = z.enum([
+    'bonus',
+    'digital',
+    'fee',
+    'promotion',
+    'refund',
+    'service',
+    'shipping',
+    'standard',
+    'subscription',
+    'tax',
+]);
 export type OrderItemType = z.infer<typeof OrderItemTypeSchema>;
 
 export const OrderPaymentStatusSchema = z.enum(['paid', 'partiallyPaid', 'partiallyRefunded', 'refunded', 'unpaid']);
 export type OrderPaymentStatus = z.infer<typeof OrderPaymentStatusSchema>;
 
-export const OrderTypeSchema = z.enum(['backorder', 'creditNote', 'draft', 'preOrder', 'quote', 'recurring', 'replacement', 'split', 'standard', 'test']);
+export const OrderTypeSchema = z.enum([
+    'backorder',
+    'creditNote',
+    'draft',
+    'preOrder',
+    'quote',
+    'recurring',
+    'replacement',
+    'split',
+    'standard',
+    'test',
+]);
 export type OrderType = z.infer<typeof OrderTypeSchema>;
 
 export const OrderPriceTaxSchema = z.object({
@@ -21,7 +49,6 @@ export const OrderPriceTaxSchema = z.object({
     amount: z.number().nullish(),
 });
 export type OrderPriceTax = z.infer<typeof OrderPriceTaxSchema>;
-
 
 export const OrderConfirmationSchema = z.object({
     id: z.string(),
@@ -46,18 +73,20 @@ export const OrderPriceSchema = z.object({
             percent: z.number().nullish(),
         })
         .nullish(),
-    taxBrackets: z.array(
-        z.object({
-            gross: z.number().nullish(),
-            net: z.number().nullish(),
-            tax: z
-                .object({
-                    name: z.string().nullish(),
-                    percent: z.number().nullish(),
-                })
-                .nullish(),
-        }),
-    ).nullish(),
+    taxBreakdown: z
+        .array(
+            z.object({
+                gross: z.number().nullish(),
+                net: z.number().nullish(),
+                tax: z
+                    .object({
+                        name: z.string().nullish(),
+                        percent: z.number().nullish(),
+                    })
+                    .nullish(),
+            }),
+        )
+        .nullish(),
 });
 export type OrderPrice = z.infer<typeof OrderPriceSchema>;
 
@@ -135,17 +164,21 @@ export const OrderSchema = z.object({
     pipelines: z.array(OrderPipelineAssociationSchema).nullish(),
     meta: z.array(KeyValuePairSchema).nullish(),
     // order v2
-    appliedPromotions: z.array(
-        z.object({
-            identifier: z.string().optional(),
-            name: z.string().optional(),
-            meta: z.array(KeyValuePairSchema).optional(),
-            mechanism: z.object({
-                type: OrderAppliedPromotionMechanismTypeSchema.optional(),
-                value: z.number().optional(),
-            }).optional(),
-        }),
-    ).nullish(),
+    appliedPromotions: z
+        .array(
+            z.object({
+                identifier: z.string().optional(),
+                name: z.string().optional(),
+                meta: z.array(KeyValuePairSchema).optional(),
+                mechanism: z
+                    .object({
+                        type: OrderAppliedPromotionMechanismTypeSchema.optional(),
+                        value: z.number().optional(),
+                    })
+                    .optional(),
+            }),
+        )
+        .nullish(),
     paymentStatus: OrderPaymentStatusSchema.nullish(),
     relatedOrderIds: z.array(IdSchema).nullish(),
     type: OrderTypeSchema.nullish(),
