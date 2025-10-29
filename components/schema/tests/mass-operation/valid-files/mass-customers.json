@@ -2,6 +2,7 @@
     "version": "0.0.1",
     "operations": [
         {
+            "_ref": "update-brief-op",
             "intent": "item/updateComponent/item",
             "itemId": "67105ea33fd643312ff491ef",
             "language": "en",
@@ -45,7 +46,7 @@
         {
             "intent": "customer/upsert",
             "identifier": "customer-123",
-            "firstName": "John",
+            "firstName": "John {{update-brief-op.message}}",
             "lastName": "Doe",
             "type": "individual"
         }

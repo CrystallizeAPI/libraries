@@ -1,4 +1,14 @@
 import { z } from 'zod';
+
+export const LoopingOperationOperationSchema = z.object({
+    _ref: z.string().optional(),
+});
+
+// Helper function to extend any operation schema with base properties
+export const withLoopingOperationProperties = <T extends z.ZodRawShape>(schema: z.ZodObject<T>) => {
+    return LoopingOperationOperationSchema.extend(schema.shape);
+};
+
 import {
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
@@ -40,49 +50,49 @@ import {
 } from './subscription-contract.js';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
-    CreateDocumentOperationSchema,
-    UpdateDocumentOperationSchema,
-    UpsertDocumentOperationSchema,
+    withLoopingOperationProperties(CreateDocumentOperationSchema),
+    withLoopingOperationProperties(UpdateDocumentOperationSchema),
+    withLoopingOperationProperties(UpsertDocumentOperationSchema),
 
-    CreateFolderOperationSchema,
-    UpdateFolderOperationSchema,
-    UpsertFolderOperationSchema,
+    withLoopingOperationProperties(CreateFolderOperationSchema),
+    withLoopingOperationProperties(UpdateFolderOperationSchema),
+    withLoopingOperationProperties(UpsertFolderOperationSchema),
 
-    CreateProductOperationSchema,
-    UpdateProductOperationSchema,
-    UpsertProductOperationSchema,
+    withLoopingOperationProperties(CreateProductOperationSchema),
+    withLoopingOperationProperties(UpdateProductOperationSchema),
+    withLoopingOperationProperties(UpsertProductOperationSchema),
 
-    PublishItemOperationSchema,
-    UnPublishItemOperationSchema,
+    withLoopingOperationProperties(PublishItemOperationSchema),
+    withLoopingOperationProperties(UnPublishItemOperationSchema),
 
-    UpdateItemComponentOperationSchema,
-    UpdateSkuComponentOperationSchema,
+    withLoopingOperationProperties(UpdateItemComponentOperationSchema),
+    withLoopingOperationProperties(UpdateSkuComponentOperationSchema),
 
-    CreateShapeOperationSchema,
-    UpdateShapeOperationSchema,
-    UpsertShapeOperationSchema,
+    withLoopingOperationProperties(CreateShapeOperationSchema),
+    withLoopingOperationProperties(UpdateShapeOperationSchema),
+    withLoopingOperationProperties(UpsertShapeOperationSchema),
 
-    CreatePieceOperationSchema,
-    UpdatePieceOperationSchema,
-    UpsertPieceOperationSchema,
+    withLoopingOperationProperties(CreatePieceOperationSchema),
+    withLoopingOperationProperties(UpdatePieceOperationSchema),
+    withLoopingOperationProperties(UpsertPieceOperationSchema),
 
-    ModifyProductVariantStockOperationSchema,
+    withLoopingOperationProperties(ModifyProductVariantStockOperationSchema),
 
-    CreateCustomerGroupOperationSchema,
-    UpdateCustomerGroupOperationSchema,
-    UpsertCustomerGroupOperationSchema,
+    withLoopingOperationProperties(CreateCustomerGroupOperationSchema),
+    withLoopingOperationProperties(UpdateCustomerGroupOperationSchema),
+    withLoopingOperationProperties(UpsertCustomerGroupOperationSchema),
 
-    CreateCustomerOperationSchema,
-    UpdateCustomerOperationSchema,
-    UpsertCustomerOperationSchema,
+    withLoopingOperationProperties(CreateCustomerOperationSchema),
+    withLoopingOperationProperties(UpdateCustomerOperationSchema),
+    withLoopingOperationProperties(UpsertCustomerOperationSchema),
 
-    RegisterOrderOperationSchema,
-    UpdateOrderOperationSchema,
-    UpsertOrderOperationSchema,
+    withLoopingOperationProperties(RegisterOrderOperationSchema),
+    withLoopingOperationProperties(UpdateOrderOperationSchema),
+    withLoopingOperationProperties(UpsertOrderOperationSchema),
 
-    CreateSubscriptionContractOperationSchema,
-    UpdateSubscriptionContractOperationSchema,
-    UpsertSubscriptionContractOperationSchema,
+    withLoopingOperationProperties(CreateSubscriptionContractOperationSchema),
+    withLoopingOperationProperties(UpdateSubscriptionContractOperationSchema),
+    withLoopingOperationProperties(UpsertSubscriptionContractOperationSchema),
 ]);
 
 export const OperationsSchema = z.object({

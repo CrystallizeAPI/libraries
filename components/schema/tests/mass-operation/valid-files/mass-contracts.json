@@ -2,6 +2,7 @@
     "version": "0.0.1",
     "operations": [
         {
+            "_ref": "customer-for-contract-123",
             "intent": "customer/upsert",
             "identifier": "customer-for-contract-123",
             "firstName": "John",
@@ -24,7 +25,7 @@
             "item": {
                 "sku": "PREMIUM-SUBSCRIPTION-001",
                 "quantity": 1,
-                "name": "Premium Monthly Subscription",
+                "name": "Premium Monthly Subscription {{customer-for-contract-123.message}}",
                 "imageUrl": "https://example.com/subscription-icon.png",
                 "meta": [
                     {

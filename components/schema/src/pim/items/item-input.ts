@@ -17,5 +17,5 @@ export const CreateItemInputSchema = z.object({
 });
 export type CreateItemInput = z.infer<typeof CreateItemInputSchema>;
 
-export const UpdateItemInputSchema = CreateItemInputSchema.omit({ shapeIdentifier: true, tree: true });
+export const UpdateItemInputSchema = CreateItemInputSchema.omit({ shapeIdentifier: true }).partial();
 export type UpdatetemInputSchema = z.infer<typeof UpdateItemInputSchema>;

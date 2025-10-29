@@ -61,21 +61,23 @@ export const VariantInputSchema = z.object({
             z.object({
                 identifier: z.string(),
                 stock: z.number(),
-                meta: KeyValueInputSchema.nullish(),
+                meta: z.array(KeyValueInputSchema).nullish(),
             }),
         )
         .nullish(),
-    subscriptionPlan: z
-        .object({
-            identifier: z.string(),
-            periods: z.array(
-                z.object({
-                    id: IdSchema,
-                    initial: PhaseInputSchema.nullish(),
-                    recurring: PhaseInputSchema,
-                }),
-            ),
-        })
+    subscriptionPlans: z
+        .array(
+            z.object({
+                identifier: z.string(),
+                periods: z.array(
+                    z.object({
+                        id: IdSchema,
+                        initial: PhaseInputSchema.nullish(),
+                        recurring: PhaseInputSchema,
+                    }),
+                ),
+            }),
+        )
         .nullish(),
 });
 
@@ -88,5 +90,5 @@ export type CreateProductInput = z.infer<typeof CreateProductInputSchema>;
 export const UpdateProductInputSchema = UpdateItemInputSchema.extend({
     vatTypeId: IdSchema,
     variants: z.array(VariantInputSchema).min(1),
-});
+}).partial();
 export type UpdateProductInput = z.infer<typeof UpdateProductInputSchema>;

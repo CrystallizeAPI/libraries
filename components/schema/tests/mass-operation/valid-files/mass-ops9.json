@@ -2,15 +2,23 @@
     "version": "0.0.1",
     "operations": [
         {
+            "_ref": "barakouda",
+            "intent": "customer/upsert",
+            "identifier": "looping",
+            "firstName": "Barak",
+            "lastName": "Ouda",
+            "type": "individual"
+        },
+        {
             "intent": "product/upsert",
             "itemId": "632958a35dfc2c90cbbad20d",
             "language": "en",
             "shapeIdentifier": "mass-ops-product-shape",
-            "name": "Mass operations Single Item",
+            "name": "Mass operations Single Item {{barakouda.identifier}}",
             "tree": {
-                "parentId": "632958a35dfc2c90cbbad20c"
+                "parentId": "626ac5cf021ee19c131577a6"
             },
-            "vatTypeId": "632958a35dfc2c90cbbad20c",
+            "vatTypeId": "626ac7e4021ee19c131577a7",
             "component": [
                 {
                     "componentId": "title",
@@ -23,7 +31,7 @@
                 {
                     "sku": "mass-ops-single-item-sku",
                     "isDefault": true,
-                    "name": "Mass operations Single Item",
+                    "name": "Mass operations Single Item {{barakouda.identifier}}",
                     "priceVariants": [
                         {
                             "identifier": "default",
