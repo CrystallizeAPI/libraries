@@ -1,0 +1,146 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "piece/upsert",
+            "identifier": "rating-system",
+            "name": "Rating System",
+            "components": [
+                {
+                    "id": "name",
+                    "name": "Rating Name",
+                    "type": "singleLine",
+                    "description": "Rating Name",
+                    "config": {
+                        "singleLine": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "rating-description",
+                    "name": "Rating Description",
+                    "type": "richText",
+                    "description": "The Rating Description",
+                    "config": {
+                        "richText": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "rating-type",
+                    "name": "Rating Type",
+                    "type": "selection",
+                    "description": "The Rating Type",
+                    "config": {
+                        "selection": {
+                            "required": true,
+                            "min": 1,
+                            "max": 1,
+                            "options": [
+                                {
+                                    "key": "stars",
+                                    "value": "Stars"
+                                },
+                                {
+                                    "key": "kuddos",
+                                    "value": "Kuddos"
+                                },
+                                {
+                                    "key": "thumbs up",
+                                    "value": "Thumbs Up"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "rating-note",
+                    "name": "Rating Note",
+                    "type": "numeric",
+                    "description": "The Rating Note",
+                    "config": {
+                        "numeric": {
+                            "required": true,
+                            "mutilingual": false,
+                            "decimalPlaces": 5,
+                            "units": ["stars", "kuddos", "thumbs up"]
+                        }
+                    }
+                },
+                {
+                    "id": "enabled",
+                    "name": "Enabled",
+                    "type": "boolean",
+                    "description": "Whether or not this rating is enabled",
+                    "config": {
+                        "boolean": {
+                            "required": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "shape/upsert",
+            "type": "product",
+            "identifier": "dream-product",
+            "name": "A dream product",
+            "components": [
+                {
+                    "id": "title",
+                    "name": "Title",
+                    "type": "singleLine",
+                    "description": "The title of the dream product",
+                    "config": {
+                        "singleLine": {
+                            "required": true
+                        }
+                    }
+                },
+                {
+                    "id": "rating",
+                    "name": "Rating",
+                    "type": "piece",
+                    "description": "The Rating",
+                    "config": {
+                        "piece": {
+                            "required": true,
+                            "identifier": "rating-system"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "root",
+            "intent": "folder/create",
+            "name": "Automated folder",
+            "language": "en",
+            "shapeIdentifier": "folder",
+            "tree": {
+                "parentId": "6902a7a78f7d45cf23343fab"
+            }
+        },
+        {
+            "_ref": "subroot",
+            "intent": "folder/create",
+            "name": "Automated Sub folder - {{ root.id }}",
+            "language": "en",
+            "shapeIdentifier": "folder",
+            "tree": {
+                "parentId": "{{ root.id }}"
+            }
+        },
+        {
+            "intent": "folder/create",
+            "name": "Automated Sub Sub folder -  {{ root.id }} - {{ subroot.id }}",
+            "shapeIdentifier": "folder",
+            "language": "en",
+            "tree": {
+                "parentId": "{{ subroot.id }}"
+            }
+        }
+    ]
+}

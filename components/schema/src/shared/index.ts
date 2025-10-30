@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const IdSchema = z.string().regex(/^[0-9a-f]{24}$/);
+export const IdSchema = z.string().regex(/^(?:[0-9a-f]{24}|{{.*}})$/);
 export type Id = z.infer<typeof IdSchema>;
 
 export const ItemTypeSchema = z.enum(['product', 'document', 'folder']);
