@@ -1,0 +1,2733 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "products",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Products",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Products"
+                    }
+                },
+                {
+                    "componentId": "blocks",
+                    "componentMultipleChoice": [
+                        {
+                            "componentId": "banner",
+                            "piece": {
+                                "identifier": "banner",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Outdoor furniture"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Designed by French brothers Ronan and Erwan Bouroullec, this outdoor collection is united by its visual simplicity and core strength. It’s designed in colour and form to integrate effortlessly into a natural landscape or urban setting."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "call-to-action",
+                                        "piece": {
+                                            "identifier": "call-to-action",
+                                            "components": [
+                                                {
+                                                    "componentId": "action",
+                                                    "contentChunk": {
+                                                        "chunks": [
+                                                            [
+                                                                {
+                                                                    "componentId": "label",
+                                                                    "singleLine": {
+                                                                        "text": "See collection"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "componentId": "url",
+                                                                    "singleLine": {
+                                                                        "text": "/products/outdoor-furniture"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["pastel"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "Check out our products"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Check out our products"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "stories",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Stories",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Stories"
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "room",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Room",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Room"
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "brands",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Brands",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Brands"
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "outdoor",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ products.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Outdoor furniture",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Palissade Collection by Ronan and Erwan Bouroullec"
+                    }
+                },
+                {
+                    "componentId": "description",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "kind": "inline",
+                                        "textContent": "The Palissade Collection, designed by Ronan and Erwan Bouroullec for HAY, offers a range of sleek and durable outdoor furniture crafted from steel. This collection includes chairs, benches, tables, and lounge sofas, all designed to blend seamlessly into both natural and urban environments while providing timeless style and comfort."
+                                    },
+                                    {
+                                        "kind": "inline",
+                                        "type": "line-break"
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "block",
+                                "type": "unordered-list",
+                                "children": [
+                                    {
+                                        "kind": "block",
+                                        "type": "list-item",
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "type": "strong",
+                                                "textContent": "Timeless Design:"
+                                            },
+                                            {
+                                                "kind": "inline",
+                                                "textContent": "Elegant and minimalist aesthetics that transcend trends."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "block",
+                                        "type": "list-item",
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "type": "strong",
+                                                "textContent": "Durable Construction:"
+                                            },
+                                            {
+                                                "kind": "inline",
+                                                "textContent": "Crafted from high-quality steel for lasting outdoor use."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "block",
+                                        "type": "list-item",
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "type": "strong",
+                                                "textContent": "Versatile Functionality:"
+                                            },
+                                            {
+                                                "kind": "inline",
+                                                "textContent": "Suitable for various outdoor spaces, from gardens to cafes."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "block",
+                                        "type": "list-item",
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "type": "strong",
+                                                "textContent": "Comfort and Ergonomics:"
+                                            },
+                                            {
+                                                "kind": "inline",
+                                                "textContent": "Designed for optimal relaxation and support."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "block",
+                                        "type": "list-item",
+                                        "children": [
+                                            {
+                                                "kind": "inline",
+                                                "type": "strong",
+                                                "textContent": "Weather-Resistant:"
+                                            },
+                                            {
+                                                "kind": "inline",
+                                                "textContent": "Built to withstand the elements and maintain its beauty."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "kind": "inline",
+                                        "type": "line-break"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "blocks",
+                    "componentMultipleChoice": [
+                        {
+                            "componentId": "banner",
+                            "piece": {
+                                "identifier": "banner",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Balcony collection"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Designed by French brothers Ronan and Erwan Bouroullec, this outdoor collection is united by its visual simplicity and core strength. It’s designed in colour and form to integrate effortlessly into a natural landscape or urban setting."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "call-to-action",
+                                        "piece": {
+                                            "identifier": "call-to-action",
+                                            "components": [
+                                                {
+                                                    "componentId": "action",
+                                                    "contentChunk": {
+                                                        "chunks": [
+                                                            [
+                                                                {
+                                                                    "componentId": "label",
+                                                                    "singleLine": {
+                                                                        "text": "Read the story"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "componentId": "url",
+                                                                    "singleLine": {
+                                                                        "text": "/"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["muted"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ products.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Accessories",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Accessories"
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "menu",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "menu-item",
+            "name": "Menu"
+        },
+        {
+            "_ref": "menuTop",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ menu.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "menu-item",
+            "name": "Top"
+        },
+        {
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ menuTop.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "menu-item",
+            "name": "Products",
+            "components": [
+                {
+                    "componentId": "label",
+                    "singleLine": {
+                        "text": "Products"
+                    }
+                },
+                {
+                    "componentId": "link",
+                    "componentChoice": {
+                        "componentId": "item",
+                        "itemRelations": {
+                            "itemIds": ["{{ products.id }}"],
+                            "skus": []
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ menuTop.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "menu-item",
+            "name": "Stories",
+            "components": [
+                {
+                    "componentId": "label",
+                    "singleLine": {
+                        "text": "Stories"
+                    }
+                },
+                {
+                    "componentId": "link",
+                    "componentChoice": {
+                        "componentId": "item",
+                        "itemRelations": {
+                            "itemIds": ["{{ stories.id }}"],
+                            "skus": []
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ menuTop.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "menu-item",
+            "name": "Room",
+            "components": [
+                {
+                    "componentId": "label",
+                    "singleLine": {
+                        "text": "Room"
+                    }
+                },
+                {
+                    "componentId": "link",
+                    "componentChoice": {
+                        "componentId": "item",
+                        "itemRelations": {
+                            "itemIds": ["{{ room.id }}"],
+                            "skus": []
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "hay",
+            "intent": "document/create",
+            "tree": {
+                "parentId": "{{ brands.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "brand",
+            "name": "HAY",
+            "components": [
+                {
+                    "componentId": "name",
+                    "singleLine": {
+                        "text": "HAY"
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "product/create",
+            "tree": {
+                "parentId": "{{ accessories.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "product",
+            "name": "Quilted Cushion",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "variants": [
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Anthracite"
+                        }
+                    ],
+                    "isDefault": true,
+                    "name": "Quilted Cushion Anthracite",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 99
+                        }
+                    ],
+                    "sku": "quilted-cushion-anthracite",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Sky grey"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Quilted Cushion Sky grey",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 99
+                        }
+                    ],
+                    "sku": "quilted-cushion-sky-grey",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Olive"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Quilted Cushion Olive",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 99
+                        }
+                    ],
+                    "sku": "quilted-cushion-olive",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Iron red"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Quilted Cushion Iron red",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 99
+                        }
+                    ],
+                    "sku": "quilted-cushion-iron-red",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ]
+                }
+            ],
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Palissade Dining Bench Quilted Cushion"
+                    }
+                },
+                {
+                    "componentId": "description",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Adding extra comfort and functionality to Palissade’s collection of chairs and benches, the Palissade Soft Quilted Cushion is specially formed to fit the majority of the Palissade models. Crafted in fabric with a water-repellent finish, the cushion features an anti-slip backing and is filled with a soft and thick foam crumb and silicon fibre ball padding. The fabric has a high UV resistance, meaning it is fade-resistant with good colour fastness properties. The cushions are available in three colours and can be used all year round."
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "brand",
+                    "itemRelations": {
+                        "itemIds": ["{{ hay.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "dimensions",
+                    "piece": {
+                        "identifier": "dimensions",
+                        "components": [
+                            {
+                                "componentId": "width",
+                                "numeric": {
+                                    "number": 110,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "height",
+                                "numeric": {
+                                    "number": 89,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "depth",
+                                "numeric": {
+                                    "number": 6,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "weight",
+                                "numeric": {
+                                    "number": 600,
+                                    "unit": "g"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "product2",
+            "intent": "product/create",
+            "tree": {
+                "parentId": "{{ outdoor.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "product",
+            "name": "Palissade lounge sofa",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "variants": [
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Iron red"
+                        }
+                    ],
+                    "isDefault": true,
+                    "name": "Palissade lounge sofa Iron Red",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1000
+                        }
+                    ],
+                    "sku": "palissade-lounge-sofa-iron-red",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 1001
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 139,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 70,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 88,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "matching-products",
+                            "itemRelations": {
+                                "itemIds": [],
+                                "skus": ["quilted-cushion-iron-red"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Olive"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade lounge sofa Olive",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1000
+                        }
+                    ],
+                    "sku": "palissade-lounge-sofa-olive",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 10
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 139,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 70,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 88,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "matching-products",
+                            "itemRelations": {
+                                "itemIds": [],
+                                "skus": ["quilted-cushion-olive"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Sky grey"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade lounge sofa Sky Grey",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1250
+                        }
+                    ],
+                    "sku": "palissade-lounge-sofa-sky-grey",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 20
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 139,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 70,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 88,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "matching-products",
+                            "itemRelations": {
+                                "itemIds": [],
+                                "skus": ["quilted-cushion-sky-grey"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Steel"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade lounge sofa Galvanised Steel",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1900
+                        }
+                    ],
+                    "sku": "palissade-lounge-sofa-galvanised-steel",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 100
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 139,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 70,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 88,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Anthracite"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade lounge sofa Anthracite",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1250
+                        }
+                    ],
+                    "sku": "palissade-lounge-sofa-anthracite",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 10
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 139,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 70,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 88,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "matching-products",
+                            "itemRelations": {
+                                "itemIds": [],
+                                "skus": ["quilted-cushion-anthracite"]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Palissade Lounge Sofa"
+                    }
+                },
+                {
+                    "componentId": "description",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Discover the Palissade lounge sofa, a masterful creation by French designers Ronan and Erwan Bouroullec for HAY. This piece combines sleek, geometric design with exceptional durability, crafted from powder-coated or hot-galvanised steel. Perfect for both urban and natural settings, the Palissade lounge sofa offers sophisticated comfort and style for any outdoor space."
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "story",
+                    "paragraphCollection": {
+                        "paragraphs": [
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "The Palissade lounge sofa embodies the visionary design ethos of French brothers Ronan and Erwan Bouroullec, crafted for HAY to transform outdoor living. With its elegant yet robust construction, this sofa is a testament to the beauty of symmetrical geometry and minimalist aesthetics. Made from either powder-coated or hot-galvanised steel, the Palissade lounge sofa is built to withstand the rigors of outdoor environments while maintaining its refined look."
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Designed to seamlessly integrate into various settings—from chic city terraces to tranquil garden retreats—the Palissade lounge sofa provides not just seating but a sophisticated lounging experience. Its clean lines and balanced proportions create a visually striking piece that complements any outdoor décor."
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Over time, the sofa's resilient materials will develop a unique patina, adding to its charm and character. This piece is more than just furniture; it’s an investment in enduring style and comfort, designed to become an integral part of your outdoor living space for years to come. Whether hosting a lively gathering or enjoying a quiet moment, the Palissade lounge sofa offers an inviting blend of elegance and practicality."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "About the Lounge Sofa"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "brand",
+                    "itemRelations": {
+                        "itemIds": ["{{ hay.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "dimensions",
+                    "piece": {
+                        "identifier": "dimensions",
+                        "components": [
+                            {
+                                "componentId": "width",
+                                "numeric": {
+                                    "number": 65,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "height",
+                                "numeric": {
+                                    "number": 70,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "depth",
+                                "numeric": {
+                                    "number": 165,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "weight",
+                                "numeric": {
+                                    "number": 35,
+                                    "unit": "kg"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "Palissade Lounge Sofa"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Discover the Palissade lounge sofa, a masterful creation by French designers Ronan and Erwan Bouroullec for HAY. This piece combines sleek, geometric design with exceptional durability, crafted from powder-coated or hot-galvanised steel. Perfect for both urban and natural settings, the Palissade lounge sofa offers sophisticated comfort and style for any outdoor space."
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "product/create",
+            "tree": {
+                "parentId": "{{ outdoor.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "product",
+            "name": "Palissade table",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "variants": [
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Iron red"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Large"
+                        }
+                    ],
+                    "isDefault": true,
+                    "name": "Palissade table iron Red",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1200
+                        }
+                    ],
+                    "sku": "palissade-table-iron-red",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 100
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Olive"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Large"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Olive",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1200
+                        }
+                    ],
+                    "sku": "palissade-table-olive-powder",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 40
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Steel"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Large"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Galvanised Steel",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 2000
+                        }
+                    ],
+                    "sku": "palissade-table-galvanised-steel",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 100
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Anthracite"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Large"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Anthracite Powder",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1200
+                        }
+                    ],
+                    "sku": "palissade-table-anthracite-powder",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 98
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Iron red"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Small"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Iron Red Small",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 900
+                        }
+                    ],
+                    "sku": "palissade-table-iron-red-small",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 120
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Sky grey"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Small"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Sky Grey Small",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 900
+                        }
+                    ],
+                    "sku": "palissade-table-sky-grey-small",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 200
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Anthracite"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Small"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Anthracite small",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 900
+                        }
+                    ],
+                    "sku": "palissade-table-anthracite-small",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 30
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Olive"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Small"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Olive Small",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 900
+                        }
+                    ],
+                    "sku": "palissade-table-olive-small",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 25
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Steel"
+                        },
+                        {
+                            "attribute": "Size",
+                            "value": "Small"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "Palissade table Galvanised Steel Small",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1200
+                        }
+                    ],
+                    "sku": "palissade-table-galvanised-steel-small",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 7
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "dimensions",
+                            "piece": {
+                                "identifier": "dimensions",
+                                "components": [
+                                    {
+                                        "componentId": "width",
+                                        "numeric": {
+                                            "number": 90,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "height",
+                                        "numeric": {
+                                            "number": 75,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "depth",
+                                        "numeric": {
+                                            "number": 832,
+                                            "unit": "cm"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "weight",
+                                        "numeric": {
+                                            "number": 45,
+                                            "unit": "kg"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Palissade Table"
+                    }
+                },
+                {
+                    "componentId": "description",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Timeless Elegance in Every Outdoor Setting"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "story",
+                    "paragraphCollection": {
+                        "paragraphs": [
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Designed by French brothers Ronan and Erwan Bouroullec, Palissade is a collection of outdoor furniture for HAY in powder coated or hot galvanised steel. United by a common principle of symmetrical geometry, the Palissade collection is engineered to reproduce the same visual simplicity and core strength throughout. Designed in colour and form to integrate effortlessly into a natural landscape or urban setting, Palissade is intended to be used over a longer period of time and become more beautiful over the years. The collection is suited to a wide variety of environments, from cafés and restaurants to gardens, terraces and balconies"
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Elevate your outdoors"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "brand",
+                    "itemRelations": {
+                        "itemIds": ["{{ hay.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "details",
+                    "contentChunk": {
+                        "chunks": [
+                            [
+                                {
+                                    "componentId": "title",
+                                    "singleLine": {
+                                        "text": "Materials"
+                                    }
+                                },
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "Powder coated steel with a two-component coating; a primer and an outdoor powder coating which provides a barrier to corrosive elements, making it suitable for outdoor use "
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "componentId": "title",
+                                    "singleLine": {
+                                        "text": "Sustainability"
+                                    }
+                                },
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "HAY focuses on developing long-lasting products that minimise our environmental impact. We optimise the use of sustainable materials such as recycled materials, FSC-certified wood and water-based lacquer, with a growing number of eco-certified products. We have strict regulatory requirements, and the majority of our products are tested to comply with international standards for strength, durability and safety"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "componentId": "title",
+                                    "singleLine": {
+                                        "text": "Care & maintenance"
+                                    }
+                                },
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "Our Care & Maintenance offers guidance for optimal maintenance of your HAY product. It includes advice and instructions on cleaning and caring for specific materials to prolong the life of your furniture. Find the guide at hay.com."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "componentId": "title",
+                                    "singleLine": {
+                                        "text": "Color & finish"
+                                    }
+                                },
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "Take care not to scratch the chairs against each other when stacking them. Do not move or drag the chairs around when stacked as the weight will damage the legs."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "componentId": "title",
+                                    "singleLine": {
+                                        "text": "Country of origin"
+                                    }
+                                },
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "Latvia"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "componentId": "dimensions",
+                    "piece": {
+                        "identifier": "dimensions",
+                        "components": [
+                            {
+                                "componentId": "width",
+                                "numeric": {
+                                    "number": 90,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "height",
+                                "numeric": {
+                                    "number": 75,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "depth",
+                                "numeric": {
+                                    "number": 170,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "weight",
+                                "numeric": {
+                                    "number": 35,
+                                    "unit": "kg"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "related-products",
+                    "itemRelations": {
+                        "itemIds": ["{{ product2.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "Palissade Table"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Timeless Elegance in Every Outdoor Setting."
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_ref": "story1",
+            "intent": "document/create",
+            "tree": {
+                "parentId": "{{ stories.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "story",
+            "name": "Zen Garden",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "How to Create a Zen Garden with Minimalist Furniture and Plants"
+                    }
+                },
+                {
+                    "componentId": "intro",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "A Zen garden is a space designed to foster tranquility and mindfulness, making it a perfect escape from the stress of daily life. With minimalist furniture and carefully selected plants, you can create a peaceful oasis in your backyard or patio. This article will guide you through the essential steps to design your very own Zen garden."
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "story",
+                    "paragraphCollection": {
+                        "paragraphs": [
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Minimalism is key when designing a Zen garden. Opt for furniture with clean lines and simple shapes to avoid overwhelming the space. Low seating arrangements like wooden benches or cushions placed on stone platforms blend seamlessly into the garden's natural environment. Using neutral-colored furniture, such as beige, gray, or natural wood tones, further contributes to the calm, minimalist aesthetic."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "The Art of Minimalist Furniture in Zen Gardens"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Plants are integral to a Zen garden, as they symbolize growth, life, and renewal. Bamboo, moss, and ferns are common in Zen-inspired designs due to their soft, soothing presence. Opt for plants that require minimal care but offer maximum visual impact, such as Japanese maples, which add striking color and texture. Incorporating small water features, like a pond or fountain, enhances the calming atmosphere with the sound of trickling water."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Selecting Plants for Serenity"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "A key element in many Zen gardens is the inclusion of pathways for mindful walks. These paths can be made of stepping stones, gravel, or smooth wooden planks and should guide you through the garden at a leisurely pace. Incorporating small benches or resting areas along the path encourages moments of reflection and stillness, helping you connect with your surroundings."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Creating Pathways for Mindful Walks"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "A Zen garden relies on the balance between hardscape elements (such as stone, wood, and gravel) and softscape elements (such as plants, moss, and sand). Use natural stones to create boundaries, define areas, or form focal points within the garden. The softscaping—your plants and greenery—should be carefully placed to accentuate the hard elements without overpowering them, maintaining harmony and balance throughout."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Balancing Hardscaping and Softscaping"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Designing a Zen garden requires thoughtful choices that prioritize simplicity, balance, and mindfulness. By incorporating minimalist furniture, soothing plants, and serene pathways, you can create a space that serves as a personal sanctuary, promoting peace and calm in your daily life."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Closing Thoughts: A Sanctuary of Calm"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "featured",
+                    "itemRelations": {
+                        "itemIds": ["{{ product2.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "How to Create a Zen Garden with Minimalist Furniture and Plants"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "A Zen garden is a space designed to foster tranquility and mindfulness, making it a perfect escape from the stress of daily life. With minimalist furniture and carefully selected plants, you can create a peaceful oasis in your backyard or pati"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "document/create",
+            "tree": {
+                "parentId": "{{ stories.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "story",
+            "name": "Designing Your Outdoor Oasis",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Designing Your Outdoor Oasis: Furniture and Plant Pairings"
+                    }
+                },
+                {
+                    "componentId": "intro",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Your outdoor space is an extension of your home, and with the right design, it can become a place of relaxation and joy. From selecting the perfect furniture to incorporating plants that enhance your garden’s beauty, creating a harmonious balance is key. In this article, we’ll show you how to pair outdoor furniture with plants to design a space that feels like a personal retreat."
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "story",
+                    "paragraphCollection": {
+                        "paragraphs": [
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Before you choose furniture or plants, consider how you want to use your outdoor area. Do you need a space for entertaining, relaxing, or dining? Knowing the purpose will help you select the right pieces to meet your needs."
+                                        },
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Durable, weather-resistant materials like teak, metal, or wicker are ideal for outdoor furniture. Whether you're looking for a large dining table or a cozy set of lounge chairs, it's important to choose furniture that fits your lifestyle."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Defining the Purpose of Your Outdoor Space"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Plants are essential in transforming your outdoor space. Use large potted plants or trees to create privacy, and choose flowering plants for pops of colour. Mixing textures with ferns, succulents, and trailing plants can create visual interest."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Adding Plants for Colour and Texture"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Accessories like cushions, outdoor rugs, and lighting add comfort and style to your outdoor space. Soft furnishings can make your outdoor furniture more inviting, while lanterns and string lights create a cozy ambiance at night."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Accessorizing Your Space for Comfort"
+                                }
+                            },
+                            {
+                                "body": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "When designing your outdoor oasis, balance is key. Ensure that neither the plants nor the furniture overwhelms the space, and choose items that complement each other to create a harmonious, inviting atmosphere."
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "text": "Creating Balance Between Furniture and Plants"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "featured",
+                    "itemRelations": {
+                        "itemIds": ["{{ product2.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "up-next",
+                    "itemRelations": {
+                        "itemIds": ["{{ story1.id }}"],
+                        "skus": []
+                    }
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "Designing Your Outdoor Oasis: Furniture and Plant Pairings"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Your outdoor space is an extension of your home, and with the right design, it can become a place of relaxation and joy."
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "document/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "landing-page",
+            "name": "Index",
+            "components": [
+                {
+                    "componentId": "blocks",
+                    "componentMultipleChoice": [
+                        {
+                            "componentId": "banner",
+                            "piece": {
+                                "identifier": "banner",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Sit back, relax, and let your furniture wow"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Why settle for boring? Our furniture is so stylish, your guests might just forget to leave. Get comfy, get classy, and let your home do the bragging."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "call-to-action",
+                                        "piece": {
+                                            "identifier": "call-to-action",
+                                            "components": [
+                                                {
+                                                    "componentId": "action",
+                                                    "contentChunk": {
+                                                        "chunks": [
+                                                            [
+                                                                {
+                                                                    "componentId": "label",
+                                                                    "singleLine": {
+                                                                        "text": "Go to products"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "componentId": "url",
+                                                                    "singleLine": {
+                                                                        "text": "/products/outdoor-furniture"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["stretch"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["pastel"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "feature-highlights",
+                            "piece": {
+                                "identifier": "feature-highlights",
+                                "components": [
+                                    {
+                                        "componentId": "usp",
+                                        "contentChunk": {
+                                            "chunks": [
+                                                [
+                                                    {
+                                                        "componentId": "headline",
+                                                        "singleLine": {
+                                                            "text": "Custom comfort, tailored to you"
+                                                        }
+                                                    },
+                                                    {
+                                                        "componentId": "description",
+                                                        "richText": {
+                                                            "json": [
+                                                                {
+                                                                    "kind": "block",
+                                                                    "type": "paragraph",
+                                                                    "textContent": "We offer fully customizable furniture pieces designed to fit your style and space, ensuring every item is uniquely yours."
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                [
+                                                    {
+                                                        "componentId": "headline",
+                                                        "singleLine": {
+                                                            "text": "Luxury quality, affordable prices"
+                                                        }
+                                                    },
+                                                    {
+                                                        "componentId": "description",
+                                                        "richText": {
+                                                            "json": [
+                                                                {
+                                                                    "kind": "block",
+                                                                    "type": "paragraph",
+                                                                    "textContent": "Enjoy high-end furniture crafted with premium materials—without the luxury price tag. Style and durability, made accessible."
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                [
+                                                    {
+                                                        "componentId": "headline",
+                                                        "singleLine": {
+                                                            "text": "Fast delivery, no compromise"
+                                                        }
+                                                    },
+                                                    {
+                                                        "componentId": "description",
+                                                        "richText": {
+                                                            "json": [
+                                                                {
+                                                                    "kind": "block",
+                                                                    "type": "paragraph",
+                                                                    "textContent": "Get your dream furniture delivered quickly with our express shipping options, so you can start enjoying your space in no time!"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["light"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "product-slider",
+                            "piece": {
+                                "identifier": "product-slider",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "To plant a garden is to believe in tomorrow"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "children": [
+                                                        {
+                                                            "kind": "inline",
+                                                            "textContent": "Our plants are sure to brighten up your home"
+                                                        },
+                                                        {
+                                                            "kind": "inline",
+                                                            "type": "line-break"
+                                                        },
+                                                        {
+                                                            "kind": "inline",
+                                                            "textContent": "(and your future)."
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "products",
+                                        "itemRelations": {
+                                            "itemIds": [],
+                                            "skus": [
+                                                "palissade-table-iron-red",
+                                                "palissade-table-iron-red-small",
+                                                "palissade-table-sky-grey-small",
+                                                "palissade-lounge-sofa-olive",
+                                                "palissade-table-anthracite-small"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["light"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "picture-grid",
+                            "piece": {
+                                "identifier": "picture-grid",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "To plant a garden is to believe in tomorrow"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Beautiful grid below."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["light"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "product-slider",
+                            "piece": {
+                                "identifier": "product-slider",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Wide plants section"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Disco time."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "products",
+                                        "itemRelations": {
+                                            "itemIds": [],
+                                            "skus": [
+                                                "palissade-table-iron-red",
+                                                "palissade-lounge-sofa-olive",
+                                                "quilted-cushion-olive",
+                                                "palissade-table-anthracite-powder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["stretch"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["dark"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "story-slider",
+                            "piece": {
+                                "identifier": "story-slider",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Plants that won't judge your watering habits"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Add a fresh touch to your home with our vibrant collection of indoor plants. Low-maintenance and full of personality, they’ll transform any room into a lush paradise!"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "stories",
+                                        "itemRelations": {
+                                            "itemIds": ["{{ story1.id }}"],
+                                            "skus": []
+                                        }
+                                    },
+                                    {
+                                        "componentId": "layout",
+                                        "piece": {
+                                            "identifier": "layout",
+                                            "components": [
+                                                {
+                                                    "componentId": "display-width",
+                                                    "selection": {
+                                                        "keys": ["contain"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "theme",
+                                                    "selection": {
+                                                        "keys": ["light"]
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "background-media",
+                                                    "componentChoice": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "componentId": "meta",
+                    "piece": {
+                        "identifier": "meta",
+                        "components": [
+                            {
+                                "componentId": "title",
+                                "singleLine": {
+                                    "text": "Welcome to the Crystallize storefront accelerator"
+                                }
+                            },
+                            {
+                                "componentId": "description",
+                                "richText": {
+                                    "json": [
+                                        {
+                                            "kind": "block",
+                                            "type": "paragraph",
+                                            "textContent": "Powered by Crystallize and Nextjs."
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
