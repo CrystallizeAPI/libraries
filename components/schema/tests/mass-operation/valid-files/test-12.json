@@ -63,7 +63,6 @@
                     "config": {
                         "numeric": {
                             "required": true,
-                            "mutilingual": false,
                             "decimalPlaces": 5,
                             "units": ["stars", "kuddos", "thumbs up"]
                         }

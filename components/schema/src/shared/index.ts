@@ -27,14 +27,40 @@ export const KeyValuePairInputSchema = z.object({
 export type KeyValuePair = z.infer<typeof KeyValuePairSchema>;
 export type KeyValuePairInput = z.infer<typeof KeyValuePairInputSchema>;
 
-// todo: maybe core next only
-export const OwnerSchema = z.object({
-    id: IdSchema,
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-    email: z.email().optional(),
-    companyName: z.string().optional(),
+export const TURISchema = z.string().min(1);
+export const RefSchema = z.string().min(1);
+
+export const checkTuriOrId = (
+    data: { turi?: string; itemId?: string; id?: string },
+    ctx: { addIssue: ({ code, message, path }: { code: 'custom'; message: string; path: string[] }) => void },
+) => {
+    if (!data.turi && !(data.itemId || data.id)) {
+        ctx.addIssue({
+            code: 'custom',
+            message: 'Expected at least one turi.',
+            path: ['turi'],
+        });
+    }
+};
+
+const ownerBaseShape = {
+    firstName: z.string().nullish(),
+    lastName: z.string().nullish(),
+    email: z.string().email().nullish(),
+    companyName: z.string().nullish(),
+} satisfies z.ZodRawShape;
+
+const CoreOwnerSchema = z.object({
+    ...ownerBaseShape,
+    id: IdSchema.optional(),
 });
+
+const CoreNextOwnerSchema = z.object({
+    ...ownerBaseShape,
+    id: IdSchema,
+});
+
+export const OwnerSchema = z.union([CoreOwnerSchema, CoreNextOwnerSchema]);
 export type Owner = z.infer<typeof OwnerSchema>;
 
 export const ComponentTypeSchema = z.enum([

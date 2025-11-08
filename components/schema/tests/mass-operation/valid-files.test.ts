@@ -7,16 +7,20 @@ describe('Mass Operations - Check sets of files', {}, async () => {
     const validFilesDir = path.join(__dirname, './valid-files');
     const files = fs.readdirSync(validFilesDir);
     files.forEach((file) => {
-        it(`${file} should pass`, () => {
+        // const file = 'mass-ops9.json';
+        it(`${file} should pass without altering content`, () => {
             const filePath = path.join(validFilesDir, file);
             const content = fs.readFileSync(filePath, 'utf-8');
             const structure = JSON.parse(content);
-            const op = OperationsSchema.safeParse(structure);
-            if (!op.success) {
-                console.dir({ error: op.error }, { depth: null });
-            }
+            const result = OperationsSchema.safeParse(structure);
 
-            expect(op.success).toBe(true);
+            if (!result.success) {
+                console.dir({ error: result.error }, { depth: null });
+            }
+            expect(result.success).toBe(true);
+            if (result.success) {
+                expect(result.data).toEqual(structure);
+            }
         });
     });
 });

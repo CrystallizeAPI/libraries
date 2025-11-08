@@ -19,7 +19,7 @@ export const CreateCustomerInputSchema = z.object({
     phone: z.string().nullish(),
     taxNumber: z.string().nullish(),
     birthDate: DateTimeSchema.nullish(),
-    type: CustomerTypeSchema,
+    type: CustomerTypeSchema.nullish(),
     externalReferences: z.array(KeyValuePairInputSchema).nullish(),
     meta: z.array(KeyValuePairInputSchema).nullish(),
     addresses: z.array(AddressInputSchema).nullish(),

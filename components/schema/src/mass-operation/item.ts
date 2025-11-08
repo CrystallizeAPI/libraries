@@ -8,89 +8,108 @@ import {
     UpdateFolderInputSchema,
     UpdateProductInputSchema,
 } from '../pim/index.js';
-import { IdSchema } from '../shared/index.js';
+import { checkTuriOrId, IdSchema, RefSchema, TURISchema } from '../shared';
 
 export const CreateDocumentOperationSchema = CreateDocumentInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('document/create'),
     language: z.string().min(1),
+    turi: TURISchema.optional(),
 });
 
 export const UpdateDocumentOperationSchema = UpdateDocumentInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('document/update'),
-    itemId: IdSchema,
     language: z.string().min(1),
-});
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
+}).superRefine(checkTuriOrId);
 
 export const UpsertDocumentOperationSchema = CreateDocumentInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('document/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema,
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
 });
 
 export const CreateFolderOperationSchema = CreateFolderInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('folder/create'),
     language: z.string().min(1),
+    turi: TURISchema.optional(),
 });
 
 export const UpdateFolderOperationSchema = UpdateFolderInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('folder/update'),
     language: z.string().min(1),
-    itemId: IdSchema,
-});
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
+}).superRefine(checkTuriOrId);
 
 export const UpsertFolderOperationSchema = CreateFolderInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('folder/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema,
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
 });
 
 export const CreateProductOperationSchema = CreateProductInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('product/create'),
     language: z.string().min(1),
+    turi: TURISchema.optional(),
 });
 
 export const UpdateProductOperationSchema = UpdateProductInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('product/update'),
     language: z.string().min(1),
-    itemId: IdSchema,
-});
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
+}).superRefine(checkTuriOrId);
 
 export const UpsertProductOperationSchema = CreateProductInputSchema.extend({
+    _ref: RefSchema.optional(),
     intent: z.literal('product/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema,
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
 });
 
-export const UpdateItemComponentOperationSchema = z.object({
-    intent: z.literal('item/updateComponent/item'),
+export const UpdateItemComponentOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('item/updateComponent/item'),
+        language: z.string().min(1),
+        component: ComponentContentInputSchema,
+        itemId: IdSchema.optional(),
+        turi: TURISchema.optional(),
+    })
+    .superRefine(checkTuriOrId);
+
+export const UpdateSkuComponentOperationSchema = z.object({
+    _ref: RefSchema.optional(),
+    intent: z.literal('item/updateComponent/sku'),
     language: z.string().min(1),
     component: ComponentContentInputSchema,
-    sku: z.never().optional(),
-    itemId: IdSchema,
-});
-
-export const UpdateSkuComponentOperationSchema = UpdateItemComponentOperationSchema.omit({
-    intent: true,
-    itemId: true,
-    sku: true,
-}).extend({
-    intent: z.literal('item/updateComponent/sku'),
     sku: z.string(),
-    itemId: z.never().optional(),
 });
 
 export const PublishItemOperationSchema = z.object({
+    _ref: RefSchema.optional(),
     intent: z.literal('item/publish'),
-    itemId: IdSchema,
     language: z.string().min(1),
     includeDescendants: z.boolean().optional(),
+    itemId: IdSchema.optional(),
+    turi: TURISchema.optional(),
 });
 
-export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ intent: true }).merge(
-    z.object({
-        intent: z.literal('item/unpublish'),
-    }),
-);
+export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ intent: true }).extend({
+    intent: z.literal('item/unpublish'),
+});
 
 export type UpdateItemComponentOperation = z.infer<typeof UpdateItemComponentOperationSchema>;
 export type UpdateSkuComponentOperation = z.infer<typeof UpdateSkuComponentOperationSchema>;

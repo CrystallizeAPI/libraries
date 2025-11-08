@@ -19,7 +19,7 @@
                 "parentId": "626ac5cf021ee19c131577a6"
             },
             "vatTypeId": "626ac7e4021ee19c131577a7",
-            "component": [
+            "components": [
                 {
                     "componentId": "title",
                     "singleLine": {

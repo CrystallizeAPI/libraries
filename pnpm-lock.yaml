@@ -155,8 +155,8 @@ importers:
     components/schema:
         dependencies:
             zod:
-                specifier: ^4.0.15
-                version: 4.0.15
+                specifier: ^4.1.12
+                version: 4.1.12
         devDependencies:
             '@tsconfig/node20':
                 specifier: ^20.1.6
@@ -5106,6 +5106,12 @@ packages:
                 integrity: sha512-2IVHb9h4Mt6+UXkyMs0XbfICUh1eUrlJJAOupBHUhLRnKkruawyDddYRCs0Eizt900ntIMk9/4RksYl+FgSpcQ==,
             }
 
+    zod@4.1.12:
+        resolution:
+            {
+                integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==,
+            }
+
     zwitch@2.0.4:
         resolution:
             {
@@ -8474,5 +8480,7 @@ snapshots:
     zod@3.25.76: {}
 
     zod@4.0.15: {}
+
+    zod@4.1.12: {}
 
     zwitch@2.0.4: {}

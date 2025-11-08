@@ -1,14 +1,5 @@
 import { z } from 'zod';
 
-export const LoopingOperationOperationSchema = z.object({
-    _ref: z.string().optional(),
-});
-
-// Helper function to extend any operation schema with base properties
-export const withLoopingOperationProperties = <T extends z.ZodRawShape>(schema: z.ZodObject<T>) => {
-    return LoopingOperationOperationSchema.extend(schema.shape);
-};
-
 import {
     PublishItemOperationSchema,
     UnPublishItemOperationSchema,
@@ -49,50 +40,53 @@ import {
     UpsertSubscriptionContractOperationSchema,
 } from './subscription-contract.js';
 
+import { RegisterImageOperationSchema } from './asset.js';
+
 export const OperationSchema = z.discriminatedUnion('intent', [
-    withLoopingOperationProperties(CreateDocumentOperationSchema),
-    withLoopingOperationProperties(UpdateDocumentOperationSchema),
-    withLoopingOperationProperties(UpsertDocumentOperationSchema),
+    CreateDocumentOperationSchema,
+    UpdateDocumentOperationSchema,
+    UpsertDocumentOperationSchema,
 
-    withLoopingOperationProperties(CreateFolderOperationSchema),
-    withLoopingOperationProperties(UpdateFolderOperationSchema),
-    withLoopingOperationProperties(UpsertFolderOperationSchema),
+    CreateFolderOperationSchema,
+    UpdateFolderOperationSchema,
+    UpsertFolderOperationSchema,
 
-    withLoopingOperationProperties(CreateProductOperationSchema),
-    withLoopingOperationProperties(UpdateProductOperationSchema),
-    withLoopingOperationProperties(UpsertProductOperationSchema),
+    CreateProductOperationSchema,
+    UpdateProductOperationSchema,
+    UpsertProductOperationSchema,
 
-    withLoopingOperationProperties(PublishItemOperationSchema),
-    withLoopingOperationProperties(UnPublishItemOperationSchema),
+    PublishItemOperationSchema,
+    UnPublishItemOperationSchema,
 
-    withLoopingOperationProperties(UpdateItemComponentOperationSchema),
-    withLoopingOperationProperties(UpdateSkuComponentOperationSchema),
+    UpdateItemComponentOperationSchema,
+    UpdateSkuComponentOperationSchema,
 
-    withLoopingOperationProperties(CreateShapeOperationSchema),
-    withLoopingOperationProperties(UpdateShapeOperationSchema),
-    withLoopingOperationProperties(UpsertShapeOperationSchema),
+    CreateShapeOperationSchema,
+    UpdateShapeOperationSchema,
+    UpsertShapeOperationSchema,
 
-    withLoopingOperationProperties(CreatePieceOperationSchema),
-    withLoopingOperationProperties(UpdatePieceOperationSchema),
-    withLoopingOperationProperties(UpsertPieceOperationSchema),
+    CreatePieceOperationSchema,
+    UpdatePieceOperationSchema,
+    UpsertPieceOperationSchema,
 
-    withLoopingOperationProperties(ModifyProductVariantStockOperationSchema),
+    ModifyProductVariantStockOperationSchema,
+    RegisterImageOperationSchema,
 
-    withLoopingOperationProperties(CreateCustomerGroupOperationSchema),
-    withLoopingOperationProperties(UpdateCustomerGroupOperationSchema),
-    withLoopingOperationProperties(UpsertCustomerGroupOperationSchema),
+    CreateCustomerGroupOperationSchema,
+    UpdateCustomerGroupOperationSchema,
+    UpsertCustomerGroupOperationSchema,
 
-    withLoopingOperationProperties(CreateCustomerOperationSchema),
-    withLoopingOperationProperties(UpdateCustomerOperationSchema),
-    withLoopingOperationProperties(UpsertCustomerOperationSchema),
+    CreateCustomerOperationSchema,
+    UpdateCustomerOperationSchema,
+    UpsertCustomerOperationSchema,
 
-    withLoopingOperationProperties(RegisterOrderOperationSchema),
-    withLoopingOperationProperties(UpdateOrderOperationSchema),
-    withLoopingOperationProperties(UpsertOrderOperationSchema),
+    RegisterOrderOperationSchema,
+    UpdateOrderOperationSchema,
+    UpsertOrderOperationSchema,
 
-    withLoopingOperationProperties(CreateSubscriptionContractOperationSchema),
-    withLoopingOperationProperties(UpdateSubscriptionContractOperationSchema),
-    withLoopingOperationProperties(UpsertSubscriptionContractOperationSchema),
+    CreateSubscriptionContractOperationSchema,
+    UpdateSubscriptionContractOperationSchema,
+    UpsertSubscriptionContractOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -146,3 +140,5 @@ export type {
     UpdateSubscriptionContractOperation,
     UpsertSubscriptionContractOperation,
 } from './subscription-contract.js';
+
+export type { RegisterImageOperation } from './asset.js';

@@ -1,0 +1,65 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "shape/upsert",
+            "type": "folder",
+            "name": "Category",
+            "identifier": "category",
+            "components": [
+                {
+                    "id": "title",
+                    "type": "singleLine",
+                    "name": "Title",
+                    "config": {
+                        "singleLine": {}
+                    }
+                },
+                {
+                    "id": "description",
+                    "type": "richText",
+                    "name": "Description",
+                    "config": {
+                        "richText": {
+                            "multilingual": true
+                        }
+                    }
+                },
+                {
+                    "id": "image",
+                    "type": "images",
+                    "name": "Image",
+                    "config": {
+                        "images": {
+                            "multilingual": false,
+                            "discoverable": true
+                        }
+                    }
+                },
+                {
+                    "id": "blocks",
+                    "type": "componentMultipleChoice",
+                    "name": "Blocks",
+                    "config": {
+                        "componentMultipleChoice": {
+                            "discoverable": true,
+                            "choices": [
+                                {
+                                    "id": "banner",
+                                    "type": "piece",
+                                    "name": "Banner",
+                                    "config": {
+                                        "piece": {
+                                            "identifier": "banner"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "variantComponents": []
+        }
+    ]
+}

@@ -63,7 +63,6 @@
                     "config": {
                         "numeric": {
                             "required": true,
-                            "mutilingual": false,
                             "decimalPlaces": 5,
                             "units": ["stars", "kuddos {{ defaults.languages.[0] }}", "thumbs up"]
                         }
@@ -115,6 +114,7 @@
         },
         {
             "_ref": "root",
+            "turi": "my-tenant-product-root-folder",
             "intent": "folder/create",
             "name": "Automated folder",
             "language": "en",

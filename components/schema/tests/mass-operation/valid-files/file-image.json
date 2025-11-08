@@ -1,0 +1,79 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "my-registred-image",
+            "intent": "image/register",
+            "key": "{{ upload \"https://placehold.co/600x400?text=Register+Only\" }}"
+        },
+        {
+            "intent": "product/upsert",
+            "shapeIdentifier": "default-product",
+            "language": "{{ defaults.languages.[0] }}",
+            "name": "My Product with Image",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "variants": [
+                {
+                    "name": "Default",
+                    "sku": "my-product-with-image-default",
+                    "images": [
+                        {
+                            "key": "{{ upload \"https://placehold.co/600x400?text=Direct+Upload+Image+1\" }}"
+                        },
+                        {
+                            "key": "{{ upload \"https://placehold.co/600x400?text=Direct+Upload+Image+2\" }}"
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "images",
+                            "images": [
+                                {
+                                    "key": "{{ my-registred-image.key }}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "intent": "product/upsert",
+            "turi": "product/my-product-with-image-2",
+            "language": "{{ defaults.languages.[0] }}",
+            "shapeIdentifier": "default-product",
+            "name": "My Product with Image 2",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "variants": [
+                {
+                    "name": "Default",
+                    "sku": "my-product-with-image-default-2",
+                    "images": [
+                        {
+                            "key": "{{ upload \"https://placehold.co/600x400?text=Direct+Upload+Image+1\" }}"
+                        },
+                        {
+                            "key": "{{ upload \"https://placehold.co/600x400?text=Direct+Upload+Image+2\" }}"
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "images",
+                            "images": [
+                                {
+                                    "key": "{{ upload \"https://placehold.co/600x400?text=Register+And+Set\" }}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

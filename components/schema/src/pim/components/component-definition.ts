@@ -17,7 +17,9 @@ export const ComponentDefinitionInputSchema = z.object({
     type: ComponentTypeSchema,
     name: z.string().min(1),
     description: z.string().optional(),
-    config: ComponentConfigInputSchema.optional(),
+    get config() {
+        return ComponentConfigInputSchema.optional();
+    },
 });
 
 export type ComponentDefinitionInput = z.infer<typeof ComponentDefinitionInputSchema>;

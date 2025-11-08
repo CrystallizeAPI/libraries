@@ -35,7 +35,7 @@
                             "title": {
                                 "text": "paragraphCollection - Mass operations title"
                             },
-                            "body:": {
+                            "body": {
                                 "html": ["<p>paragraphCollection - Mass operations Single Item</p>"]
                             }
                         },
@@ -43,7 +43,7 @@
                             "title": {
                                 "text": "paragraphCollection - Mass operations title 2"
                             },
-                            "body:": {
+                            "body": {
                                 "html": ["<p>paragraphCollection - Mass operations Single Item 2 </p>"]
                             }
                         }

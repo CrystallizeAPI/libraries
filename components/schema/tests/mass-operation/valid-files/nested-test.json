@@ -1,0 +1,77 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "products",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Products",
+            "components": [
+                {
+                    "componentId": "blocks",
+                    "componentMultipleChoice": [
+                        {
+                            "componentId": "banner",
+                            "piece": {
+                                "identifier": "banner",
+                                "components": [
+                                    {
+                                        "componentId": "title",
+                                        "singleLine": {
+                                            "text": "Outdoor furniture"
+                                        }
+                                    },
+                                    {
+                                        "componentId": "description",
+                                        "richText": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Designed by French brothers Ronan and Erwan Bouroullec, this outdoor collection is united by its visual simplicity and core strength. It’s designed in colour and form to integrate effortlessly into a natural landscape or urban setting."
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "componentId": "call-to-action",
+                                        "piece": {
+                                            "identifier": "call-to-action",
+                                            "components": [
+                                                {
+                                                    "componentId": "action",
+                                                    "contentChunk": {
+                                                        "chunks": [
+                                                            [
+                                                                {
+                                                                    "componentId": "label",
+                                                                    "singleLine": {
+                                                                        "text": "See collection"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "componentId": "url",
+                                                                    "singleLine": {
+                                                                        "text": "/products/outdoor-furniture"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -24,7 +24,7 @@ export const CustomerSchema = z.object({
     phone: z.string().nullish(),
     taxNumber: z.string().nullish(),
     birthDate: DateTimeSchema.nullish(),
-    type: CustomerTypeSchema.optional(),
+    type: CustomerTypeSchema.nullish(),
     externalReferences: z.array(KeyValuePairSchema).nullish(),
     meta: z.array(KeyValuePairSchema).nullish(),
     addresses: z.array(AddressSchema).nullish(),
