@@ -114,7 +114,7 @@
         },
         {
             "_ref": "root",
-            "turi": "my-tenant-product-root-folder",
+            "resourceIdentifier": "my-tenant-product-root-folder",
             "intent": "folder/create",
             "name": "Automated folder",
             "language": "en",

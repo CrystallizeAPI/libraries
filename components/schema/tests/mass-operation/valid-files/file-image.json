@@ -42,7 +42,7 @@
         },
         {
             "intent": "product/upsert",
-            "turi": "product/my-product-with-image-2",
+            "resourceIdentifier": "product/my-product-with-image-2",
             "language": "{{ defaults.languages.[0] }}",
             "shapeIdentifier": "default-product",
             "name": "My Product with Image 2",

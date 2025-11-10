@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { UpdateOrderInputSchema, RegisterOrderInputSchema } from '../pim';
-import { checkTuriOrId, RefSchema, TURISchema } from '../shared';
+import { checkResourceIdentifierOrId, RefSchema, ResourceIdentifierSchema } from '../shared';
 
 export const RegisterOrderOperationSchema = RegisterOrderInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('order/register'),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 export type RegisterOrderOperation = z.infer<typeof RegisterOrderOperationSchema>;
 
@@ -14,9 +14,9 @@ export const UpdateOrderOperationSchema = UpdateOrderInputSchema.omit({ id: true
         _ref: RefSchema.optional(),
         intent: z.literal('order/update'),
         id: UpdateOrderInputSchema.shape.id.optional(),
-        turi: TURISchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
     })
-    .superRefine(checkTuriOrId);
+    .superRefine(checkResourceIdentifierOrId);
 
 export type UpdateOrderOperation = z.infer<typeof UpdateOrderOperationSchema>;
 
@@ -26,7 +26,7 @@ export const UpsertOrderOperationSchema = RegisterOrderInputSchema.omit({
     _ref: RefSchema.optional(),
     intent: z.literal('order/upsert'),
     id: UpdateOrderInputSchema.shape.id.optional(),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export type UpsertOrderOperation = z.infer<typeof UpsertOrderOperationSchema>;

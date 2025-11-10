@@ -27,18 +27,18 @@ export const KeyValuePairInputSchema = z.object({
 export type KeyValuePair = z.infer<typeof KeyValuePairSchema>;
 export type KeyValuePairInput = z.infer<typeof KeyValuePairInputSchema>;
 
-export const TURISchema = z.string().min(1);
+export const ResourceIdentifierSchema = z.string().min(1);
 export const RefSchema = z.string().min(1);
 
-export const checkTuriOrId = (
-    data: { turi?: string; itemId?: string; id?: string },
+export const checkResourceIdentifierOrId = (
+    data: { resourceIdentifier?: string; itemId?: string; id?: string },
     ctx: { addIssue: ({ code, message, path }: { code: 'custom'; message: string; path: string[] }) => void },
 ) => {
-    if (!data.turi && !(data.itemId || data.id)) {
+    if (!data.resourceIdentifier && !(data.itemId || data.id)) {
         ctx.addIssue({
             code: 'custom',
-            message: 'Expected at least one turi.',
-            path: ['turi'],
+            message: 'Expected at least a resourceIdentifier or an id/itemId.',
+            path: ['resourceIdentifier'],
         });
     }
 };

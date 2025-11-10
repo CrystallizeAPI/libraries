@@ -8,13 +8,13 @@ import {
     UpdateFolderInputSchema,
     UpdateProductInputSchema,
 } from '../pim/index.js';
-import { checkTuriOrId, IdSchema, RefSchema, TURISchema } from '../shared';
+import { checkResourceIdentifierOrId, IdSchema, RefSchema, ResourceIdentifierSchema } from '../shared';
 
 export const CreateDocumentOperationSchema = CreateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('document/create'),
     language: z.string().min(1),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const UpdateDocumentOperationSchema = UpdateDocumentInputSchema.extend({
@@ -22,22 +22,22 @@ export const UpdateDocumentOperationSchema = UpdateDocumentInputSchema.extend({
     intent: z.literal('document/update'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
-}).superRefine(checkTuriOrId);
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
+}).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertDocumentOperationSchema = CreateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('document/upsert'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const CreateFolderOperationSchema = CreateFolderInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('folder/create'),
     language: z.string().min(1),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const UpdateFolderOperationSchema = UpdateFolderInputSchema.extend({
@@ -45,22 +45,22 @@ export const UpdateFolderOperationSchema = UpdateFolderInputSchema.extend({
     intent: z.literal('folder/update'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
-}).superRefine(checkTuriOrId);
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
+}).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertFolderOperationSchema = CreateFolderInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('folder/upsert'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const CreateProductOperationSchema = CreateProductInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('product/create'),
     language: z.string().min(1),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const UpdateProductOperationSchema = UpdateProductInputSchema.extend({
@@ -68,15 +68,15 @@ export const UpdateProductOperationSchema = UpdateProductInputSchema.extend({
     intent: z.literal('product/update'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
-}).superRefine(checkTuriOrId);
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
+}).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertProductOperationSchema = CreateProductInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('product/upsert'),
     language: z.string().min(1),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const UpdateItemComponentOperationSchema = z
@@ -86,9 +86,9 @@ export const UpdateItemComponentOperationSchema = z
         language: z.string().min(1),
         component: ComponentContentInputSchema,
         itemId: IdSchema.optional(),
-        turi: TURISchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
     })
-    .superRefine(checkTuriOrId);
+    .superRefine(checkResourceIdentifierOrId);
 
 export const UpdateSkuComponentOperationSchema = z.object({
     _ref: RefSchema.optional(),
@@ -104,7 +104,7 @@ export const PublishItemOperationSchema = z.object({
     language: z.string().min(1),
     includeDescendants: z.boolean().optional(),
     itemId: IdSchema.optional(),
-    turi: TURISchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 
 export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ intent: true }).extend({
