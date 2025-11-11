@@ -1,19 +1,19 @@
 import { z } from 'zod';
 
-import { BooleanContentInputSchema } from './types/boolean.js';
-import { DatetimeContentInputSchema } from './types/datetime.js';
-import { GridRelationsContentInputSchema } from './types/grid-relations.js';
-import { ImagesContentInputSchema } from './types/images.js';
-import { LocationContentInputSchema } from './types/location.js';
-import { ParagraphCollectionContentInputSchema } from './types/paragraph-collection.js';
-import { RichTextContentInputSchema } from './types/rich-text.js';
-import { SingleLineContentInputSchema } from './types/single-line.js';
-import { VideosContentInputSchema } from './types/videos.js';
-import { NumericContentInputSchema } from './types/numeric.js';
-import { FilesContentInputSchema } from './types/files.js';
-import { ItemRelationsContentInputSchema } from './types/item-relations.js';
-import { PropertiesTableContentInputSchema } from './types/properties-table.js';
-import { SelectionContentInputSchema } from './types/selection.js';
+import { BooleanContentInputSchema } from './types/boolean';
+import { DatetimeContentInputSchema } from './types/datetime';
+import { GridRelationsContentInputSchema } from './types/grid-relations';
+import { ImagesContentInputSchema } from './types/images';
+import { LocationContentInputSchema } from './types/location';
+import { ParagraphCollectionContentInputSchema } from './types/paragraph-collection';
+import { RichTextContentInputSchema } from './types/rich-text';
+import { SingleLineContentInputSchema } from './types/single-line';
+import { VideosContentInputSchema } from './types/videos';
+import { NumericContentInputSchema } from './types/numeric';
+import { FilesContentInputSchema } from './types/files';
+import { ItemRelationsContentInputSchema } from './types/item-relations';
+import { PropertiesTableContentInputSchema } from './types/properties-table';
+import { SelectionContentInputSchema } from './types/selection';
 
 export const PieceContentInputSchema = z.object({
     identifier: z.string(),

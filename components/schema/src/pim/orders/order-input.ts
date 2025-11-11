@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { DateTimeSchema, IdSchema, KeyValuePairInputSchema } from '../../shared';
-import { PaymentInputSchema } from '../payment/payment-input.js';
+import { PaymentInputSchema } from '../payment/payment-input';
 import { CreateCustomerInputSchema } from '../customers/customer-input';
 import {
     OrderAppliedPromotionMechanismTypeSchema,

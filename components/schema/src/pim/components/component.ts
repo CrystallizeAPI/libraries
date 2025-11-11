@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { ComponentTypeSchema } from '../../shared/index.js';
-import { ComponentContentSchema } from './component-content.js';
+import { ComponentTypeSchema } from '../../shared/index';
+import { ComponentContentSchema } from './component-content';
 
 export const ComponentSchema = z.object({
     componentId: z.string().min(1),

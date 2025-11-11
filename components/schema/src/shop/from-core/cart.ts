@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { CustomerSchema } from './customer.js';
-import { MetaSchema, MetadataSchema } from './metadata.js';
-import { CartContextSchema } from './input/cart-context.js';
-import { CartItemOriginSchema, CartStateSchema } from './cart-enum.js';
-import { PriceSchema } from './price.js';
-import { ImageSchema, ImageVariantSchema } from './images.js';
-import { MechanismSchema } from './promotions.js';
+import { CustomerSchema } from './customer';
+import { MetaSchema, MetadataSchema } from './metadata';
+import { CartContextSchema } from './input/cart-context';
+import { CartItemOriginSchema, CartStateSchema } from './cart-enum';
+import { PriceSchema } from './price';
+import { ImageSchema, ImageVariantSchema } from './images';
+import { MechanismSchema } from './promotions';
 
 // Product
 export const ProductSchema = z.object({

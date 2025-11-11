@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { CustomerSchema } from '../customer.js';
-import { AddressSchema } from '../address.js';
-import { KeyValueInputSchema, MetaInputSchema } from '../metadata.js';
+import { CustomerSchema } from '../customer';
+import { AddressSchema } from '../address';
+import { KeyValueInputSchema, MetaInputSchema } from '../metadata';
 
 export const CustomerInputSchema = CustomerSchema.omit({
     meta: true,

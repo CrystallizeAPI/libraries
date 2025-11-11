@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared.js';
+import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared';
 
 // in the future that may be needed to split between config and input
 const extraConfig = z.object({

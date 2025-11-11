@@ -1,2 +1,2 @@
-export * from './customer-input.js';
-export * from './customer.js';
+export * from './customer-input';
+export * from './customer';

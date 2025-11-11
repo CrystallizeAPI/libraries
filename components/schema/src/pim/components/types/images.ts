@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
-import { RichTextContentInputSchema, RichTextContentSchema } from './rich-text.js';
-import { DateTimeSchema, IdSchema, KeyValuePairInputSchema, KeyValuePairSchema } from '../../../shared/index.js';
+import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared';
+import { RichTextContentInputSchema, RichTextContentSchema } from './rich-text';
+import { DateTimeSchema, IdSchema, KeyValuePairInputSchema, KeyValuePairSchema } from '../../../shared/index';
 
 /* TODO: REVIEW THE NULLLISH AND OPTIONAL USAGE */
 /* on Content c'est nullish or optional

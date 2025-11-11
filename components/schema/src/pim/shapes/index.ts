@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { ItemTypeSchema, KeyValuePairInputSchema } from '../../shared/index.js';
-import { ComponentDefinitionInputSchema, ComponentDefinitionSchema } from '../components/component-definition.js';
+import { ItemTypeSchema, KeyValuePairInputSchema } from '../../shared/index';
+import { ComponentDefinitionInputSchema, ComponentDefinitionSchema } from '../components/component-definition';
 
 export const CreatePieceInputSchema = z.object({
     identifier: z.string().min(2).max(64),

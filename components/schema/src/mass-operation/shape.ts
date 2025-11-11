@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { CreatePieceInputSchema, CreateShapeInputSchema, UpdateShapeInputSchema } from '../pim/shapes/index.js';
-import { RefSchema } from '../shared/index.js';
+import { CreatePieceInputSchema, CreateShapeInputSchema, UpdateShapeInputSchema } from '../pim/shapes/index';
+import { RefSchema } from '../shared/index';
 
 export const CreateShapeOperationSchema = CreateShapeInputSchema.extend({
     _ref: RefSchema.optional(),

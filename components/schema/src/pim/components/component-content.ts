@@ -1,20 +1,20 @@
 import { z } from 'zod';
 
-import { BooleanContentSchema } from './types/boolean.js';
-import { DatetimeContentSchema } from './types/datetime.js';
-import { GridRelationsContentSchema } from './types/grid-relations.js';
-import { ImagesContentSchema } from './types/images.js';
-import { LocationContentSchema } from './types/location.js';
-import { ParagraphCollectionContentSchema } from './types/paragraph-collection.js';
-import { RichTextContentSchema } from './types/rich-text.js';
-import { SingleLineContentSchema } from './types/single-line.js';
-import { VideosContentSchema } from './types/videos.js';
-import { NumericContentSchema } from './types/numeric.js';
-import { FilesContentSchema } from './types/files.js';
-import { ItemRelationsContentSchema } from './types/item-relations.js';
-import { PropertiesTableContentSchema } from './types/properties-table.js';
-import { SelectionContentSchema } from './types/selection.js';
-import { ComponentSchema } from './component.js';
+import { BooleanContentSchema } from './types/boolean';
+import { DatetimeContentSchema } from './types/datetime';
+import { GridRelationsContentSchema } from './types/grid-relations';
+import { ImagesContentSchema } from './types/images';
+import { LocationContentSchema } from './types/location';
+import { ParagraphCollectionContentSchema } from './types/paragraph-collection';
+import { RichTextContentSchema } from './types/rich-text';
+import { SingleLineContentSchema } from './types/single-line';
+import { VideosContentSchema } from './types/videos';
+import { NumericContentSchema } from './types/numeric';
+import { FilesContentSchema } from './types/files';
+import { ItemRelationsContentSchema } from './types/item-relations';
+import { PropertiesTableContentSchema } from './types/properties-table';
+import { SelectionContentSchema } from './types/selection';
+import { ComponentSchema } from './component';
 
 export const ChoiceContentSchema = z.object({
     get selectedComponent() {

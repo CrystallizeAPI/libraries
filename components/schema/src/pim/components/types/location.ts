@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared.js';
+import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared';
 
 export const LocationConfigSchema = GenericComponentConfigSchema;
 export const LocationConfigInputSchema = GenericComponentConfigInputSchema;

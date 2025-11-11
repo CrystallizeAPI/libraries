@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
+import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared';
 import {
     DateTimeSchema,
     IdSchema,
@@ -7,7 +7,7 @@ import {
     KeyValuePairSchema,
     OwnerSchema,
     VersionLabelSchema,
-} from '../../../shared/index.js';
+} from '../../../shared/index';
 
 export const GridRelationsConfigSchema = MinMaxComponentConfigSchema;
 export const GridRelationsConfigInputSchema = MinMaxComponentConfigInputSchema;

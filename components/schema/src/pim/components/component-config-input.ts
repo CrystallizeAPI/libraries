@@ -1,21 +1,21 @@
 import { z } from 'zod';
 
-import { BooleanConfigInputSchema } from './types/boolean.js';
-import { DatetimeConfigInputSchema } from './types/datetime.js';
-import { GridRelationsConfigInputSchema } from './types/grid-relations.js';
-import { ImagesConfigInputSchema } from './types/images.js';
-import { LocationConfigInputSchema } from './types/location.js';
-import { ParagraphCollectionConfigInputSchema } from './types/paragraph-collection.js';
-import { RichTextConfigInputSchema } from './types/rich-text.js';
-import { SingleLineConfigInputSchema } from './types/single-line.js';
-import { VideosConfigInputSchema } from './types/videos.js';
-import { NumericConfigInputSchema } from './types/numeric.js';
-import { FilesConfigInputSchema } from './types/files.js';
-import { ItemRelationsConfigInputSchema } from './types/item-relations.js';
-import { PropertiesTableConfigInputSchema } from './types/properties-table.js';
-import { SelectionConfigInputSchema } from './types/selection.js';
-import { GenericComponentConfigInputSchema } from './shared.js';
-import { ComponentDefinitionInputSchema } from './component-definition.js';
+import { BooleanConfigInputSchema } from './types/boolean';
+import { DatetimeConfigInputSchema } from './types/datetime';
+import { GridRelationsConfigInputSchema } from './types/grid-relations';
+import { ImagesConfigInputSchema } from './types/images';
+import { LocationConfigInputSchema } from './types/location';
+import { ParagraphCollectionConfigInputSchema } from './types/paragraph-collection';
+import { RichTextConfigInputSchema } from './types/rich-text';
+import { SingleLineConfigInputSchema } from './types/single-line';
+import { VideosConfigInputSchema } from './types/videos';
+import { NumericConfigInputSchema } from './types/numeric';
+import { FilesConfigInputSchema } from './types/files';
+import { ItemRelationsConfigInputSchema } from './types/item-relations';
+import { PropertiesTableConfigInputSchema } from './types/properties-table';
+import { SelectionConfigInputSchema } from './types/selection';
+import { GenericComponentConfigInputSchema } from './shared';
+import { ComponentDefinitionInputSchema } from './component-definition';
 
 export const ChoiceConfigInputSchema = GenericComponentConfigInputSchema.extend({
     get choices() {

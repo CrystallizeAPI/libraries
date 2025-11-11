@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
+import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared';
 
 // in the future that may be needed to split between config and input
 const extraConfig = z.object({

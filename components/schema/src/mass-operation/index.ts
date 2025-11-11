@@ -14,7 +14,7 @@ import {
     CreateProductOperationSchema,
     UpdateProductOperationSchema,
     UpsertProductOperationSchema,
-} from './item.js';
+} from './item';
 import {
     CreatePieceOperationSchema,
     CreateShapeOperationSchema,
@@ -22,8 +22,8 @@ import {
     UpdateShapeOperationSchema,
     UpsertPieceOperationSchema,
     UpsertShapeOperationSchema,
-} from './shape.js';
-import { ModifyProductVariantStockOperationSchema } from './product-variant.js';
+} from './shape';
+import { ModifyProductVariantStockOperationSchema } from './product-variant';
 import {
     CreateCustomerGroupOperationSchema,
     CreateCustomerOperationSchema,
@@ -31,16 +31,16 @@ import {
     UpdateCustomerOperationSchema,
     UpsertCustomerGroupOperationSchema,
     UpsertCustomerOperationSchema,
-} from './customer.js';
+} from './customer';
 
-import { RegisterOrderOperationSchema, UpdateOrderOperationSchema, UpsertOrderOperationSchema } from './order.js';
+import { RegisterOrderOperationSchema, UpdateOrderOperationSchema, UpsertOrderOperationSchema } from './order';
 import {
     CreateSubscriptionContractOperationSchema,
     UpdateSubscriptionContractOperationSchema,
     UpsertSubscriptionContractOperationSchema,
-} from './subscription-contract.js';
+} from './subscription-contract';
 
-import { RegisterImageOperationSchema } from './asset.js';
+import { RegisterImageOperationSchema } from './asset';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateDocumentOperationSchema,
@@ -112,7 +112,7 @@ export type {
     UnPublishItemOperation,
     UpdateItemComponentOperation,
     UpdateSkuComponentOperation,
-} from './item.js';
+} from './item';
 
 export type {
     CreateShapeOperation,
@@ -121,9 +121,9 @@ export type {
     CreatePieceOperation,
     UpdatePieceOperation,
     UpsertPieceOperation,
-} from './shape.js';
+} from './shape';
 
-export type { ModifyProductVariantStockOperation } from './product-variant.js';
+export type { ModifyProductVariantStockOperation } from './product-variant';
 
 export type {
     CreateCustomerOperation,
@@ -132,13 +132,13 @@ export type {
     CreateCustomerGroupOperation,
     UpdateCustomerGroupOperation,
     UpsertCustomerGroupOperation,
-} from './customer.js';
+} from './customer';
 
-export type { RegisterOrderOperation, UpdateOrderOperation, UpsertOrderOperation } from './order.js';
+export type { RegisterOrderOperation, UpdateOrderOperation, UpsertOrderOperation } from './order';
 export type {
     CreateSubscriptionContractOperation,
     UpdateSubscriptionContractOperation,
     UpsertSubscriptionContractOperation,
-} from './subscription-contract.js';
+} from './subscription-contract';
 
-export type { RegisterImageOperation } from './asset.js';
+export type { RegisterImageOperation } from './asset';

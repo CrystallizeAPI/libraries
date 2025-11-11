@@ -1,2 +1,2 @@
-export * from './folder-input.js';
-export * from './folder.js';
+export * from './folder-input';
+export * from './folder';

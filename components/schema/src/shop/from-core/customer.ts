@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { AddressSchema } from './address.js';
-import { DatedModelSchema, MetaSchema } from './metadata.js';
+import { AddressSchema } from './address';
+import { DatedModelSchema, MetaSchema } from './metadata';
 
 export const CustomerSchema = z
     .object({

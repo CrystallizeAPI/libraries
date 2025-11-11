@@ -1,2 +1,2 @@
-export * from './address-input.js';
-export * from './address.js';
+export * from './address-input';
+export * from './address';

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
-import { ImageContentInputSchema, ImagesContentSchema } from './images.js';
-import { DateTimeSchema } from '../../../shared/index.js';
+import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared';
+import { ImageContentInputSchema, ImagesContentSchema } from './images';
+import { DateTimeSchema } from '../../../shared/index';
 
 export const VideosConfigSchema = MinMaxComponentConfigSchema;
 export const VideosConfigInputSchema = MinMaxComponentConfigInputSchema;

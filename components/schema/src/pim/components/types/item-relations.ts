@@ -4,8 +4,8 @@ import {
     MinMaxComponentConfigInputSchema,
     MinMaxComponentConfigSchema,
     MinValueSchema,
-} from '../shared.js';
-import { IdSchema } from '../../../shared/index.js';
+} from '../shared';
+import { IdSchema } from '../../../shared/index';
 
 // in the future that may be needed to split between config and input
 const extraConfig = z.object({

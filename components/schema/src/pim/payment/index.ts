@@ -1,2 +1,2 @@
-export * from './payment-input.js';
-export * from './payment.js';
+export * from './payment-input';
+export * from './payment';

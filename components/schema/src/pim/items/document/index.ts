@@ -1,2 +1,2 @@
-export * from './document-input.js';
-export * from './document.js';
+export * from './document-input';
+export * from './document';

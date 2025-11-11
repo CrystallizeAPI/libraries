@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { ComponentTypeSchema } from '../../shared/index.js';
-import { ComponentConfigInputSchema } from './component-config-input.js';
-import { ComponentConfigSchema } from './component-config.js';
+import { ComponentTypeSchema } from '../../shared/index';
+import { ComponentConfigInputSchema } from './component-config-input';
+import { ComponentConfigSchema } from './component-config';
 
 export const ComponentDefinitionSchema = z.object({
     id: z.string().min(1),

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared.js';
-import { DateTimeSchema } from '../../../shared/index.js';
+import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared';
+import { DateTimeSchema } from '../../../shared/index';
 
 export const DatetimeConfigSchema = GenericComponentConfigSchema;
 export const DatetimeConfigInputSchema = GenericComponentConfigInputSchema;

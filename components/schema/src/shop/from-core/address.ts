@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MetaSchema } from './metadata.js';
+import { MetaSchema } from './metadata';
 
 export const AddressTypeSchema = z.enum(['delivery', 'billing', 'other']);
 export type AddressType = z.infer<typeof AddressTypeSchema>;

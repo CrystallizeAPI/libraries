@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared.js';
+import { MinMaxComponentConfigInputSchema, MinMaxComponentConfigSchema } from '../shared';
 
 export const RichTextConfigSchema = MinMaxComponentConfigSchema;
 export const RichTextConfigInputSchema = MinMaxComponentConfigInputSchema;

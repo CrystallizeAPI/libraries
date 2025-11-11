@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared.js';
-import { RichTextContentInputSchema, RichTextContentSchema } from './rich-text.js';
-import { ImageContentInputSchema, ImageContentSchema } from './images.js';
-import { SingleLineContentInputSchema, SingleLineContentSchema } from './single-line.js';
-import { VideoContentInputSchema, VideoContentSchema, VideosContentInputSchema } from './videos.js';
+import { GenericComponentConfigInputSchema, GenericComponentConfigSchema } from '../shared';
+import { RichTextContentInputSchema, RichTextContentSchema } from './rich-text';
+import { ImageContentInputSchema, ImageContentSchema } from './images';
+import { SingleLineContentInputSchema, SingleLineContentSchema } from './single-line';
+import { VideoContentInputSchema, VideoContentSchema, VideosContentInputSchema } from './videos';
 
 export const ParagraphCollectionConfigSchema = GenericComponentConfigSchema.omit({
     multilingual: true,

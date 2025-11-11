@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { CustomerInputSchema } from './customer.js';
-import { MetaInputSchema, id } from '../metadata.js';
-import { PriceInputSchema } from './price.js';
-import { CartContextSchema } from './cart-context.js';
-import { ImageVariantSchema } from '../images.js';
+import { CustomerInputSchema } from './customer';
+import { MetaInputSchema, id } from '../metadata';
+import { PriceInputSchema } from './price';
+import { CartContextSchema } from './cart-context';
+import { ImageVariantSchema } from '../images';
 
 export const CartSkuItemInputSchema = z.object({
     sku: z.string(),

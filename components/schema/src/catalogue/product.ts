@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { ImageSchema } from './images.js';
-import { TopicSchema } from './topics.js';
-import { ProductVariantSubscriptionPlanSchema } from './subscription.js';
+import { ImageSchema } from './images';
+import { TopicSchema } from './topics';
+import { ProductVariantSubscriptionPlanSchema } from './subscription';
 import { DateTimeSchema, KeyValuePairSchema } from '../shared';
 
 export const ItemSchema = z.object({

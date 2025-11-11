@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ComponentContentInputSchema } from '../pim/components/component-content-input.js';
+import { ComponentContentInputSchema } from '../pim/components/component-content-input';
 import {
     CreateDocumentInputSchema,
     CreateFolderInputSchema,
@@ -7,7 +7,7 @@ import {
     UpdateDocumentInputSchema,
     UpdateFolderInputSchema,
     UpdateProductInputSchema,
-} from '../pim/index.js';
+} from '../pim/index';
 import { checkResourceIdentifierOrId, IdSchema, RefSchema, ResourceIdentifierSchema } from '../shared';
 
 export const CreateDocumentOperationSchema = CreateDocumentInputSchema.extend({

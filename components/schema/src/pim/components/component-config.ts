@@ -1,21 +1,21 @@
 import { z } from 'zod';
 
-import { BooleanConfigSchema } from './types/boolean.js';
-import { DatetimeConfigSchema } from './types/datetime.js';
-import { GridRelationsConfigSchema } from './types/grid-relations.js';
-import { ImagesConfigSchema } from './types/images.js';
-import { LocationConfigSchema } from './types/location.js';
-import { ParagraphCollectionConfigSchema } from './types/paragraph-collection.js';
-import { RichTextConfigSchema } from './types/rich-text.js';
-import { SingleLineConfigSchema } from './types/single-line.js';
-import { VideosConfigSchema } from './types/videos.js';
-import { NumericConfigSchema } from './types/numeric.js';
-import { FilesConfigSchema } from './types/files.js';
-import { ItemRelationsConfigSchema } from './types/item-relations.js';
-import { PropertiesTableConfigSchema } from './types/properties-table.js';
-import { SelectionConfigSchema } from './types/selection.js';
-import { GenericComponentConfigSchema } from './shared.js';
-import { ComponentDefinitionSchema } from './component-definition.js';
+import { BooleanConfigSchema } from './types/boolean';
+import { DatetimeConfigSchema } from './types/datetime';
+import { GridRelationsConfigSchema } from './types/grid-relations';
+import { ImagesConfigSchema } from './types/images';
+import { LocationConfigSchema } from './types/location';
+import { ParagraphCollectionConfigSchema } from './types/paragraph-collection';
+import { RichTextConfigSchema } from './types/rich-text';
+import { SingleLineConfigSchema } from './types/single-line';
+import { VideosConfigSchema } from './types/videos';
+import { NumericConfigSchema } from './types/numeric';
+import { FilesConfigSchema } from './types/files';
+import { ItemRelationsConfigSchema } from './types/item-relations';
+import { PropertiesTableConfigSchema } from './types/properties-table';
+import { SelectionConfigSchema } from './types/selection';
+import { GenericComponentConfigSchema } from './shared';
+import { ComponentDefinitionSchema } from './component-definition';
 
 export const ChoiceConfigSchema = GenericComponentConfigSchema.extend({
     get choices() {
