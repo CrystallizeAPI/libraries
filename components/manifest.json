@@ -1,5 +1,6 @@
 {
     "type": "oss-monorepository",
+    "versionerEnabled": true,
     "many-repositories": {
         "js-api-client": {
             "name": "(Java|Type)Script API Client",
