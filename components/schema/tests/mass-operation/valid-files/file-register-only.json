@@ -4,7 +4,7 @@
         {
             "_ref": "my-registred-image",
             "intent": "image/register",
-            "key": "{{ upload \"https://fiestaplop.com/images/logoplop.png\" }}"
+            "key": "{{ upload \"https://www.lillypadvillage.com/wp-content/uploads/2024/04/crystal-quartz-and-amethyst.jpg\" }}"
         }
     ]
 }

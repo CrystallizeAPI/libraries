@@ -1,0 +1,161 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "my-image1",
+            "intent": "image/register",
+            "key": "{{ upload \"https://www.klika.com.au/media/catalog/product/cache/620/90/e/g/egp-5w-rd-1_1_.jpg\" }}"
+        },
+        {
+            "_ref": "my-folder1",
+            "intent": "folder/create",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "category",
+            "name": "Test Upload Images",
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "Test Upload Images"
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "product/create",
+            "tree": {
+                "parentId": "{{ my-folder1.id }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "product",
+            "name": "My Guitar",
+            "vatTypeId": "{{ defaults.vats.[0] }}",
+            "variants": [
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Red"
+                        }
+                    ],
+                    "isDefault": true,
+                    "name": "My Blue Guitar",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 99
+                        }
+                    ],
+                    "sku": "guitar-red-aidhaiugdagusda",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ],
+                    "images": [
+                        {
+                            "key": "{{ my-image1.key }}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.klika.com.au/media/catalog/product/cache/620/90/e/g/egp-5w-rd-1_1_.jpg\" }}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.musocity.com.au/cdn/shop/products/Lorden-Acoustic-Dreadnought-Guitar-Wine-Red_grande.png\" }}"
+                        }
+                    ]
+                },
+                {
+                    "attributes": [
+                        {
+                            "attribute": "Color",
+                            "value": "Blue"
+                        }
+                    ],
+                    "isDefault": false,
+                    "name": "My Blue Guitar",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 199
+                        }
+                    ],
+                    "sku": "guitar-blue-aidhaiugdagusda",
+                    "stockLocations": [
+                        {
+                            "identifier": "default",
+                            "stock": 0
+                        }
+                    ],
+                    "images": [
+                        {
+                            "key": "{{ upload \"https://l6c-acdn2.line6.net/data/6/0a00041b008e682f9823e032e/image/png/r17673_file.png\" }}"
+                        },
+                        {
+                            "key": "{{ upload \"https://cnzaudio.com/cdn/shop/products/ST-MINI-B2_grande.jpg\" }}"
+                        }
+                    ]
+                }
+            ],
+            "components": [
+                {
+                    "componentId": "title",
+                    "singleLine": {
+                        "text": "My Guitar"
+                    }
+                },
+                {
+                    "componentId": "description",
+                    "richText": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Yeah it works!"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "componentId": "dimensions",
+                    "piece": {
+                        "identifier": "dimensions",
+                        "components": [
+                            {
+                                "componentId": "width",
+                                "numeric": {
+                                    "number": 110,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "height",
+                                "numeric": {
+                                    "number": 89,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "depth",
+                                "numeric": {
+                                    "number": 6,
+                                    "unit": "cm"
+                                }
+                            },
+                            {
+                                "componentId": "weight",
+                                "numeric": {
+                                    "number": 600,
+                                    "unit": "g"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
