@@ -8,7 +8,9 @@ export const ComponentDefinitionSchema = z.object({
     type: ComponentTypeSchema,
     name: z.string().min(1),
     description: z.string().optional(),
-    config: ComponentConfigSchema.optional(),
+    get config(): z.ZodOptional<typeof ComponentConfigSchema> {
+        return ComponentConfigSchema.optional();
+    },
 });
 export type ComponentDefinition = z.infer<typeof ComponentDefinitionSchema>;
 
@@ -17,7 +19,7 @@ export const ComponentDefinitionInputSchema = z.object({
     type: ComponentTypeSchema,
     name: z.string().min(1),
     description: z.string().optional(),
-    get config() {
+    get config(): z.ZodOptional<typeof ComponentConfigInputSchema> {
         return ComponentConfigInputSchema.optional();
     },
 });

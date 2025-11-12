@@ -4,7 +4,7 @@
         {
             "_ref": "my-registred-image",
             "intent": "image/register",
-            "key": "{{ upload \"https://placehold.co/600x400?text=Register+Only\" }}"
+            "key": "{{ upload \"https://fiestaplop.com/images/logoplop.png\" }}"
         }
     ]
 }

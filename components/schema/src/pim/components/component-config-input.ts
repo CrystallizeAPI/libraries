@@ -18,14 +18,14 @@ import { GenericComponentConfigInputSchema } from './shared';
 import { ComponentDefinitionInputSchema } from './component-definition';
 
 export const ChoiceConfigInputSchema = GenericComponentConfigInputSchema.extend({
-    get choices() {
+    get choices(): z.ZodArray<typeof ComponentDefinitionInputSchema> {
         return z.array(ComponentDefinitionInputSchema);
     },
 });
 export type ChoiceConfigInput = z.infer<typeof ChoiceConfigInputSchema>;
 
 export const ChunksConfigInputSchema = GenericComponentConfigInputSchema.extend({
-    get components() {
+    get components(): z.ZodArray<typeof ComponentDefinitionInputSchema> {
         return z.array(ComponentDefinitionInputSchema);
     },
     repeatable: z.boolean().optional(),
@@ -33,7 +33,7 @@ export const ChunksConfigInputSchema = GenericComponentConfigInputSchema.extend(
 export type ChunksConfigInput = z.infer<typeof ChunksConfigInputSchema>;
 
 export const MultipleChoicesConfigInputSchema = GenericComponentConfigInputSchema.extend({
-    get choices() {
+    get choices(): z.ZodArray<typeof ComponentDefinitionInputSchema> {
         return z.array(ComponentDefinitionInputSchema);
     },
     allowDuplicates: z.boolean().optional(),
@@ -65,8 +65,14 @@ export const NestableComponentConfigInputSchema = z.object({
 export type NestableComponentConfigInput = z.infer<typeof NestableComponentConfigInputSchema>;
 
 export const ComponentConfigInputSchema = NestableComponentConfigInputSchema.extend({
-    componentChoice: ChoiceConfigInputSchema.optional(),
-    componentMultipleChoice: MultipleChoicesConfigInputSchema.optional(),
-    contentChunk: ChunksConfigInputSchema.optional(),
+    get componentChoice(): z.ZodOptional<typeof ChoiceConfigInputSchema> {
+        return ChoiceConfigInputSchema.optional();
+    },
+    get componentMultipleChoice(): z.ZodOptional<typeof MultipleChoicesConfigInputSchema> {
+        return MultipleChoicesConfigInputSchema.optional();
+    },
+    get contentChunk(): z.ZodOptional<typeof ChunksConfigInputSchema> {
+        return ChunksConfigInputSchema.optional();
+    },
 });
 export type ComponentConfigInput = z.infer<typeof ComponentConfigInputSchema>;

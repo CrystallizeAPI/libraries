@@ -17,21 +17,21 @@ import { SelectionContentSchema } from './types/selection';
 import { ComponentSchema } from './component';
 
 export const ChoiceContentSchema = z.object({
-    get selectedComponent() {
+    get selectedComponent(): typeof ComponentSchema {
         return ComponentSchema;
     },
 });
 export type ChoiceContent = z.infer<typeof ChoiceContentSchema>;
 
 export const ChunksContentSchema = z.object({
-    get chunks() {
+    get chunks(): z.ZodArray<z.ZodArray<typeof ComponentSchema>> {
         return z.array(z.array(ComponentSchema));
     },
 });
 export type ChunksContent = z.infer<typeof ChunksContentSchema>;
 
 export const MultipleChoicesContentSchema = z.object({
-    get selectedComponents() {
+    get selectedComponents(): z.ZodArray<typeof ComponentSchema> {
         return z.array(ComponentSchema);
     },
 });
@@ -39,7 +39,7 @@ export type MultipleChoicesContent = z.infer<typeof MultipleChoicesContentSchema
 
 export const PieceContentSchema = z.object({
     identifier: z.string(),
-    get components() {
+    get components(): z.ZodArray<typeof ComponentSchema> {
         return z.array(ComponentSchema);
     },
 });

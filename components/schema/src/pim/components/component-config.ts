@@ -18,14 +18,14 @@ import { GenericComponentConfigSchema } from './shared';
 import { ComponentDefinitionSchema } from './component-definition';
 
 export const ChoiceConfigSchema = GenericComponentConfigSchema.extend({
-    get choices() {
+    get choices(): z.ZodArray<typeof ComponentDefinitionSchema> {
         return z.array(ComponentDefinitionSchema);
     },
 });
 export type ChoiceConfig = z.infer<typeof ChoiceConfigSchema>;
 
 export const ChunksConfigSchema = GenericComponentConfigSchema.extend({
-    get components() {
+    get components(): z.ZodArray<typeof ComponentDefinitionSchema> {
         return z.array(ComponentDefinitionSchema);
     },
     repeatable: z.boolean(),
@@ -33,7 +33,7 @@ export const ChunksConfigSchema = GenericComponentConfigSchema.extend({
 export type ChunksConfig = z.infer<typeof ChunksConfigSchema>;
 
 export const MultipleChoicesConfigSchema = GenericComponentConfigSchema.extend({
-    get choices() {
+    get choices(): z.ZodArray<typeof ComponentDefinitionSchema> {
         return z.array(ComponentDefinitionSchema);
     },
     allowDuplicates: z.boolean().optional(),
@@ -42,7 +42,7 @@ export type MultipleChoicesConfig = z.infer<typeof MultipleChoicesConfigSchema>;
 
 export const PieceConfigSchema = GenericComponentConfigSchema.extend({
     identifier: z.string().min(1),
-    get components() {
+    get components(): z.ZodArray<typeof ComponentDefinitionSchema> {
         return z.array(ComponentDefinitionSchema);
     },
 });

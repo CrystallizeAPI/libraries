@@ -17,7 +17,7 @@ import { SelectionContentInputSchema } from './types/selection';
 
 export const PieceContentInputSchema = z.object({
     identifier: z.string(),
-    get components() {
+    get components(): z.ZodArray<typeof ComponentContentInputSchema> {
         return z.array(ComponentContentInputSchema);
     },
 });
@@ -46,7 +46,7 @@ export const ChoiceContentInputSchema = NestableComponentContentInputSchema;
 export type ChoiceContentInput = z.infer<typeof ChoiceContentInputSchema>;
 
 export const ChunksContentInputSchema = z.object({
-    get chunks() {
+    get chunks(): z.ZodArray<z.ZodArray<typeof NestableComponentContentInputSchema>> {
         return z.array(z.array(NestableComponentContentInputSchema));
     },
 });
@@ -56,20 +56,14 @@ export const MultipleChoicesContentInputSchema = z.array(NestableComponentConten
 export type MultipleChoicesContentInput = z.infer<typeof MultipleChoicesContentInputSchema>;
 
 export const ComponentContentInputSchema = NestableComponentContentInputSchema.extend({
-    componentChoice: ChoiceContentInputSchema.nullish(),
-    componentMultipleChoice: MultipleChoicesContentInputSchema.nullish(),
-    contentChunk: ChunksContentInputSchema.nullish(),
+    get componentChoice(): z.ZodOptional<z.ZodNullable<typeof ChoiceContentInputSchema>> {
+        return ChoiceContentInputSchema.nullish();
+    },
+    get componentMultipleChoice(): z.ZodOptional<z.ZodNullable<typeof MultipleChoicesContentInputSchema>> {
+        return MultipleChoicesContentInputSchema.nullish();
+    },
+    get contentChunk(): z.ZodOptional<z.ZodNullable<typeof ChunksContentInputSchema>> {
+        return ChunksContentInputSchema.nullish();
+    },
 });
 export type ComponentContentInput = z.infer<typeof ComponentContentInputSchema>;
-
-const plop: ComponentContentInput['piece'] = {
-    components: [
-        {
-            componentId: 'string',
-            singleLine: {
-                text: 'string',
-            },
-        },
-    ],
-    identifier: 'string',
-};
