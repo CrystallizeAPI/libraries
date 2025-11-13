@@ -8,3 +8,4 @@ export * from './addresses/index';
 export * from './subscription-contracts/index';
 export * from './payment/index';
 export * from './assets/index';
+export * from './pricelists/index';

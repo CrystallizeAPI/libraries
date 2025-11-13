@@ -1,0 +1,82 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "price-list-eur",
+            "intent": "pricelist/create",
+            "identifier": "pl-eur-spring",
+            "name": "Spring EUR Campaign",
+            "modifierType": "ABSOLUTE",
+            "priceVariants": [
+                {
+                    "identifier": "eur",
+                    "modifier": 15.5,
+                    "decimalPlaces": 2
+                }
+            ],
+            "selectedProductVariants": {
+                "type": "ALL_SKUS"
+            },
+            "targetAudience": {
+                "type": "EVERYONE"
+            },
+            "startDate": "2024-01-01T00:00:00.000Z",
+            "endDate": "2024-03-31T23:59:59.999Z"
+        },
+        {
+            "_ref": "price-list-update",
+            "intent": "pricelist/update",
+            "identifier": "pl-eur-spring",
+            "name": "Spring EUR VIP Campaign",
+            "selectedProductVariants": {
+                "type": "SOME_SKUS",
+                "variants": [
+                    {
+                        "sku": "chair-001",
+                        "priceVariants": {
+                            "identifier": "eur",
+                            "modifier": 12.25,
+                            "decimalPlaces": 2
+                        }
+                    }
+                ]
+            },
+            "targetAudience": {
+                "type": "SOME",
+                "customerIdentifiers": ["vip-company"],
+                "marketIdentifiers": ["eu"]
+            }
+        },
+        {
+            "_ref": "price-list-upsert",
+            "intent": "pricelist/upsert",
+            "identifier": "pl-usd-holiday",
+            "name": "Holiday USD List",
+            "modifierType": "PERCENTAGE",
+            "priceVariants": [
+                {
+                    "identifier": "eur",
+                    "modifier": 10
+                }
+            ],
+            "selectedProductVariants": {
+                "type": "SOME_SKUS",
+                "variants": [
+                    {
+                        "sku": "sofa-001"
+                    },
+                    {
+                        "sku": "table-002",
+                        "priceVariants": {
+                            "identifier": "eur",
+                            "modifier": 20
+                        }
+                    }
+                ]
+            },
+            "targetAudience": {
+                "type": "EVERYONE"
+            }
+        }
+    ]
+}

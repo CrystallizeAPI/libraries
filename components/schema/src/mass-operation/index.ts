@@ -41,6 +41,11 @@ import {
 } from './subscription-contract';
 
 import { RegisterImageOperationSchema } from './asset';
+import {
+    CreatePriceListOperationSchema,
+    UpdatePriceListOperationSchema,
+    UpsertPriceListOperationSchema,
+} from './pricelist';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateDocumentOperationSchema,
@@ -87,6 +92,10 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     CreateSubscriptionContractOperationSchema,
     UpdateSubscriptionContractOperationSchema,
     UpsertSubscriptionContractOperationSchema,
+
+    CreatePriceListOperationSchema,
+    UpdatePriceListOperationSchema,
+    UpsertPriceListOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -142,3 +151,4 @@ export type {
 } from './subscription-contract';
 
 export type { RegisterImageOperation } from './asset';
+export type { CreatePriceListOperation, UpdatePriceListOperation, UpsertPriceListOperation } from './pricelist';
