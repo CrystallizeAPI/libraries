@@ -1,0 +1,76 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "product/create",
+            "language": "en",
+            "shapeIdentifier": "bundle",
+            "name": "First Product B ",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "vatTypeId": "{{ defaults.vatTypeIds.[0] }}",
+            "variants": [
+                {
+                    "sku": "mass-123213123-single-item-sku-12313-qwiegqwuyqwueygfqweqe",
+                    "isDefault": true,
+                    "name": "Mass operations Single Item A1231123",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1000
+                        }
+                    ],
+                    "images": [
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/E3C5C19E22DE4BF0BD0610CD9FA867046C15F931D4F3A0ACA4FC88C0A3455C0F/a709631f96de4e3490ebf12c9388f2c7/jpg/media/6fef2792dd6845da959ae54df2284bd5/P-188922.jpg\"}}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/BFD234C86B459B301A69E1DD66AF9CE35E8C144A62D674DCF7D708F5D50507C4/c1bb33060b17456bafb5b2e6f98bfe05/jpg/media/ad6f3fbd98634337b4368aad812b7ef5/B-188922.jpg\"}}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/867DF746A37A424F08E6F0D5D2E778EDBB0A74945DD5CB37CF3844AF3FA234D9/5defe859b3ab4162a6e7b5f4afa955fc/jpg/media/709a142842284c44b3b23ba3c0003095/X-188922.jpg\"}}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/AD82281A514F5FBBCF761A5EBABF7614101DE19CA602EF712602981C521DEECB/271298ba43e3464ca3aa3f1a587a2567/jpg/media/0c5a4c068c7e4614ac33ba03b90720c8/Y-188922.jpg\"}}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/FCA082CF8B5A3655B3D0BD0B4851AE18FD52737B8A29B869419F16E283DBE1BB/19dfc8c375d044c283381f7878a63351/jpg/media/2ef41926fc644837959de33bf180f974/Z-188922.jpg\"}}"
+                        },
+                        {
+                            "key": "{{ upload \"https://www.nordicfeel.com/storage/DB88CF51B8D580B29A212EE10620E85107DA5B6BDE7B79AA7425B2E33A9F2FE7/4547c1c6b1fc46db9cc5d67bc4d5e3b2/jpg/media/cf7ae851d5f044c385b4fdef748ce541/W-188922.jpg\"}}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "intent": "product/create",
+            "language": "en",
+            "shapeIdentifier": "bundle",
+            "name": "Second Product BB",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "vatTypeId": "{{ defaults.vatTypeIds.[0] }}",
+            "variants": [
+                {
+                    "sku": "mass-ops-123123-item-sku-1asdljkbakdjbasd1qweqweqweqwe2313",
+                    "isDefault": true,
+                    "name": "Mass operations Single Item B1231231",
+                    "priceVariants": [
+                        {
+                            "identifier": "default",
+                            "price": 1000
+                        }
+                    ],
+                    "images": [
+                        {
+                            "key": "{{ upload \"https://img.freepik.com/free-vector/cute-diamond-crystal-stone-cartoon-vector-icon-illustration-finance-object-icon-isolated-flat_138676-13725.jpg\"}}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -77,6 +77,12 @@
             "targetAudience": {
                 "type": "EVERYONE"
             }
+        },
+        {
+            "_ref": "price-list-update",
+            "intent": "pricelist/update",
+            "identifier": "pl-eur-spring2",
+            "name": "Spring EUR VIP Campaign 2"
         }
     ]
 }

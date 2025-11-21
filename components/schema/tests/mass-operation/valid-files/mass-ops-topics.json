@@ -1,0 +1,63 @@
+{
+    "version": "1.0.0",
+    "operations": [
+        {
+            "intent": "topic/create",
+            "language": "en",
+            "name": "Sports",
+            "displayColor": "#ff9900",
+            "pathIdentifier": "sports",
+            "children": [
+                {
+                    "name": "Football",
+                    "pathIdentifier": "football",
+                    "children": [
+                        {
+                            "name": "Premier League",
+                            "pathIdentifier": "premier-league"
+                        }
+                    ]
+                },
+                {
+                    "name": "Basketball",
+                    "pathIdentifier": "basketball"
+                }
+            ]
+        },
+        {
+            "_ref": "topic-to-update",
+            "intent": "topic/update",
+            "language": "en",
+            "name": "Updated Health",
+            "displayColor": "#33cc33",
+            "pathIdentifier": "health-updated",
+            "parentId": "0123456789abcdef01234569",
+            "topicId": "0123456789abcdef01234567"
+        },
+        {
+            "intent": "topic/upsert",
+            "language": "en",
+            "name": "Technology",
+            "pathIdentifier": "technology",
+            "topicId": "0123456789abcdef01234567",
+            "children": [
+                {
+                    "name": "Software",
+                    "pathIdentifier": "software",
+                    "children": [
+                        {
+                            "name": "Programming Languages",
+                            "pathIdentifier": "programming-languages",
+                            "children": [
+                                {
+                                    "name": "TypeScript",
+                                    "pathIdentifier": "typescript"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

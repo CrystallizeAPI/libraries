@@ -38,6 +38,13 @@
             "type": "individual"
         },
         {
+            "intent": "customer/create",
+            "identifier": "customer-12asdassfsdsdfdsfdassd3",
+            "firstName": "John",
+            "lastName": "Doe",
+            "type": "individual"
+        },
+        {
             "intent": "customer/update",
             "identifier": "customer-123",
             "firstName": "John",

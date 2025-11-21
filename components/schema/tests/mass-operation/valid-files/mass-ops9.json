@@ -13,7 +13,7 @@
             "intent": "product/upsert",
             "itemId": "632958a35dfc2c90cbbad20d",
             "language": "en",
-            "shapeIdentifier": "mass-ops-product-shape",
+            "shapeIdentifier": "default-product",
             "name": "Mass operations Single Item {{barakouda.identifier}}",
             "tree": {
                 "parentId": "626ac5cf021ee19c131577a6"

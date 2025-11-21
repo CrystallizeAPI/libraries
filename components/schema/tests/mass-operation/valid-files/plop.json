@@ -1,0 +1,10 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "item/publish",
+            "language": "en",
+            "itemId": "691795989fcd4fa2b881d4cf"
+        }
+    ]
+}

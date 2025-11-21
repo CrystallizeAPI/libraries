@@ -2,9 +2,19 @@
     "version": "0.0.1",
     "operations": [
         {
-            "_ref": "my-registred-image",
+            "_ref": "my-registred-image1",
             "intent": "image/register",
             "key": "{{ upload \"https://www.lillypadvillage.com/wp-content/uploads/2024/04/crystal-quartz-and-amethyst.jpg\" }}"
+        },
+        {
+            "_ref": "my-registred-image2",
+            "intent": "image/register",
+            "key": "{{ upload \"https://www.lillypadvillage.com/wp-content/uploads/2024/04/crystal-quartz-and-amethyst.jpg\" }}"
+        },
+        {
+            "_ref": "my-registred-image3",
+            "intent": "image/register",
+            "key": "{{ upload \"https://placehold.co/600x400/EEE/31343C\" }}"
         }
     ]
 }

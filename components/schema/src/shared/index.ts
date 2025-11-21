@@ -31,13 +31,13 @@ export const ResourceIdentifierSchema = z.string().min(1);
 export const RefSchema = z.string().min(1);
 
 export const checkResourceIdentifierOrId = (
-    data: { resourceIdentifier?: string; itemId?: string; id?: string },
+    data: { resourceIdentifier?: string; itemId?: string; id?: string; topicId?: string },
     ctx: { addIssue: ({ code, message, path }: { code: 'custom'; message: string; path: string[] }) => void },
 ) => {
-    if (!data.resourceIdentifier && !(data.itemId || data.id)) {
+    if (!data.resourceIdentifier && !(data.itemId || data.id || data.topicId)) {
         ctx.addIssue({
             code: 'custom',
-            message: 'Expected at least a resourceIdentifier or an id/itemId.',
+            message: 'Expected at least a resourceIdentifier or an id/itemId/topicID.',
             path: ['resourceIdentifier'],
         });
     }
@@ -46,7 +46,7 @@ export const checkResourceIdentifierOrId = (
 const ownerBaseShape = {
     firstName: z.string().nullish(),
     lastName: z.string().nullish(),
-    email: z.string().email().nullish(),
+    email: z.email().nullish(),
     companyName: z.string().nullish(),
 } satisfies z.ZodRawShape;
 

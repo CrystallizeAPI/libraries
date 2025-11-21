@@ -1,0 +1,25 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "intent": "customer/group/create",
+            "identifier": "gcustomer-123",
+            "name": "John Doe"
+        },
+        {
+            "intent": "customer/group/create",
+            "identifier": "gcustomer-12asdassfsdsdfdsfdassd3",
+            "name": "John Doe"
+        },
+        {
+            "intent": "customer/group/update",
+            "identifier": "gcustomer-123",
+            "name": "John Doe"
+        },
+        {
+            "intent": "customer/group/upsert",
+            "identifier": "gcustomer-123",
+            "name": "John Doe"
+        }
+    ]
+}

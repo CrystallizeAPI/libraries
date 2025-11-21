@@ -46,6 +46,7 @@ import {
     UpdatePriceListOperationSchema,
     UpsertPriceListOperationSchema,
 } from './pricelist';
+import { CreateTopicOperationSchema, UpdateTopicOperationSchema, UpsertTopicOperationSchema } from './topic';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateDocumentOperationSchema,
@@ -96,6 +97,10 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     CreatePriceListOperationSchema,
     UpdatePriceListOperationSchema,
     UpsertPriceListOperationSchema,
+
+    CreateTopicOperationSchema,
+    UpdateTopicOperationSchema,
+    UpsertTopicOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -152,3 +157,4 @@ export type {
 
 export type { RegisterImageOperation } from './asset';
 export type { CreatePriceListOperation, UpdatePriceListOperation, UpsertPriceListOperation } from './pricelist';
+export type { CreateTopicOperation, UpdateTopicOperation, UpsertTopicOperation } from './topic';
