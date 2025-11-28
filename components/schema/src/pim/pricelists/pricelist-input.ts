@@ -15,7 +15,7 @@ export type PriceListPriceVariantInput = z.infer<typeof PriceListPriceVariantInp
 
 export const PriceListProductVariantInputSchema = z.object({
     sku: z.string().min(1),
-    priceVariants: PriceListPriceVariantInputSchema.nullish(),
+    priceVariants: z.array(PriceListPriceVariantInputSchema).nullish(),
 });
 export type PriceListProductVariantInput = z.infer<typeof PriceListProductVariantInputSchema>;
 

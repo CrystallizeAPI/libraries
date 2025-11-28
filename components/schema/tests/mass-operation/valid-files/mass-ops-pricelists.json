@@ -33,11 +33,13 @@
                 "variants": [
                     {
                         "sku": "chair-001",
-                        "priceVariants": {
-                            "identifier": "eur",
-                            "modifier": 12.25,
-                            "decimalPlaces": 2
-                        }
+                        "priceVariants": [
+                            {
+                                "identifier": "eur",
+                                "modifier": 12.25,
+                                "decimalPlaces": 2
+                            }
+                        ]
                     }
                 ]
             },
@@ -67,10 +69,12 @@
                     },
                     {
                         "sku": "table-002",
-                        "priceVariants": {
-                            "identifier": "eur",
-                            "modifier": 20
-                        }
+                        "priceVariants": [
+                            {
+                                "identifier": "eur",
+                                "modifier": 20
+                            }
+                        ]
                     }
                 ]
             },
