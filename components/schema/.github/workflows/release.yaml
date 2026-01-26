@@ -5,6 +5,10 @@ on:
 
 name: Release a New Version
 
+permissions:
+    id-token: write # Required for OIDC
+    contents: write
+
 jobs:
     releaseandpublish:
         name: Release on Github and Publish on NPM
@@ -16,16 +20,23 @@ jobs:
             - name: ⎔ Setup node
               uses: actions/setup-node@v5
               with:
-                  node-version: 22
-                  always-auth: true
+                  node-version: 24
                   registry-url: 'https://registry.npmjs.org'
                   scope: '@crystallize'
 
+            - name: ⬆️ Upgrade npm
+              run: npm i -g npm@11
+
+            - name: ⎔ Set up pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.14.0
+
             - name: 📥 Download deps
-              run: yarn install
+              run: pnpm install
 
             - name: 🏄 Run the tests
-              run: yarn build && yarn test
+              run: pnpm build && pnpm test
 
             - name: 🏷 Create Release
               uses: actions/create-release@v1
@@ -38,7 +49,9 @@ jobs:
                   prerelease: false
 
             - name: 📢 Publish to NPM
-              run: yarn publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
+              run: npm publish --provenance --access public
               env:
-                  NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # Use OIDC for npm authentication instead of NPM_TOKEN
+                  NODE_AUTH_TOKEN: ''
+                  NPM_TOKEN: ''

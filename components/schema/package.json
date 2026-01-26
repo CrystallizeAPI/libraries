@@ -1,7 +1,11 @@
 {
     "name": "@crystallize/schema",
-    "version": "6.3.0",
+    "version": "6.3.4",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CrystallizeAPI/schema"
+    },
     "exports": {
         "./catalogue": {
             "types": "./dist/catalogue/index.d.ts",
