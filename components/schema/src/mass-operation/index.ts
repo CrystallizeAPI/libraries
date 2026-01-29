@@ -14,6 +14,7 @@ import {
     CreateProductOperationSchema,
     UpdateProductOperationSchema,
     UpsertProductOperationSchema,
+    DeleteItemOperationSchema,
 } from './item';
 import {
     CreatePieceOperationSchema,
@@ -50,6 +51,8 @@ import { CreateTopicOperationSchema, UpdateTopicOperationSchema, UpsertTopicOper
 import { ModifyProductVariantPriceOperationSchema } from './product-variant';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
+    DeleteItemOperationSchema,
+
     CreateDocumentOperationSchema,
     UpdateDocumentOperationSchema,
     UpsertDocumentOperationSchema,
@@ -128,6 +131,7 @@ export type {
     UnPublishItemOperation,
     UpdateItemComponentOperation,
     UpdateSkuComponentOperation,
+    DeleteItemOperation,
 } from './item';
 
 export type {

@@ -111,10 +111,18 @@ export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ in
     intent: z.literal('item/unpublish'),
 });
 
+export const DeleteItemOperationSchema = z.object({
+    _ref: RefSchema.optional(),
+    intent: z.literal('item/delete'),
+    itemId: IdSchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
+});
+
 export type UpdateItemComponentOperation = z.infer<typeof UpdateItemComponentOperationSchema>;
 export type UpdateSkuComponentOperation = z.infer<typeof UpdateSkuComponentOperationSchema>;
 export type PublishItemOperation = z.infer<typeof PublishItemOperationSchema>;
 export type UnPublishItemOperation = z.infer<typeof UnPublishItemOperationSchema>;
+export type DeleteItemOperation = z.infer<typeof DeleteItemOperationSchema>;
 
 export type CreateDocumentOperation = z.infer<typeof CreateDocumentOperationSchema>;
 export type UpdateDocumentOperation = z.infer<typeof UpdateDocumentOperationSchema>;
