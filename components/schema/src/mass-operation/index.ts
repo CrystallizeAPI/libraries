@@ -47,6 +47,7 @@ import {
     UpsertPriceListOperationSchema,
 } from './pricelist';
 import { CreateTopicOperationSchema, UpdateTopicOperationSchema, UpsertTopicOperationSchema } from './topic';
+import { ModifyProductVariantPriceOperationSchema } from './product-variant';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     CreateDocumentOperationSchema,
@@ -76,6 +77,7 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     UpsertPieceOperationSchema,
 
     ModifyProductVariantStockOperationSchema,
+    ModifyProductVariantPriceOperationSchema,
     RegisterImageOperationSchema,
 
     CreateCustomerGroupOperationSchema,
