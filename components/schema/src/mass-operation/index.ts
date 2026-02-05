@@ -15,6 +15,9 @@ import {
     UpdateProductOperationSchema,
     UpsertProductOperationSchema,
     DeleteItemOperationSchema,
+    AddItemTreeNodeAliasesOperationSchema,
+    AddItemTreeNodeShortcutsOperationSchema,
+    AddItemTreeNodeHistoryOperationSchema,
 } from './item';
 import {
     CreatePieceOperationSchema,
@@ -106,6 +109,10 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     CreateTopicOperationSchema,
     UpdateTopicOperationSchema,
     UpsertTopicOperationSchema,
+
+    AddItemTreeNodeAliasesOperationSchema,
+    AddItemTreeNodeShortcutsOperationSchema,
+    AddItemTreeNodeHistoryOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -132,6 +139,9 @@ export type {
     UpdateItemComponentOperation,
     UpdateSkuComponentOperation,
     DeleteItemOperation,
+    AddItemTreeNodeAliasesOperation,
+    AddItemTreeNodeShortcutsOperation,
+    AddItemTreeNodeHistoryOperation,
 } from './item';
 
 export type {

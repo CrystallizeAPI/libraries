@@ -111,12 +111,51 @@ export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ in
     intent: z.literal('item/unpublish'),
 });
 
-export const DeleteItemOperationSchema = z.object({
-    _ref: RefSchema.optional(),
-    intent: z.literal('item/delete'),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
-});
+export const DeleteItemOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('item/delete'),
+        itemId: IdSchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
+    })
+    .superRefine(checkResourceIdentifierOrId);
+
+export const AddItemTreeNodeShortcutsOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('item/paths/addShortcuts'),
+        itemId: IdSchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
+        shortcuts: z.array(
+            z.object({
+                parentId: IdSchema,
+                position: z.number().int().min(0).optional(),
+            }),
+        ),
+    })
+    .superRefine(checkResourceIdentifierOrId);
+
+export const AddItemTreeNodeAliasesOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('item/paths/addAliases'),
+        itemId: IdSchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
+        language: z.string().min(1),
+        paths: z.array(z.string().min(1)),
+    })
+    .superRefine(checkResourceIdentifierOrId);
+
+export const AddItemTreeNodeHistoryOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('item/paths/addHistory'),
+        itemId: IdSchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
+        language: z.string().min(1),
+        paths: z.array(z.string().min(1)),
+    })
+    .superRefine(checkResourceIdentifierOrId);
 
 export type UpdateItemComponentOperation = z.infer<typeof UpdateItemComponentOperationSchema>;
 export type UpdateSkuComponentOperation = z.infer<typeof UpdateSkuComponentOperationSchema>;
@@ -135,3 +174,7 @@ export type UpsertFolderOperation = z.infer<typeof UpsertFolderOperationSchema>;
 export type CreateProductOperation = z.infer<typeof CreateProductOperationSchema>;
 export type UpdateProductOperation = z.infer<typeof UpdateProductOperationSchema>;
 export type UpsertProductOperation = z.infer<typeof UpsertProductOperationSchema>;
+
+export type AddItemTreeNodeShortcutsOperation = z.infer<typeof AddItemTreeNodeShortcutsOperationSchema>;
+export type AddItemTreeNodeAliasesOperation = z.infer<typeof AddItemTreeNodeAliasesOperationSchema>;
+export type AddItemTreeNodeHistoryOperation = z.infer<typeof AddItemTreeNodeHistoryOperationSchema>;

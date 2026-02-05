@@ -1,0 +1,80 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "topA",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Top A of my tree for Paths Operations",
+            "resourceIdentifier": "top-A-of-my-tree-for-paths-operations"
+        },
+        {
+            "_ref": "topB",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Top B of my tree for Paths Operations",
+            "resourceIdentifier": "top-B-of-my-tree-for-paths-operations"
+        },
+        {
+            "_ref": "topC",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Top C of my tree for Paths Operations",
+            "resourceIdentifier": "top-C-of-my-tree-for-paths-operations"
+        },
+        {
+            "intent": "document/upsert",
+            "tree": {
+                "parentId": "{{#if topA.id.id}}{{ topA.id.id }}{{else}}{{ topA.id}}{{/if}}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-document",
+            "name": "Child of Top A",
+            "resourceIdentifier": "child-of-top-a"
+        },
+        {
+            "intent": "item/paths/addAliases",
+            "language": "en",
+            "resourceIdentifier": "child-of-top-a",
+            "paths": [
+                "/fake/top-b-of-my-tree-for-paths-operations/alias-for-child-of-top-a",
+                "/another-fake/top-b/alias2-for-child-of-top-a"
+            ]
+        },
+        {
+            "intent": "item/paths/addHistory",
+            "language": "en",
+            "resourceIdentifier": "child-of-top-a",
+            "paths": [
+                "/old-fake/top-b-of-my-tree-for-paths-operations/alias-for-child-of-top-a",
+                "/old-another-fake/top-b/alias2-for-child-of-top-a"
+            ]
+        },
+        {
+            "intent": "item/paths/addShortcuts",
+            "resourceIdentifier": "child-of-top-a",
+            "shortcuts": [
+                {
+                    "parentId": "{{#if topB.id.id}}{{ topB.id.id }}{{else}}{{ topB.id}}{{/if}}",
+                    "position": 12
+                },
+                {
+                    "parentId": "{{#if topC.id.id}}{{ topC.id.id }}{{else}}{{ topC.id}}{{/if}}",
+                    "position": 12
+                }
+            ]
+        }
+    ]
+}
