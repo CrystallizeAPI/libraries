@@ -6,6 +6,7 @@ export const CreateTopicOperationSchema = CreateTopicInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('topic/create'),
     language: z.string(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
 });
 export type CreateTopicOperation = z.infer<typeof CreateTopicOperationSchema>;
 
