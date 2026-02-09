@@ -9,6 +9,7 @@ import {
     UpdateProductInputSchema,
 } from '../pim/index';
 import { checkResourceIdentifierOrId, IdSchema, RefSchema, ResourceIdentifierSchema } from '../shared';
+import { FlowContentActionConfigInputSchema, ItemFlowStageAssociationInputSchema } from '../pim/flow/flow-input';
 
 export const CreateDocumentOperationSchema = CreateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
@@ -157,6 +158,15 @@ export const AddItemTreeNodeHistoryOperationSchema = z
     })
     .superRefine(checkResourceIdentifierOrId);
 
+export const AddItemsToFlowStageOperationSchema = z.object({
+    _ref: RefSchema.optional(),
+    intent: z.literal('item/flow/stage/addItems'),
+    actionConfig: z.array(FlowContentActionConfigInputSchema).optional(),
+    items: z.array(ItemFlowStageAssociationInputSchema).min(1),
+    moveFromFlowIdentifier: z.string().min(1).optional(),
+    stageIdentifier: z.string().min(1),
+});
+
 export type UpdateItemComponentOperation = z.infer<typeof UpdateItemComponentOperationSchema>;
 export type UpdateSkuComponentOperation = z.infer<typeof UpdateSkuComponentOperationSchema>;
 export type PublishItemOperation = z.infer<typeof PublishItemOperationSchema>;
@@ -178,3 +188,4 @@ export type UpsertProductOperation = z.infer<typeof UpsertProductOperationSchema
 export type AddItemTreeNodeShortcutsOperation = z.infer<typeof AddItemTreeNodeShortcutsOperationSchema>;
 export type AddItemTreeNodeAliasesOperation = z.infer<typeof AddItemTreeNodeAliasesOperationSchema>;
 export type AddItemTreeNodeHistoryOperation = z.infer<typeof AddItemTreeNodeHistoryOperationSchema>;
+export type AddItemsToFlowStageOperation = z.infer<typeof AddItemsToFlowStageOperationSchema>;

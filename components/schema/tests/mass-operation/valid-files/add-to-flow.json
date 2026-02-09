@@ -1,0 +1,68 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "flow",
+            "intent": "flow/upsert",
+            "identifier": "my-new-flow",
+            "name": "My New Flow",
+            "meta": [
+                {
+                    "key": "description",
+                    "value": "This is my new flow"
+                }
+            ],
+            "stages": [
+                {
+                    "identifier": "stage-1",
+                    "name": "Stage 1",
+                    "actions": [
+                        {
+                            "action": "publish",
+                            "publish": {
+                                "onFailure": {
+                                    "action": "advance"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "type": "item"
+        },
+        {
+            "_ref": "topA",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Top A of my tree for Flow Operations",
+            "resourceIdentifier": "top-A-of-my-tree-for-flow-operations"
+        },
+        {
+            "_ref": "topB",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Top B of my tree for Flow Operations",
+            "resourceIdentifier": "top-B-of-my-tree-for-flow-operations"
+        },
+        {
+            "intent": "item/flow/stage/addItems",
+            "items": [
+                {
+                    "id": "{{#if topA.id.id}}{{ topA.id.id }}{{else}}{{ topA.id}}{{/if}}"
+                },
+                {
+                    "id": "{{#if topB.id.id}}{{ topB.id.id }}{{else}}{{ topB.id}}{{/if}}"
+                }
+            ],
+            "stageIdentifier": "stage-1"
+        }
+    ]
+}

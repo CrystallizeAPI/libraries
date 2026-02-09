@@ -18,6 +18,7 @@ import {
     AddItemTreeNodeAliasesOperationSchema,
     AddItemTreeNodeShortcutsOperationSchema,
     AddItemTreeNodeHistoryOperationSchema,
+    AddItemsToFlowStageOperationSchema,
 } from './item';
 import {
     CreatePieceOperationSchema,
@@ -27,6 +28,7 @@ import {
     UpsertPieceOperationSchema,
     UpsertShapeOperationSchema,
 } from './shape';
+
 import { ModifyProductVariantStockOperationSchema } from './product-variant';
 import {
     CreateCustomerGroupOperationSchema,
@@ -52,6 +54,7 @@ import {
 } from './pricelist';
 import { CreateTopicOperationSchema, UpdateTopicOperationSchema, UpsertTopicOperationSchema } from './topic';
 import { ModifyProductVariantPriceOperationSchema } from './product-variant';
+import { CreateFlowOperationSchema, UpdateFlowOperationSchema, UpsertFlowOperationSchema } from './flow';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     DeleteItemOperationSchema,
@@ -113,6 +116,11 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     AddItemTreeNodeAliasesOperationSchema,
     AddItemTreeNodeShortcutsOperationSchema,
     AddItemTreeNodeHistoryOperationSchema,
+
+    CreateFlowOperationSchema,
+    UpdateFlowOperationSchema,
+    UpsertFlowOperationSchema,
+    AddItemsToFlowStageOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -142,7 +150,10 @@ export type {
     AddItemTreeNodeAliasesOperation,
     AddItemTreeNodeShortcutsOperation,
     AddItemTreeNodeHistoryOperation,
+    AddItemsToFlowStageOperation,
 } from './item';
+
+export type { CreateFlowOperation, UpdateFlowOperation, UpsertFlowOperation } from './flow';
 
 export type {
     CreateShapeOperation,

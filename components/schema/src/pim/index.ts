@@ -9,4 +9,5 @@ export * from './subscription-contracts/index';
 export * from './payment/index';
 export * from './assets/index';
 export * from './pricelists/index';
+export * from './flow/index';
 export * from './topics/index';
