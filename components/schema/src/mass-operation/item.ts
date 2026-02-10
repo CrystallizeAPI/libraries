@@ -11,6 +11,11 @@ import {
 import { checkResourceIdentifierOrId, IdSchema, RefSchema, ResourceIdentifierSchema } from '../shared';
 import { FlowContentActionConfigInputSchema, ItemFlowStageAssociationInputSchema } from '../pim/flow/flow-input';
 
+const itemIdAndResourceIdentifierSchemaFields = {
+    itemId: IdSchema.optional(),
+    resourceIdentifier: ResourceIdentifierSchema.optional(),
+};
+
 export const CreateDocumentOperationSchema = CreateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('document/create'),
@@ -22,16 +27,14 @@ export const UpdateDocumentOperationSchema = UpdateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('document/update'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 }).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertDocumentOperationSchema = CreateDocumentInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('document/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 });
 
 export const CreateFolderOperationSchema = CreateFolderInputSchema.extend({
@@ -45,16 +48,14 @@ export const UpdateFolderOperationSchema = UpdateFolderInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('folder/update'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 }).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertFolderOperationSchema = CreateFolderInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('folder/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 });
 
 export const CreateProductOperationSchema = CreateProductInputSchema.extend({
@@ -68,16 +69,14 @@ export const UpdateProductOperationSchema = UpdateProductInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('product/update'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 }).superRefine(checkResourceIdentifierOrId);
 
 export const UpsertProductOperationSchema = CreateProductInputSchema.extend({
     _ref: RefSchema.optional(),
     intent: z.literal('product/upsert'),
     language: z.string().min(1),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
+    ...itemIdAndResourceIdentifierSchemaFields,
 });
 
 export const UpdateItemComponentOperationSchema = z
@@ -86,8 +85,7 @@ export const UpdateItemComponentOperationSchema = z
         intent: z.literal('item/updateComponent/item'),
         language: z.string().min(1),
         component: ComponentContentInputSchema,
-        itemId: IdSchema.optional(),
-        resourceIdentifier: ResourceIdentifierSchema.optional(),
+        ...itemIdAndResourceIdentifierSchemaFields,
     })
     .superRefine(checkResourceIdentifierOrId);
 
@@ -99,62 +97,31 @@ export const UpdateSkuComponentOperationSchema = z.object({
     sku: z.string(),
 });
 
-export const PublishItemOperationSchema = z.object({
+const publishUnpublishItemBaseSchemaFields = {
     _ref: RefSchema.optional(),
-    intent: z.literal('item/publish'),
     language: z.string().min(1),
     includeDescendants: z.boolean().optional(),
-    itemId: IdSchema.optional(),
-    resourceIdentifier: ResourceIdentifierSchema.optional(),
-});
+    ...itemIdAndResourceIdentifierSchemaFields,
+};
+export const PublishItemOperationSchema = z
+    .object({
+        intent: z.literal('item/publish'),
+        ...publishUnpublishItemBaseSchemaFields,
+    })
+    .superRefine(checkResourceIdentifierOrId);
 
-export const UnPublishItemOperationSchema = PublishItemOperationSchema.omit({ intent: true }).extend({
-    intent: z.literal('item/unpublish'),
-});
+export const UnPublishItemOperationSchema = z
+    .object({
+        intent: z.literal('item/unpublish'),
+        ...publishUnpublishItemBaseSchemaFields,
+    })
+    .superRefine(checkResourceIdentifierOrId);
 
 export const DeleteItemOperationSchema = z
     .object({
         _ref: RefSchema.optional(),
         intent: z.literal('item/delete'),
-        itemId: IdSchema.optional(),
-        resourceIdentifier: ResourceIdentifierSchema.optional(),
-    })
-    .superRefine(checkResourceIdentifierOrId);
-
-export const AddItemTreeNodeShortcutsOperationSchema = z
-    .object({
-        _ref: RefSchema.optional(),
-        intent: z.literal('item/paths/addShortcuts'),
-        itemId: IdSchema.optional(),
-        resourceIdentifier: ResourceIdentifierSchema.optional(),
-        shortcuts: z.array(
-            z.object({
-                parentId: IdSchema,
-                position: z.number().int().min(0).optional(),
-            }),
-        ),
-    })
-    .superRefine(checkResourceIdentifierOrId);
-
-export const AddItemTreeNodeAliasesOperationSchema = z
-    .object({
-        _ref: RefSchema.optional(),
-        intent: z.literal('item/paths/addAliases'),
-        itemId: IdSchema.optional(),
-        resourceIdentifier: ResourceIdentifierSchema.optional(),
-        language: z.string().min(1),
-        paths: z.array(z.string().min(1)),
-    })
-    .superRefine(checkResourceIdentifierOrId);
-
-export const AddItemTreeNodeHistoryOperationSchema = z
-    .object({
-        _ref: RefSchema.optional(),
-        intent: z.literal('item/paths/addHistory'),
-        itemId: IdSchema.optional(),
-        resourceIdentifier: ResourceIdentifierSchema.optional(),
-        language: z.string().min(1),
-        paths: z.array(z.string().min(1)),
+        ...itemIdAndResourceIdentifierSchemaFields,
     })
     .superRefine(checkResourceIdentifierOrId);
 
@@ -185,7 +152,4 @@ export type CreateProductOperation = z.infer<typeof CreateProductOperationSchema
 export type UpdateProductOperation = z.infer<typeof UpdateProductOperationSchema>;
 export type UpsertProductOperation = z.infer<typeof UpsertProductOperationSchema>;
 
-export type AddItemTreeNodeShortcutsOperation = z.infer<typeof AddItemTreeNodeShortcutsOperationSchema>;
-export type AddItemTreeNodeAliasesOperation = z.infer<typeof AddItemTreeNodeAliasesOperationSchema>;
-export type AddItemTreeNodeHistoryOperation = z.infer<typeof AddItemTreeNodeHistoryOperationSchema>;
 export type AddItemsToFlowStageOperation = z.infer<typeof AddItemsToFlowStageOperationSchema>;

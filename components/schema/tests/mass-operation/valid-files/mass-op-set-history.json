@@ -1,0 +1,23 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "itemB",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Item B",
+            "resourceIdentifier": "item-b"
+        },
+        {
+            "_ref": "setHistory",
+            "intent": "item/paths/setHistory",
+            "language": "en",
+            "itemId": "{{ itemB.itemId }}",
+            "paths": ["/set-history-path"]
+        }
+    ]
+}

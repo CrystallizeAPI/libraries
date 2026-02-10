@@ -1,0 +1,26 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "itemC",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Item C",
+            "resourceIdentifier": "item-c"
+        },
+        {
+            "_ref": "setShortcut",
+            "intent": "item/paths/setShortcuts",
+            "itemId": "{{ itemC.itemId }}",
+            "shortcuts": [
+                {
+                    "parentId": "{{ defaults.rootItemId }}"
+                }
+            ]
+        }
+    ]
+}

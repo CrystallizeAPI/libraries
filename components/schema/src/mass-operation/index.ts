@@ -15,9 +15,6 @@ import {
     UpdateProductOperationSchema,
     UpsertProductOperationSchema,
     DeleteItemOperationSchema,
-    AddItemTreeNodeAliasesOperationSchema,
-    AddItemTreeNodeShortcutsOperationSchema,
-    AddItemTreeNodeHistoryOperationSchema,
     AddItemsToFlowStageOperationSchema,
 } from './item';
 import {
@@ -55,6 +52,17 @@ import {
 import { CreateTopicOperationSchema, UpdateTopicOperationSchema, UpsertTopicOperationSchema } from './topic';
 import { ModifyProductVariantPriceOperationSchema } from './product-variant';
 import { CreateFlowOperationSchema, UpdateFlowOperationSchema, UpsertFlowOperationSchema } from './flow';
+import {
+    RemoveItemTreeNodeHistoryOperationSchema,
+    SetItemTreeNodeHistoryOperationSchema,
+    AddItemTreeNodeAliasesOperationSchema,
+    SetItemTreeNodeAliasesOperationSchema,
+    RemoveItemTreeNodeAliasesOperationSchema,
+    AddItemTreeNodeHistoryOperationSchema,
+    AddItemTreeNodeShortcutsOperationSchema,
+    SetItemTreeNodeShortcutsOperationSchema,
+    RemoveItemTreeNodeShortcutsOperationSchema,
+} from './item-tree-node';
 
 export const OperationSchema = z.discriminatedUnion('intent', [
     DeleteItemOperationSchema,
@@ -113,14 +121,22 @@ export const OperationSchema = z.discriminatedUnion('intent', [
     UpdateTopicOperationSchema,
     UpsertTopicOperationSchema,
 
-    AddItemTreeNodeAliasesOperationSchema,
-    AddItemTreeNodeShortcutsOperationSchema,
-    AddItemTreeNodeHistoryOperationSchema,
-
     CreateFlowOperationSchema,
     UpdateFlowOperationSchema,
     UpsertFlowOperationSchema,
     AddItemsToFlowStageOperationSchema,
+
+    AddItemTreeNodeAliasesOperationSchema,
+    SetItemTreeNodeAliasesOperationSchema,
+    RemoveItemTreeNodeAliasesOperationSchema,
+
+    AddItemTreeNodeHistoryOperationSchema,
+    SetItemTreeNodeHistoryOperationSchema,
+    RemoveItemTreeNodeHistoryOperationSchema,
+
+    AddItemTreeNodeShortcutsOperationSchema,
+    SetItemTreeNodeShortcutsOperationSchema,
+    RemoveItemTreeNodeShortcutsOperationSchema,
 ]);
 
 export const OperationsSchema = z.object({
@@ -147,11 +163,20 @@ export type {
     UpdateItemComponentOperation,
     UpdateSkuComponentOperation,
     DeleteItemOperation,
-    AddItemTreeNodeAliasesOperation,
-    AddItemTreeNodeShortcutsOperation,
-    AddItemTreeNodeHistoryOperation,
     AddItemsToFlowStageOperation,
 } from './item';
+
+export type {
+    AddItemTreeNodeShortcutsOperation,
+    AddItemTreeNodeAliasesOperation,
+    AddItemTreeNodeHistoryOperation,
+    SetItemTreeNodeShortcutsOperation,
+    SetItemTreeNodeAliasesOperation,
+    SetItemTreeNodeHistoryOperation,
+    RemoveItemTreeNodeShortcutsOperation,
+    RemoveItemTreeNodeAliasesOperation,
+    RemoveItemTreeNodeHistoryOperation,
+} from './item-tree-node';
 
 export type { CreateFlowOperation, UpdateFlowOperation, UpsertFlowOperation } from './flow';
 

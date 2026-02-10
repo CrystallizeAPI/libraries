@@ -1,0 +1,23 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "itemA",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Item A",
+            "resourceIdentifier": "item-a"
+        },
+        {
+            "_ref": "removeAlias",
+            "intent": "item/paths/removeAliases",
+            "language": "en",
+            "itemId": "{{ itemA.itemId }}",
+            "paths": ["/remove-alias-path"]
+        }
+    ]
+}
