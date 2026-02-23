@@ -27,3 +27,13 @@ export const UpsertTopicOperationSchema = CreateTopicInputSchema.extend({
     resourceIdentifier: ResourceIdentifierSchema.optional(),
 }).superRefine(checkResourceIdentifierOrId);
 export type UpsertTopicOperation = z.infer<typeof UpsertTopicOperationSchema>;
+
+export const DeleteTopicOperationSchema = z
+    .object({
+        _ref: RefSchema.optional(),
+        intent: z.literal('topic/delete'),
+        topicId: IdSchema.optional(),
+        resourceIdentifier: ResourceIdentifierSchema.optional(),
+    })
+    .superRefine(checkResourceIdentifierOrId);
+export type DeleteTopicOperation = z.infer<typeof DeleteTopicOperationSchema>;
