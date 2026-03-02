@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { DateTimeSchema, IdSchema } from '../../shared';
+import { DateTimeSchema, IdSchema, KeyValuePairSchema } from '../../shared';
 
 export const TopicSchema = z.object({
     createdAt: DateTimeSchema,
@@ -9,6 +9,7 @@ export const TopicSchema = z.object({
     name: z.string().nullish(),
     parentId: IdSchema.nullish(),
     path: z.string().min(1),
+    meta: z.array(KeyValuePairSchema).optional(),
     updatedAt: DateTimeSchema.nullish(),
 });
 export type Topic = z.infer<typeof TopicSchema>;

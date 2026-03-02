@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IdSchema } from '../../shared';
+import { IdSchema, KeyValuePairInputSchema } from '../../shared';
 
 export const CreateChildTopicInputSchema = z.object({
     get children(): z.ZodOptional<z.ZodNullable<z.ZodArray<typeof CreateChildTopicInputSchema>>> {
@@ -16,6 +16,7 @@ export const CreateTopicInputSchema = z.object({
     name: z.string(),
     parentId: IdSchema.nullish(),
     pathIdentifier: z.string().nullish(),
+    meta: z.array(KeyValuePairInputSchema).nullish(),
 });
 export type CreateTopicInput = z.infer<typeof CreateTopicInputSchema>;
 
@@ -24,5 +25,6 @@ export const UpdateTopicInputSchema = z.object({
     name: z.string().nullish(),
     parentId: IdSchema.nullish(),
     pathIdentifier: z.string().nullish(),
+    meta: z.array(KeyValuePairInputSchema).nullish(),
 });
 export type UpdateTopicInput = z.infer<typeof UpdateTopicInputSchema>;
