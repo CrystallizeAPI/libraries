@@ -24,6 +24,7 @@
     },
     {
       "id": "DX-002",
+      "status": "done",
       "title": "Delete commented-out subscription.ts file",
       "priority": "P0",
       "category": "code-quality",
