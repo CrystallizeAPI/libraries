@@ -119,6 +119,7 @@
     },
     {
       "id": "DX-007",
+      "status": "done",
       "title": "Set error name on JSApiClientCallError",
       "priority": "P1",
       "category": "error-handling",
