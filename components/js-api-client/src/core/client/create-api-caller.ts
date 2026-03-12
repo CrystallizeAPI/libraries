@@ -27,6 +27,7 @@ export class JSApiClientCallError<Errors = unknown> extends Error {
         variables: VariablesType;
     }) {
         super(message);
+        this.name = 'JSApiClientCallError';
         this.code = code;
         this.statusText = statusText;
         this.errors = errors;
