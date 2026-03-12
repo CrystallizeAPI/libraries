@@ -184,6 +184,7 @@
     },
     {
       "id": "DX-010",
+      "status": "done",
       "title": "Improve authentication error messaging",
       "priority": "P1",
       "category": "error-handling",
