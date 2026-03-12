@@ -163,6 +163,7 @@
     },
     {
       "id": "DX-009",
+      "status": "done",
       "title": "Replace tracked .env with .env.example",
       "priority": "P1",
       "category": "security",
