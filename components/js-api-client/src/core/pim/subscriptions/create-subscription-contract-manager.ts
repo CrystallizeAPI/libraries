@@ -25,7 +25,7 @@ type WithIdentifiersAndStatus<R> = R & {
     } & (R extends { status: infer S } ? S : {});
 };
 
-const baseQuery = <OSC extends { status?: Record<string, unknown> }>(onSubscriptionContract?: OSC) => ({
+const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, unknown> }>(onSubscriptionContract?: SubscriptionContractExtra) => ({
     __on: [
         {
             __typeName: 'SubscriptionContractAggregate',
@@ -46,9 +46,9 @@ const baseQuery = <OSC extends { status?: Record<string, unknown> }>(onSubscript
 });
 
 export const createSubscriptionContractManager = (apiClient: ClientInterface) => {
-    const create = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const create = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         intentSubscriptionContract: CreateSubscriptionContractInput,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const input = CreateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
         const api = apiClient.nextPimApi;
@@ -82,9 +82,9 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.createSubscriptionContract;
     };
 
-    const update = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const update = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         intentSubscriptionContract: UpdateSubscriptionContractInput,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const { id, ...input } = UpdateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
         const api = apiClient.nextPimApi;
@@ -103,10 +103,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.updateSubscriptionContract;
     };
 
-    const cancel = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const cancel = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         id: UpdateSubscriptionContractInput['id'],
         deactivate = false,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -126,9 +126,9 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.cancelSubscriptionContract;
     };
 
-    const pause = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const pause = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -145,9 +145,9 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.pauseSubscriptionContract;
     };
 
-    const resume = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const resume = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -164,9 +164,9 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.resumeSubscriptionContract;
     };
 
-    const renew = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const renew = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {

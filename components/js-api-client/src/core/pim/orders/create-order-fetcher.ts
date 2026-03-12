@@ -20,7 +20,7 @@ export type DefaultOrderType<OnOrder = unknown, OnOrderItem = unknown, OnCustome
     total: NonNullable<Order['total']>;
 } & OnOrder;
 
-const buildBaseQuery = <OO, OOI, OC>(onOrder?: OO, onOrderItem?: OOI, onCustomer?: OC) => {
+const buildBaseQuery = <OrderExtra, OrderItemExtra, CustomerExtra>(onOrder?: OrderExtra, onOrderItem?: OrderItemExtra, onCustomer?: CustomerExtra) => {
     const priceQuery = {
         gross: true,
         net: true,
@@ -62,10 +62,10 @@ type PageInfo = {
     endCursor: string;
 };
 
-type EnhanceQuery<OO = unknown, OOI = unknown, OC = unknown> = {
-    onOrder?: OO;
-    onOrderItem?: OOI;
-    onCustomer?: OC;
+type EnhanceQuery<OrderExtra = unknown, OrderItemExtra = unknown, CustomerExtra = unknown> = {
+    onOrder?: OrderExtra;
+    onOrderItem?: OrderItemExtra;
+    onCustomer?: CustomerExtra;
 };
 
 export function createOrderFetcher(apiClient: ClientInterface) {
@@ -74,13 +74,13 @@ export function createOrderFetcher(apiClient: ClientInterface) {
         OnOrderItem = unknown,
         OnCustomer = unknown,
         EA extends Record<string, unknown> = Record<string, unknown>,
-        OC = unknown,
-        OOI = unknown,
-        OO = unknown,
+        CustomerExtra = unknown,
+        OrderItemExtra = unknown,
+        OrderExtra = unknown,
     >(
         customerIdentifier: string,
         extraArgs?: EA & { filter?: Record<string, unknown> & { customer?: Record<string, unknown> } },
-        enhancements?: EnhanceQuery<OO, OOI, OC>,
+        enhancements?: EnhanceQuery<OrderExtra, OrderItemExtra, CustomerExtra>,
     ): Promise<{
         pageInfo: PageInfo;
         orders: Array<DefaultOrderType<OnOrder, OnOrderItem, OnCustomer>>;
@@ -142,12 +142,12 @@ export function createOrderFetcher(apiClient: ClientInterface) {
         OnOrder = unknown,
         OnOrderItem = unknown,
         OnCustomer = unknown,
-        OC = unknown,
-        OOI = unknown,
-        OO = unknown,
+        CustomerExtra = unknown,
+        OrderItemExtra = unknown,
+        OrderExtra = unknown,
     >(
         id: string,
-        enhancements?: EnhanceQuery<OO, OOI, OC>,
+        enhancements?: EnhanceQuery<OrderExtra, OrderItemExtra, CustomerExtra>,
     ): Promise<DefaultOrderType<OnOrder, OnOrderItem, OnCustomer> | null> => {
         const query = {
             order: {
