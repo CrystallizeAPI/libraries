@@ -1,0 +1,1 @@
+DX-003: Fix 'chidlren' typo in catalogue fetcher - DONE

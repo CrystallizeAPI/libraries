@@ -64,7 +64,7 @@ function onFolder<OF = unknown>(onFolder?: OF, c?: CatalogueFetcherGrapqhqlOnFol
     const children = () => {
         if (c?.onChildren) {
             return {
-                chidlren: {
+                children: {
                     ...c.onChildren,
                 },
             };
