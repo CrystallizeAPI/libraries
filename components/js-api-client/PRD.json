@@ -81,6 +81,7 @@
     },
     {
       "id": "DX-005",
+      "status": "done",
       "title": "Fix results variable initialization in mass call client",
       "priority": "P0",
       "category": "code-quality",

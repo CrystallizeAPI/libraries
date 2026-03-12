@@ -2,3 +2,4 @@ DX-003: Fix 'chidlren' typo in catalogue fetcher - DONE
 DX-001: Remove dead try/catch block in API caller - DONE
 DX-002: Delete commented-out subscription.ts file - DONE
 DX-004: Remove unnecessary double spread in product hydrater - DONE
+DX-005: Fix results variable initialization in mass call client - DONE
