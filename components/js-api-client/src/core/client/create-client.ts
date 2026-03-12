@@ -13,6 +13,7 @@ export type ClientInterface = {
     shopCartApi: ApiCaller;
     config: Pick<ClientConfiguration, 'tenantIdentifier' | 'tenantId' | 'origin'>;
     close: () => void;
+    [Symbol.dispose]: () => void;
 };
 export type ClientConfiguration = {
     tenantIdentifier: string;
@@ -100,5 +101,6 @@ export const createClient = (configuration: ClientConfiguration, options?: Creat
             origin: configuration.origin,
         },
         close: grabClose,
+        [Symbol.dispose]: grabClose,
     };
 };
