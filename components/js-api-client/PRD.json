@@ -204,6 +204,7 @@
     },
     {
       "id": "DX-011",
+      "status": "done",
       "title": "Improve generic parameter naming in fetchers",
       "priority": "P2",
       "category": "type-safety",
