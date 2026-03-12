@@ -5,6 +5,7 @@
   "tasks": [
     {
       "id": "DX-001",
+      "status": "done",
       "title": "Remove dead try/catch block in API caller",
       "priority": "P0",
       "category": "code-quality",
