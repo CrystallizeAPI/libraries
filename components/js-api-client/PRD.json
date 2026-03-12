@@ -99,6 +99,7 @@
     },
     {
       "id": "DX-006",
+      "status": "done",
       "title": "Fix stale 'module' field in package.json",
       "priority": "P0",
       "category": "build",
