@@ -1,5 +1,5 @@
 import { CreateClientOptions, ClientConfiguration } from './create-client.js';
-import { Grab } from './create-grabber.js';
+import { Grab, GrabOptions } from './create-grabber.js';
 
 export type VariablesType = Record<string, unknown>;
 export type ApiCaller = <T = unknown>(query: string, variables?: VariablesType) => Promise<T>;
@@ -93,7 +93,7 @@ export const post = async <T>(
     config: ClientConfiguration,
     query: string,
     variables?: VariablesType,
-    init?: RequestInit | any | undefined,
+    init?: GrabOptions,
     options?: CreateClientOptions,
 ): Promise<T> => {
     const { headers: initHeaders, ...initRest } = init || {};
