@@ -63,6 +63,7 @@
     },
     {
       "id": "DX-004",
+      "status": "done",
       "title": "Remove unnecessary double spread in product hydrater",
       "priority": "P0",
       "category": "code-quality",
