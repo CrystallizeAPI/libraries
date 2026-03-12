@@ -138,6 +138,7 @@
     },
     {
       "id": "DX-008",
+      "status": "done",
       "title": "Remove 'any' from union types in grabber and API caller signatures",
       "priority": "P1",
       "category": "type-safety",

@@ -5,3 +5,4 @@ DX-004: Remove unnecessary double spread in product hydrater - DONE
 DX-005: Fix results variable initialization in mass call client - DONE
 DX-006: Fix stale 'module' field in package.json - DONE
 DX-007: Set error name on JSApiClientCallError - DONE
+DX-008: Remove 'any' from union types in grabber and API caller signatures - DONE

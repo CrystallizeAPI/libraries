@@ -10,8 +10,13 @@ export type GrabResponse = {
     json: <T>() => Promise<T>;
     text: () => Promise<string>;
 };
+export type GrabOptions = {
+    method?: string;
+    headers?: Record<string, string>;
+    body?: string;
+};
 export type Grab = {
-    grab: (url: string, options?: RequestInit | any | undefined) => Promise<GrabResponse>;
+    grab: (url: string, options?: GrabOptions) => Promise<GrabResponse>;
     close: () => void;
 };
 
@@ -21,7 +26,7 @@ type Options = {
 export const createGrabber = (options?: Options): Grab => {
     const clients = new Map();
     const IDLE_TIMEOUT = 300000; // 5 min idle timeout
-    const grab = async (url: string, grabOptions?: RequestInit | any): Promise<GrabResponse> => {
+    const grab = async (url: string, grabOptions?: GrabOptions): Promise<GrabResponse> => {
         if (options?.useHttp2 !== true) {
             return fetch(url, grabOptions);
         }
@@ -62,12 +67,12 @@ export const createGrabber = (options?: Options): Grab => {
             const client = getClient(origin);
             resetIdleTimeout(origin);
             const headers = {
-                ':method': grabOptions.method || 'GET',
+                ':method': grabOptions?.method || 'GET',
                 ':path': urlObj.pathname + urlObj.search,
-                ...grabOptions.headers,
+                ...grabOptions?.headers,
             };
             const req = client.request(headers);
-            if (grabOptions.body) {
+            if (grabOptions?.body) {
                 req.write(grabOptions.body);
             }
             req.setEncoding('utf8');

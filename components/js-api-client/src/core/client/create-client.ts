@@ -29,7 +29,7 @@ export type ClientConfiguration = {
 export type CreateClientOptions = {
     useHttp2?: boolean;
     profiling?: ProfilingOptions;
-    extraHeaders?: RequestInit['headers'];
+    extraHeaders?: Record<string, string>;
     shopApiToken?: {
         doNotFetch?: boolean;
         scopes?: string[];
