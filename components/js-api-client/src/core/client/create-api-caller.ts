@@ -137,7 +137,8 @@ export const post = async <T>(
         if (Array.isArray(serverTiming)) {
             serverTiming = serverTiming[0];
         }
-        const duration = serverTiming?.split(';')[1]?.split('=')[1] ?? -1;
+        const durMatch = serverTiming?.match(/dur=([\d.]+)/);
+        const duration = durMatch ? durMatch[1] : -1;
         profiling.onRequestResolved(
             {
                 resolutionTimeMs: ms,
