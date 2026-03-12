@@ -99,7 +99,7 @@ export function createMassCallClient(
         let batch = [];
         let results: {
             [key: string]: any;
-        } = [];
+        } = {};
         do {
             let batchErrorCount = 0;
             const to = seek + increment;
