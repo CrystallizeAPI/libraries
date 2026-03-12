@@ -87,7 +87,7 @@ function byPaths(client: ClientInterface, options?: ProductHydraterOptions): Pro
         }, {} as any);
 
         const query = {
-            ...{ ...productListQuery },
+            ...productListQuery,
             ...(extraQuery !== undefined ? extraQuery : {}),
         };
 
