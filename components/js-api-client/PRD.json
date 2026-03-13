@@ -393,6 +393,7 @@
     },
     {
       "id": "DX-019",
+      "status": "done",
       "title": "Add CI workflow for pull requests",
       "priority": "P3",
       "category": "ci-cd",
