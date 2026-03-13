@@ -1,0 +1,20 @@
+DX-003: Fix 'chidlren' typo in catalogue fetcher - DONE
+DX-001: Remove dead try/catch block in API caller - DONE
+DX-002: Delete commented-out subscription.ts file - DONE
+DX-004: Remove unnecessary double spread in product hydrater - DONE
+DX-005: Fix results variable initialization in mass call client - DONE
+DX-006: Fix stale 'module' field in package.json - DONE
+DX-007: Set error name on JSApiClientCallError - DONE
+DX-008: Remove 'any' from union types in grabber and API caller signatures - DONE
+DX-009: Replace tracked .env with .env.example - DONE
+DX-010: Improve authentication error messaging - DONE
+DX-014: Make Server-Timing header parsing robust - DONE
+DX-011: Improve generic parameter naming in fetchers - DONE
+DX-012: Add Symbol.dispose support for automatic cleanup - DONE
+DX-013: Add request timeout support via AbortController - DONE
+DX-016: Reduce any usage in mass call client types - DONE
+DX-015: Reduce boilerplate in mass call client enqueue methods - DONE
+DX-017: Add unit tests with mocked HTTP for core modules - DONE
+DX-018: Add error-path tests for API caller - DONE
+DX-019: Add CI workflow for pull requests - DONE
+DX-020: Add JSDoc comments to main exported functions - DONE

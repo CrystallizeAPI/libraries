@@ -1,5 +1,5 @@
 import { CreateClientOptions, ClientConfiguration } from './create-client.js';
-import { Grab } from './create-grabber.js';
+import { Grab, GrabOptions } from './create-grabber.js';
 
 export type VariablesType = Record<string, unknown>;
 export type ApiCaller = <T = unknown>(query: string, variables?: VariablesType) => Promise<T>;
@@ -27,6 +27,7 @@ export class JSApiClientCallError<Errors = unknown> extends Error {
         variables: VariablesType;
     }) {
         super(message);
+        this.name = 'JSApiClientCallError';
         this.code = code;
         this.statusText = statusText;
         this.errors = errors;
@@ -57,6 +58,8 @@ export const createApiCaller = (
     };
 };
 
+const warnedConfigs = new WeakSet<ClientConfiguration>();
+
 export const authenticationHeaders = (config: ClientConfiguration): Record<string, string> => {
     if (config.sessionId) {
         return {
@@ -67,6 +70,13 @@ export const authenticationHeaders = (config: ClientConfiguration): Record<strin
         return {
             'X-Crystallize-Static-Auth-Token': config.staticAuthToken,
         };
+    }
+    if (!config.accessTokenId && !config.accessTokenSecret && !warnedConfigs.has(config)) {
+        warnedConfigs.add(config);
+        console.warn(
+            '@crystallize/js-api-client: No authentication credentials configured. ' +
+                'Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.',
+        );
     }
     return {
         'X-Crystallize-Access-Token-Id': config.accessTokenId || '',
@@ -92,99 +102,100 @@ export const post = async <T>(
     config: ClientConfiguration,
     query: string,
     variables?: VariablesType,
-    init?: RequestInit | any | undefined,
+    init?: GrabOptions,
     options?: CreateClientOptions,
 ): Promise<T> => {
-    try {
-        const { headers: initHeaders, ...initRest } = init || {};
-        const profiling = options?.profiling;
+    const { headers: initHeaders, ...initRest } = init || {};
+    const profiling = options?.profiling;
 
-        const headers = {
-            'Content-type': 'application/json; charset=UTF-8',
-            Accept: 'application/json',
-            ...authenticationHeaders(config),
-            ...initHeaders,
-        };
+    const headers = {
+        'Content-type': 'application/json; charset=UTF-8',
+        Accept: 'application/json',
+        ...authenticationHeaders(config),
+        ...initHeaders,
+    };
 
-        const body = JSON.stringify({ query, variables });
-        let start: number = 0;
-        if (profiling) {
-            start = Date.now();
-            if (profiling.onRequest) {
-                profiling.onRequest(query, variables);
-            }
+    const body = JSON.stringify({ query, variables });
+    let start: number = 0;
+    if (profiling) {
+        start = Date.now();
+        if (profiling.onRequest) {
+            profiling.onRequest(query, variables);
         }
-
-        const response = await grab(path, {
-            ...initRest,
-            method: 'POST',
-            headers,
-            body,
-        });
-
-        if (profiling) {
-            const ms = Date.now() - start;
-            let serverTiming = response.headers.get('server-timing') ?? undefined;
-            if (Array.isArray(serverTiming)) {
-                serverTiming = serverTiming[0];
-            }
-            const duration = serverTiming?.split(';')[1]?.split('=')[1] ?? -1;
-            profiling.onRequestResolved(
-                {
-                    resolutionTimeMs: ms,
-                    serverTimeMs: Number(duration),
-                },
-                query,
-                variables,
-            );
-        }
-        if (response.ok && 204 === response.status) {
-            return <T>{};
-        }
-        if (!response.ok) {
-            const json = await response.json<{
-                message: string;
-                errors: unknown;
-            }>();
-            throw new JSApiClientCallError({
-                code: response.status,
-                statusText: response.statusText,
-                message: json.message,
-                query,
-                variables: variables || {},
-                errors: json.errors || {},
-            });
-        }
-        // we still need to check for error as the API can return 200 with errors
-        const json = await response.json<{
-            errors: {
-                message: string;
-            }[];
-            data: T;
-        }>();
-        if (json.errors) {
-            throw new JSApiClientCallError({
-                code: 400,
-                statusText: 'Error was returned from the API',
-                message: json.errors[0].message,
-                query,
-                variables: variables || {},
-                errors: json.errors || {},
-            });
-        }
-        // let's try to find `errorName` at the second level to handle Core Next errors more gracefully
-        const err = getCoreNextError(json.data);
-        if (err) {
-            throw new JSApiClientCallError({
-                code: 400,
-                query,
-                variables: variables || {},
-                statusText: 'Error was returned (wrapped) from the API. (most likely Core Next)',
-                message: `[${err.errorName}] ${err.message ?? 'An error occurred'}`,
-            });
-        }
-        return json.data;
-    } catch (exception) {
-        throw exception;
     }
+
+    const timeout = options?.timeout;
+    const signal = timeout ? AbortSignal.timeout(timeout) : undefined;
+
+    const response = await grab(path, {
+        ...initRest,
+        method: 'POST',
+        headers,
+        body,
+        signal,
+    });
+
+    if (profiling) {
+        const ms = Date.now() - start;
+        let serverTiming = response.headers.get('server-timing') ?? undefined;
+        if (Array.isArray(serverTiming)) {
+            serverTiming = serverTiming[0];
+        }
+        const durMatch = serverTiming?.match(/dur=([\d.]+)/);
+        const duration = durMatch ? durMatch[1] : -1;
+        profiling.onRequestResolved(
+            {
+                resolutionTimeMs: ms,
+                serverTimeMs: Number(duration),
+            },
+            query,
+            variables,
+        );
+    }
+    if (response.ok && 204 === response.status) {
+        return <T>{};
+    }
+    if (!response.ok) {
+        const json = await response.json<{
+            message: string;
+            errors: unknown;
+        }>();
+        throw new JSApiClientCallError({
+            code: response.status,
+            statusText: response.statusText,
+            message: json.message,
+            query,
+            variables: variables || {},
+            errors: json.errors || {},
+        });
+    }
+    // we still need to check for error as the API can return 200 with errors
+    const json = await response.json<{
+        errors: {
+            message: string;
+        }[];
+        data: T;
+    }>();
+    if (json.errors) {
+        throw new JSApiClientCallError({
+            code: 400,
+            statusText: 'Error was returned from the API',
+            message: json.errors[0].message,
+            query,
+            variables: variables || {},
+            errors: json.errors || {},
+        });
+    }
+    // let's try to find `errorName` at the second level to handle Core Next errors more gracefully
+    const err = getCoreNextError(json.data);
+    if (err) {
+        throw new JSApiClientCallError({
+            code: 400,
+            query,
+            variables: variables || {},
+            statusText: 'Error was returned (wrapped) from the API. (most likely Core Next)',
+            message: `[${err.errorName}] ${err.message ?? 'An error occurred'}`,
+        });
+    }
+    return json.data;
 };

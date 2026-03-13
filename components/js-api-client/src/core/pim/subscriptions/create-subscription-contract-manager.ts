@@ -25,7 +25,9 @@ type WithIdentifiersAndStatus<R> = R & {
     } & (R extends { status: infer S } ? S : {});
 };
 
-const baseQuery = <OSC extends { status?: Record<string, unknown> }>(onSubscriptionContract?: OSC) => ({
+const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, unknown> }>(
+    onSubscriptionContract?: SubscriptionContractExtra,
+) => ({
     __on: [
         {
             __typeName: 'SubscriptionContractAggregate',
@@ -45,10 +47,31 @@ const baseQuery = <OSC extends { status?: Record<string, unknown> }>(onSubscript
     ],
 });
 
+/**
+ * Creates a subscription contract manager for creating, updating, and managing subscription lifecycle via the Crystallize PIM API.
+ * Requires PIM API credentials (accessTokenId/accessTokenSecret) in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient` with PIM credentials.
+ * @returns An object with methods to `create`, `update`, `cancel`, `pause`, `resume`, `renew`, `createTemplateBasedOnVariant`, and `createTemplateBasedOnVariantIdentity`.
+ *
+ * @example
+ * ```ts
+ * const subscriptionManager = createSubscriptionContractManager(client);
+ * const contract = await subscriptionManager.create({
+ *   customerIdentifier: 'customer@example.com',
+ *   subscriptionPlan: { identifier: 'monthly', periodId: 'period-1' },
+ *   item: { sku: 'SKU-001', name: 'My Subscription', quantity: 1 },
+ *   recurring: { price: 9.99, currency: 'USD', period: 1, unit: 'month' },
+ * });
+ * ```
+ */
 export const createSubscriptionContractManager = (apiClient: ClientInterface) => {
-    const create = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const create = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         intentSubscriptionContract: CreateSubscriptionContractInput,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const input = CreateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
         const api = apiClient.nextPimApi;
@@ -82,9 +105,12 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.createSubscriptionContract;
     };
 
-    const update = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const update = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         intentSubscriptionContract: UpdateSubscriptionContractInput,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const { id, ...input } = UpdateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
         const api = apiClient.nextPimApi;
@@ -103,10 +129,13 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.updateSubscriptionContract;
     };
 
-    const cancel = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const cancel = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
         deactivate = false,
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -126,9 +155,12 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.cancelSubscriptionContract;
     };
 
-    const pause = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const pause = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -145,9 +177,12 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.pauseSubscriptionContract;
     };
 
-    const resume = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const resume = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
@@ -164,9 +199,12 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.resumeSubscriptionContract;
     };
 
-    const renew = async <OnSubscriptionContract, OSC extends { status?: Record<string, unknown> } = {}>(
+    const renew = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
-        onSubscriptionContract?: OSC,
+        onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const api = apiClient.nextPimApi;
         const mutation = {
