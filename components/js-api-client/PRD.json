@@ -256,6 +256,7 @@
     },
     {
       "id": "DX-013",
+      "status": "done",
       "title": "Add request timeout support via AbortController",
       "priority": "P2",
       "category": "reliability",

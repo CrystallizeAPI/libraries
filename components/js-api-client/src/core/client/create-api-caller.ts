@@ -124,11 +124,15 @@ export const post = async <T>(
         }
     }
 
+    const timeout = options?.timeout;
+    const signal = timeout ? AbortSignal.timeout(timeout) : undefined;
+
     const response = await grab(path, {
         ...initRest,
         method: 'POST',
         headers,
         body,
+        signal,
     });
 
     if (profiling) {
