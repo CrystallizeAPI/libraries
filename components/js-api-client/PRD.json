@@ -371,6 +371,7 @@
     },
     {
       "id": "DX-018",
+      "status": "done",
       "title": "Add error-path tests for API caller",
       "priority": "P3",
       "category": "testing",

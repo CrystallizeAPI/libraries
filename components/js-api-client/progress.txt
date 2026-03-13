@@ -15,3 +15,4 @@ DX-013: Add request timeout support via AbortController - DONE
 DX-016: Reduce any usage in mass call client types - DONE
 DX-015: Reduce boilerplate in mass call client enqueue methods - DONE
 DX-017: Add unit tests with mocked HTTP for core modules - DONE
+DX-018: Add error-path tests for API caller - DONE
