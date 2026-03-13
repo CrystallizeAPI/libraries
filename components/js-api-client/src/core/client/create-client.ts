@@ -50,6 +50,24 @@ export const apiHost = (configuration: ClientConfiguration) => {
     };
 };
 
+/**
+ * Creates a Crystallize API client that provides access to catalogue, discovery, PIM, and shop cart APIs.
+ * Use this as the main entry point for all interactions with the Crystallize APIs.
+ *
+ * @param configuration - The tenant configuration including identifier and authentication credentials.
+ * @param options - Optional settings for HTTP/2, profiling, timeouts, and extra headers.
+ * @returns A client interface with pre-configured API callers for each Crystallize endpoint.
+ *
+ * @example
+ * ```ts
+ * const client = createClient({
+ *   tenantIdentifier: 'my-tenant',
+ *   accessTokenId: 'my-token-id',
+ *   accessTokenSecret: 'my-token-secret',
+ * });
+ * const data = await client.catalogueApi(query);
+ * ```
+ */
 export const createClient = (configuration: ClientConfiguration, options?: CreateClientOptions): ClientInterface => {
     const identifier = configuration.tenantIdentifier;
     const { grab, close: grabClose } = createGrabber({

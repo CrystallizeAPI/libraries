@@ -414,6 +414,7 @@
     },
     {
       "id": "DX-020",
+      "status": "done",
       "title": "Add JSDoc comments to main exported functions",
       "priority": "P3",
       "category": "documentation",

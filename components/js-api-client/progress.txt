@@ -17,3 +17,4 @@ DX-015: Reduce boilerplate in mass call client enqueue methods - DONE
 DX-017: Add unit tests with mocked HTTP for core modules - DONE
 DX-018: Add error-path tests for API caller - DONE
 DX-019: Add CI workflow for pull requests - DONE
+DX-020: Add JSDoc comments to main exported functions - DONE

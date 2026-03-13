@@ -45,6 +45,24 @@ const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, u
     ],
 });
 
+/**
+ * Creates a subscription contract manager for creating, updating, and managing subscription lifecycle via the Crystallize PIM API.
+ * Requires PIM API credentials (accessTokenId/accessTokenSecret) in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient` with PIM credentials.
+ * @returns An object with methods to `create`, `update`, `cancel`, `pause`, `resume`, `renew`, `createTemplateBasedOnVariant`, and `createTemplateBasedOnVariantIdentity`.
+ *
+ * @example
+ * ```ts
+ * const subscriptionManager = createSubscriptionContractManager(client);
+ * const contract = await subscriptionManager.create({
+ *   customerIdentifier: 'customer@example.com',
+ *   subscriptionPlan: { identifier: 'monthly', periodId: 'period-1' },
+ *   item: { sku: 'SKU-001', name: 'My Subscription', quantity: 1 },
+ *   recurring: { price: 9.99, currency: 'USD', period: 1, unit: 'month' },
+ * });
+ * ```
+ */
 export const createSubscriptionContractManager = (apiClient: ClientInterface) => {
     const create = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
         intentSubscriptionContract: CreateSubscriptionContractInput,

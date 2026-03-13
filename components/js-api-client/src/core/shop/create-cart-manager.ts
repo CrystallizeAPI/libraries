@@ -13,6 +13,23 @@ import { transformCartCustomerInput, transformCartInput } from './helpers.js';
 
 type WithId<R> = R & { id: string };
 
+/**
+ * Creates a cart manager for hydrating, placing, and managing shopping carts via the Crystallize Shop Cart API.
+ * Requires a shop API token or appropriate credentials in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient`.
+ * @returns An object with methods to `hydrate`, `fetch`, `place`, `fulfill`, `abandon`, `addSkuItem`, `removeItem`, `setMeta`, and `setCustomer`.
+ *
+ * @example
+ * ```ts
+ * const cartManager = createCartManager(client);
+ * const cart = await cartManager.hydrate({
+ *   items: [{ sku: 'SKU-001', quantity: 2 }],
+ *   locale: { displayName: 'English', language: 'en' },
+ * });
+ * const placed = await cartManager.place(cart.id);
+ * ```
+ */
 export const createCartManager = (apiClient: ClientInterface) => {
     const fetch = async <OnCart, OC = unknown>(id: string, onCart?: OC) => {
         const query = {

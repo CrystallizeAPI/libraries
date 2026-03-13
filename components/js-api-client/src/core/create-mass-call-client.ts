@@ -62,12 +62,23 @@ const createFibonacciSleeper = (): Sleeper => {
 };
 
 /**
- * Note: MassCallClient is experimental and may not work as expected.
- * Creates a mass call client based on an existing ClientInterface.
+ * Creates a mass call client that batches and throttles multiple API requests with automatic retry and concurrency control.
+ * Use this when you need to execute many API calls efficiently, such as bulk imports or migrations. Note: this feature is experimental.
  *
- * @param client ClientInterface
- * @param options Object
- * @returns MassClientInterface
+ * @param client - A Crystallize client instance created via `createClient`.
+ * @param options - Configuration for concurrency, batching callbacks, failure handling, and sleep strategy.
+ * @returns A mass client interface that extends `ClientInterface` with `enqueue`, `execute`, `retry`, `reset`, `hasFailed`, and `failureCount` capabilities.
+ *
+ * @example
+ * ```ts
+ * const massClient = createMassCallClient(client, { initialSpawn: 2, maxSpawn: 5 });
+ * massClient.enqueue.pimApi(`mutation { ... }`, { id: '1' });
+ * massClient.enqueue.pimApi(`mutation { ... }`, { id: '2' });
+ * const results = await massClient.execute();
+ * if (massClient.hasFailed()) {
+ *   const retryResults = await massClient.retry();
+ * }
+ * ```
  */
 export function createMassCallClient(
     client: ClientInterface,
