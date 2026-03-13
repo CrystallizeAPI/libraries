@@ -13,3 +13,4 @@ DX-011: Improve generic parameter naming in fetchers - DONE
 DX-012: Add Symbol.dispose support for automatic cleanup - DONE
 DX-013: Add request timeout support via AbortController - DONE
 DX-016: Reduce any usage in mass call client types - DONE
+DX-015: Reduce boilerplate in mass call client enqueue methods - DONE

@@ -207,32 +207,15 @@ export function createMassCallClient(
         config: client.config,
         close: client.close,
         [Symbol.dispose]: client[Symbol.dispose],
-        enqueue: {
-            catalogueApi: (query: string, variables?: VariablesType): string => {
-                const key = `catalogueApi-${counter++}`;
-                promises.push({ key, caller: client.catalogueApi, query, variables });
-                return key;
-            },
-            discoveryApi: (query: string, variables?: VariablesType): string => {
-                const key = `discoveryApi-${counter++}`;
-                promises.push({ key, caller: client.discoveryApi, query, variables });
-                return key;
-            },
-            pimApi: (query: string, variables?: VariablesType): string => {
-                const key = `pimApi-${counter++}`;
-                promises.push({ key, caller: client.pimApi, query, variables });
-                return key;
-            },
-            nextPimApi: (query: string, variables?: VariablesType): string => {
-                const key = `nextPimApi-${counter++}`;
-                promises.push({ key, caller: client.nextPimApi, query, variables });
-                return key;
-            },
-            shopCartApi: (query: string, variables?: VariablesType): string => {
-                const key = `shopCartApi-${counter++}`;
-                promises.push({ key, caller: client.shopCartApi, query, variables });
-                return key;
-            },
-        },
+        enqueue: Object.fromEntries(
+            (['catalogueApi', 'discoveryApi', 'pimApi', 'nextPimApi', 'shopCartApi'] as const).map((apiName) => [
+                apiName,
+                (query: string, variables?: VariablesType): string => {
+                    const key = `${apiName}-${counter++}`;
+                    promises.push({ key, caller: client[apiName], query, variables });
+                    return key;
+                },
+            ]),
+        ) as MassClientInterface['enqueue'],
     };
 }

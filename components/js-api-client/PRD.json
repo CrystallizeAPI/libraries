@@ -303,6 +303,7 @@
     },
     {
       "id": "DX-015",
+      "status": "done",
       "title": "Reduce boilerplate in mass call client enqueue methods",
       "priority": "P3",
       "category": "code-quality",
