@@ -67,7 +67,10 @@ describe('HTTP error codes', () => {
     );
 
     test('error includes errors array from response', async () => {
-        const errors = [{ field: 'token', message: 'expired' }, { field: 'scope', message: 'insufficient' }];
+        const errors = [
+            { field: 'token', message: 'expired' },
+            { field: 'scope', message: 'insufficient' },
+        ];
         const grab = vi.fn().mockResolvedValue(
             mockGrabResponse({
                 ok: false,
@@ -134,11 +137,7 @@ describe('GraphQL errors in 200 response', () => {
         const grab = vi.fn().mockResolvedValue(
             mockGrabResponse({
                 jsonData: {
-                    errors: [
-                        { message: 'First error' },
-                        { message: 'Second error' },
-                        { message: 'Third error' },
-                    ],
+                    errors: [{ message: 'First error' }, { message: 'Second error' }, { message: 'Third error' }],
                     data: null,
                 },
             }),
@@ -257,41 +256,31 @@ describe('network failures', () => {
     test('propagates network error from grab', async () => {
         const grab = vi.fn().mockRejectedValue(new TypeError('fetch failed'));
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow('fetch failed');
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow('fetch failed');
     });
 
     test('propagates DNS resolution failure', async () => {
         const grab = vi.fn().mockRejectedValue(new TypeError('getaddrinfo ENOTFOUND api.test.com'));
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow('ENOTFOUND');
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow('ENOTFOUND');
     });
 
     test('propagates connection refused', async () => {
         const grab = vi.fn().mockRejectedValue(new Error('connect ECONNREFUSED 127.0.0.1:443'));
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow('ECONNREFUSED');
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow('ECONNREFUSED');
     });
 
     test('propagates connection reset', async () => {
         const grab = vi.fn().mockRejectedValue(new Error('read ECONNRESET'));
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow('ECONNRESET');
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow('ECONNRESET');
     });
 });
 
 describe('timeout scenarios', () => {
     test('passes abort signal when timeout is configured', async () => {
-        const grab = vi.fn().mockResolvedValue(
-            mockGrabResponse({ jsonData: { data: { ok: true } } }),
-        );
+        const grab = vi.fn().mockResolvedValue(mockGrabResponse({ jsonData: { data: { ok: true } } }));
 
         await post(grab, 'https://api.test.com', defaultConfig, query, undefined, undefined, {
             timeout: 5000,
@@ -306,9 +295,7 @@ describe('timeout scenarios', () => {
     });
 
     test('does not pass signal when no timeout configured', async () => {
-        const grab = vi.fn().mockResolvedValue(
-            mockGrabResponse({ jsonData: { data: { ok: true } } }),
-        );
+        const grab = vi.fn().mockResolvedValue(mockGrabResponse({ jsonData: { data: { ok: true } } }));
 
         await post(grab, 'https://api.test.com', defaultConfig, query);
 
@@ -338,9 +325,7 @@ describe('malformed responses', () => {
             text: () => Promise.resolve('<html>Server Error</html>'),
         });
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow(SyntaxError);
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow(SyntaxError);
     });
 
     test('propagates JSON parse error on 200 with invalid body', async () => {
@@ -353,17 +338,13 @@ describe('malformed responses', () => {
             text: () => Promise.resolve(''),
         });
 
-        await expect(
-            post(grab, 'https://api.test.com', defaultConfig, query),
-        ).rejects.toThrow(SyntaxError);
+        await expect(post(grab, 'https://api.test.com', defaultConfig, query)).rejects.toThrow(SyntaxError);
     });
 });
 
 describe('204 No Content', () => {
     test('returns empty object', async () => {
-        const grab = vi.fn().mockResolvedValue(
-            mockGrabResponse({ ok: true, status: 204, statusText: 'No Content' }),
-        );
+        const grab = vi.fn().mockResolvedValue(mockGrabResponse({ ok: true, status: 204, statusText: 'No Content' }));
 
         const result = await post(grab, 'https://api.test.com', defaultConfig, 'mutation { delete }');
         expect(result).toEqual({});

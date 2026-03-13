@@ -87,7 +87,11 @@ export function createMassCallClient(
         maxSpawn?: number;
         onBatchDone?: (batch: MassCallClientBatch) => Promise<void>;
         beforeRequest?: (batch: MassCallClientBatch, promise: CrystallizePromise) => Promise<CrystallizePromise | void>;
-        afterRequest?: (batch: MassCallClientBatch, promise: CrystallizePromise, results: Record<string, unknown>) => Promise<void>;
+        afterRequest?: (
+            batch: MassCallClientBatch,
+            promise: CrystallizePromise,
+            results: Record<string, unknown>,
+        ) => Promise<void>;
         onFailure?: (
             batch: { from: number; to: number },
             exception: unknown,
@@ -117,7 +121,9 @@ export function createMassCallClient(
             batch = promises.slice(seek, to);
             const batchResults = await Promise.all(
                 batch.map(async (promise: CrystallizePromise) => {
-                    const buildStandardPromise = async (promise: CrystallizePromise): Promise<{ key: string; result: unknown } | undefined> => {
+                    const buildStandardPromise = async (
+                        promise: CrystallizePromise,
+                    ): Promise<{ key: string; result: unknown } | undefined> => {
                         try {
                             return {
                                 key: promise.key,

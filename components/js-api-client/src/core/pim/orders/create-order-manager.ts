@@ -125,7 +125,12 @@ export const createOrderManager = (apiClient: ClientInterface) => {
     type PutInPipelineStageDefaultOrderType<OnOrder, OnCustomer> = Required<Pick<Order, 'id' | 'reference'>> & {
         customer: Required<Pick<NonNullable<Order['customer']>, 'identifier'>> & OnCustomer;
     } & OnOrder;
-    const putInPipelineStage = async <OnOrder = unknown, OnCustomer = unknown, CustomerExtra = unknown, OrderExtra = unknown>(
+    const putInPipelineStage = async <
+        OnOrder = unknown,
+        OnCustomer = unknown,
+        CustomerExtra = unknown,
+        OrderExtra = unknown,
+    >(
         { id, pipelineId, stageId }: PutInPipelineStageArgs,
         enhancements?: PutInPipelineStageEnhancedQuery<CustomerExtra, OrderExtra>,
     ): Promise<PutInPipelineStageDefaultOrderType<OnOrder, OnCustomer>> => {
@@ -157,7 +162,12 @@ export const createOrderManager = (apiClient: ClientInterface) => {
     type RemoveFromPipelineDefaultOrderType<OnOrder, OnCustomer> = Required<Pick<Order, 'id' | 'reference'>> & {
         customer: Required<Pick<NonNullable<Order['customer']>, 'identifier'>> & OnCustomer;
     } & OnOrder;
-    const removeFromPipeline = async <OnOrder = unknown, OnCustomer = unknown, CustomerExtra = unknown, OrderExtra = unknown>(
+    const removeFromPipeline = async <
+        OnOrder = unknown,
+        OnCustomer = unknown,
+        CustomerExtra = unknown,
+        OrderExtra = unknown,
+    >(
         { id, pipelineId }: RemoveFromPipelineArgs,
         enhancements?: RemoveFromPipelineEnhancedQuery<CustomerExtra, OrderExtra>,
     ): Promise<RemoveFromPipelineDefaultOrderType<OnOrder, OnCustomer>> => {

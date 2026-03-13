@@ -134,7 +134,9 @@ describe('createMassCallClient', () => {
             initialSpawn: 1,
             maxSpawn: 5,
             sleeper: noopSleeper(),
-            onBatchDone: async (batch) => { batches.push(batch); },
+            onBatchDone: async (batch) => {
+                batches.push(batch);
+            },
         });
 
         for (let i = 0; i < 6; i++) {

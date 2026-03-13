@@ -25,7 +25,9 @@ type WithIdentifiersAndStatus<R> = R & {
     } & (R extends { status: infer S } ? S : {});
 };
 
-const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, unknown> }>(onSubscriptionContract?: SubscriptionContractExtra) => ({
+const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, unknown> }>(
+    onSubscriptionContract?: SubscriptionContractExtra,
+) => ({
     __on: [
         {
             __typeName: 'SubscriptionContractAggregate',
@@ -64,7 +66,10 @@ const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, u
  * ```
  */
 export const createSubscriptionContractManager = (apiClient: ClientInterface) => {
-    const create = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const create = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         intentSubscriptionContract: CreateSubscriptionContractInput,
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
@@ -100,7 +105,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.createSubscriptionContract;
     };
 
-    const update = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const update = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         intentSubscriptionContract: UpdateSubscriptionContractInput,
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
@@ -121,7 +129,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.updateSubscriptionContract;
     };
 
-    const cancel = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const cancel = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
         deactivate = false,
         onSubscriptionContract?: SubscriptionContractExtra,
@@ -144,7 +155,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.cancelSubscriptionContract;
     };
 
-    const pause = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const pause = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
@@ -163,7 +177,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.pauseSubscriptionContract;
     };
 
-    const resume = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const resume = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
@@ -182,7 +199,10 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         return confirmation.resumeSubscriptionContract;
     };
 
-    const renew = async <OnSubscriptionContract, SubscriptionContractExtra extends { status?: Record<string, unknown> } = {}>(
+    const renew = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
