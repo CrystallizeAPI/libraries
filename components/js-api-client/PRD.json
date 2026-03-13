@@ -322,6 +322,7 @@
     },
     {
       "id": "DX-016",
+      "status": "done",
       "title": "Reduce any usage in mass call client types",
       "priority": "P2",
       "category": "type-safety",
