@@ -14,6 +14,7 @@ export type GrabOptions = {
     method?: string;
     headers?: Record<string, string>;
     body?: string;
+    signal?: AbortSignal;
 };
 export type Grab = {
     grab: (url: string, options?: GrabOptions) => Promise<GrabResponse>;
@@ -28,7 +29,8 @@ export const createGrabber = (options?: Options): Grab => {
     const IDLE_TIMEOUT = 300000; // 5 min idle timeout
     const grab = async (url: string, grabOptions?: GrabOptions): Promise<GrabResponse> => {
         if (options?.useHttp2 !== true) {
-            return fetch(url, grabOptions);
+            const { signal, ...fetchOptions } = grabOptions || {};
+            return fetch(url, { ...fetchOptions, signal });
         }
         const closeAndDeleteClient = (origin: string) => {
             const clientObj = clients.get(origin);
@@ -72,6 +74,23 @@ export const createGrabber = (options?: Options): Grab => {
                 ...grabOptions?.headers,
             };
             const req = client.request(headers);
+
+            if (grabOptions?.signal) {
+                const signal = grabOptions.signal;
+                if (signal.aborted) {
+                    req.close();
+                    reject(signal.reason);
+                    return;
+                }
+                const onAbort = () => {
+                    req.close();
+                    reject(signal.reason);
+                };
+                signal.addEventListener('abort', onAbort, { once: true });
+                req.on('end', () => signal.removeEventListener('abort', onAbort));
+                req.on('error', () => signal.removeEventListener('abort', onAbort));
+            }
+
             if (grabOptions?.body) {
                 req.write(grabOptions.body);
             }

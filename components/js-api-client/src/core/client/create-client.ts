@@ -31,6 +31,8 @@ export type CreateClientOptions = {
     useHttp2?: boolean;
     profiling?: ProfilingOptions;
     extraHeaders?: Record<string, string>;
+    /** Request timeout in milliseconds. When set, requests that take longer will be aborted. */
+    timeout?: number;
     shopApiToken?: {
         doNotFetch?: boolean;
         scopes?: string[];
