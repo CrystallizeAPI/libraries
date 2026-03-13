@@ -14,12 +14,14 @@ export type MassCallClientBatch = {
 };
 export type QueuedApiCaller = (query: string, variables?: VariablesType) => string;
 
+export type MassCallResults = Record<string, unknown>;
+
 export type MassClientInterface = ClientInterface & {
-    execute: () => Promise<any>;
+    execute: () => Promise<MassCallResults>;
     reset: () => void;
     hasFailed: () => boolean;
     failureCount: () => number;
-    retry: () => Promise<any>;
+    retry: () => Promise<MassCallResults>;
     catalogueApi: ApiCaller;
     discoveryApi: ApiCaller;
     pimApi: ApiCaller;
@@ -74,15 +76,15 @@ export function createMassCallClient(
         maxSpawn?: number;
         onBatchDone?: (batch: MassCallClientBatch) => Promise<void>;
         beforeRequest?: (batch: MassCallClientBatch, promise: CrystallizePromise) => Promise<CrystallizePromise | void>;
-        afterRequest?: (batch: MassCallClientBatch, promise: CrystallizePromise, results: any) => Promise<void>;
+        afterRequest?: (batch: MassCallClientBatch, promise: CrystallizePromise, results: Record<string, unknown>) => Promise<void>;
         onFailure?: (
             batch: { from: number; to: number },
-            exception: any,
+            exception: unknown,
             promise: CrystallizePromise,
         ) => Promise<boolean>;
         sleeper?: Sleeper;
         changeIncrementFor?: (
-            situaion: 'more-than-half-have-failed' | 'some-have-failed' | 'none-have-failed',
+            situation: 'more-than-half-have-failed' | 'some-have-failed' | 'none-have-failed',
             currentIncrement: number,
         ) => number;
     },
@@ -97,16 +99,14 @@ export function createMassCallClient(
     const execute = async () => {
         failedPromises = [];
         let batch = [];
-        let results: {
-            [key: string]: any;
-        } = {};
+        let results: MassCallResults = {};
         do {
             let batchErrorCount = 0;
             const to = seek + increment;
             batch = promises.slice(seek, to);
             const batchResults = await Promise.all(
                 batch.map(async (promise: CrystallizePromise) => {
-                    const buildStandardPromise = async (promise: CrystallizePromise): Promise<any> => {
+                    const buildStandardPromise = async (promise: CrystallizePromise): Promise<{ key: string; result: unknown } | undefined> => {
                         try {
                             return {
                                 key: promise.key,
@@ -129,7 +129,7 @@ export function createMassCallClient(
                     }
 
                     // otherwise we wrap it
-                    return new Promise(async (resolve) => {
+                    return new Promise<{ key: string; result: unknown } | undefined>(async (resolve) => {
                         let alteredPromise;
                         if (options.beforeRequest) {
                             alteredPromise = await options.beforeRequest({ from: seek, to: to }, promise);
