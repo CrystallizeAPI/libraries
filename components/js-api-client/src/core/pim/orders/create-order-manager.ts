@@ -28,6 +28,23 @@ const baseQuery = <CustomerExtra, OrderExtra>(enhancements?: { onCustomer?: Cust
     ],
 });
 
+/**
+ * Creates an order manager for registering, updating, and managing orders via the Crystallize PIM API.
+ * Requires PIM API credentials (accessTokenId/accessTokenSecret) in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient` with PIM credentials.
+ * @returns An object with methods to `register`, `update`, `setPayments`, `putInPipelineStage`, and `removeFromPipeline`.
+ *
+ * @example
+ * ```ts
+ * const orderManager = createOrderManager(client);
+ * const { id, createdAt } = await orderManager.register({
+ *   customer: { identifier: 'customer@example.com' },
+ *   cart: [{ sku: 'SKU-001', name: 'My Product', quantity: 1 }],
+ *   total: { gross: 100, net: 80, currency: 'USD' },
+ * });
+ * ```
+ */
 export const createOrderManager = (apiClient: ClientInterface) => {
     const register = async (intentOrder: RegisterOrderInput) => {
         const intent = RegisterOrderInputSchema.parse(intentOrder);

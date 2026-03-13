@@ -68,6 +68,20 @@ type EnhanceQuery<OrderExtra = unknown, OrderItemExtra = unknown, CustomerExtra 
     onCustomer?: CustomerExtra;
 };
 
+/**
+ * Creates an order fetcher for retrieving orders from the Crystallize PIM API.
+ * Requires PIM API credentials (accessTokenId/accessTokenSecret) in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient` with PIM credentials.
+ * @returns An object with `byId` and `byCustomerIdentifier` methods for fetching orders.
+ *
+ * @example
+ * ```ts
+ * const orderFetcher = createOrderFetcher(client);
+ * const order = await orderFetcher.byId('order-id-123');
+ * const { orders, pageInfo } = await orderFetcher.byCustomerIdentifier('customer@example.com');
+ * ```
+ */
 export function createOrderFetcher(apiClient: ClientInterface) {
     const fetchPaginatedByCustomerIdentifier = async <
         OnOrder = unknown,

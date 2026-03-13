@@ -12,6 +12,23 @@ import { createCustomerFetcher } from './create-customer-fetcher.js';
 
 type WithIdentifier<R> = R & { identifier: string };
 
+/**
+ * Creates a customer manager for creating, updating, and managing customer records via the Crystallize PIM API.
+ * Requires PIM API credentials (accessTokenId/accessTokenSecret) in the client configuration.
+ *
+ * @param apiClient - A Crystallize client instance created via `createClient` with PIM credentials.
+ * @returns An object with methods to `create`, `update`, `setMeta`, `setMetaKey`, `setExternalReference`, and `setExternalReferenceKey`.
+ *
+ * @example
+ * ```ts
+ * const customerManager = createCustomerManager(client);
+ * const customer = await customerManager.create({
+ *   identifier: 'customer@example.com',
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ * });
+ * ```
+ */
 export const createCustomerManager = (apiClient: ClientInterface) => {
     const create = async <OnCustomer, CustomerExtra = unknown>(
         intentCustomer: CreateCustomerInput,
