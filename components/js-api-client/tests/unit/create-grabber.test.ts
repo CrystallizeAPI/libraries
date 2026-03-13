@@ -26,11 +26,14 @@ describe('createGrabber (fetch mode)', () => {
             body: '{"query":"{ test }"}',
         });
 
-        expect(fetchSpy).toHaveBeenCalledWith('https://api.test.com/graphql', expect.objectContaining({
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: '{"query":"{ test }"}',
-        }));
+        expect(fetchSpy).toHaveBeenCalledWith(
+            'https://api.test.com/graphql',
+            expect.objectContaining({
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: '{"query":"{ test }"}',
+            }),
+        );
         expect(response.ok).toBe(true);
         expect(response.status).toBe(200);
 
@@ -55,9 +58,12 @@ describe('createGrabber (fetch mode)', () => {
         const { grab } = createGrabber();
         await grab('https://api.test.com', { signal: controller.signal });
 
-        expect(fetchSpy).toHaveBeenCalledWith('https://api.test.com', expect.objectContaining({
-            signal: controller.signal,
-        }));
+        expect(fetchSpy).toHaveBeenCalledWith(
+            'https://api.test.com',
+            expect.objectContaining({
+                signal: controller.signal,
+            }),
+        );
 
         fetchSpy.mockRestore();
     });

@@ -1,450 +1,427 @@
 {
-  "project": "@crystallize/js-api-client",
-  "version": "5.3.0",
-  "goal": "Improve developer experience, code quality, type safety, and reliability of the JS API client",
-  "tasks": [
-    {
-      "id": "DX-001",
-      "status": "done",
-      "title": "Remove dead try/catch block in API caller",
-      "priority": "P0",
-      "category": "code-quality",
-      "effort": "5min",
-      "context": "In `src/core/client/create-api-caller.ts` lines 187-188, there is a catch block that simply rethrows the exception. This is a no-op that adds visual noise and misleads readers into thinking error handling is happening.",
-      "files": ["src/core/client/create-api-caller.ts"],
-      "requirements": [
-        "Remove the outer `try { ... } catch (exception) { throw exception; }` wrapper from the `post` function",
-        "Keep all the inner logic intact — only the wrapping try/catch is removed",
-        "The function behavior must remain identical"
-      ],
-      "verification": [
-        "Run `pnpm test` — all tests must pass",
-        "Verify the `post` function no longer has a useless catch block"
-      ]
-    },
-    {
-      "id": "DX-002",
-      "status": "done",
-      "title": "Delete commented-out subscription.ts file",
-      "priority": "P0",
-      "category": "code-quality",
-      "effort": "5min",
-      "context": "The file `src/core/subscription.ts` contains 543 lines of entirely commented-out code. This functionality has been replaced by the modules in `src/core/pim/subscriptions/`. The dead code creates confusion about what's active. Git history preserves it if ever needed.",
-      "files": ["src/core/subscription.ts"],
-      "requirements": [
-        "Delete the file `src/core/subscription.ts` entirely",
-        "Verify it is not imported or referenced anywhere in the codebase (it currently is not exported from `src/index.ts`)",
-        "No other files should be modified"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass",
-        "Grep the codebase for any imports of `subscription.ts` from the core directory (not the pim/subscriptions/ path)"
-      ]
-    },
-    {
-      "id": "DX-003",
-      "status": "done",
-      "title": "Fix 'chidlren' typo in catalogue fetcher",
-      "priority": "P0",
-      "category": "code-quality",
-      "effort": "5min",
-      "context": "In `src/core/catalogue/create-catalogue-fetcher.ts` around line 67, there is a typo: `chidlren` instead of `children`. This is in a GraphQL query builder, so it likely produces an incorrect field name in queries. This is a bug.",
-      "files": ["src/core/catalogue/create-catalogue-fetcher.ts"],
-      "requirements": [
-        "Find and replace `chidlren` with `children` in the catalogue fetcher",
-        "Check if the same typo appears anywhere else in the codebase and fix those too"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass",
-        "Grep the entire codebase for `chidlren` to ensure no remaining instances"
-      ]
-    },
-    {
-      "id": "DX-004",
-      "status": "done",
-      "title": "Remove unnecessary double spread in product hydrater",
-      "priority": "P0",
-      "category": "code-quality",
-      "effort": "5min",
-      "context": "In `src/core/catalogue/create-product-hydrater.ts` around line 90, there is `{ ...{ ...productListQuery } }` — a double spread that is functionally identical to `{ ...productListQuery }`. This is confusing to read.",
-      "files": ["src/core/catalogue/create-product-hydrater.ts"],
-      "requirements": [
-        "Simplify `{ ...{ ...productListQuery } }` to `{ ...productListQuery }`",
-        "No behavioral change"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass"
-      ]
-    },
-    {
-      "id": "DX-005",
-      "status": "done",
-      "title": "Fix results variable initialization in mass call client",
-      "priority": "P0",
-      "category": "code-quality",
-      "effort": "5min",
-      "context": "In `src/core/create-mass-call-client.ts` line 101, `results` is declared as `let results: { [key: string]: any } = []`. It's typed as an object but initialized as an array. It's then used as an object (`results[result.key] = ...`). While JavaScript allows this (arrays are objects), it's misleading and technically wrong.",
-      "files": ["src/core/create-mass-call-client.ts"],
-      "requirements": [
-        "Change `let results: { [key: string]: any } = []` to `let results: { [key: string]: any } = {}`",
-        "No behavioral change expected"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass"
-      ]
-    },
-    {
-      "id": "DX-006",
-      "status": "done",
-      "title": "Fix stale 'module' field in package.json",
-      "priority": "P0",
-      "category": "build",
-      "effort": "5min",
-      "context": "The `package.json` has `\"module\": \"./dist/index.mjs\"` but the build (tsup) outputs `./dist/index.js` for ESM. The `.mjs` file does not exist. Some bundlers (Webpack, Rollup) use the `module` field to resolve ESM entry points, so this can cause import failures in certain setups.",
-      "files": ["package.json"],
-      "requirements": [
-        "Either change `\"module\": \"./dist/index.mjs\"` to `\"module\": \"./dist/index.js\"` to match the actual build output",
-        "Or remove the `module` field entirely since the `exports` map already handles ESM resolution correctly",
-        "Verify the `exports` field is correct and consistent with the chosen approach"
-      ],
-      "verification": [
-        "Run `pnpm build` and verify the referenced file exists in `dist/`",
-        "Check that `ls dist/index.js` exists (ESM output)",
-        "Check that `ls dist/index.cjs` exists (CJS output)"
-      ]
-    },
-    {
-      "id": "DX-007",
-      "status": "done",
-      "title": "Set error name on JSApiClientCallError",
-      "priority": "P1",
-      "category": "error-handling",
-      "effort": "5min",
-      "context": "The custom error class `JSApiClientCallError` in `src/core/client/create-api-caller.ts` extends `Error` but never sets `this.name`. This means stack traces and `error.name` show generic `Error` instead of `JSApiClientCallError`, making debugging harder. All well-designed custom error classes should set their name.",
-      "files": ["src/core/client/create-api-caller.ts"],
-      "requirements": [
-        "Add `this.name = 'JSApiClientCallError';` in the constructor, after the `super()` call",
-        "No other changes needed"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass",
-        "Manually verify: `new JSApiClientCallError({...}).name === 'JSApiClientCallError'`"
-      ]
-    },
-    {
-      "id": "DX-008",
-      "status": "done",
-      "title": "Remove 'any' from union types in grabber and API caller signatures",
-      "priority": "P1",
-      "category": "type-safety",
-      "effort": "30min",
-      "context": "In `src/core/client/create-grabber.ts` line 14 and `src/core/client/create-api-caller.ts` line 95, the parameter type is `RequestInit | any | undefined`. The `| any` makes the entire union collapse to `any`, completely defeating TypeScript's type checking. This means any caller can pass anything without type errors.",
-      "files": [
-        "src/core/client/create-grabber.ts",
-        "src/core/client/create-api-caller.ts"
-      ],
-      "requirements": [
-        "Define a proper `GrabOptions` type that extends or replaces the `RequestInit | any` pattern",
-        "The type should cover what the grabber actually uses: `method`, `headers`, `body`",
-        "Update the `Grab` type, `grab` function signature, and `post` function signature",
-        "Ensure HTTP/2 code path still compiles (it uses `headers` with `:method` and `:path` pseudo-headers)",
-        "No behavioral changes"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed with no type errors",
-        "Run `pnpm test` — all tests must pass",
-        "Verify that passing an invalid option to `grab()` now produces a TypeScript error"
-      ]
-    },
-    {
-      "id": "DX-009",
-      "status": "done",
-      "title": "Replace tracked .env with .env.example",
-      "priority": "P1",
-      "category": "security",
-      "effort": "10min",
-      "context": "There is a `.env` file (519 bytes) tracked in the repository root. Even if it only contains test tenant credentials, tracking `.env` files in git is bad practice — it trains contributors to commit secrets. The file should be replaced with a `.env.example` template.",
-      "files": [".env", ".env.example", ".gitignore"],
-      "requirements": [
-        "Create a `.env.example` file with the same keys but placeholder values (e.g., `CRYSTALLIZE_ACCESS_TOKEN_ID=your-token-id-here`)",
-        "Add `.env` to `.gitignore` if not already present",
-        "Remove `.env` from git tracking (but don't delete the local file): `git rm --cached .env`",
-        "Update any documentation that references the `.env` file"
-      ],
-      "verification": [
-        "Verify `.env` is in `.gitignore`",
-        "Verify `.env.example` exists with placeholder values",
-        "Run `pnpm test` — tests should still work (they use `dotenv/config` which reads the local `.env`)"
-      ]
-    },
-    {
-      "id": "DX-010",
-      "status": "done",
-      "title": "Improve authentication error messaging",
-      "priority": "P1",
-      "category": "error-handling",
-      "effort": "30min",
-      "context": "In `src/core/client/create-api-caller.ts` lines 71-74, when no authentication is configured (no sessionId, no staticAuthToken, no accessToken), the `authenticationHeaders` function silently sends empty string values for `X-Crystallize-Access-Token-Id` and `X-Crystallize-Access-Token-Secret`. This results in a confusing 401/403 error from the server instead of a clear local error message telling the developer they forgot to configure authentication.",
-      "files": ["src/core/client/create-api-caller.ts"],
-      "requirements": [
-        "When the fallback case is reached (no sessionId, no staticAuthToken) AND both `accessTokenId` and `accessTokenSecret` are empty/undefined, log a warning or throw a descriptive error",
-        "The warning should say something like: 'No authentication credentials configured. Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.'",
-        "Consider using `console.warn` rather than throwing, since some catalogue endpoints may work without auth",
-        "Only warn once per client instance to avoid spam"
-      ],
-      "verification": [
-        "Run `pnpm test` — all tests must pass",
-        "Manually test: create a client with no auth config, call `pimApi()`, verify a warning is logged"
-      ]
-    },
-    {
-      "id": "DX-011",
-      "status": "done",
-      "title": "Improve generic parameter naming in fetchers",
-      "priority": "P2",
-      "category": "type-safety",
-      "effort": "30min",
-      "context": "Across order, customer, and subscription fetchers/managers, generic type parameters use cryptic abbreviations: `OO`, `OOI`, `OC`. These are mixed with clearer names like `OnOrder`, `OnCustomer` in the same files. This inconsistency makes the generics hard to understand for library consumers who see them in IDE tooltips.",
-      "files": [
-        "src/core/pim/orders/create-order-fetcher.ts",
-        "src/core/pim/orders/create-order-manager.ts",
-        "src/core/pim/customers/create-customer-manager.ts",
-        "src/core/pim/customers/create-customer-fetcher.ts",
-        "src/core/pim/subscriptions/create-subscription-contract-fetcher.ts",
-        "src/core/pim/subscriptions/create-subscription-contract-manager.ts"
-      ],
-      "requirements": [
-        "Rename cryptic generic parameters to descriptive names consistently across all fetchers/managers",
-        "Suggested mapping: `OO` → `OrderExtra`, `OOI` → `OrderItemExtra`, `OC` → `CustomerExtra`",
-        "Ensure the public API types (visible to consumers) use the new names",
-        "This is a non-breaking change since generic names are not part of the runtime API"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass"
-      ]
-    },
-    {
-      "id": "DX-012",
-      "status": "done",
-      "title": "Add Symbol.dispose support for automatic cleanup",
-      "priority": "P2",
-      "category": "api-design",
-      "effort": "1h",
-      "context": "The `ClientInterface` requires calling `close()` to clean up HTTP/2 connections. If a developer forgets, connections leak. TypeScript 5.2+ supports the `using` declaration with `Symbol.dispose` / `Symbol.asyncDispose`, which provides automatic cleanup. This is a modern ergonomic improvement that makes the library safer to use.",
-      "files": [
-        "src/core/client/create-client.ts"
-      ],
-      "requirements": [
-        "Add `[Symbol.dispose]` to the `ClientInterface` type that calls `close()`",
-        "Implement it in the `createClient` return value",
-        "Keep the existing `close()` method for backward compatibility",
-        "This allows: `using client = createClient({...})` — auto-closes when scope exits",
-        "Ensure the TypeScript target/lib settings support `Symbol.dispose` (may need to add `esnext.disposable` to `lib`)",
-        "Do NOT break existing usage patterns"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass",
-        "Write a quick TypeScript snippet using `using client = createClient({...})` and verify it compiles"
-      ]
-    },
-    {
-      "id": "DX-013",
-      "status": "done",
-      "title": "Add request timeout support via AbortController",
-      "priority": "P2",
-      "category": "reliability",
-      "effort": "1h",
-      "context": "There is no way to set a timeout on API calls. A hanging request will hang forever, which is especially problematic in serverless environments with execution time limits. The library should support an optional timeout that automatically aborts requests.",
-      "files": [
-        "src/core/client/create-client.ts",
-        "src/core/client/create-api-caller.ts",
-        "src/core/client/create-grabber.ts"
-      ],
-      "requirements": [
-        "Add an optional `timeout` field to `CreateClientOptions` (in milliseconds)",
-        "In the `post` function, create an `AbortController` with `AbortSignal.timeout(ms)` when timeout is configured",
-        "Pass the signal to the `grab` function (for fetch path: pass as part of RequestInit; for HTTP/2 path: use `req.close()` on timeout)",
-        "Throw a descriptive error when a timeout occurs (e.g., `JSApiClientCallError` with a clear message)",
-        "Allow per-request timeout override (optional, can be deferred)",
-        "Default: no timeout (backward compatible)"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass",
-        "Manually test: create a client with `timeout: 1` (1ms) and verify it times out on a real request"
-      ]
-    },
-    {
-      "id": "DX-014",
-      "status": "done",
-      "title": "Make Server-Timing header parsing robust",
-      "priority": "P2",
-      "category": "reliability",
-      "effort": "15min",
-      "context": "In `src/core/client/create-api-caller.ts` lines 127-131, the Server-Timing header is parsed with `split(';')[1]?.split('=')[1]`. This assumes a specific format and will produce garbage values with non-standard headers. The profiling feature should not break or report wrong values due to header format variations.",
-      "files": ["src/core/client/create-api-caller.ts"],
-      "requirements": [
-        "Parse the Server-Timing header according to the spec: `<metric>;dur=<value>`",
-        "Use a regex like `/dur=([\\d.]+)/` to extract the duration value reliably",
-        "If parsing fails, fall back to `-1` (current fallback) without throwing",
-        "Handle the case where the header is missing entirely (already handled with `?? undefined`)"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass (especially `catalogue-profiled.test.ts`)"
-      ]
-    },
-    {
-      "id": "DX-015",
-      "status": "done",
-      "title": "Reduce boilerplate in mass call client enqueue methods",
-      "priority": "P3",
-      "category": "code-quality",
-      "effort": "15min",
-      "context": "In `src/core/create-mass-call-client.ts` lines 209-234, the five `enqueue` methods (`catalogueApi`, `discoveryApi`, `pimApi`, `nextPimApi`, `shopCartApi`) are identical except for the key prefix and the caller they reference. This is ~25 lines of repetitive code that can be generated programmatically.",
-      "files": ["src/core/create-mass-call-client.ts"],
-      "requirements": [
-        "Replace the five repetitive `enqueue` method definitions with a generated approach",
-        "Use a helper function or `Object.fromEntries` pattern to create the enqueue methods dynamically",
-        "The public API and types must remain identical — this is an internal refactor only",
-        "Ensure type safety is preserved (the `QueuedApiCaller` type must still apply)"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass"
-      ]
-    },
-    {
-      "id": "DX-016",
-      "status": "done",
-      "title": "Reduce any usage in mass call client types",
-      "priority": "P2",
-      "category": "type-safety",
-      "effort": "1h",
-      "context": "The `create-mass-call-client.ts` file has 10+ usages of `any` in its types: `execute()` returns `Promise<any>`, `afterRequest` callback receives `any`, `onFailure` receives `any` for the exception, `results` is `{ [key: string]: any }`. This defeats TypeScript's ability to help consumers of the mass call client.",
-      "files": ["src/core/create-mass-call-client.ts"],
-      "requirements": [
-        "Replace `Promise<any>` return type of `execute()` with `Promise<Record<string, unknown>>` or a generic",
-        "Replace `any` in `afterRequest` callback with the actual result shape",
-        "Replace `any` for `exception` in `onFailure` with `unknown` (TypeScript best practice for caught errors)",
-        "Replace `results` type with `Record<string, unknown>` or a generic keyed type",
-        "Keep the `experimental` nature — don't over-engineer, just remove the `any` holes",
-        "Fix the typo `situaion` → `situation` in the `changeIncrementFor` callback parameter (line 85)"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Run `pnpm test` — all tests must pass"
-      ]
-    },
-    {
-      "id": "DX-017",
-      "status": "done",
-      "title": "Add unit tests with mocked HTTP for core modules",
-      "priority": "P3",
-      "category": "testing",
-      "effort": "4h",
-      "context": "Currently all 15 test files are integration tests that hit real Crystallize APIs. There are zero unit tests. Critical modules like `create-grabber.ts`, `create-mass-call-client.ts`, and `create-binary-file-manager.ts` have no tests at all. Unit tests with mocked HTTP would: (1) allow tests to run without credentials, (2) test error paths, (3) run fast enough for PR CI.",
-      "files": [
-        "tests/unit/create-api-caller.test.ts",
-        "tests/unit/create-grabber.test.ts",
-        "tests/unit/create-mass-call-client.test.ts"
-      ],
-      "requirements": [
-        "Create a `tests/unit/` directory for unit tests",
-        "Add unit tests for `create-api-caller.ts` covering: successful response, GraphQL errors in 200 response, HTTP error responses, Core Next wrapped errors, 204 No Content handling",
-        "Add unit tests for `create-mass-call-client.ts` covering: basic enqueue and execute, retry logic, batch size adaptation (increment/decrement), Fibonacci backoff",
-        "Mock the `grab` function (it's a simple function signature, easy to mock)",
-        "Do not require API credentials or network access",
-        "Test error paths: network failures, malformed JSON responses, timeout scenarios"
-      ],
-      "verification": [
-        "Run `pnpm test` — all tests (integration + unit) must pass",
-        "Unit tests must pass without any `.env` credentials"
-      ]
-    },
-    {
-      "id": "DX-018",
-      "status": "done",
-      "title": "Add error-path tests for API caller",
-      "priority": "P3",
-      "category": "testing",
-      "effort": "2h",
-      "context": "The current test suite only covers happy paths. There are no tests for: authentication failures (401/403), rate limiting (429), server errors (500/502/503), network timeouts, malformed JSON responses, or missing required fields. These are common real-world scenarios that should be covered.",
-      "files": ["tests/unit/error-handling.test.ts"],
-      "requirements": [
-        "Create tests that verify `JSApiClientCallError` is thrown with correct properties for various HTTP error codes",
-        "Test that GraphQL errors in 200 responses are properly detected and thrown",
-        "Test that Core Next wrapped errors are detected via `getCoreNextError`",
-        "Test that the error includes the query and variables for debugging",
-        "Test 204 No Content returns empty object",
-        "Mock the grab function for all tests — no network required"
-      ],
-      "verification": [
-        "Run `pnpm test` — all tests must pass",
-        "Tests must pass without credentials"
-      ]
-    },
-    {
-      "id": "DX-019",
-      "status": "done",
-      "title": "Add CI workflow for pull requests",
-      "priority": "P3",
-      "category": "ci-cd",
-      "effort": "30min",
-      "context": "Currently `.github/workflows/release.yaml` only runs on git tags (releases). There is no CI that runs on pull requests. This means broken code can be merged without any automated checks. A PR workflow should at minimum run build and unit tests.",
-      "files": [".github/workflows/ci.yaml"],
-      "requirements": [
-        "Create a new workflow file `.github/workflows/ci.yaml`",
-        "Trigger on: pull requests to main, pushes to main",
-        "Steps: checkout, setup Node.js (same version as release.yaml), install deps with pnpm, run `pnpm build`, run `pnpm test` (unit tests only — integration tests need credentials)",
-        "Consider testing on multiple Node.js versions (20, 22, 24)",
-        "Keep it fast — unit tests should not require API credentials"
-      ],
-      "verification": [
-        "Push a branch and create a PR to verify the workflow triggers",
-        "Verify the workflow passes with build + unit tests"
-      ]
-    },
-    {
-      "id": "DX-020",
-      "status": "done",
-      "title": "Add JSDoc comments to main exported functions",
-      "priority": "P3",
-      "category": "documentation",
-      "effort": "2h",
-      "context": "Most exported factory functions have no JSDoc comments. IDE users (the primary consumers of this library) get no inline documentation when hovering over `createClient`, `createCatalogueFetcher`, `createOrderManager`, etc. Good JSDoc with `@param`, `@returns`, and `@example` tags significantly improves discoverability.",
-      "files": [
-        "src/core/client/create-client.ts",
-        "src/core/catalogue/create-catalogue-fetcher.ts",
-        "src/core/catalogue/create-navigation-fetcher.ts",
-        "src/core/catalogue/create-product-hydrater.ts",
-        "src/core/pim/orders/create-order-manager.ts",
-        "src/core/pim/orders/create-order-fetcher.ts",
-        "src/core/pim/customers/create-customer-manager.ts",
-        "src/core/pim/subscriptions/create-subscription-contract-manager.ts",
-        "src/core/shop/create-cart-manager.ts",
-        "src/core/create-signature-verifier.ts",
-        "src/core/pim/create-binary-file-manager.ts",
-        "src/core/create-mass-call-client.ts"
-      ],
-      "requirements": [
-        "Add JSDoc to all exported factory functions with: description, @param tags, @returns description, and at least one @example",
-        "Focus on the main entry points that library consumers use directly",
-        "Keep descriptions concise — one sentence for what it does, one for when to use it",
-        "Include authentication requirements in the description where relevant (e.g., 'Requires PIM API credentials')",
-        "Do not add JSDoc to internal/helper functions"
-      ],
-      "verification": [
-        "Run `pnpm build` — build must succeed",
-        "Open the source files in an IDE and verify JSDoc appears on hover for the exported functions"
-      ]
-    }
-  ]
+    "project": "@crystallize/js-api-client",
+    "version": "5.3.0",
+    "goal": "Improve developer experience, code quality, type safety, and reliability of the JS API client",
+    "tasks": [
+        {
+            "id": "DX-001",
+            "status": "done",
+            "title": "Remove dead try/catch block in API caller",
+            "priority": "P0",
+            "category": "code-quality",
+            "effort": "5min",
+            "context": "In `src/core/client/create-api-caller.ts` lines 187-188, there is a catch block that simply rethrows the exception. This is a no-op that adds visual noise and misleads readers into thinking error handling is happening.",
+            "files": ["src/core/client/create-api-caller.ts"],
+            "requirements": [
+                "Remove the outer `try { ... } catch (exception) { throw exception; }` wrapper from the `post` function",
+                "Keep all the inner logic intact — only the wrapping try/catch is removed",
+                "The function behavior must remain identical"
+            ],
+            "verification": [
+                "Run `pnpm test` — all tests must pass",
+                "Verify the `post` function no longer has a useless catch block"
+            ]
+        },
+        {
+            "id": "DX-002",
+            "status": "done",
+            "title": "Delete commented-out subscription.ts file",
+            "priority": "P0",
+            "category": "code-quality",
+            "effort": "5min",
+            "context": "The file `src/core/subscription.ts` contains 543 lines of entirely commented-out code. This functionality has been replaced by the modules in `src/core/pim/subscriptions/`. The dead code creates confusion about what's active. Git history preserves it if ever needed.",
+            "files": ["src/core/subscription.ts"],
+            "requirements": [
+                "Delete the file `src/core/subscription.ts` entirely",
+                "Verify it is not imported or referenced anywhere in the codebase (it currently is not exported from `src/index.ts`)",
+                "No other files should be modified"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass",
+                "Grep the codebase for any imports of `subscription.ts` from the core directory (not the pim/subscriptions/ path)"
+            ]
+        },
+        {
+            "id": "DX-003",
+            "status": "done",
+            "title": "Fix 'chidlren' typo in catalogue fetcher",
+            "priority": "P0",
+            "category": "code-quality",
+            "effort": "5min",
+            "context": "In `src/core/catalogue/create-catalogue-fetcher.ts` around line 67, there is a typo: `chidlren` instead of `children`. This is in a GraphQL query builder, so it likely produces an incorrect field name in queries. This is a bug.",
+            "files": ["src/core/catalogue/create-catalogue-fetcher.ts"],
+            "requirements": [
+                "Find and replace `chidlren` with `children` in the catalogue fetcher",
+                "Check if the same typo appears anywhere else in the codebase and fix those too"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass",
+                "Grep the entire codebase for `chidlren` to ensure no remaining instances"
+            ]
+        },
+        {
+            "id": "DX-004",
+            "status": "done",
+            "title": "Remove unnecessary double spread in product hydrater",
+            "priority": "P0",
+            "category": "code-quality",
+            "effort": "5min",
+            "context": "In `src/core/catalogue/create-product-hydrater.ts` around line 90, there is `{ ...{ ...productListQuery } }` — a double spread that is functionally identical to `{ ...productListQuery }`. This is confusing to read.",
+            "files": ["src/core/catalogue/create-product-hydrater.ts"],
+            "requirements": [
+                "Simplify `{ ...{ ...productListQuery } }` to `{ ...productListQuery }`",
+                "No behavioral change"
+            ],
+            "verification": ["Run `pnpm build` — build must succeed", "Run `pnpm test` — all tests must pass"]
+        },
+        {
+            "id": "DX-005",
+            "status": "done",
+            "title": "Fix results variable initialization in mass call client",
+            "priority": "P0",
+            "category": "code-quality",
+            "effort": "5min",
+            "context": "In `src/core/create-mass-call-client.ts` line 101, `results` is declared as `let results: { [key: string]: any } = []`. It's typed as an object but initialized as an array. It's then used as an object (`results[result.key] = ...`). While JavaScript allows this (arrays are objects), it's misleading and technically wrong.",
+            "files": ["src/core/create-mass-call-client.ts"],
+            "requirements": [
+                "Change `let results: { [key: string]: any } = []` to `let results: { [key: string]: any } = {}`",
+                "No behavioral change expected"
+            ],
+            "verification": ["Run `pnpm build` — build must succeed", "Run `pnpm test` — all tests must pass"]
+        },
+        {
+            "id": "DX-006",
+            "status": "done",
+            "title": "Fix stale 'module' field in package.json",
+            "priority": "P0",
+            "category": "build",
+            "effort": "5min",
+            "context": "The `package.json` has `\"module\": \"./dist/index.mjs\"` but the build (tsup) outputs `./dist/index.js` for ESM. The `.mjs` file does not exist. Some bundlers (Webpack, Rollup) use the `module` field to resolve ESM entry points, so this can cause import failures in certain setups.",
+            "files": ["package.json"],
+            "requirements": [
+                "Either change `\"module\": \"./dist/index.mjs\"` to `\"module\": \"./dist/index.js\"` to match the actual build output",
+                "Or remove the `module` field entirely since the `exports` map already handles ESM resolution correctly",
+                "Verify the `exports` field is correct and consistent with the chosen approach"
+            ],
+            "verification": [
+                "Run `pnpm build` and verify the referenced file exists in `dist/`",
+                "Check that `ls dist/index.js` exists (ESM output)",
+                "Check that `ls dist/index.cjs` exists (CJS output)"
+            ]
+        },
+        {
+            "id": "DX-007",
+            "status": "done",
+            "title": "Set error name on JSApiClientCallError",
+            "priority": "P1",
+            "category": "error-handling",
+            "effort": "5min",
+            "context": "The custom error class `JSApiClientCallError` in `src/core/client/create-api-caller.ts` extends `Error` but never sets `this.name`. This means stack traces and `error.name` show generic `Error` instead of `JSApiClientCallError`, making debugging harder. All well-designed custom error classes should set their name.",
+            "files": ["src/core/client/create-api-caller.ts"],
+            "requirements": [
+                "Add `this.name = 'JSApiClientCallError';` in the constructor, after the `super()` call",
+                "No other changes needed"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass",
+                "Manually verify: `new JSApiClientCallError({...}).name === 'JSApiClientCallError'`"
+            ]
+        },
+        {
+            "id": "DX-008",
+            "status": "done",
+            "title": "Remove 'any' from union types in grabber and API caller signatures",
+            "priority": "P1",
+            "category": "type-safety",
+            "effort": "30min",
+            "context": "In `src/core/client/create-grabber.ts` line 14 and `src/core/client/create-api-caller.ts` line 95, the parameter type is `RequestInit | any | undefined`. The `| any` makes the entire union collapse to `any`, completely defeating TypeScript's type checking. This means any caller can pass anything without type errors.",
+            "files": ["src/core/client/create-grabber.ts", "src/core/client/create-api-caller.ts"],
+            "requirements": [
+                "Define a proper `GrabOptions` type that extends or replaces the `RequestInit | any` pattern",
+                "The type should cover what the grabber actually uses: `method`, `headers`, `body`",
+                "Update the `Grab` type, `grab` function signature, and `post` function signature",
+                "Ensure HTTP/2 code path still compiles (it uses `headers` with `:method` and `:path` pseudo-headers)",
+                "No behavioral changes"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed with no type errors",
+                "Run `pnpm test` — all tests must pass",
+                "Verify that passing an invalid option to `grab()` now produces a TypeScript error"
+            ]
+        },
+        {
+            "id": "DX-009",
+            "status": "done",
+            "title": "Replace tracked .env with .env.example",
+            "priority": "P1",
+            "category": "security",
+            "effort": "10min",
+            "context": "There is a `.env` file (519 bytes) tracked in the repository root. Even if it only contains test tenant credentials, tracking `.env` files in git is bad practice — it trains contributors to commit secrets. The file should be replaced with a `.env.example` template.",
+            "files": [".env", ".env.example", ".gitignore"],
+            "requirements": [
+                "Create a `.env.example` file with the same keys but placeholder values (e.g., `CRYSTALLIZE_ACCESS_TOKEN_ID=your-token-id-here`)",
+                "Add `.env` to `.gitignore` if not already present",
+                "Remove `.env` from git tracking (but don't delete the local file): `git rm --cached .env`",
+                "Update any documentation that references the `.env` file"
+            ],
+            "verification": [
+                "Verify `.env` is in `.gitignore`",
+                "Verify `.env.example` exists with placeholder values",
+                "Run `pnpm test` — tests should still work (they use `dotenv/config` which reads the local `.env`)"
+            ]
+        },
+        {
+            "id": "DX-010",
+            "status": "done",
+            "title": "Improve authentication error messaging",
+            "priority": "P1",
+            "category": "error-handling",
+            "effort": "30min",
+            "context": "In `src/core/client/create-api-caller.ts` lines 71-74, when no authentication is configured (no sessionId, no staticAuthToken, no accessToken), the `authenticationHeaders` function silently sends empty string values for `X-Crystallize-Access-Token-Id` and `X-Crystallize-Access-Token-Secret`. This results in a confusing 401/403 error from the server instead of a clear local error message telling the developer they forgot to configure authentication.",
+            "files": ["src/core/client/create-api-caller.ts"],
+            "requirements": [
+                "When the fallback case is reached (no sessionId, no staticAuthToken) AND both `accessTokenId` and `accessTokenSecret` are empty/undefined, log a warning or throw a descriptive error",
+                "The warning should say something like: 'No authentication credentials configured. Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.'",
+                "Consider using `console.warn` rather than throwing, since some catalogue endpoints may work without auth",
+                "Only warn once per client instance to avoid spam"
+            ],
+            "verification": [
+                "Run `pnpm test` — all tests must pass",
+                "Manually test: create a client with no auth config, call `pimApi()`, verify a warning is logged"
+            ]
+        },
+        {
+            "id": "DX-011",
+            "status": "done",
+            "title": "Improve generic parameter naming in fetchers",
+            "priority": "P2",
+            "category": "type-safety",
+            "effort": "30min",
+            "context": "Across order, customer, and subscription fetchers/managers, generic type parameters use cryptic abbreviations: `OO`, `OOI`, `OC`. These are mixed with clearer names like `OnOrder`, `OnCustomer` in the same files. This inconsistency makes the generics hard to understand for library consumers who see them in IDE tooltips.",
+            "files": [
+                "src/core/pim/orders/create-order-fetcher.ts",
+                "src/core/pim/orders/create-order-manager.ts",
+                "src/core/pim/customers/create-customer-manager.ts",
+                "src/core/pim/customers/create-customer-fetcher.ts",
+                "src/core/pim/subscriptions/create-subscription-contract-fetcher.ts",
+                "src/core/pim/subscriptions/create-subscription-contract-manager.ts"
+            ],
+            "requirements": [
+                "Rename cryptic generic parameters to descriptive names consistently across all fetchers/managers",
+                "Suggested mapping: `OO` → `OrderExtra`, `OOI` → `OrderItemExtra`, `OC` → `CustomerExtra`",
+                "Ensure the public API types (visible to consumers) use the new names",
+                "This is a non-breaking change since generic names are not part of the runtime API"
+            ],
+            "verification": ["Run `pnpm build` — build must succeed", "Run `pnpm test` — all tests must pass"]
+        },
+        {
+            "id": "DX-012",
+            "status": "done",
+            "title": "Add Symbol.dispose support for automatic cleanup",
+            "priority": "P2",
+            "category": "api-design",
+            "effort": "1h",
+            "context": "The `ClientInterface` requires calling `close()` to clean up HTTP/2 connections. If a developer forgets, connections leak. TypeScript 5.2+ supports the `using` declaration with `Symbol.dispose` / `Symbol.asyncDispose`, which provides automatic cleanup. This is a modern ergonomic improvement that makes the library safer to use.",
+            "files": ["src/core/client/create-client.ts"],
+            "requirements": [
+                "Add `[Symbol.dispose]` to the `ClientInterface` type that calls `close()`",
+                "Implement it in the `createClient` return value",
+                "Keep the existing `close()` method for backward compatibility",
+                "This allows: `using client = createClient({...})` — auto-closes when scope exits",
+                "Ensure the TypeScript target/lib settings support `Symbol.dispose` (may need to add `esnext.disposable` to `lib`)",
+                "Do NOT break existing usage patterns"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass",
+                "Write a quick TypeScript snippet using `using client = createClient({...})` and verify it compiles"
+            ]
+        },
+        {
+            "id": "DX-013",
+            "status": "done",
+            "title": "Add request timeout support via AbortController",
+            "priority": "P2",
+            "category": "reliability",
+            "effort": "1h",
+            "context": "There is no way to set a timeout on API calls. A hanging request will hang forever, which is especially problematic in serverless environments with execution time limits. The library should support an optional timeout that automatically aborts requests.",
+            "files": [
+                "src/core/client/create-client.ts",
+                "src/core/client/create-api-caller.ts",
+                "src/core/client/create-grabber.ts"
+            ],
+            "requirements": [
+                "Add an optional `timeout` field to `CreateClientOptions` (in milliseconds)",
+                "In the `post` function, create an `AbortController` with `AbortSignal.timeout(ms)` when timeout is configured",
+                "Pass the signal to the `grab` function (for fetch path: pass as part of RequestInit; for HTTP/2 path: use `req.close()` on timeout)",
+                "Throw a descriptive error when a timeout occurs (e.g., `JSApiClientCallError` with a clear message)",
+                "Allow per-request timeout override (optional, can be deferred)",
+                "Default: no timeout (backward compatible)"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass",
+                "Manually test: create a client with `timeout: 1` (1ms) and verify it times out on a real request"
+            ]
+        },
+        {
+            "id": "DX-014",
+            "status": "done",
+            "title": "Make Server-Timing header parsing robust",
+            "priority": "P2",
+            "category": "reliability",
+            "effort": "15min",
+            "context": "In `src/core/client/create-api-caller.ts` lines 127-131, the Server-Timing header is parsed with `split(';')[1]?.split('=')[1]`. This assumes a specific format and will produce garbage values with non-standard headers. The profiling feature should not break or report wrong values due to header format variations.",
+            "files": ["src/core/client/create-api-caller.ts"],
+            "requirements": [
+                "Parse the Server-Timing header according to the spec: `<metric>;dur=<value>`",
+                "Use a regex like `/dur=([\\d.]+)/` to extract the duration value reliably",
+                "If parsing fails, fall back to `-1` (current fallback) without throwing",
+                "Handle the case where the header is missing entirely (already handled with `?? undefined`)"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Run `pnpm test` — all tests must pass (especially `catalogue-profiled.test.ts`)"
+            ]
+        },
+        {
+            "id": "DX-015",
+            "status": "done",
+            "title": "Reduce boilerplate in mass call client enqueue methods",
+            "priority": "P3",
+            "category": "code-quality",
+            "effort": "15min",
+            "context": "In `src/core/create-mass-call-client.ts` lines 209-234, the five `enqueue` methods (`catalogueApi`, `discoveryApi`, `pimApi`, `nextPimApi`, `shopCartApi`) are identical except for the key prefix and the caller they reference. This is ~25 lines of repetitive code that can be generated programmatically.",
+            "files": ["src/core/create-mass-call-client.ts"],
+            "requirements": [
+                "Replace the five repetitive `enqueue` method definitions with a generated approach",
+                "Use a helper function or `Object.fromEntries` pattern to create the enqueue methods dynamically",
+                "The public API and types must remain identical — this is an internal refactor only",
+                "Ensure type safety is preserved (the `QueuedApiCaller` type must still apply)"
+            ],
+            "verification": ["Run `pnpm build` — build must succeed", "Run `pnpm test` — all tests must pass"]
+        },
+        {
+            "id": "DX-016",
+            "status": "done",
+            "title": "Reduce any usage in mass call client types",
+            "priority": "P2",
+            "category": "type-safety",
+            "effort": "1h",
+            "context": "The `create-mass-call-client.ts` file has 10+ usages of `any` in its types: `execute()` returns `Promise<any>`, `afterRequest` callback receives `any`, `onFailure` receives `any` for the exception, `results` is `{ [key: string]: any }`. This defeats TypeScript's ability to help consumers of the mass call client.",
+            "files": ["src/core/create-mass-call-client.ts"],
+            "requirements": [
+                "Replace `Promise<any>` return type of `execute()` with `Promise<Record<string, unknown>>` or a generic",
+                "Replace `any` in `afterRequest` callback with the actual result shape",
+                "Replace `any` for `exception` in `onFailure` with `unknown` (TypeScript best practice for caught errors)",
+                "Replace `results` type with `Record<string, unknown>` or a generic keyed type",
+                "Keep the `experimental` nature — don't over-engineer, just remove the `any` holes",
+                "Fix the typo `situaion` → `situation` in the `changeIncrementFor` callback parameter (line 85)"
+            ],
+            "verification": ["Run `pnpm build` — build must succeed", "Run `pnpm test` — all tests must pass"]
+        },
+        {
+            "id": "DX-017",
+            "status": "done",
+            "title": "Add unit tests with mocked HTTP for core modules",
+            "priority": "P3",
+            "category": "testing",
+            "effort": "4h",
+            "context": "Currently all 15 test files are integration tests that hit real Crystallize APIs. There are zero unit tests. Critical modules like `create-grabber.ts`, `create-mass-call-client.ts`, and `create-binary-file-manager.ts` have no tests at all. Unit tests with mocked HTTP would: (1) allow tests to run without credentials, (2) test error paths, (3) run fast enough for PR CI.",
+            "files": [
+                "tests/unit/create-api-caller.test.ts",
+                "tests/unit/create-grabber.test.ts",
+                "tests/unit/create-mass-call-client.test.ts"
+            ],
+            "requirements": [
+                "Create a `tests/unit/` directory for unit tests",
+                "Add unit tests for `create-api-caller.ts` covering: successful response, GraphQL errors in 200 response, HTTP error responses, Core Next wrapped errors, 204 No Content handling",
+                "Add unit tests for `create-mass-call-client.ts` covering: basic enqueue and execute, retry logic, batch size adaptation (increment/decrement), Fibonacci backoff",
+                "Mock the `grab` function (it's a simple function signature, easy to mock)",
+                "Do not require API credentials or network access",
+                "Test error paths: network failures, malformed JSON responses, timeout scenarios"
+            ],
+            "verification": [
+                "Run `pnpm test` — all tests (integration + unit) must pass",
+                "Unit tests must pass without any `.env` credentials"
+            ]
+        },
+        {
+            "id": "DX-018",
+            "status": "done",
+            "title": "Add error-path tests for API caller",
+            "priority": "P3",
+            "category": "testing",
+            "effort": "2h",
+            "context": "The current test suite only covers happy paths. There are no tests for: authentication failures (401/403), rate limiting (429), server errors (500/502/503), network timeouts, malformed JSON responses, or missing required fields. These are common real-world scenarios that should be covered.",
+            "files": ["tests/unit/error-handling.test.ts"],
+            "requirements": [
+                "Create tests that verify `JSApiClientCallError` is thrown with correct properties for various HTTP error codes",
+                "Test that GraphQL errors in 200 responses are properly detected and thrown",
+                "Test that Core Next wrapped errors are detected via `getCoreNextError`",
+                "Test that the error includes the query and variables for debugging",
+                "Test 204 No Content returns empty object",
+                "Mock the grab function for all tests — no network required"
+            ],
+            "verification": ["Run `pnpm test` — all tests must pass", "Tests must pass without credentials"]
+        },
+        {
+            "id": "DX-019",
+            "status": "done",
+            "title": "Add CI workflow for pull requests",
+            "priority": "P3",
+            "category": "ci-cd",
+            "effort": "30min",
+            "context": "Currently `.github/workflows/release.yaml` only runs on git tags (releases). There is no CI that runs on pull requests. This means broken code can be merged without any automated checks. A PR workflow should at minimum run build and unit tests.",
+            "files": [".github/workflows/ci.yaml"],
+            "requirements": [
+                "Create a new workflow file `.github/workflows/ci.yaml`",
+                "Trigger on: pull requests to main, pushes to main",
+                "Steps: checkout, setup Node.js (same version as release.yaml), install deps with pnpm, run `pnpm build`, run `pnpm test` (unit tests only — integration tests need credentials)",
+                "Consider testing on multiple Node.js versions (20, 22, 24)",
+                "Keep it fast — unit tests should not require API credentials"
+            ],
+            "verification": [
+                "Push a branch and create a PR to verify the workflow triggers",
+                "Verify the workflow passes with build + unit tests"
+            ]
+        },
+        {
+            "id": "DX-020",
+            "status": "done",
+            "title": "Add JSDoc comments to main exported functions",
+            "priority": "P3",
+            "category": "documentation",
+            "effort": "2h",
+            "context": "Most exported factory functions have no JSDoc comments. IDE users (the primary consumers of this library) get no inline documentation when hovering over `createClient`, `createCatalogueFetcher`, `createOrderManager`, etc. Good JSDoc with `@param`, `@returns`, and `@example` tags significantly improves discoverability.",
+            "files": [
+                "src/core/client/create-client.ts",
+                "src/core/catalogue/create-catalogue-fetcher.ts",
+                "src/core/catalogue/create-navigation-fetcher.ts",
+                "src/core/catalogue/create-product-hydrater.ts",
+                "src/core/pim/orders/create-order-manager.ts",
+                "src/core/pim/orders/create-order-fetcher.ts",
+                "src/core/pim/customers/create-customer-manager.ts",
+                "src/core/pim/subscriptions/create-subscription-contract-manager.ts",
+                "src/core/shop/create-cart-manager.ts",
+                "src/core/create-signature-verifier.ts",
+                "src/core/pim/create-binary-file-manager.ts",
+                "src/core/create-mass-call-client.ts"
+            ],
+            "requirements": [
+                "Add JSDoc to all exported factory functions with: description, @param tags, @returns description, and at least one @example",
+                "Focus on the main entry points that library consumers use directly",
+                "Keep descriptions concise — one sentence for what it does, one for when to use it",
+                "Include authentication requirements in the description where relevant (e.g., 'Requires PIM API credentials')",
+                "Do not add JSDoc to internal/helper functions"
+            ],
+            "verification": [
+                "Run `pnpm build` — build must succeed",
+                "Open the source files in an IDE and verify JSDoc appears on hover for the exported functions"
+            ]
+        }
+    ]
 }

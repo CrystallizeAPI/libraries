@@ -1,5 +1,10 @@
 import { describe, test, expect, vi } from 'vitest';
-import { createApiCaller, post, authenticationHeaders, JSApiClientCallError } from '../../src/core/client/create-api-caller.js';
+import {
+    createApiCaller,
+    post,
+    authenticationHeaders,
+    JSApiClientCallError,
+} from '../../src/core/client/create-api-caller.js';
 import type { Grab, GrabResponse } from '../../src/core/client/create-grabber.js';
 import type { ClientConfiguration } from '../../src/core/client/create-client.js';
 
@@ -84,22 +89,28 @@ describe('post', () => {
     test('passes query and variables in request body', async () => {
         const grab = mockGrab(mockGrabResponse());
         await post(grab, 'https://api.test.com', defaultConfig, '{ items }', { limit: 10 });
-        expect(grab).toHaveBeenCalledWith('https://api.test.com', expect.objectContaining({
-            method: 'POST',
-            body: JSON.stringify({ query: '{ items }', variables: { limit: 10 } }),
-        }));
+        expect(grab).toHaveBeenCalledWith(
+            'https://api.test.com',
+            expect.objectContaining({
+                method: 'POST',
+                body: JSON.stringify({ query: '{ items }', variables: { limit: 10 } }),
+            }),
+        );
     });
 
     test('includes authentication headers', async () => {
         const grab = mockGrab(mockGrabResponse());
         await post(grab, 'https://api.test.com', defaultConfig, '{ items }');
-        expect(grab).toHaveBeenCalledWith('https://api.test.com', expect.objectContaining({
-            headers: expect.objectContaining({
-                'X-Crystallize-Access-Token-Id': 'token-id',
-                'X-Crystallize-Access-Token-Secret': 'token-secret',
-                'Content-type': 'application/json; charset=UTF-8',
+        expect(grab).toHaveBeenCalledWith(
+            'https://api.test.com',
+            expect.objectContaining({
+                headers: expect.objectContaining({
+                    'X-Crystallize-Access-Token-Id': 'token-id',
+                    'X-Crystallize-Access-Token-Secret': 'token-secret',
+                    'Content-type': 'application/json; charset=UTF-8',
+                }),
             }),
-        }));
+        );
     });
 
     test('204 No Content returns empty object', async () => {
@@ -109,12 +120,14 @@ describe('post', () => {
     });
 
     test('throws JSApiClientCallError on HTTP error', async () => {
-        const grab = mockGrab(mockGrabResponse({
-            ok: false,
-            status: 401,
-            statusText: 'Unauthorized',
-            jsonData: { message: 'Invalid credentials', errors: [{ field: 'token' }] },
-        }));
+        const grab = mockGrab(
+            mockGrabResponse({
+                ok: false,
+                status: 401,
+                statusText: 'Unauthorized',
+                jsonData: { message: 'Invalid credentials', errors: [{ field: 'token' }] },
+            }),
+        );
         try {
             await post(grab, 'https://api.test.com', defaultConfig, '{ items }');
             expect.unreachable('should have thrown');
@@ -129,12 +142,14 @@ describe('post', () => {
     });
 
     test('throws on GraphQL errors in 200 response', async () => {
-        const grab = mockGrab(mockGrabResponse({
-            jsonData: {
-                errors: [{ message: 'Field "foo" not found' }],
-                data: null,
-            },
-        }));
+        const grab = mockGrab(
+            mockGrabResponse({
+                jsonData: {
+                    errors: [{ message: 'Field "foo" not found' }],
+                    data: null,
+                },
+            }),
+        );
         try {
             await post(grab, 'https://api.test.com', defaultConfig, '{ foo }');
             expect.unreachable('should have thrown');
@@ -147,16 +162,18 @@ describe('post', () => {
     });
 
     test('detects Core Next wrapped errors', async () => {
-        const grab = mockGrab(mockGrabResponse({
-            jsonData: {
-                data: {
-                    someOperation: {
-                        errorName: 'ItemNotFound',
-                        message: 'The item does not exist',
+        const grab = mockGrab(
+            mockGrabResponse({
+                jsonData: {
+                    data: {
+                        someOperation: {
+                            errorName: 'ItemNotFound',
+                            message: 'The item does not exist',
+                        },
                     },
                 },
-            },
-        }));
+            }),
+        );
         try {
             await post(grab, 'https://api.test.com', defaultConfig, '{ someOperation }');
             expect.unreachable('should have thrown');
@@ -169,13 +186,15 @@ describe('post', () => {
     });
 
     test('Core Next error without message uses fallback', async () => {
-        const grab = mockGrab(mockGrabResponse({
-            jsonData: {
-                data: {
-                    op: { errorName: 'GenericError' },
+        const grab = mockGrab(
+            mockGrabResponse({
+                jsonData: {
+                    data: {
+                        op: { errorName: 'GenericError' },
+                    },
                 },
-            },
-        }));
+            }),
+        );
         try {
             await post(grab, 'https://api.test.com', defaultConfig, '{ op }');
             expect.unreachable('should have thrown');
@@ -190,16 +209,23 @@ describe('post', () => {
         await post(grab, 'https://api.test.com', defaultConfig, '{ items }', undefined, {
             headers: { 'X-Custom': 'value' },
         });
-        expect(grab).toHaveBeenCalledWith('https://api.test.com', expect.objectContaining({
-            headers: expect.objectContaining({ 'X-Custom': 'value' }),
-        }));
+        expect(grab).toHaveBeenCalledWith(
+            'https://api.test.com',
+            expect.objectContaining({
+                headers: expect.objectContaining({ 'X-Custom': 'value' }),
+            }),
+        );
     });
 
     test('error includes query and variables for debugging', async () => {
-        const grab = mockGrab(mockGrabResponse({
-            ok: false, status: 500, statusText: 'Internal Server Error',
-            jsonData: { message: 'Server error', errors: [] },
-        }));
+        const grab = mockGrab(
+            mockGrabResponse({
+                ok: false,
+                status: 500,
+                statusText: 'Internal Server Error',
+                jsonData: { message: 'Server error', errors: [] },
+            }),
+        );
         const variables = { id: '123' };
         try {
             await post(grab, 'https://api.test.com', defaultConfig, '{ item(id: $id) }', variables);
@@ -233,9 +259,12 @@ describe('createApiCaller', () => {
             extraHeaders: { 'X-Tenant': 'test' },
         });
         await caller('{ items }');
-        expect(grab).toHaveBeenCalledWith('https://api.test.com', expect.objectContaining({
-            headers: expect.objectContaining({ 'X-Tenant': 'test' }),
-        }));
+        expect(grab).toHaveBeenCalledWith(
+            'https://api.test.com',
+            expect.objectContaining({
+                headers: expect.objectContaining({ 'X-Tenant': 'test' }),
+            }),
+        );
     });
 });
 
@@ -243,9 +272,11 @@ describe('profiling', () => {
     test('calls onRequest and onRequestResolved', async () => {
         const onRequest = vi.fn();
         const onRequestResolved = vi.fn();
-        const grab = mockGrab(mockGrabResponse({
-            headers: { get: (name: string) => name === 'server-timing' ? 'total;dur=42.5' : null },
-        }));
+        const grab = mockGrab(
+            mockGrabResponse({
+                headers: { get: (name: string) => (name === 'server-timing' ? 'total;dur=42.5' : null) },
+            }),
+        );
         const caller = createApiCaller(grab, 'https://api.test.com', defaultConfig, {
             profiling: { onRequest, onRequestResolved },
         });

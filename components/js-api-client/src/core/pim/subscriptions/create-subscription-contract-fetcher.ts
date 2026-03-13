@@ -19,7 +19,10 @@ type DefaultSubscriptionContractType<OnSubscriptionContract, OnCustomer> = Requi
     customer: Required<Pick<NonNullable<SubscriptionContract['customer']>, 'identifier'>> & OnCustomer;
 } & OnSubscriptionContract;
 
-const buildBaseQuery = <CustomerExtra, SubscriptionContractExtra>(onSubscriptionContract?: SubscriptionContractExtra, onCustomer?: CustomerExtra) => {
+const buildBaseQuery = <CustomerExtra, SubscriptionContractExtra>(
+    onSubscriptionContract?: SubscriptionContractExtra,
+    onCustomer?: CustomerExtra,
+) => {
     const phaseQuery = {
         period: true,
         unit: true,
@@ -114,7 +117,12 @@ type EnhanceQuery<SubscriptionContractExtra = unknown, CustomerExtra = unknown> 
 };
 
 export const createSubscriptionContractFetcher = (apiClient: ClientInterface) => {
-    const fetchById = async <OnSubscriptionContract = unknown, OnCustomer = unknown, SubscriptionContractExtra = unknown, CustomerExtra = unknown>(
+    const fetchById = async <
+        OnSubscriptionContract = unknown,
+        OnCustomer = unknown,
+        SubscriptionContractExtra = unknown,
+        CustomerExtra = unknown,
+    >(
         id: string,
         enhancements?: EnhanceQuery<SubscriptionContractExtra, CustomerExtra>,
     ): Promise<DefaultSubscriptionContractType<OnSubscriptionContract, OnCustomer> | null> => {

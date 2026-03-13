@@ -20,7 +20,11 @@ export type DefaultOrderType<OnOrder = unknown, OnOrderItem = unknown, OnCustome
     total: NonNullable<Order['total']>;
 } & OnOrder;
 
-const buildBaseQuery = <OrderExtra, OrderItemExtra, CustomerExtra>(onOrder?: OrderExtra, onOrderItem?: OrderItemExtra, onCustomer?: CustomerExtra) => {
+const buildBaseQuery = <OrderExtra, OrderItemExtra, CustomerExtra>(
+    onOrder?: OrderExtra,
+    onOrderItem?: OrderItemExtra,
+    onCustomer?: CustomerExtra,
+) => {
     const priceQuery = {
         gross: true,
         net: true,
