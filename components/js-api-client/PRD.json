@@ -345,6 +345,7 @@
     },
     {
       "id": "DX-017",
+      "status": "done",
       "title": "Add unit tests with mocked HTTP for core modules",
       "priority": "P3",
       "category": "testing",
