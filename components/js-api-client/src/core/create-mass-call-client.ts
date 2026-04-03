@@ -169,7 +169,7 @@ export function createMassCallClient(
 
             // fire that a batch is done
             if (options.onBatchDone) {
-                options.onBatchDone({ from: seek, to });
+                await options.onBatchDone({ from: seek, to });
             }
             // we move the seek pointer
             seek += batch.length;
