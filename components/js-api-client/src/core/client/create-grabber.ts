@@ -23,10 +23,11 @@ export type Grab = {
 
 type Options = {
     useHttp2?: boolean;
+    http2IdleTimeout?: number;
 };
 export const createGrabber = (options?: Options): Grab => {
     const clients = new Map<string, { client: ClientHttp2Session; idleTimeout: ReturnType<typeof setTimeout> | null }>();
-    const IDLE_TIMEOUT = 300000; // 5 min idle timeout
+    const IDLE_TIMEOUT = options?.http2IdleTimeout ?? 300000; // default 5 min idle timeout
     const grab = async (url: string, grabOptions?: GrabOptions): Promise<GrabResponse> => {
         if (options?.useHttp2 !== true) {
             const { signal, ...fetchOptions } = grabOptions || {};

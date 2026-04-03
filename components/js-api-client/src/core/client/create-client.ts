@@ -33,6 +33,8 @@ export type CreateClientOptions = {
     extraHeaders?: Record<string, string>;
     /** Request timeout in milliseconds. When set, requests that take longer will be aborted. */
     timeout?: number;
+    /** HTTP/2 idle timeout in milliseconds. Defaults to 300000 (5 minutes). */
+    http2IdleTimeout?: number;
     shopApiToken?: {
         doNotFetch?: boolean;
         scopes?: string[];
@@ -72,6 +74,7 @@ export const createClient = (configuration: ClientConfiguration, options?: Creat
     const identifier = configuration.tenantIdentifier;
     const { grab, close: grabClose } = createGrabber({
         useHttp2: options?.useHttp2,
+        http2IdleTimeout: options?.http2IdleTimeout,
     });
 
     // let's rewrite the configuration based on the need of the endpoint
