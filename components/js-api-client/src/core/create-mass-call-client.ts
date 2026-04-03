@@ -145,20 +145,18 @@ export function createMassCallClient(
                         return buildStandardPromise(promise);
                     }
 
-                    // otherwise we wrap it
-                    return new Promise<{ key: string; result: unknown } | undefined>(async (resolve) => {
-                        let alteredPromise;
-                        if (options.beforeRequest) {
-                            alteredPromise = await options.beforeRequest({ from: seek, to: to }, promise);
-                        }
-                        const result = await buildStandardPromise(alteredPromise ?? promise);
-                        if (options.afterRequest && result) {
-                            await options.afterRequest({ from: seek, to: to }, promise, {
-                                [result.key]: result.result,
-                            });
-                        }
-                        resolve(result);
-                    });
+                    // otherwise we wrap it with before/after hooks
+                    let alteredPromise;
+                    if (options.beforeRequest) {
+                        alteredPromise = await options.beforeRequest({ from: seek, to: to }, promise);
+                    }
+                    const result = await buildStandardPromise(alteredPromise ?? promise);
+                    if (options.afterRequest && result) {
+                        await options.afterRequest({ from: seek, to: to }, promise, {
+                            [result.key]: result.result,
+                        });
+                    }
+                    return result;
                 }),
             );
             batchResults.forEach((result) => {
