@@ -66,6 +66,27 @@ const baseQuery = <SubscriptionContractExtra extends { status?: Record<string, u
  * ```
  */
 export const createSubscriptionContractManager = (apiClient: ClientInterface) => {
+    const lifecycleAction = async <
+        OnSubscriptionContract,
+        SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
+    >(
+        mutationName: string,
+        args: Record<string, unknown>,
+        onSubscriptionContract?: SubscriptionContractExtra,
+    ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
+        const api = apiClient.nextPimApi;
+        const mutation = {
+            [mutationName]: {
+                __args: args,
+                ...baseQuery(onSubscriptionContract),
+            },
+        };
+        const confirmation = await api<Record<string, WithIdentifiersAndStatus<OnSubscriptionContract>>>(
+            jsonToGraphQLQuery({ mutation }),
+        );
+        return confirmation[mutationName];
+    };
+
     const create = async <
         OnSubscriptionContract,
         SubscriptionContractExtra extends { status?: Record<string, unknown> } = {},
@@ -74,35 +95,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const input = CreateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            createSubscriptionContract: {
-                __args: {
-                    input: transformSubscriptionContractInput(input),
-                },
-                __on: [
-                    {
-                        __typeName: 'SubscriptionContractAggregate',
-                        id: true,
-                        customerIdentifier: true,
-                        status: {
-                            state: true,
-                            ...onSubscriptionContract?.status,
-                        },
-                        ...(onSubscriptionContract || {}),
-                    },
-                    {
-                        __typeName: 'BasicError',
-                        errorName: true,
-                        message: true,
-                    },
-                ],
-            },
-        };
-        const confirmation = await api<{
-            createSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.createSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'createSubscriptionContract',
+            { input: transformSubscriptionContractInput(input) },
+            onSubscriptionContract,
+        );
     };
 
     const update = async <
@@ -113,20 +110,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
         const { id, ...input } = UpdateSubscriptionContractInputSchema.parse(intentSubscriptionContract);
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            updateSubscriptionContract: {
-                __args: {
-                    subscriptionContractId: id,
-                    input: transformSubscriptionContractInput(input),
-                },
-                ...baseQuery(onSubscriptionContract),
-            },
-        };
-        const confirmation = await api<{
-            updateSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.updateSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'updateSubscriptionContract',
+            { subscriptionContractId: id, input: transformSubscriptionContractInput(input) },
+            onSubscriptionContract,
+        );
     };
 
     const cancel = async <
@@ -137,22 +125,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         deactivate = false,
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            cancelSubscriptionContract: {
-                __args: {
-                    subscriptionContractId: id,
-                    input: {
-                        deactivate,
-                    },
-                },
-                ...baseQuery(onSubscriptionContract),
-            },
-        };
-        const confirmation = await api<{
-            cancelSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.cancelSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'cancelSubscriptionContract',
+            { subscriptionContractId: id, input: { deactivate } },
+            onSubscriptionContract,
+        );
     };
 
     const pause = async <
@@ -162,19 +139,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            pauseSubscriptionContract: {
-                __args: {
-                    subscriptionContractId: id,
-                },
-                ...baseQuery(onSubscriptionContract),
-            },
-        };
-        const confirmation = await api<{
-            pauseSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.pauseSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'pauseSubscriptionContract',
+            { subscriptionContractId: id },
+            onSubscriptionContract,
+        );
     };
 
     const resume = async <
@@ -184,19 +153,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            resumeSubscriptionContract: {
-                __args: {
-                    subscriptionContractId: id,
-                },
-                ...baseQuery(onSubscriptionContract),
-            },
-        };
-        const confirmation = await api<{
-            resumeSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.resumeSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'resumeSubscriptionContract',
+            { subscriptionContractId: id },
+            onSubscriptionContract,
+        );
     };
 
     const renew = async <
@@ -206,19 +167,11 @@ export const createSubscriptionContractManager = (apiClient: ClientInterface) =>
         id: UpdateSubscriptionContractInput['id'],
         onSubscriptionContract?: SubscriptionContractExtra,
     ): Promise<WithIdentifiersAndStatus<OnSubscriptionContract>> => {
-        const api = apiClient.nextPimApi;
-        const mutation = {
-            renewSubscriptionContract: {
-                __args: {
-                    subscriptionContractId: id,
-                },
-                ...baseQuery(onSubscriptionContract),
-            },
-        };
-        const confirmation = await api<{
-            renewSubscriptionContract: WithIdentifiersAndStatus<OnSubscriptionContract>;
-        }>(jsonToGraphQLQuery({ mutation }));
-        return confirmation.renewSubscriptionContract;
+        return lifecycleAction<OnSubscriptionContract, SubscriptionContractExtra>(
+            'renewSubscriptionContract',
+            { subscriptionContractId: id },
+            onSubscriptionContract,
+        );
     };
 
     /**
