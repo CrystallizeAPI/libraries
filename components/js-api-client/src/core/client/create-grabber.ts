@@ -25,7 +25,7 @@ type Options = {
     useHttp2?: boolean;
 };
 export const createGrabber = (options?: Options): Grab => {
-    const clients = new Map();
+    const clients = new Map<string, { client: ClientHttp2Session; idleTimeout: ReturnType<typeof setTimeout> | null }>();
     const IDLE_TIMEOUT = 300000; // 5 min idle timeout
     const grab = async (url: string, grabOptions?: GrabOptions): Promise<GrabResponse> => {
         if (options?.useHttp2 !== true) {
@@ -42,7 +42,10 @@ export const createGrabber = (options?: Options): Grab => {
 
         const resetIdleTimeout = (origin: string) => {
             const clientObj = clients.get(origin);
-            if (clientObj && clientObj.idleTimeout) {
+            if (!clientObj) {
+                return;
+            }
+            if (clientObj.idleTimeout) {
                 clearTimeout(clientObj.idleTimeout);
             }
             clientObj.idleTimeout = setTimeout(() => {
@@ -51,7 +54,7 @@ export const createGrabber = (options?: Options): Grab => {
         };
 
         const getClient = (origin: string): ClientHttp2Session => {
-            if (!clients.has(origin) || clients.get(origin).client.closed) {
+            if (!clients.has(origin) || clients.get(origin)!.client.closed) {
                 closeAndDeleteClient(origin);
                 const client = connect(origin);
                 client.on('error', () => {
@@ -60,7 +63,7 @@ export const createGrabber = (options?: Options): Grab => {
                 clients.set(origin, { client, idleTimeout: null });
                 resetIdleTimeout(origin);
             }
-            return clients.get(origin).client;
+            return clients.get(origin)!.client;
         };
 
         return new Promise((resolve, reject) => {
