@@ -71,12 +71,15 @@ export const authenticationHeaders = (config: ClientConfiguration): Record<strin
             'X-Crystallize-Static-Auth-Token': config.staticAuthToken,
         };
     }
-    if (!config.accessTokenId && !config.accessTokenSecret && !warnedConfigs.has(config)) {
-        warnedConfigs.add(config);
-        console.warn(
-            '@crystallize/js-api-client: No authentication credentials configured. ' +
-                'Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.',
-        );
+    if (!config.accessTokenId && !config.accessTokenSecret) {
+        if (!warnedConfigs.has(config)) {
+            warnedConfigs.add(config);
+            console.warn(
+                '@crystallize/js-api-client: No authentication credentials configured. ' +
+                    'Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.',
+            );
+        }
+        return {};
     }
     return {
         'X-Crystallize-Access-Token-Id': config.accessTokenId || '',
