@@ -1,27 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
 import { post, JSApiClientCallError } from '../../src/core/client/create-api-caller.js';
-import type { GrabResponse } from '../../src/core/client/create-grabber.js';
-import type { ClientConfiguration } from '../../src/core/client/create-client.js';
-
-const mockGrabResponse = (overrides: Partial<GrabResponse> & { jsonData?: unknown } = {}): GrabResponse => {
-    const { jsonData = { data: {} }, ...rest } = overrides;
-    return {
-        ok: true,
-        status: 200,
-        statusText: 'OK',
-        headers: { get: () => null },
-        json: () => Promise.resolve(jsonData as any),
-        text: () => Promise.resolve(JSON.stringify(jsonData)),
-        ...rest,
-    };
-};
-
-const defaultConfig: ClientConfiguration = {
-    tenantIdentifier: 'test-tenant',
-    tenantId: 'test-id',
-    accessTokenId: 'token-id',
-    accessTokenSecret: 'token-secret',
-};
+import { mockGrabResponse, defaultConfig } from './helpers.js';
 
 const query = '{ items { id name } }';
 const variables = { lang: 'en' };

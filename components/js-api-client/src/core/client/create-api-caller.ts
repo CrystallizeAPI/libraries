@@ -40,6 +40,20 @@ export class JSApiClientCallError<Errors = unknown> extends Error {
         return this.code;
     }
 }
+const normalizeHeaders = (headers: Record<string, string> | Headers | [string, string][]): Record<string, string> => {
+    if (headers instanceof Headers) {
+        const result: Record<string, string> = {};
+        headers.forEach((value, key) => {
+            result[key] = value;
+        });
+        return result;
+    }
+    if (Array.isArray(headers)) {
+        return Object.fromEntries(headers);
+    }
+    return headers;
+};
+
 export const createApiCaller = (
     grab: Grab['grab'],
     uri: string,
@@ -55,7 +69,7 @@ export const createApiCaller = (
             variables,
             options?.extraHeaders
                 ? {
-                      headers: options.extraHeaders,
+                      headers: normalizeHeaders(options.extraHeaders),
                   }
                 : undefined,
             options,

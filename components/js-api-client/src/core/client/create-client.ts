@@ -30,7 +30,7 @@ export type ClientConfiguration = {
 export type CreateClientOptions = {
     useHttp2?: boolean;
     profiling?: ProfilingOptions;
-    extraHeaders?: Record<string, string>;
+    extraHeaders?: Record<string, string> | Headers | [string, string][];
     /** Request timeout in milliseconds. When set, requests that take longer will be aborted. */
     timeout?: number;
     /** HTTP/2 idle timeout in milliseconds. Defaults to 300000 (5 minutes). */

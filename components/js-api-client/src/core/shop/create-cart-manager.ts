@@ -31,15 +31,25 @@ type WithId<R> = R & { id: string };
  * ```
  */
 export const createCartManager = (apiClient: ClientInterface) => {
-    const cartQuery = async <OnCart, OC = unknown>(name: string, args: Record<string, unknown>, onCart?: OC) => {
+    const cartQuery = async <OnCart, CartExtra = unknown>(
+        name: string,
+        args: Record<string, unknown>,
+        onCart?: CartExtra,
+    ) => {
         const query = { [name]: { __args: args, id: true, ...onCart } };
-        const response = await apiClient.shopCartApi<Record<string, WithId<OnCart>>>(jsonToGraphQLQuery({ query }));
+        const response = await apiClient.shopCartApi<Record<string, WithId<CartExtra>>>(jsonToGraphQLQuery({ query }));
         return response[name];
     };
 
-    const cartMutation = async <OnCart, OC = unknown>(name: string, args: Record<string, unknown>, onCart?: OC) => {
+    const cartMutation = async <OnCart, CartExtra = unknown>(
+        name: string,
+        args: Record<string, unknown>,
+        onCart?: CartExtra,
+    ) => {
         const mutation = { [name]: { __args: args, id: true, ...onCart } };
-        const response = await apiClient.shopCartApi<Record<string, WithId<OnCart>>>(jsonToGraphQLQuery({ mutation }));
+        const response = await apiClient.shopCartApi<Record<string, WithId<CartExtra>>>(
+            jsonToGraphQLQuery({ mutation }),
+        );
         return response[name];
     };
 
@@ -49,29 +59,40 @@ export const createCartManager = (apiClient: ClientInterface) => {
     };
 
     return {
-        hydrate: async <OnCart, OC = unknown>(intent: CartInput, onCart?: OC) => {
+        hydrate: async <OnCart, CartExtra = unknown>(intent: CartInput, onCart?: CartExtra) => {
             const input = CartInputSchema.parse(intent);
-            return cartMutation<OnCart, OC>('hydrate', { input: transformCartInput(input) }, onCart);
+            return cartMutation<OnCart, CartExtra>('hydrate', { input: transformCartInput(input) }, onCart);
         },
-        place: <OnCart, OC = unknown>(id: string, onCart?: OC) => cartMutation<OnCart, OC>('place', { id }, onCart),
-        fetch: <OnCart, OC = unknown>(id: string, onCart?: OC) => cartQuery<OnCart, OC>('cart', { id }, onCart),
-        fulfill: <OnCart, OC = unknown>(id: string, orderId: string, onCart?: OC) =>
-            cartMutation<OnCart, OC>('fulfill', { id, orderId }, onCart),
-        abandon: <OnCart, OC = unknown>(id: string, onCart?: OC) => cartMutation<OnCart, OC>('abandon', { id }, onCart),
-        addSkuItem: async <OnCart, OC = unknown>(id: string, intent: CartSkuItemInput, onCart?: OC) => {
+        place: <OnCart, CartExtra = unknown>(id: string, onCart?: CartExtra) =>
+            cartMutation<OnCart, CartExtra>('place', { id }, onCart),
+        fetch: <OnCart, CartExtra = unknown>(id: string, onCart?: CartExtra) =>
+            cartQuery<OnCart, CartExtra>('cart', { id }, onCart),
+        fulfill: <OnCart, CartExtra = unknown>(id: string, orderId: string, onCart?: CartExtra) =>
+            cartMutation<OnCart, CartExtra>('fulfill', { id, orderId }, onCart),
+        abandon: <OnCart, CartExtra = unknown>(id: string, onCart?: CartExtra) =>
+            cartMutation<OnCart, CartExtra>('abandon', { id }, onCart),
+        addSkuItem: async <OnCart, CartExtra = unknown>(id: string, intent: CartSkuItemInput, onCart?: CartExtra) => {
             const input = CartSkuItemInputSchema.parse(intent);
-            return cartMutation<OnCart, OC>('addSkuItem', { id, input }, onCart);
+            return cartMutation<OnCart, CartExtra>('addSkuItem', { id, input }, onCart);
         },
-        removeItem: <OnCart, OC = unknown>(
+        removeItem: <OnCart, CartExtra = unknown>(
             id: string,
             { sku, quantity }: { sku: string; quantity: number },
-            onCart?: OC,
-        ) => cartMutation<OnCart, OC>('removeCartItem', { id, sku, quantity }, onCart),
-        setMeta: <OnCart, OC = unknown>(id: string, { meta, merge }: MetaIntent, onCart?: OC) =>
-            cartMutation<OnCart, OC>('setMeta', { id, merge, meta }, onCart),
-        setCustomer: async <OnCart, OC = unknown>(id: string, customerIntent: CustomerInput, onCart?: OC) => {
+            onCart?: CartExtra,
+        ) => cartMutation<OnCart, CartExtra>('removeCartItem', { id, sku, quantity }, onCart),
+        setMeta: <OnCart, CartExtra = unknown>(id: string, { meta, merge }: MetaIntent, onCart?: CartExtra) =>
+            cartMutation<OnCart, CartExtra>('setMeta', { id, merge, meta }, onCart),
+        setCustomer: async <OnCart, CartExtra = unknown>(
+            id: string,
+            customerIntent: CustomerInput,
+            onCart?: CartExtra,
+        ) => {
             const input = CustomerInputSchema.parse(customerIntent);
-            return cartMutation<OnCart, OC>('setCustomer', { id, input: transformCartCustomerInput(input) }, onCart);
+            return cartMutation<OnCart, CartExtra>(
+                'setCustomer',
+                { id, input: transformCartCustomerInput(input) },
+                onCart,
+            );
         },
     };
 };

@@ -71,6 +71,18 @@ export const createGrabber = (options?: Options): Grab => {
         };
 
         return new Promise((resolve, reject) => {
+            let settled = false;
+            const safeResolve = (value: GrabResponse) => {
+                if (settled) return;
+                settled = true;
+                resolve(value);
+            };
+            const safeReject = (reason: unknown) => {
+                if (settled) return;
+                settled = true;
+                reject(reason);
+            };
+
             const urlObj = new URL(url);
             const origin = urlObj.origin;
             const client = getClient(origin);
@@ -86,12 +98,12 @@ export const createGrabber = (options?: Options): Grab => {
                 const signal = grabOptions.signal;
                 if (signal.aborted) {
                     req.close();
-                    reject(signal.reason);
+                    safeReject(signal.reason);
                     return;
                 }
                 const onAbort = () => {
                     req.close();
-                    reject(signal.reason);
+                    safeReject(signal.reason);
                 };
                 signal.addEventListener('abort', onAbort, { once: true });
                 req.on('end', () => signal.removeEventListener('abort', onAbort));
@@ -128,12 +140,12 @@ export const createGrabber = (options?: Options): Grab => {
 
                 req.on('end', () => {
                     resetIdleTimeout(origin);
-                    resolve(response);
+                    safeResolve(response);
                 });
 
                 req.on('error', (err) => {
                     resetIdleTimeout(origin);
-                    reject(err);
+                    safeReject(err);
                 });
             });
             req.end();

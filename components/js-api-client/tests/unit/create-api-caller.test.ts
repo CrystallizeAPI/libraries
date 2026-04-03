@@ -6,30 +6,10 @@ import {
     JSApiClientCallError,
 } from '../../src/core/client/create-api-caller.js';
 import type { Grab, GrabResponse } from '../../src/core/client/create-grabber.js';
-import type { ClientConfiguration } from '../../src/core/client/create-client.js';
-
-const mockGrabResponse = (overrides: Partial<GrabResponse> & { jsonData?: unknown } = {}): GrabResponse => {
-    const { jsonData = { data: { test: true } }, ...rest } = overrides;
-    return {
-        ok: true,
-        status: 200,
-        statusText: 'OK',
-        headers: { get: () => null },
-        json: () => Promise.resolve(jsonData as any),
-        text: () => Promise.resolve(JSON.stringify(jsonData)),
-        ...rest,
-    };
-};
+import { mockGrabResponse, defaultConfig } from './helpers.js';
 
 const mockGrab = (response: GrabResponse): Grab['grab'] => {
     return vi.fn().mockResolvedValue(response);
-};
-
-const defaultConfig: ClientConfiguration = {
-    tenantIdentifier: 'test-tenant',
-    tenantId: 'test-id',
-    accessTokenId: 'token-id',
-    accessTokenSecret: 'token-secret',
 };
 
 describe('authenticationHeaders', () => {
