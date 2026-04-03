@@ -39,9 +39,7 @@ export const createCartManager = (apiClient: ClientInterface) => {
 
     const cartMutation = async <OnCart, OC = unknown>(name: string, args: Record<string, unknown>, onCart?: OC) => {
         const mutation = { [name]: { __args: args, id: true, ...onCart } };
-        const response = await apiClient.shopCartApi<Record<string, WithId<OnCart>>>(
-            jsonToGraphQLQuery({ mutation }),
-        );
+        const response = await apiClient.shopCartApi<Record<string, WithId<OnCart>>>(jsonToGraphQLQuery({ mutation }));
         return response[name];
     };
 

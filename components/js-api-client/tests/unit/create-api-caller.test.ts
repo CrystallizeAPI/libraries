@@ -60,22 +60,9 @@ describe('authenticationHeaders', () => {
         });
     });
 
-    test('warns when no auth is configured', () => {
-        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    test('returns empty headers when no auth is configured', () => {
         const config: ClientConfiguration = { tenantIdentifier: 'test' };
-        authenticationHeaders(config);
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('No authentication credentials configured'));
-        warnSpy.mockRestore();
-    });
-
-    test('warns only once per config object', () => {
-        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-        const config: ClientConfiguration = { tenantIdentifier: 'test-once' };
-        authenticationHeaders(config);
-        authenticationHeaders(config);
-        authenticationHeaders(config);
-        expect(warnSpy).toHaveBeenCalledTimes(1);
-        warnSpy.mockRestore();
+        expect(authenticationHeaders(config)).toEqual({});
     });
 });
 

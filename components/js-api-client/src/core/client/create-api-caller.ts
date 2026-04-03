@@ -63,8 +63,6 @@ export const createApiCaller = (
     };
 };
 
-const warnedConfigs = new WeakSet<ClientConfiguration>();
-
 export const authenticationHeaders = (config: ClientConfiguration): Record<string, string> => {
     if (config.sessionId) {
         return {
@@ -76,20 +74,13 @@ export const authenticationHeaders = (config: ClientConfiguration): Record<strin
             'X-Crystallize-Static-Auth-Token': config.staticAuthToken,
         };
     }
-    if (!config.accessTokenId && !config.accessTokenSecret) {
-        if (!warnedConfigs.has(config)) {
-            warnedConfigs.add(config);
-            console.warn(
-                '@crystallize/js-api-client: No authentication credentials configured. ' +
-                    'Set accessTokenId/accessTokenSecret, staticAuthToken, or sessionId in the client configuration.',
-            );
-        }
-        return {};
+    if (config.accessTokenId || config.accessTokenSecret) {
+        return {
+            'X-Crystallize-Access-Token-Id': config.accessTokenId || '',
+            'X-Crystallize-Access-Token-Secret': config.accessTokenSecret || '',
+        };
     }
-    return {
-        'X-Crystallize-Access-Token-Id': config.accessTokenId || '',
-        'X-Crystallize-Access-Token-Secret': config.accessTokenSecret || '',
-    };
+    return {};
 };
 
 type ApiErrorEntry = { errorName: string; message?: string };

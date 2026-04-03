@@ -411,10 +411,12 @@ const api = createClient({ tenantIdentifier: 'my-tenant', accessTokenId: '…', 
 const limit = pLimit(5); // max 5 concurrent requests
 
 const mutations = items.map((item) =>
-    limit(() => api.pimApi(
-        `mutation UpdateItem($id: ID!, $name: String!) { product { update(id: $id, input: { name: $name }) { id } } }`,
-        { id: item.id, name: item.name },
-    )),
+    limit(() =>
+        api.pimApi(
+            `mutation UpdateItem($id: ID!, $name: String!) { product { update(id: $id, input: { name: $name }) { id } } }`,
+            { id: item.id, name: item.name },
+        ),
+    ),
 );
 
 const results = await Promise.allSettled(mutations);
