@@ -63,6 +63,8 @@ api.close();
     - `origin` custom host suffix (defaults to `.crystallize.com`)
 - options
     - `useHttp2` enable HTTP/2 transport
+    - `timeout` request timeout in milliseconds; requests that take longer will be aborted
+    - `http2IdleTimeout` HTTP/2 idle timeout in milliseconds (default `300000` — 5 minutes). Use a shorter value for serverless functions, a longer one for long-running servers
     - `profiling` callbacks
     - `extraHeaders` extra request headers for all calls
     - `shopApiToken` controls auto-fetch: `{ doNotFetch?: boolean; scopes?: string[]; expiresIn?: number }`
@@ -88,6 +90,23 @@ Pass the relevant credentials to `createClient`:
 - `shopApiToken` optional; if omitted, a token will be fetched using your PIM credentials on first cart call
 
 See the official docs for auth: https://crystallize.com/learn/developer-guides/api-overview/authentication
+
+### Error handling
+
+API call errors throw a `JSApiClientCallError` with both `code` and `statusCode` properties for the HTTP status:
+
+```typescript
+import { JSApiClientCallError } from '@crystallize/js-api-client';
+
+try {
+    await api.pimApi(`query { … }`);
+} catch (e) {
+    if (e instanceof JSApiClientCallError) {
+        console.error(`HTTP ${e.statusCode}:`, e.message);
+        // e.code also works (same value)
+    }
+}
+```
 
 ## Profiling requests
 
