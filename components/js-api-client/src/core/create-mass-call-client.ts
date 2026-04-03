@@ -61,9 +61,21 @@ const createFibonacciSleeper = (): Sleeper => {
     };
 };
 
+let hasWarnedDeprecation = false;
+
 /**
  * Creates a mass call client that batches and throttles multiple API requests with automatic retry and concurrency control.
- * Use this when you need to execute many API calls efficiently, such as bulk imports or migrations. Note: this feature is experimental.
+ *
+ * @deprecated Use mature ecosystem packages like `p-limit` or `p-queue` instead for concurrency control.
+ * They provide better error handling, TypeScript support, and are actively maintained.
+ *
+ * ```ts
+ * import pLimit from 'p-limit';
+ * const limit = pLimit(5);
+ * const results = await Promise.all(
+ *   items.map((item) => limit(() => client.pimApi(mutation, { id: item.id }))),
+ * );
+ * ```
  *
  * @param client - A Crystallize client instance created via `createClient`.
  * @param options - Configuration for concurrency, batching callbacks, failure handling, and sleep strategy.
@@ -104,6 +116,15 @@ export function createMassCallClient(
         ) => number;
     },
 ): MassClientInterface {
+    if (!hasWarnedDeprecation) {
+        hasWarnedDeprecation = true;
+        console.warn(
+            '[@crystallize/js-api-client] createMassCallClient is deprecated. ' +
+                'Use p-limit or p-queue for concurrency control instead. ' +
+                'See https://www.npmjs.com/package/p-limit',
+        );
+    }
+
     let promises: CrystallizePromise[] = [];
     let failedPromises: CrystallizePromise[] = [];
     let seek = 0;
