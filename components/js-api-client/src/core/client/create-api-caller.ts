@@ -34,6 +34,11 @@ export class JSApiClientCallError<Errors = unknown> extends Error {
         this.query = query;
         this.variables = variables;
     }
+
+    /** Alias for `code` — follows the Node.js convention of numeric `statusCode`. */
+    get statusCode(): number {
+        return this.code;
+    }
 }
 export const createApiCaller = (
     grab: Grab['grab'],
