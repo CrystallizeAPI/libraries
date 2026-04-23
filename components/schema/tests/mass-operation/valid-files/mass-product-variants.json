@@ -1,0 +1,206 @@
+{
+    "version": "1.0.0",
+    "operations": [
+        {
+            "_ref": "variant-to-add",
+            "intent": "product/variant/create",
+            "language": "en",
+            "productId": "0123456789abcdef01234567",
+            "sku": "sku-red-large",
+            "name": "Red - Large",
+            "isDefault": false,
+            "externalReference": "ext-red-large",
+            "attributes": [
+                {
+                    "attribute": "color",
+                    "value": "red"
+                },
+                {
+                    "attribute": "size",
+                    "value": "large"
+                }
+            ],
+            "priceVariants": [
+                {
+                    "identifier": "default",
+                    "price": 49.99
+                },
+                {
+                    "identifier": "b2b",
+                    "price": 39.99
+                }
+            ],
+            "stockLocations": [
+                {
+                    "identifier": "warehouse-eu",
+                    "stock": 15,
+                    "meta": [
+                        {
+                            "key": "bin",
+                            "value": "A-12"
+                        }
+                    ]
+                },
+                {
+                    "identifier": "warehouse-us",
+                    "stock": 5
+                }
+            ],
+            "images": [
+                {
+                    "key": "hero.jpg",
+                    "mimeType": "image/jpeg"
+                }
+            ],
+            "videos": [
+                {
+                    "key": "demo.mp4",
+                    "title": "Product demo"
+                }
+            ]
+        },
+        {
+            "_ref": "variant-to-update",
+            "intent": "product/variant/update",
+            "language": "en",
+            "sku": "sku-red-large",
+            "name": "Red - Large (Updated)",
+            "priceVariants": [
+                {
+                    "identifier": "default",
+                    "price": 44.99
+                }
+            ]
+        },
+        {
+            "intent": "product/variant/upsert",
+            "language": "en",
+            "productId": "0123456789abcdef01234567",
+            "sku": "sku-blue-medium",
+            "name": "Blue - Medium",
+            "priceVariants": [
+                {
+                    "identifier": "default",
+                    "price": 34.99
+                }
+            ],
+            "stockLocations": [
+                {
+                    "identifier": "warehouse-eu",
+                    "stock": 12
+                }
+            ]
+        },
+        {
+            "intent": "product/variant/delete",
+            "sku": "sku-red-small"
+        },
+        {
+            "_ref": "plop",
+            "intent": "folder/upsert",
+            "tree": {
+                "parentId": "{{ defaults.rootItemId }}"
+            },
+            "language": "en",
+            "shapeIdentifier": "default-folder",
+            "name": "Container"
+        },
+        {
+            "_ref": "tshirt",
+            "intent": "product/upsert",
+            "language": "en",
+            "resourceIdentifier": "product-tshirt",
+            "shapeIdentifier": "default-product",
+            "vatTypeId": "{{ defaults.vatTypeIds.[0] }}",
+            "name": "T-Shirt",
+            "tree": {
+                "parentId": "{{ plop.id }}"
+            },
+            "variants": [
+                {
+                    "sku": "sku-red-small-{{ plop.id }}",
+                    "name": "Red - Small",
+                    "isDefault": true,
+                    "priceVariants": [
+                        {
+                            "identifier": "eur",
+                            "price": 19.99
+                        }
+                    ],
+                    "attributes": [
+                        {
+                            "attribute": "color",
+                            "value": "red"
+                        },
+                        {
+                            "attribute": "size",
+                            "value": "small"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_ref": "variant-to-add",
+            "intent": "product/variant/create",
+            "language": "en",
+            "productId": "{{ tshirt.id }}",
+            "sku": "sku-red-large-{{ plop.id }}",
+            "name": "Red - Large",
+            "isDefault": false,
+            "externalReference": "ext-red-large",
+            "attributes": [
+                {
+                    "attribute": "color",
+                    "value": "red"
+                },
+                {
+                    "attribute": "size",
+                    "value": "large"
+                }
+            ],
+            "priceVariants": [
+                {
+                    "identifier": "eur",
+                    "price": 49.99
+                }
+            ],
+            "images": [
+                {
+                    "key": "hero.jpg",
+                    "mimeType": "image/jpeg"
+                }
+            ],
+            "videos": [
+                {
+                    "key": "demo.mp4",
+                    "title": "Product demo"
+                }
+            ]
+        },
+        {
+            "_ref": "variant-to-update",
+            "intent": "product/variant/update",
+            "language": "en",
+            "sku": "sku-red-large-{{ plop.id }}",
+            "name": "Red - Large (Updated)",
+            "priceVariants": [
+                {
+                    "identifier": "eur",
+                    "price": 44.99
+                }
+            ]
+        },
+        {
+            "intent": "product/variant/upsert",
+            "language": "en",
+            "productId": "{{ tshirt.id }}",
+            "sku": "sku-blue-medium-{{ plop.id }}",
+            "name": "Blue - Medium"
+        },
+        {
+            "intent": "product/variant/delete",
+            "sku": "sku-red-small-{{ plop.id }}"
+        }
+    ]
+}

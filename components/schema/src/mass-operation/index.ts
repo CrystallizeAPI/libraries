@@ -26,7 +26,14 @@ import {
     UpsertShapeOperationSchema,
 } from './shape';
 
-import { ModifyProductVariantStockOperationSchema } from './product-variant';
+import {
+    AddProductVariantOperationSchema,
+    DeleteProductVariantOperationSchema,
+    ModifyProductVariantPriceOperationSchema,
+    ModifyProductVariantStockOperationSchema,
+    UpdateProductVariantOperationSchema,
+    UpsertProductVariantOperationSchema,
+} from './product-variant';
 import {
     CreateCustomerGroupOperationSchema,
     CreateCustomerOperationSchema,
@@ -55,7 +62,6 @@ import {
     UpsertTopicOperationSchema,
     DeleteTopicOperationSchema,
 } from './topic';
-import { ModifyProductVariantPriceOperationSchema } from './product-variant';
 import { CreateFlowOperationSchema, UpdateFlowOperationSchema, UpsertFlowOperationSchema } from './flow';
 import {
     RemoveItemTreeNodeHistoryOperationSchema,
@@ -100,6 +106,10 @@ export const OperationSchema = z.discriminatedUnion('intent', [
 
     ModifyProductVariantStockOperationSchema,
     ModifyProductVariantPriceOperationSchema,
+    AddProductVariantOperationSchema,
+    UpdateProductVariantOperationSchema,
+    UpsertProductVariantOperationSchema,
+    DeleteProductVariantOperationSchema,
     RegisterImageOperationSchema,
 
     CreateCustomerGroupOperationSchema,
@@ -195,7 +205,14 @@ export type {
     UpsertPieceOperation,
 } from './shape';
 
-export type { ModifyProductVariantStockOperation } from './product-variant';
+export type {
+    ModifyProductVariantStockOperation,
+    ModifyProductVariantPriceOperation,
+    AddProductVariantOperation,
+    UpdateProductVariantOperation,
+    UpsertProductVariantOperation,
+    DeleteProductVariantOperation,
+} from './product-variant';
 
 export type {
     CreateCustomerOperation,
