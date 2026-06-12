@@ -65,6 +65,7 @@ export type Owner = z.infer<typeof OwnerSchema>;
 
 export const ComponentTypeSchema = z.enum([
     'boolean',
+    'colors',
     'componentChoice',
     'componentMultipleChoice',
     'contentChunk',

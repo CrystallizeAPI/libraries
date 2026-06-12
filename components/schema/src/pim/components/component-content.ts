@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { BooleanContentSchema } from './types/boolean';
+import { ColorsContentSchema } from './types/colors';
 import { DatetimeContentSchema } from './types/datetime';
 import { GridRelationsContentSchema } from './types/grid-relations';
 import { ImagesContentSchema } from './types/images';
@@ -50,6 +51,7 @@ export const ComponentContentSchema = z.union([
     ImagesContentSchema,
     VideosContentSchema,
     BooleanContentSchema,
+    ColorsContentSchema,
     DatetimeContentSchema,
     GridRelationsContentSchema,
     ItemRelationsContentSchema,

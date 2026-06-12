@@ -9,6 +9,7 @@ export * from './component';
 
 // Types
 export * from './types/boolean';
+export * from './types/colors';
 export * from './types/datetime';
 export * from './types/files';
 export * from './types/grid-relations';

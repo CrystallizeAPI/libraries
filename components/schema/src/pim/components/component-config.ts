@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { BooleanConfigSchema } from './types/boolean';
+import { ColorsConfigSchema } from './types/colors';
 import { DatetimeConfigSchema } from './types/datetime';
 import { GridRelationsConfigSchema } from './types/grid-relations';
 import { ImagesConfigSchema } from './types/images';
@@ -51,6 +52,7 @@ export type PieceConfig = z.infer<typeof PieceConfigSchema>;
 export const ComponentConfigSchema = z.union([
     BooleanConfigSchema,
     ChoiceConfigSchema,
+    ColorsConfigSchema,
     MultipleChoicesConfigSchema,
     ChunksConfigSchema,
     DatetimeConfigSchema,

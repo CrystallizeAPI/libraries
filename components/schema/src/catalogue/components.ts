@@ -10,6 +10,7 @@ export type RichTextContent = z.infer<typeof RichTextContentSchema>;
 
 export const ComponentContentTypeSchema = z.enum([
     'BooleanContent',
+    'ColorsContent',
     'ComponentChoiceContent',
     'ContentChunkContent',
     'ComponentMultipleChoiceContent',

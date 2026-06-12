@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { BooleanConfigInputSchema } from './types/boolean';
+import { ColorsConfigInputSchema } from './types/colors';
 import { DatetimeConfigInputSchema } from './types/datetime';
 import { GridRelationsConfigInputSchema } from './types/grid-relations';
 import { ImagesConfigInputSchema } from './types/images';
@@ -50,6 +51,7 @@ export const NestableComponentConfigInputSchema = z.object({
     images: ImagesConfigInputSchema.optional(),
     videos: VideosConfigInputSchema.optional(),
     boolean: BooleanConfigInputSchema.optional(),
+    colors: ColorsConfigInputSchema.optional(),
     datetime: DatetimeConfigInputSchema.optional(),
     gridRelations: GridRelationsConfigInputSchema.optional(),
     itemRelations: ItemRelationsConfigInputSchema.optional(),
