@@ -1,0 +1,31 @@
+{
+    "version": "0.0.1",
+    "operations": [
+        {
+            "_ref": "price-list-upsert-variants",
+            "intent": "pricelist/selectedProductVariants/upsert",
+            "identifier": "pl-eur-spring",
+            "variants": [
+                {
+                    "sku": "chair-001"
+                },
+                {
+                    "sku": "table-002",
+                    "priceVariants": [
+                        {
+                            "identifier": "eur",
+                            "modifier": 20,
+                            "decimalPlaces": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_ref": "price-list-remove-variants",
+            "intent": "pricelist/selectedProductVariants/remove",
+            "identifier": "pl-eur-spring",
+            "skus": ["sofa-001", "lamp-003"]
+        }
+    ]
+}
