@@ -11,3 +11,6 @@ export * from './from-core/images';
 export * from './from-core/metadata';
 export * from './from-core/price';
 export * from './from-core/promotions';
+
+export * from './customer';
+export * from './order';
