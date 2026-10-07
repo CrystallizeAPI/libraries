@@ -25,6 +25,7 @@ export const UpsertPriceListSelectedProductVariantsOperationSchema = z.object({
     intent: z.literal('pricelist/selectedProductVariants/upsert'),
     identifier: z.string().min(1),
     variants: z.array(PriceListProductVariantInputSchema),
+    ignoreInvalidSkus: z.boolean().optional(),
 });
 export type UpsertPriceListSelectedProductVariantsOperation = z.infer<
     typeof UpsertPriceListSelectedProductVariantsOperationSchema

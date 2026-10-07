@@ -19,6 +19,27 @@ describe('Mass Operations - Price list selected product variants', () => {
         ).toBe(true);
     });
 
+    it('keeps ignoreInvalidSkus on an upsert', () => {
+        const result = OperationSchema.safeParse({
+            intent: 'pricelist/selectedProductVariants/upsert',
+            identifier: 'pl-eur-spring',
+            variants: [{ sku: 'chair-001' }],
+            ignoreInvalidSkus: true,
+        });
+        expect(result.success).toBe(true);
+        expect(result.data).toMatchObject({ ignoreInvalidSkus: true });
+    });
+
+    it('rejects a non-boolean ignoreInvalidSkus', () => {
+        const result = OperationSchema.safeParse({
+            intent: 'pricelist/selectedProductVariants/upsert',
+            identifier: 'pl-eur-spring',
+            variants: [],
+            ignoreInvalidSkus: 'yes',
+        });
+        expect(result.success).toBe(false);
+    });
+
     it('rejects a remove with an empty sku', () => {
         const result = OperationSchema.safeParse({
             intent: 'pricelist/selectedProductVariants/remove',
