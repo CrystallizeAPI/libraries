@@ -6,7 +6,7 @@ import { SubscriptionContractTierTypeSchema } from '../subscription-contracts';
 
 export const ModifyProductVariantStockInputSchema = z.object({
     operation: z.enum(['decrease', 'increase', 'overwrite']),
-    quantity: z.number().int().min(1),
+    quantity: z.number().int().min(0),
     sku: z.string().min(1),
     stockLocationIdentifier: z.string().min(1),
 });
