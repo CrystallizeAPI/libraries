@@ -1,0 +1,379 @@
+{
+    "version": "1.0.0",
+    "operations": [
+        {
+            "intent": "piece/upsert",
+            "identifier": "seo",
+            "name": "SEO",
+            "components": [
+                {
+                    "id": "meta-title",
+                    "name": "Meta title",
+                    "type": "singleLine",
+                    "config": {
+                        "singleLine": {
+                            "required": true,
+                            "searchable": true,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "meta-description",
+                    "name": "Meta description",
+                    "type": "richText",
+                    "config": {
+                        "richText": {
+                            "searchable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "shape/upsert",
+            "type": "product",
+            "identifier": "chair",
+            "name": "Chair",
+            "components": [
+                {
+                    "id": "title",
+                    "name": "Title",
+                    "type": "singleLine",
+                    "description": "Searchable only: unset means on",
+                    "config": {
+                        "singleLine": {
+                            "required": true,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "internal-notes",
+                    "name": "Internal notes",
+                    "type": "richText",
+                    "description": "No indexing flags set, must round-trip unchanged; discoverable false is the master switch",
+                    "config": {
+                        "richText": {
+                            "discoverable": false
+                        }
+                    }
+                },
+                {
+                    "id": "in-stock",
+                    "name": "In stock",
+                    "type": "boolean",
+                    "config": {
+                        "boolean": {
+                            "searchable": false,
+                            "sortable": false
+                        }
+                    }
+                },
+                {
+                    "id": "release-date",
+                    "name": "Release date",
+                    "type": "datetime",
+                    "config": {
+                        "datetime": {
+                            "searchable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "showroom",
+                    "name": "Showroom",
+                    "type": "location",
+                    "config": {
+                        "location": {
+                            "searchable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "manual",
+                    "name": "Manual",
+                    "type": "files",
+                    "config": {
+                        "files": {
+                            "maxFileSize": { "size": 20, "unit": "MiB" },
+                            "searchable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "specs",
+                    "name": "Specs",
+                    "type": "propertiesTable",
+                    "config": {
+                        "propertiesTable": {
+                            "sections": [{ "title": "Dimensions", "keys": ["width", "height"] }],
+                            "searchable": false,
+                            "sortable": false
+                        }
+                    }
+                },
+                {
+                    "id": "showcase",
+                    "name": "Showcase",
+                    "type": "gridRelations",
+                    "config": {
+                        "gridRelations": {
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "material",
+                    "name": "Material",
+                    "type": "selection",
+                    "description": "Facet and filter, never free-text searched or sorted",
+                    "config": {
+                        "selection": {
+                            "min": 1,
+                            "max": 1,
+                            "options": [
+                                { "key": "oak", "value": "Oak", "isPreselected": true },
+                                { "key": "walnut", "value": "Walnut" }
+                            ],
+                            "searchable": false,
+                            "sortable": false
+                        }
+                    }
+                },
+                {
+                    "id": "story",
+                    "name": "Story",
+                    "type": "paragraphCollection",
+                    "config": {
+                        "paragraphCollection": {
+                            "multilingual": ["title", "body"],
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "dimensions",
+                    "name": "Dimensions",
+                    "type": "contentChunk",
+                    "config": {
+                        "contentChunk": {
+                            "repeatable": false,
+                            "searchable": false,
+                            "facetable": false,
+                            "components": [
+                                {
+                                    "id": "width",
+                                    "name": "Width",
+                                    "type": "numeric",
+                                    "config": {
+                                        "numeric": {
+                                            "decimalPlaces": 1,
+                                            "units": ["cm"],
+                                            "searchable": false,
+                                            "facetable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": "weight",
+                                    "name": "Weight",
+                                    "type": "numeric",
+                                    "config": {
+                                        "numeric": {
+                                            "facetable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "hero",
+                    "name": "Hero",
+                    "type": "componentChoice",
+                    "config": {
+                        "componentChoice": {
+                            "searchable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false,
+                            "choices": [
+                                {
+                                    "id": "image",
+                                    "name": "Image",
+                                    "type": "images",
+                                    "config": { "images": { "max": 1, "searchable": false } }
+                                },
+                                {
+                                    "id": "video",
+                                    "name": "Video",
+                                    "type": "videos",
+                                    "config": { "videos": { "max": 1, "searchable": false } }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "blocks",
+                    "name": "Blocks",
+                    "type": "componentMultipleChoice",
+                    "config": {
+                        "componentMultipleChoice": {
+                            "allowDuplicates": true,
+                            "sortable": false,
+                            "choices": [
+                                {
+                                    "id": "banner",
+                                    "name": "Banner",
+                                    "type": "singleLine",
+                                    "config": {
+                                        "singleLine": { "filterable": false, "sortable": false, "facetable": false }
+                                    }
+                                },
+                                {
+                                    "id": "seo",
+                                    "name": "SEO",
+                                    "type": "piece",
+                                    "config": { "piece": { "identifier": "seo", "searchable": false } }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "related",
+                    "name": "Related products",
+                    "type": "itemRelations",
+                    "config": {
+                        "itemRelations": {
+                            "minItems": 0,
+                            "maxItems": 10,
+                            "searchable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                }
+            ],
+            "variantComponents": [
+                {
+                    "id": "color",
+                    "name": "Color",
+                    "type": "colors",
+                    "config": {
+                        "colors": {
+                            "requireLabel": true,
+                            "searchable": false,
+                            "sortable": false
+                        }
+                    }
+                },
+                {
+                    "id": "size",
+                    "name": "Size",
+                    "type": "selection",
+                    "config": {
+                        "selection": {
+                            "options": [
+                                { "key": "s", "value": "Small" },
+                                { "key": "m", "value": "Medium" }
+                            ],
+                            "searchable": false,
+                            "sortable": false
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "shape/create",
+            "type": "document",
+            "identifier": "landing-page",
+            "name": "Landing page",
+            "components": [
+                {
+                    "id": "headline",
+                    "name": "Headline",
+                    "type": "singleLine",
+                    "config": {
+                        "singleLine": {
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "shape/update",
+            "identifier": "landing-page",
+            "name": "Landing page",
+            "components": [
+                {
+                    "id": "headline",
+                    "name": "Headline",
+                    "type": "singleLine",
+                    "config": {
+                        "singleLine": {
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "intent": "piece/update",
+            "identifier": "seo",
+            "name": "SEO",
+            "components": [
+                {
+                    "id": "meta-title",
+                    "name": "Meta title",
+                    "type": "singleLine",
+                    "config": {
+                        "singleLine": {
+                            "required": true,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                },
+                {
+                    "id": "meta-description",
+                    "name": "Meta description",
+                    "type": "richText",
+                    "config": {
+                        "richText": {
+                            "searchable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "facetable": false
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
