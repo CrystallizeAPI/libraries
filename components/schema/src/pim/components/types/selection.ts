@@ -9,6 +9,7 @@ const extraConfig = z.object({
             key: z.string(),
             value: z.string(),
             isPreselected: z.boolean().optional(),
+            label: z.string().nullish(),
         }),
     ),
 });
