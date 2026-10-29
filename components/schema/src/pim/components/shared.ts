@@ -5,6 +5,17 @@ export const GenericComponentConfigSchema = z.object({
     multilingual: z.boolean().optional(),
     required: z.boolean().optional(),
     discoverable: z.boolean().optional(),
+    /**
+     * Discovery indexing flags. Unset means `true` everywhere.
+     *
+     * They narrow the QUERY SURFACE only: a component with all four off is still stored and still
+     * returned in the Discovery payload. `discoverable: false` is the master switch that removes it
+     * from Discovery entirely. Changes take effect at the tenant's next re-ignition, in both directions.
+     */
+    searchable: z.boolean().optional(),
+    filterable: z.boolean().optional(),
+    sortable: z.boolean().optional(),
+    facetable: z.boolean().optional(),
 });
 export type GenericComponentConfig = z.infer<typeof GenericComponentConfigSchema>;
 export const GenericComponentConfigInputSchema = GenericComponentConfigSchema;
